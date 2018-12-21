@@ -1,4 +1,28 @@
+var omezitNaKraj = -1;
+var detailni = 0;
+
+var zacatky = [];
+var konce = [];
+
 var KRAJE_KODY  = {
+    "19": "PHA",
+    "27": "SČK",
+    "35": "JČK",
+    "43": "PLK",
+    "51": "KVK",
+    "60": "ULK",
+    "78": "LIK",
+    "86": "KHK",
+    "94": "PAK",
+    "108": "VYK",
+    "116": "JMK",
+    "124": "OLK",
+    "132": "MSK",
+    "141": "ZLK"
+};
+
+var KRAJE_NAZVY = {
+    "-1": "Česká republika",
     "19": "Hlavní město Praha",
     "27": "Středočeský",
     "35": "Jihočeský",
@@ -13,13 +37,14 @@ var KRAJE_KODY  = {
     "124": "Olomoucký",
     "132": "Moravskoslezský",
     "141": "Zlínský"
-}
+};
 
-var omezitNaKraj = 94;
-var zacatky = [];
-var konce = [];
+// Výstraha HPPS:
+// Výstraha SIVS:
+// Zpráva SVRS:
+// Cvičná zpráva ČHMÚ:
 
-var resultText = 'Výstrahy ČHMU kraj ' + KRAJE_KODY[omezitNaKraj] + ': ';
+var resultText = vystupText = '';
 
 if (vystraha.info)
 {
@@ -75,10 +100,10 @@ if (vystraha.info)
             }
 
             zacatek_format = zacatekRok + zacatekMesic + zacatekDen + zacatekHodina + zacatekMinuta;
-            zacatek_format = Number(zacatek_format);
+            zacatek_format_num = Number(zacatek_format);
 
             if (vystraha.info[i].jev_kod != "OUTLOOK") {
-                zacatky.push(zacatek_format);
+                zacatky.push(zacatek_format_num);
             }
 
             konec = '999999999999';
@@ -101,7 +126,7 @@ if (vystraha.info)
                     konecCas = konec.substring(10,15);
                     konecCas = konecCas.replace(/\:$/, "");
                 }
-             } else {
+            } else {
                 konecDen = '0' + konecDen_porovn;
                 konecMesic = konec.substring(2,4);
                 konecMesic_porovn = konecMesic.replace(/\.$/, "");
@@ -127,15 +152,46 @@ if (vystraha.info)
             }
 
             konec_format = konecRok + konecMesic + konecDen + konecHodina + konecMinuta;
-            konec_format = Number(konec_format);
+            konec_format_num = Number(konec_format);
             if (konec == "999999999999") {
-                konec_format = 999999999999;
+                konec_format_num = 999999999999;
+            }
+
+            zahajeni = zacatek_format.substring(6,8) + '.' + zacatek_format.substring(4,6) + '. ' + zacatek_format.substring(8,10) + ':' + zacatek_format.substring(10,12);
+            ukonceni = konec_format.substring(6,8) + '.' + konec_format.substring(4,6) + '. ' + konec_format.substring(8,10) + ':' + konec_format.substring(10,12);
+            if (konec == "999999999999") {
+                ukonceni = 'odvolání.';
             }
 
             if (vystraha.info[i].jev_kod != "OUTLOOK") {
-                konce.push(konec_format);
-           
-                resultText += vystraha.info[i].jev + '\n';
+                konce.push(konec_format_num);
+
+                if (omezitNaKraj == -1) {
+                    resultText += vystraha.info[i].jev;
+                    resultText += ' pro kraje ';
+
+                    var seznkraje = '';
+                    var kraje_pole = [];
+
+                    for (var t = 0; t < vystraha.info[i].kraj.length; t++) {
+                        kraje_pole.push(vystraha.info[i].kraj[t].UID);
+                    }
+
+                    kraje_pole.sort(function(a, b){return a - b});
+
+                    for (var t = 0; t < vystraha.info[i].kraj.length; t++) {
+                        seznkraje += '' + KRAJE_KODY[kraje_pole[t]] + ', ';
+                    }
+                    seznkraje = seznkraje.substring(0, seznkraje.length-2);
+                    resultText += seznkraje + '\n';
+                } else {
+                    if (detailni == 1) {
+                        resultText += vystraha.info[i].jev + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
+                    }
+                    if (detailni == 0) {
+                        resultText += vystraha.info[i].jev + '\n';
+                    }
+                }
             }
         }
     }
@@ -146,17 +202,26 @@ if (vystraha.info)
     endy = Math.max.apply(null, konce);
     end = endy.toString();
 
-    zahajeni = start.substring(6,8) + '.' + start.substring(4,6) + '. ' + start.substring(8,10) + ':' + start.substring(10,12);
-    ukonceni = end.substring(6,8) + '.' + end.substring(4,6) + '. ' + end.substring(8,10) + ':' + end.substring(10,12);
+    total_zahajeni = start.substring(6,8) + '.' + start.substring(4,6) + '. ' + start.substring(8,10) + ':' + start.substring(10,12);
+    total_ukonceni = end.substring(6,8) + '.' + end.substring(4,6) + '. ' + end.substring(8,10) + ':' + end.substring(10,12);
     if (end == "999999999999") {
-        ukonceni = 'odvolání.';
+        total_ukonceni = 'odvolání.';
     }
 
     if (start == "Infinity") {
-        resultText += 'není v platnosti žádná výstraha.';
+        vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
     } else {
-        resultText += 'Platnost od ' + zahajeni + ' do ' + ukonceni + '\n';
+        vystupText += 'Výstraha ČHMÚ: ';
+        vystupText += resultText;
+        if (detailni == 0) {
+            vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
+        }
+        if (omezitNaKraj == -1) {
+            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
+        }
     }
 }
 
-return resultText;
+vystupText = vystupText.substring(0, vystupText.length-1);
+
+return vystupText;
