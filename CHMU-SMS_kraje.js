@@ -1,6 +1,26 @@
+// Verze 5
+
 var omezitNaKraj = -1;
 var detailni = 0;
 
+var KRAJE_NAZVY = {
+    "-1": "Česká republika",
+    "19": "Hlavní město Praha",
+    "27": "Středočeský",
+    "35": "Jihočeský",
+    "43": "Plzeňský",
+    "51": "Karlovarský",
+    "60": "Ústecký",
+    "78": "Liberecký",
+    "86": "Královéhradecký",
+    "94": "Pardubický",
+    "108": "Vysočina",
+    "116": "Jihomoravský",
+    "124": "Olomoucký",
+    "132": "Moravskoslezský",
+    "141": "Zlínský"
+};
+ 
 var zacatky = [];
 var konce = [];
 
@@ -20,29 +40,6 @@ var KRAJE_KODY  = {
     "132": "MSK",
     "141": "ZLK"
 };
-
-var KRAJE_NAZVY = {
-    "-1": "Česká republika",
-    "19": "Hlavní město Praha",
-    "27": "Středočeský",
-    "35": "Jihočeský",
-    "43": "Plzeňský",
-    "51": "Karlovarský",
-    "60": "Ústecký",
-    "78": "Liberecký",
-    "86": "Královéhradecký",
-    "94": "Pardubický",
-    "108": "Vysočina",
-    "116": "Jihomoravský",
-    "124": "Olomoucký",
-    "132": "Moravskoslezský",
-    "141": "Zlínský"
-};
-
-// Výstraha HPPS:
-// Výstraha SIVS:
-// Zpráva SVRS:
-// Cvičná zpráva ČHMÚ:
 
 var resultText = vystupText = '';
 
@@ -208,6 +205,11 @@ if (vystraha.info)
         total_ukonceni = 'odvolání.';
     }
 
+// Výstraha HPPS:
+// Výstraha SIVS:
+// Zpráva SVRS:
+// Cvičná zpráva ČHMÚ:
+
     if (start == "Infinity") {
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
     } else {
@@ -216,9 +218,9 @@ if (vystraha.info)
         if (detailni == 0) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
         }
-        if (omezitNaKraj == -1) {
-            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
-        }
+    }
+    if (omezitNaKraj == -1) {
+        vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
     }
 }
 
