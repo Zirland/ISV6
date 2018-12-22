@@ -1,7 +1,7 @@
-#JavaScript předpisy pro ISV6
+# JavaScript předpisy pro ISV6
 
 
-##[CHMU-SMS]
+## [CHMU-SMS]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ.
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
