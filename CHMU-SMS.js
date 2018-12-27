@@ -1,4 +1,4 @@
-// Verze 6
+// Verze 7
 
 var omezitNaKraj = -1;
 var detailni = 0;
@@ -43,61 +43,24 @@ var KRAJE_KODY  = {
 };
 
 var TYP_JEVU = {
-    "I.1": "SIVS",
-    "I.2": "SIVS",
-    "I.3": "SIVS",
-    "I.4": "SIVS",
-    "I.5": "SIVS",
-    "I.6": "SIVS",
-    "II.1": "SIVS",
-    "II.2": "SIVS",
-    "III.1": "SIVS",
-    "III.2": "SIVS",
-    "III.3": "SIVS",
-    "IV.1": "SIVS",
-    "IV.2": "SIVS",
-    "IV.3": "SIVS",
-    "IV.4": "SIVS",
-    "V.1": "SIVS",
-    "V.2": "SIVS",
-    "VI.1": "SIVS",
-    "VI.2": "SIVS",
-    "VI.3": "SIVS",
-    "VII.1": "SIVS",
-    "VIII.1": "SIVS",
-    "VIII.2": "SIVS",
-    "VIII.3": "SIVS",
-    "IX.1": "SIVS",
-    "IX.2": "SIVS",
-    "X.1": "SIVS",
-    "X.2": "SIVS",
-    "X.2a": "SIVS",
-    "X.3": "SIVS",
-    "X.3a": "SIVS",
-    "XI.1": "HPPS",
-    "XI.2": "HPPS",
-    "XI.3": "HPPS",
-    "XII.1": "HPPS",
-    "XII.2": "HPPS",
-    "XII.3": "HPPS",
-    "XII.4": "HPPS",
-    "XIII.1": "HPPS",
-    "XIII.2": "HPPS",
-    "XIII.3": "HPPS",
-    "XIII.4": "HPPS",
-    "XIV.1": "SIVS",
-    "XIV.2": "SIVS",
-    "XV.1": "SIVS",
-    "XV.2": "SIVS",
-    "XV.3": "SIVS",
-    "SMOGSIT.O3": "SVRS",
-    "WARN.O3": "SVRS",
-    "SMOGSIT.PM10": "SVRS",
-    "REG.PM10": "SVRS",
-    "SMOGSIT.SO2": "SVRS",
-    "REG.SO2": "SVRS",
-    "SMOGSIT.NO2": "SVRS",
-    "REG.NO2": "SVRS"
+    "I": "SIVS",
+    "II": "SIVS",
+    "III": "SIVS",
+    "IV": "SIVS",
+    "V": "SIVS",
+    "VI": "SIVS",
+    "VII": "SIVS",
+    "VIII": "SIVS",
+    "IX": "SIVS",
+    "X": "SIVS",
+    "XI": "HPPS",
+    "XII": "HPPS",
+    "XIII": "HPPS",
+    "XIV": "SIVS",
+    "XV": "SIVS",
+    "SMOGSIT": "SVRS",
+    "WARN": "SVRS",
+    "REG": "SVRS",
 };
 
 var resultText = vystupText = '';
@@ -221,7 +184,7 @@ if (vystraha.info)
 
             if (vystraha.info[i].jev_kod != "OUTLOOK") {
                 konce.push(konec_format_num);
-                kod_cis = vystraha.info[i].stupen_kod;
+                kod_cis = vystraha.info[i].jev_kod;
                 seznjevu.push(TYP_JEVU[kod_cis]);
 
                 if (omezitNaKraj == -1) {
