@@ -221,7 +221,8 @@ if (vystraha.info)
 
             if (vystraha.info[i].jev_kod != "OUTLOOK") {
                 konce.push(konec_format_num);
-                seznjevu.push(TYP_JEVU[vystraha.info[i].jev_kod]);
+                kod_cis = vystraha.info[i].stupen_kod;
+                seznjevu.push(TYP_JEVU[kod_cis]);
 
                 if (omezitNaKraj == -1) {
                     resultText += vystraha.info[i].jev;
@@ -267,12 +268,13 @@ if (vystraha.info)
 
     rezim = "SVRS";
     if (seznjevu.includes("SIVS")) {
+        vystupText += "SIVS"
         rezim = "SIVS";
+    }
     if (seznjevu.includes("HPPS")) {
+        vystupText += "HPPS"
         rezim = "HPPS";
     }
-
-// Cvičná zpráva ČHMÚ:
 
     if (start == "Infinity") {
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
@@ -292,9 +294,9 @@ if (vystraha.info)
         if (detailni == 0) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
         }
-    }
-    if (omezitNaKraj == -1) {
-        vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
+        if (omezitNaKraj == -1) {
+            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
+        }
     }
 }
 
