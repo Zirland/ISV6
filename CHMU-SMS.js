@@ -218,9 +218,9 @@ if (vystraha.info)
         if (detailni == 0) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
         }
-    }
-    if (omezitNaKraj == -1) {
-        vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
+        if (omezitNaKraj == -1) {
+            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
+        }
     }
 }
 
