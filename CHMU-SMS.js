@@ -296,6 +296,8 @@ if (vystraha.info)
                         uvod = 'Výstraha SVRS: ';
                     break;
                 }
+            break;
+        }
         vystupText += uvod;
         vystupText += resultText;
         if (detailni == 0) {
