@@ -1,7 +1,7 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## [CHMU-SMS] vývoj
+## [CHMU-SMS] verze 7 – 2018-12-28
 ### Změněno
 - Zjednodušení číselníku kategorie jevů pro typ výstrahy
 
