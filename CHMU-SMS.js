@@ -23,6 +23,7 @@ var KRAJE_NAZVY = {
  
 var zacatky = [];
 var konce = [];
+var seznjevu = [];
 
 var KRAJE_KODY  = {
     "19": "PHA",
@@ -39,6 +40,64 @@ var KRAJE_KODY  = {
     "124": "OLK",
     "132": "MSK",
     "141": "ZLK"
+};
+
+var TYP_JEVU = {
+    "I.1": "SIVS",
+    "I.2": "SIVS",
+    "I.3": "SIVS",
+    "I.4": "SIVS",
+    "I.5": "SIVS",
+    "I.6": "SIVS",
+    "II.1": "SIVS",
+    "II.2": "SIVS",
+    "III.1": "SIVS",
+    "III.2": "SIVS",
+    "III.3": "SIVS",
+    "IV.1": "SIVS",
+    "IV.2": "SIVS",
+    "IV.3": "SIVS",
+    "IV.4": "SIVS",
+    "V.1": "SIVS",
+    "V.2": "SIVS",
+    "VI.1": "SIVS",
+    "VI.2": "SIVS",
+    "VI.3": "SIVS",
+    "VII.1": "SIVS",
+    "VIII.1": "SIVS",
+    "VIII.2": "SIVS",
+    "VIII.3": "SIVS",
+    "IX.1": "SIVS",
+    "IX.2": "SIVS",
+    "X.1": "SIVS",
+    "X.2": "SIVS",
+    "X.2a": "SIVS",
+    "X.3": "SIVS",
+    "X.3a": "SIVS",
+    "XI.1": "HPPS",
+    "XI.2": "HPPS",
+    "XI.3": "HPPS",
+    "XII.1": "HPPS",
+    "XII.2": "HPPS",
+    "XII.3": "HPPS",
+    "XII.4": "HPPS",
+    "XIII.1": "HPPS",
+    "XIII.2": "HPPS",
+    "XIII.3": "HPPS",
+    "XIII.4": "HPPS",
+    "XIV.1": "SIVS",
+    "XIV.2": "SIVS",
+    "XV.1": "SIVS",
+    "XV.2": "SIVS",
+    "XV.3": "SIVS",
+    "SMOGSIT.O3": "SVRS",
+    "WARN.O3": "SVRS",
+    "SMOGSIT.PM10": "SVRS",
+    "REG.PM10": "SVRS",
+    "SMOGSIT.SO2": "SVRS",
+    "REG.SO2": "SVRS",
+    "SMOGSIT.NO2": "SVRS",
+    "REG.NO2": "SVRS"
 };
 
 var resultText = vystupText = '';
@@ -162,6 +221,8 @@ if (vystraha.info)
 
             if (vystraha.info[i].jev_kod != "OUTLOOK") {
                 konce.push(konec_format_num);
+                kod_cis = vystraha.info[i].stupen_kod;
+                seznjevu.push(TYP_JEVU[kod_cis]);
 
                 if (omezitNaKraj == -1) {
                     resultText += vystraha.info[i].jev;
@@ -205,15 +266,37 @@ if (vystraha.info)
         total_ukonceni = 'odvolání.';
     }
 
-// Výstraha HPPS:
-// Výstraha SIVS:
-// Zpráva SVRS:
-// Cvičná zpráva ČHMÚ:
+    rezim = "SVRS";
+    if (seznjevu.includes("SIVS")) {
+        rezim = "SIVS";
+    }
+    if (seznjevu.includes("HPPS")) {
+        rezim = "HPPS";
+    }
 
     if (start == "Infinity") {
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
     } else {
-        vystupText += 'Výstraha ČHMÚ: ';
+        switch (vystraha.ucel) {
+            case 'Exercise' :
+                uvod = 'Cvičná zpráva ČHMÚ: '; break;
+            case 'System' :
+                uvod = 'Systémová zpráva ČHMÚ: '; break;
+            case 'Test' :
+                uvod = 'Testovací zpráva ČHMÚ: '; break;
+            default : 
+                switch (rezim) {
+                    case "HPPS" :
+                        uvod = 'Výstraha HPPS: ';
+                    break;
+                    case "SIVS" :
+                        uvod = 'Výstraha SIVS: ';
+                    break;
+                    case "SVRS" :
+                        uvod = 'Výstraha SVRS: ';
+                    break;
+                }
+        vystupText += uvod;
         vystupText += resultText;
         if (detailni == 0) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
