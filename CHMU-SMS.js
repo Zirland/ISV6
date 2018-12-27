@@ -277,17 +277,26 @@ if (vystraha.info)
     if (start == "Infinity") {
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
     } else {
-        switch (rezim) {
-            case "HPPS" :
-                vystupText += 'Výstraha HPPS: ';
-            break;
-            case "SIVS" :
-                vystupText += 'Výstraha SIVS: ';
-            break;
-            case "SVRS" :
-                vystupText += 'Výstraha SVRS: ';
-            break;
-        }
+        switch (vystraha.ucel) {
+            case 'Exercise' :
+                uvod = 'Cvičná zpráva ČHMÚ: '; break;
+            case 'System' :
+                uvod = 'Systémová zpráva ČHMÚ: '; break;
+            case 'Test' :
+                uvod = 'Testovací zpráva ČHMÚ: '; break;
+            default : 
+                switch (rezim) {
+                    case "HPPS" :
+                        uvod = 'Výstraha HPPS: ';
+                    break;
+                    case "SIVS" :
+                        uvod = 'Výstraha SIVS: ';
+                    break;
+                    case "SVRS" :
+                        uvod = 'Výstraha SVRS: ';
+                    break;
+                }
+        vystupText += uvod;
         vystupText += resultText;
         if (detailni == 0) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
