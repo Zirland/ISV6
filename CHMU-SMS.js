@@ -268,11 +268,9 @@ if (vystraha.info)
 
     rezim = "SVRS";
     if (seznjevu.includes("SIVS")) {
-        vystupText += "SIVS"
         rezim = "SIVS";
     }
     if (seznjevu.includes("HPPS")) {
-        vystupText += "HPPS"
         rezim = "HPPS";
     }
 
