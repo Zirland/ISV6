@@ -214,9 +214,6 @@ if (vystraha.info)
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
     } else {
         vystupText += 'Výstraha ČHMÚ: ';
-        if (vystraha.typ == "Exercise") {
-            vystupText += 'Cvičná zpráva ČHMÚ: ';
-        }
         vystupText += resultText;
         if (detailni == 0) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
