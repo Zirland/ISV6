@@ -213,7 +213,13 @@ if (vystraha.info)
     if (start == "Infinity") {
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
     } else {
-        vystupText += 'Výstraha ČHMÚ: ';
+        switch (vystraha.ucel) {
+            case 'Exercise' : uvod = 'Cvičná zpráva ČHMÚ: '; break;
+            case 'System' : uvod = 'Systémová zpráva ČHMÚ: '; break;
+            case 'Test' : uvod = 'Testovací zpráva ČHMÚ: '; break;
+            default : uvod = 'Výstraha ČHMÚ: '; break;
+        }
+        vystupText += uvod;
         vystupText += resultText;
         if (detailni == 0) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
