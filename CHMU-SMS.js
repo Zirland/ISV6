@@ -206,10 +206,9 @@ if (vystraha.info)
                     seznkraje = seznkraje.substring(0, seznkraje.length-2);
                     resultText += seznkraje + '\n';
                 } else {
-                    if (detailni == 1) {
+                    if (detailni) {
                         resultText += vystraha.info[i].jev + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
-                    }
-                    if (detailni == 0) {
+                    } else {
                         resultText += vystraha.info[i].jev + '\n';
                     }
                 }
@@ -263,7 +262,7 @@ if (vystraha.info)
         }
         vystupText += uvod;
         vystupText += resultText;
-        if (detailni == 0) {
+        if (omezitNaKraj == -1 || !detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
         }
         if (omezitNaKraj == -1) {
