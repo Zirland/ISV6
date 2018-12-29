@@ -801,7 +801,7 @@ function PrintInfo(info, ref_info)
 
     // Hlavička
     resultText += '<tr>';
-        resultText += '<td width="20%">' + HighlightDiff(info != null ? info.stupen_kod : '', ref_info != null ? ref_info.stupen_kod : '') + '<br/>' + HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
+        resultText += '<td width="20%">' + HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
         resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table border="0">';
             resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? info.dc_zacatek : '', ref_info != null ? ref_info.dc_zacatek : '') + '</td>';
