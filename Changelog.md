@@ -6,6 +6,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Změněno
 - Úprava nadpisů nad tabulkami.
 - Distribuce vyjádřena zkratkami krajů
+- Řazení krajů podle číselníkového pořadí
 
 #### Odstraněno
 - Odstranění kódů jevů z výstupu.
