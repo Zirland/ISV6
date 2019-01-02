@@ -62,7 +62,7 @@ function SimpleHighlightDiff(newValue, oldValue)
     return resultText;
 }
 
-// Zvíraznění rozdílů dvou textů
+// Zvýraznění rozdílů dvou textů
 function HighlightDiff(newValue, oldValue)
 {
     var resultText = '';
@@ -900,6 +900,11 @@ function PrintInfo(info, ref_info)
 
     return resultText;
 }
+
+var orpSort = orp;
+orpSort.sort(function(a, b) {
+    return parseFloat(a.kraj.id) - parseFloat(b.kraj.id);
+});
 
 if (hlavniKraj != -1)
 {
