@@ -1,4 +1,4 @@
-// Verze 7
+// Verze 8
 
 var omezitNaKraj = -1;
 var detailni = 0;
@@ -40,27 +40,6 @@ var KRAJE_KODY  = {
     "124": "OLK",
     "132": "MSK",
     "141": "ZLK"
-};
-
-var TYP_JEVU = {
-    "I": "SIVS",
-    "II": "SIVS",
-    "III": "SIVS",
-    "IV": "SIVS",
-    "V": "SIVS",
-    "VI": "SIVS",
-    "VII": "SIVS",
-    "VIII": "SIVS",
-    "IX": "SIVS",
-    "X": "SIVS",
-    "XI": "HPPS",
-    "XII": "HPPS",
-    "XIII": "HPPS",
-    "XIV": "SIVS",
-    "XV": "SIVS",
-    "SMOGSIT": "SVRS",
-    "WARN": "SVRS",
-    "REG": "SVRS",
 };
 
 var resultText = vystupText = '';
@@ -184,8 +163,14 @@ if (vystraha.info)
 
             if (vystraha.info[i].jev_kod != "OUTLOOK") {
                 konce.push(konec_format_num);
-                kod_cis = vystraha.info[i].jev_kod;
-                seznjevu.push(TYP_JEVU[kod_cis]);
+                warn_type = "SVRS";
+                if (vystraha.info[i].SIVS == "1") {
+                    warn_type = "SIVS";
+                }
+                if (vystraha.info[i].HPPS == "1") {
+                    warn_type = "HPPS";
+                }
+                seznjevu.push(warn_type);
 
                 if (omezitNaKraj == -1) {
                     resultText += vystraha.info[i].jev;
@@ -206,10 +191,9 @@ if (vystraha.info)
                     seznkraje = seznkraje.substring(0, seznkraje.length-2);
                     resultText += seznkraje + '\n';
                 } else {
-                    if (detailni == 1) {
+                    if (detailni) {
                         resultText += vystraha.info[i].jev + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
-                    }
-                    if (detailni == 0) {
+                    } else {
                         resultText += vystraha.info[i].jev + '\n';
                     }
                 }
@@ -263,7 +247,7 @@ if (vystraha.info)
         }
         vystupText += uvod;
         vystupText += resultText;
-        if (detailni == 0) {
+        if (omezitNaKraj == -1 || !detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
         }
         if (omezitNaKraj == -1) {
