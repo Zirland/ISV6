@@ -740,17 +740,16 @@ function GetWarningColor(info)
 
     if (info)
     {
-        if (info.zavaznost_kod == 'Moderate')
-        {
-            color = "Žlutá";
-        }
-        else if (info.zavaznost_kod == 'Severe')
-        {
-            color = "Oranžová";
-        }
-        else if (info.zavaznost_kod == 'Extreme')
-        {
-            color = "Červená";
+        switch (info.zavaznost_kod) {
+            case 'Moderate' : 
+                color = "Žlutá";
+            break;
+            case 'Severe' : 
+                color = "Oranžová";
+            break;
+            case 'Extreme' : 
+                color = "Červená";
+            break;
         }
     }
 
@@ -789,11 +788,27 @@ function PrintInfo(info, ref_info)
         }
     }
 
+    if (info) {
+        if (info.jistota_kod == 'Observed') {
+            vyskyt = '<b>Výskyt jevu</b><br>';
+        } else {
+            vyskyt = '';
+        }
+    } 
+    if (ref_info) {
+        if (ref_info.jistota_kod == 'Observed') {
+            ref_vyskyt = '<b>Výskyt jevu</b><br>';
+        } else {
+            ref_vyskyt = '';
+        }
+    } 
+
     resultText += '<table border="1" width="99%">';
 
     // Hlavička
     resultText += '<tr>';
-        resultText += '<td width="20%">' + HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
+        resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
+        resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
         resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table border="0">';
             resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? info.dc_zacatek : '', ref_info != null ? ref_info.dc_zacatek : '') + '</td>';
@@ -801,14 +816,6 @@ function PrintInfo(info, ref_info)
             resultText += '<td>' + SimpleHighlightDiff(info != null ? info.dc_konec : '', ref_info != null ? ref_info.dc_konec : '') + '<td><tr>';
         resultText += '</table></td>';
     resultText += '</tr>';
-
-    // Upozornění na výskyt
-    if (info && info.jistota_kod == 'Observed')
-    {
-        resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Výskyt nebezpečného jevu</b></td>';
-        resultText += '</tr>';
-    }
 
     // Popis
     resultText += '<tr>';
