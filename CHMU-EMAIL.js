@@ -1,33 +1,10 @@
 //Verze 7
 
-/*
-    UVG mapa je v aplikaci Spojař rozšířena o elementy:
-    
-    ref_vystraha - odpovídající elementům předcházející výstrahy (pokud výstraha má referenci / odkaz na předchozí výstrahu)
+// Pokud budeme chtít ve výpisu mít nějaký kraj jako první, tak nastavíme proměnou "hlavniKraj" (-1 je bez přeřazení)
+var hlavniKraj = -1;
 
-    ref_vystraha.id
-    ref_vystraha.poznamka
-    ref_vystraha.info[x].jev_kod
-    ref_vystraha.info[x].jev_nazev
-    ...
-    
-    seznam ORP - seřazených abecedně podle názvu kraje, názvu okresu a pak názvu ORP
-
-    orp[x].id
-    orp[x].nazev
-    orp[x].kraj
-    orp[x].kraj.id
-    orp[x].kraj.nazev
-    orp[x].kraj.zkratka
-    orp[x].okres
-    orp[x].okres.id
-    orp[x].okres.nazev
-    orp[x].okres.zkratka
-*/
-
-/*
-    Pokud budeme chtít ve výpisu mít nějaký kraj jako první, tak nastavíme proměnou "hlavniKraj" (-1 je bez přeřazení)
-*/
+// Chceme zobrazovat jevy ze všech krajů (používá se pouze pokud je nastaven i hlavní kraj)
+var zobrazovatVsechnyKraje = true;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -47,10 +24,22 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-var hlavniKraj = -1;
-
-// Chceme zobrazovat jevy ze všech krajů (používá se pouze pokud je nastaven i hlavní kraj)
-var zobrazovatVsechnyKraje = true;
+var KRAJE_KODY  = {
+    "19": "PHA",
+    "27": "SČK",
+    "35": "JČK",
+    "43": "PLK",
+    "51": "KVK",
+    "60": "ULK",
+    "78": "LIK",
+    "86": "KHK",
+    "94": "PAK",
+    "108": "VYK",
+    "116": "JMK",
+    "124": "OLK",
+    "132": "MSK",
+    "141": "ZLK"
+};
 
 // Zjednodušené zobrazení rozdílů (porovnává se celý text)
 function SimpleHighlightDiff(newValue, oldValue)
@@ -1231,7 +1220,7 @@ for (var k = 0; k < krajList.length; k++)
 
     if (found)
     {
-        dist += (dist ? ', ' : '') + krajList[k].nazev;
+        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
     }
 }
 
@@ -1253,7 +1242,7 @@ if (krajList.length == 0)
 
         if (found)
         {
-            dist += (dist ? ', ' : '') + ref_krajList[k].nazev;
+            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
         }
     }
 }
