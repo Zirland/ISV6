@@ -454,7 +454,7 @@ function PrintInfoList(krajList, ref_krajList)
                     if (first)
                     {
                         first = false;
-                        resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].UID] + '</b>';
+                        resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                     }
 
                     ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
@@ -488,7 +488,7 @@ function PrintInfoList(krajList, ref_krajList)
             if (first)
             {
                 first = false;
-                resultText += '<br/><b>' + KRAJE_NAZVY[krajList[k] + '</b>';
+                resultText += '<br/><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>';
             }
 
             resultText += PrintInfo(info, ref_info);
@@ -681,7 +681,7 @@ function PrintInfoList(krajList, ref_krajList)
                 if (first)
                 {
                     first = false;
-                    resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].UID] + '</b>';
+                    resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                 }
 
                 ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
