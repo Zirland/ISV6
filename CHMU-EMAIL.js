@@ -27,22 +27,25 @@
 
 /*
     Pokud budeme chtít ve výpisu mít nějaký kraj jako první, tak nastavíme proměnou "hlavniKraj" (-1 je bez přeřazení)
-
-    19	Hlavní město Praha
-    35	Jihočeský
-    116	Jihomoravský
-    51	Karlovarský
-    86	Královéhradecký
-    78	Liberecký
-    132	Moravskoslezský
-    124	Olomoucký
-    94	Pardubický
-    43	Plzeňský
-    27	Středočeský
-    60	Ústecký
-    108	Vysočina
-    141	Zlínský
 */
+
+var KRAJE_NAZVY = {
+    "-1": "Česká republika",
+    "19": "Hlavní město Praha",
+    "27": "Středočeský kraj",
+    "35": "Jihočeský kraj",
+    "43": "Plzeňský kraj",
+    "51": "Karlovarský kraj",
+    "60": "Ústecký kraj",
+    "78": "Liberecký kraj",
+    "86": "Královéhradecký kraj",
+    "94": "Pardubický kraj",
+    "108": "Vysočina kraj",
+    "116": "Jihomoravský kraj",
+    "124": "Olomoucký kraj",
+    "132": "Moravskoslezský kraj",
+    "141": "Zlínský kraj"
+};
 
 var hlavniKraj = -1;
 
@@ -451,7 +454,7 @@ function PrintInfoList(krajList, ref_krajList)
                     if (first)
                     {
                         first = false;
-                        resultText += '<br/><b>' + ref_krajList[k].nazev + '</b>';
+                        resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                     }
 
                     ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
@@ -485,7 +488,7 @@ function PrintInfoList(krajList, ref_krajList)
             if (first)
             {
                 first = false;
-                resultText += '<br/><b>' + krajList[k].nazev + '</b>';
+                resultText += '<br/><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>';
             }
 
             resultText += PrintInfo(info, ref_info);
@@ -528,7 +531,7 @@ function PrintInfoList(krajList, ref_krajList)
                             if (first)
                             {
                                 first = false;
-                                resultText += '<br/><b>' + ref_krajList[k].nazev + ' - ' + ref_krajList[k].okresList[o].nazev + '</b>';
+                                resultText += '<br/><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                             }
 
                             ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
@@ -569,7 +572,7 @@ function PrintInfoList(krajList, ref_krajList)
                     if (first)
                     {
                         first = false;
-                        resultText += '<br/><b>' + krajList[k].nazev + ' - ' + krajList[k].okresList[o].nazev + '</b>';
+                        resultText += '<br/><b>Okres ' + krajList[k].okresList[o].nazev + '</b>';
                     }
 
                     resultText += PrintInfo(info, ref_info);
@@ -613,7 +616,7 @@ function PrintInfoList(krajList, ref_krajList)
                                 if (first)
                                 {
                                     first = false;
-                                    resultText += '<br/><b>' + ref_krajList[k].nazev + ' - ' + ref_krajList[k].okresList[o].nazev + ' - ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                                    resultText += '<br/><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                                 }
 
                                 resultText += PrintInfo(null, ref_info);
@@ -653,7 +656,7 @@ function PrintInfoList(krajList, ref_krajList)
                         if (first)
                         {
                             first = false;
-                            resultText += '<br/><b>' + krajList[k].nazev + ' - ' + krajList[k].okresList[o].nazev + ' - ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                            resultText += '<br/><b>ORP ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                         }
 
                         resultText += PrintInfo(info, ref_info);
@@ -678,7 +681,7 @@ function PrintInfoList(krajList, ref_krajList)
                 if (first)
                 {
                     first = false;
-                    resultText += '<br/><b>' + ref_krajList[k].nazev + '</b>';
+                    resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                 }
 
                 ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
@@ -702,7 +705,7 @@ function PrintInfoList(krajList, ref_krajList)
                         if (first)
                         {
                             first = false;
-                            resultText += '<br/><b>' + ref_krajList[k].nazev + ' - ' + ref_krajList[k].okresList[o].nazev + '</b>';
+                            resultText += '<br/><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                         }
 
                         ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
@@ -727,7 +730,7 @@ function PrintInfoList(krajList, ref_krajList)
                             if (first)
                             {
                                 first = false;
-                                resultText += '<br/><b>' + ref_krajList[k].nazev + ' - ' + ref_krajList[k].okresList[o].nazev + ' - ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                                resultText += '<br/><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                             }
 
                             resultText += PrintInfo(null, ref_info);
