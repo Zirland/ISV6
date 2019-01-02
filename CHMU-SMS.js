@@ -42,27 +42,6 @@ var KRAJE_KODY  = {
     "141": "ZLK"
 };
 
-var TYP_JEVU = {
-    "I": "SIVS",
-    "II": "SIVS",
-    "III": "SIVS",
-    "IV": "SIVS",
-    "V": "SIVS",
-    "VI": "SIVS",
-    "VII": "SIVS",
-    "VIII": "SIVS",
-    "IX": "SIVS",
-    "X": "SIVS",
-    "XI": "HPPS",
-    "XII": "HPPS",
-    "XIII": "HPPS",
-    "XIV": "SIVS",
-    "XV": "SIVS",
-    "SMOGSIT": "SVRS",
-    "WARN": "SVRS",
-    "REG": "SVRS",
-};
-
 var resultText = vystupText = '';
 
 if (vystraha.info)
@@ -184,8 +163,14 @@ if (vystraha.info)
 
             if (vystraha.info[i].jev_kod != "OUTLOOK") {
                 konce.push(konec_format_num);
-                kod_cis = vystraha.info[i].jev_kod;
-                seznjevu.push(TYP_JEVU[kod_cis]);
+                warn_type = "SVRS";
+                if (vystraha.info[i].SIVS == "1") {
+                    warn_type = "SIVS";
+                }
+                if (vystraha.info[i].HPPS == "1") {
+                    warn_type = "HPPS";
+                }
+                seznjevu.push(warn_type);
 
                 if (omezitNaKraj == -1) {
                     resultText += vystraha.info[i].jev;

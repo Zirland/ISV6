@@ -9,7 +9,11 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Odstraněno
 - Odstranění kódů jevů z výstupu.
 
+## verze 8 – 2019-01-02
 ### [CHMU-SMS]
+#### Změněno
+- Změna způsobu zjištění typu výstrahy na základě směrnice ČHMÚ.
+
 #### Záplata
 - Vynucení souhrnného výpisu pro celou ČR.
 
