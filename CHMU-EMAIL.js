@@ -756,6 +756,29 @@ function GetWarningColor(info)
     return color;
 }
 
+function PozadiColor(info)
+{
+    // Barva podle závažnosti a jistoty
+    var pozadi = '#fff';
+
+    if (info)
+    {
+        switch (info.zavaznost_kod) {
+            case 'Moderate' : 
+                pozadi = "#ff0";
+            break;
+            case 'Severe' : 
+                pozadi = "#ffa500";
+            break;
+            case 'Extreme' : 
+                pozadi = "#f00";
+            break;
+        }
+    }
+
+    return pozadi;
+}
+
 function PrintInfo(info, ref_info)
 {
     var resultText = '';
@@ -803,14 +826,14 @@ function PrintInfo(info, ref_info)
         }
     } 
 
-    resultText += '<table border="1" width="99%">';
+    resultText += '<table class="tg" width="99%">';
 
     // Hlavička
     resultText += '<tr>';
         resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
         resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
-        resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
-        resultText += '<td><table border="0">';
+        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
+        resultText += '<td><table class="no">';
             resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? info.dc_zacatek : '', ref_info != null ? ref_info.dc_zacatek : '') + '</td>';
             resultText += '<td> - </td>';
             resultText += '<td>' + SimpleHighlightDiff(info != null ? info.dc_konec : '', ref_info != null ? ref_info.dc_konec : '') + '<td><tr>';
@@ -965,8 +988,30 @@ resultText += '<HTML>';
 resultText += '<HEAD>';
     resultText += '<META charset="utf-8"/>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
+
+    resultText += '<style type="text/css">';
+    resultText += '    ins {';
+    resultText += '        color: green;';
+    resultText += '        background: #dfd;';
+    resultText += '        text-decoration: none;';
+    resultText += '        }';
+    resultText += '    del {';
+    resultText += '        color: red;';
+    resultText += '        background: #fdd;';
+    resultText += '        text-decoration: line-through;';
+    resultText += '        }';
+    resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
+    resultText += '    .header {font-size:15px;}';
+    resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
+    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
+    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
+    resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
+    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
+    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
+    resultText += '</style>';
+
 resultText += '</HEAD>';
-resultText += '<BODY style="height:100%;">';
+resultText += '<BODY>';
 
 // Text v těle
 resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
