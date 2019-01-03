@@ -8,6 +8,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Distribuce vyjádřena zkratkami krajů.
 - Řazení krajů podle číselníkového pořadí.
 - Úprava způsobu výpisu informace o výskytu nebezpečného jevu.
+- Grafická úprava vzhledu výpisu.
 
 #### Odstraněno
 - Odstranění kódů jevů z výstupu.
