@@ -50,13 +50,13 @@ function SimpleHighlightDiff(newValue, oldValue)
 
     if (oldText == newText)
     {
-        resultText += '<font color="black">' + oldText + '</font>';
+        resultText += oldText;
     }
     else
     {
-        resultText += '<font color="red"><s>' + oldText + '</s></font>';
+        resultText += '<del>' + oldText + '</del>';
         resultText += oldText && newText ? '<br/>' : '';
-        resultText += '<font color="green">' + newText + '</font>';
+        resultText += '<ins>' + newText + '</ins>';
     }
     
     return resultText;
@@ -151,22 +151,22 @@ function HighlightDiff(newValue, oldValue)
             {
                 if (index != changeList.length)
                 {
-                    resultText += (lastChange == -1 ? '</s>' : '') + '</font>';
+                    resultText += (lastChange == -1 ? '</del>' : '');
                 }
 
                 lastChange = changeList[index - 1].change;
 
                 if (lastChange == 1)
                 {
-                    resultText += '<font color="green">';
+                    resultText += '<ins>';
                 }
                 else if (lastChange == -1)
                 {
-                    resultText += '<font color="red"><s>';
+                    resultText += '<del>';
                 }
                 else
                 {
-                    resultText += '<font color="black">';
+                    resultText += '';
                 }
             }
 
@@ -175,7 +175,7 @@ function HighlightDiff(newValue, oldValue)
 
         if (changeList.length > 0)
         {
-            resultText += (lastChange == -1 ? '</s>' : '') + '</font>';
+            resultText += (lastChange == -1 ? '</del>' : '');
         }
     }
 
