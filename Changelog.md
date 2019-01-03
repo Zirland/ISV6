@@ -11,6 +11,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 #### Odstraněno
 - Odstranění kódů jevů z výstupu.
+- Vyloučení jevu Outlook - Výhled nebezpečných jevů
 
 ## verze 8 – 2019-01-02
 ### [CHMU-SMS]
