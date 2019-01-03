@@ -1008,7 +1008,6 @@ resultText += '<HEAD>';
     resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;font-variant:bold;}';
     resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;}';
     resultText += '    @media print {';
-    resultText += '        blockquote {page-break-inside: avoid;}';
     resultText += '        div {page-break-inside: avoid;}';
     resultText += '    }';
     resultText += '</style>';
