@@ -3,6 +3,9 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 ## vývoj
 ### [CHMU-EMAIL]
+#### Přidáno
+- - Vyloučení jevu Outlook - Výhled nebezpečných jevů
+
 #### Změněno
 - Úprava nadpisů nad tabulkami.
 - Distribuce vyjádřena zkratkami krajů.
@@ -12,7 +15,6 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 #### Odstraněno
 - Odstranění kódů jevů z výstupu.
-- Vyloučení jevu Outlook - Výhled nebezpečných jevů
 
 ## verze 8 – 2019-01-02
 ### [CHMU-SMS]
