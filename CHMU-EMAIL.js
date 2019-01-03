@@ -421,7 +421,7 @@ function PrintInfoList(krajList, ref_krajList)
 
         if (ref_krajList.length > 0)
         {
-            // Všechny, které jsme v daném kraji zrušily
+            // Všechny, které jsme v daném kraji zrušili
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
             {
                 ref_info = ref_krajList[k].info[ri];
@@ -437,7 +437,7 @@ function PrintInfoList(krajList, ref_krajList)
                     }
                 }
 
-                // Pokud jsme výstrahu nenašly
+                // Pokud jsme výstrahu nenašli
                 if (!found)
                 {
                     if (first)
@@ -492,7 +492,7 @@ function PrintInfoList(krajList, ref_krajList)
 
             if (ref_krajList.length > 0)
             {
-                // Všechny, které jsme v daném okrese zrušily
+                // Všechny, které jsme v daném okrese zrušili
                 for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
                 {
                     ref_info = ref_krajList[k].okresList[o].info[ri];
@@ -514,7 +514,7 @@ function PrintInfoList(krajList, ref_krajList)
                             }
                         }
 
-                        // Pokud jsme výstrahu nenašly
+                        // Pokud jsme výstrahu nenašli
                         if (!found)
                         {
                             if (first)
@@ -575,7 +575,7 @@ function PrintInfoList(krajList, ref_krajList)
 
                 if (ref_krajList.length > 0)
                 {
-                    // Všechny, které jsme v daném ORP zrušily
+                    // Všechny, které jsme v daném ORP zrušili
                     for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
                     {
                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
@@ -599,7 +599,7 @@ function PrintInfoList(krajList, ref_krajList)
                                 }
                             }
 
-                            // Pokud jsme výstrahu nenašly
+                            // Pokud jsme výstrahu nenašli
                             if (!found)
                             {
                                 if (first)
@@ -662,7 +662,7 @@ function PrintInfoList(krajList, ref_krajList)
         {
             first = true;
 
-            // Všechny, které jsme v daném kraji zrušily
+            // Všechny, které jsme v daném kraji zrušili
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
             {
                 ref_info = ref_krajList[k].info[ri];
@@ -683,7 +683,7 @@ function PrintInfoList(krajList, ref_krajList)
                 first = true;
                 ref_zpracovanyInfoStupenOkres = [];
 
-                // Všechny, které jsme v daném okrese zrušily
+                // Všechny, které jsme v daném okrese zrušili
                 for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
                 {
                     ref_info = ref_krajList[k].okresList[o].info[ri];
@@ -707,7 +707,7 @@ function PrintInfoList(krajList, ref_krajList)
                 {
                     first = true;
 
-                    // Všechny, které jsme v daném ORP zrušily
+                    // Všechny, které jsme v daném ORP zrušili
                     for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
                     {
                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
@@ -735,7 +735,7 @@ function PrintInfoList(krajList, ref_krajList)
 
 function GetWarningColor(info)
 {
-    // Barva podle závažnosti a jistoty
+    // Barva podle závažnosti
     var color = 'Zelená';
 
     if (info)
@@ -754,6 +754,29 @@ function GetWarningColor(info)
     }
 
     return color;
+}
+
+function PozadiColor(info)
+{
+    // Barva podle závažnosti
+    var pozadi = '#fff';
+
+    if (info)
+    {
+        switch (info.zavaznost_kod) {
+            case 'Moderate' : 
+                pozadi = "#ff0";
+            break;
+            case 'Severe' : 
+                pozadi = "#ffa500";
+            break;
+            case 'Extreme' : 
+                pozadi = "#f00";
+            break;
+        }
+    }
+
+    return pozadi;
 }
 
 function PrintInfo(info, ref_info)
@@ -807,14 +830,14 @@ function PrintInfo(info, ref_info)
         }
     } 
 
-    resultText += '<table border="1" width="99%">';
+    resultText += '<div><table class="tg" width="99%">';
 
     // Hlavička
     resultText += '<tr>';
         resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
         resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
-        resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
-        resultText += '<td><table border="0">';
+        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
+        resultText += '<td><table class="no">';
             resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? info.dc_zacatek : '', ref_info != null ? ref_info.dc_zacatek : '') + '</td>';
             resultText += '<td> - </td>';
             resultText += '<td>' + SimpleHighlightDiff(info != null ? info.dc_konec : '', ref_info != null ? ref_info.dc_konec : '') + '<td><tr>';
@@ -907,7 +930,7 @@ function PrintInfo(info, ref_info)
         resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? info.doporuceni : '', ref_info != null ? ref_info.doporuceni : '') + '</td>';
     resultText += '</tr>';
 
-    resultText += '</table>';
+    resultText += '</table></div>';
 
     return resultText;
 }
@@ -969,8 +992,32 @@ resultText += '<HTML>';
 resultText += '<HEAD>';
     resultText += '<META charset="utf-8"/>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
+
+    resultText += '<style type="text/css">';
+    resultText += '    ins {';
+    resultText += '        color: green;';
+    resultText += '        background: #dfd;';
+    resultText += '        text-decoration: none;';
+    resultText += '        }';
+    resultText += '    del {';
+    resultText += '        color: red;';
+    resultText += '        background: #fdd;';
+    resultText += '        text-decoration: line-through;';
+    resultText += '        }';
+    resultText += '    body {font-family:serif;font-size:14px;height:100%;}';
+    resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
+    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:13x;font-variant:bold;}';
+    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;}';
+    resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
+    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;font-variant:bold;}';
+    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;}';
+    resultText += '    @media print {';
+    resultText += '        div {page-break-inside: avoid;}';
+    resultText += '    }';
+    resultText += '</style>';
+
 resultText += '</HEAD>';
-resultText += '<BODY style="height:100%;">';
+resultText += '<BODY>';
 
 // Text v těle
 resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
