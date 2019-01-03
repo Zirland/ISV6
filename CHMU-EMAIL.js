@@ -782,11 +782,7 @@ function PozadiColor(info)
 function PrintInfo(info, ref_info)
 {
     var resultText = '';
-
-    if (info && info.stupen_kod == "OUTLOOK") {
-        return resultText;
-    }
-
+    
     if (info && info.vyska)
     {
         resultText += '<br/>Výskyt je omezený nadmořskou výškou ';
