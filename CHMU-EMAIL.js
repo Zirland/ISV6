@@ -936,8 +936,21 @@ function PrintInfo(info, ref_info)
 }
 
 var orpSort = orp;
-orpSort.sort(function(a, b) {
-    return parseFloat(a.kraj.id) - parseFloat(b.kraj.id);
+orpSort.sort(function (a, b) {
+  var kraj1 = parseFloat(a.kraj.id);
+  var kraj2 = parseFloat(b.kraj.id);
+  var okres1 = parseFloat(a.okres.id);
+  var okres2 = parseFloat(b.okres.id);
+  var orp1 = parseFloat(a.id);
+  var orp2 = parseFloat(b.id);
+
+  if (kraj1 < kraj2) return -1;
+  if (kraj1 > kraj2) return 1;
+  if (okres1 < okres2) return -1;
+  if (okres1 > okres2) return 1;
+  if (orp1 < orp2) return -1;
+  if (orp1 > orp2) return 1;
+  return 0;
 });
 
 if (hlavniKraj != -1)
