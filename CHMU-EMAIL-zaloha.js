@@ -256,7 +256,7 @@ function PrepareInfo(orp, vystraha)
             // Uložíme si info jevy, které jsou pro celý kraj
             for (var j = 0; j < vystraha.info.length; j++)
             {
-                if (posledniKraj && vystraha.info[j].krajPom)
+                if (posledniKraj.info && vystraha.info[j].krajPom)
                 {
                     posledniKraj.info.push(vystraha.info[j]);
                 }
@@ -283,7 +283,7 @@ function PrepareInfo(orp, vystraha)
             // Uložíme si info jevy, které jsou pro celý okres
             for (var j = 0; j < vystraha.info.length; j++)
             {
-                if (vystraha.info[j].okresPom)
+                if (posledniOkres.info && vystraha.info[j].okresPom)
                 {
                     posledniOkres.info.push(vystraha.info[j]);
                 }
@@ -316,7 +316,7 @@ function PrepareInfo(orp, vystraha)
         {
             var maOrp = vystraha.info[j].orp.indexOf(orp[i].id.toString()) != -1;
 
-            if (maOrp)
+            if (maOrp && posledniOrp.info)
             {
                 posledniOrp.info.push(vystraha.info[j]);
             }
@@ -344,7 +344,7 @@ function PrepareInfo(orp, vystraha)
     // Uložíme si info jevy, které jsou pro celý kraj
     for (var j = 0; j < vystraha.info.length; j++)
     {
-        if (posledniKraj && vystraha.info[j].krajPom)
+        if (posledniKraj.info && vystraha.info[j].krajPom)
         {
             posledniKraj.info.push(vystraha.info[j]);
         }
@@ -353,7 +353,7 @@ function PrepareInfo(orp, vystraha)
     // Uložíme si info jevy, které jsou pro celý okres
     for (var j = 0; j < vystraha.info.length; j++)
     {
-        if (vystraha.info[j].okresPom)
+        if (posledniOkres.info && vystraha.info[j].okresPom)
         {
             posledniOkres.info.push(vystraha.info[j]);
         }
