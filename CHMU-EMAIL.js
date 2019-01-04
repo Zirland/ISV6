@@ -1,4 +1,4 @@
-//Verze 7
+//Verze 10
 
 // Pokud budeme chtít ve výpisu mít nějaký kraj jako první, tak nastavíme proměnou "hlavniKraj" (-1 je bez přeřazení)
 var hlavniKraj = -1;
