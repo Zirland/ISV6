@@ -16,6 +16,11 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Odstraněno
 - Odstranění kódů jevů z výstupu.
 
+## verze 9 – 2019-01-04
+### [CHMU-SMS]
+#### Změněno
+- Úprava názvů krajů.
+
 ## verze 8 – 2019-01-02
 ### [CHMU-SMS]
 #### Změněno
