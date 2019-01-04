@@ -744,7 +744,6 @@ function PrintInfo(info, ref_info)
 {
     var resultText = '';
 
-    resultText += '<table border="1" width="99%">';
     if (info) {
         if (info.jistota_kod == 'Observed') {
             vyskyt = '<b>Výskyt jevu</b><br>';
@@ -921,10 +920,34 @@ var ref_krajList = [];
 // Hlavička HTML stránky
 resultText += '<HTML>';
 resultText += '<HEAD>';
-resultText += '<META charset="utf-8"/>';
-resultText += '<TITLE>' + vystraha.id + '</TITLE>';
+    resultText += '<META charset="utf-8"/>';
+    resultText += '<TITLE>' + vystraha.id + '</TITLE>';
+
+    resultText += '<style type="text/css">';
+    resultText += '    ins {';
+    resultText += '        color: green;';
+    resultText += '        background: #dfd;';
+    resultText += '        text-decoration: none;';
+    resultText += '        }';
+    resultText += '    del {';
+    resultText += '        color: red;';
+    resultText += '        background: #fdd;';
+    resultText += '        text-decoration: line-through;';
+    resultText += '        }';
+    resultText += '    body {font-family:serif;font-size:14px;height:100%;}';
+    resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
+    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:13x;font-variant:bold;}';
+    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;}';
+    resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
+    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;font-variant:bold;}';
+    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;}';
+    resultText += '    @media print {';
+    resultText += '        div {page-break-inside: avoid;}';
+    resultText += '    }';
+    resultText += '</style>';
+
 resultText += '</HEAD>';
-resultText += '<BODY style="height:100%;">';
+resultText += '<BODY>';
 
 // Text v těle
 resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
@@ -932,14 +955,139 @@ resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
 resultText += '<br/>';
 switch (vystraha.ucel)
 {
-    case 'Actual': resultText += 'VÝSTRAŽNÁ INFORMACE'; break;
+    case 'Actual':
+        // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
+        var found = false;
+        for (var k = 0; k < krajList.length && found == false; k++)
+        {
+            for (var i = 0; i < krajList[k].info.length && found == false; i++)
+            {
+                info = krajList[k].info[i];
+
+                if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                {
+                    found = true;
+                }
+            }
+
+            // Výstrahy pro okres
+            for (var o = 0; o < krajList[k].okresList.length && found == false; o++)
+            {
+                for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+                {
+                    info = krajList[k].okresList[o].info[i];
+
+                    if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                    {
+                        found = true;
+                    }
+                }
+
+                // Výstrahy pro orp
+                for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++)
+                {
+                    for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+                    {
+                        info = krajList[k].okresList[o].orpList[ol].info[i];
+
+                        if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                        {
+                            found = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        resultText += found ? 'VÝSTRAŽNÁ INFORMACE' : 'Informační zpráva';
+        break;
+
     case 'Exercise': resultText += 'Cvičná zpráva'; break;
     case 'System': resultText += 'Systémová zpráva'; break;
     case 'Test': resultText += 'Testovací zpráva'; break;
+    default: resultText += 'Informační zpráva'; break;
 }
-resultText += vystraha.HPPS && vystraha.HPPS == "1" ? ' <b>HPPS</b>' : '';
-resultText += vystraha.SIVS && vystraha.SIVS == "1" ? ' <b>SIVS</b>' : '';
-resultText += vystraha.SVRS && vystraha.SVRS == "1" ? ' <b>SVRS</b>' : '';
+
+// Zjistíme zda je někde příznak HPPS, SIVS nebo SVRS
+var hpps = false;
+var sivs = false;
+var svrs = false;
+
+// Výstrahy pro kraj
+for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs == false); k++)
+{
+    for (var i = 0; i < krajList[k].info.length && (hpps == false || sivs == false || svrs == false); i++)
+    {
+        info = krajList[k].info[i];
+
+        if (info.HPPS && info.HPPS == "1")
+        {
+            hpps = true;
+        }
+
+        if (info.SIVS && info.SIVS == "1")
+        {
+            sivs = true;
+        }
+
+        if (info.SVRS && info.SVRS == "1")
+        {
+            svrs = true;
+        }
+    }
+
+    // Výstrahy pro okres
+    for (var o = 0; o < krajList[k].okresList.length && (hpps == false || sivs == false || svrs == false); o++)
+    {
+        for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+        {
+            info = krajList[k].okresList[o].info[i];
+
+            if (info.HPPS && info.HPPS == "1")
+            {
+                hpps = true;
+            }
+
+            if (info.SIVS && info.SIVS == "1")
+            {
+                sivs = true;
+            }
+
+            if (info.SVRS && info.SVRS == "1")
+            {
+                svrs = true;
+            }
+        }
+
+        // Výstrahy pro orp
+        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps == false || sivs == false || svrs == false); ol++)
+        {
+            for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+            {
+                info = krajList[k].okresList[o].orpList[ol].info[i];
+
+                if (info.HPPS && info.HPPS == "1")
+                {
+                    hpps = true;
+                }
+
+                if (info.SIVS && info.SIVS == "1")
+                {
+                    sivs = true;
+                }
+
+                if (info.SVRS && info.SVRS == "1")
+                {
+                    svrs = true;
+                }
+            }
+        }
+    }
+}
+
+resultText += hpps ? ' <b>HPPS</b>' : '';
+resultText += sivs ? ' <b>SIVS</b>' : '';
+resultText += svrs ? ' <b>SVRS</b>' : '';
 
 resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano;
 
@@ -1076,7 +1224,7 @@ for (var k = 0; k < krajList.length; k++)
 
     if (found)
     {
-        dist += (dist ? ', ' : '') + krajList[k].nazev;
+        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
     }
 }
 
@@ -1098,7 +1246,7 @@ if (krajList.length == 0)
 
         if (found)
         {
-            dist += (dist ? ', ' : '') + ref_krajList[k].nazev;
+            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
         }
     }
 }
