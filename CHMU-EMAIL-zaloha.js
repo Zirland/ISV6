@@ -256,7 +256,7 @@ function PrepareInfo(orp, vystraha)
             // Uložíme si info jevy, které jsou pro celý kraj
             for (var j = 0; j < vystraha.info.length; j++)
             {
-                if (vystraha.info[j].krajPom)
+                if (posledniKraj && vystraha.info[j].krajPom)
                 {
                     posledniKraj.info.push(vystraha.info[j]);
                 }
@@ -344,7 +344,7 @@ function PrepareInfo(orp, vystraha)
     // Uložíme si info jevy, které jsou pro celý kraj
     for (var j = 0; j < vystraha.info.length; j++)
     {
-        if (vystraha.info[j].krajPom)
+        if (posledniKraj && vystraha.info[j].krajPom)
         {
             posledniKraj.info.push(vystraha.info[j]);
         }
