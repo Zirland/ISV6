@@ -1,51 +1,45 @@
-/*
-    UVG mapa je v aplikaci Spojař rozšířena o elementy:
-    
-    ref_vystraha - odpovídající elementům předcházející výstrahy (pokud výstraha má referenci / odkaz na předchozí výstrahu)
+//Verze 7
 
-    ref_vystraha.id
-    ref_vystraha.poznamka
-    ref_vystraha.info[x].jev_kod
-    ref_vystraha.info[x].jev_nazev
-    ...
-    
-    seznam ORP - seřazených abecedně podle názvu kraje, názvu okresu a pak názvu ORP
-
-    orp[x].id
-    orp[x].nazev
-    orp[x].kraj
-    orp[x].kraj.id
-    orp[x].kraj.nazev
-    orp[x].kraj.zkratka
-    orp[x].okres
-    orp[x].okres.id
-    orp[x].okres.nazev
-    orp[x].okres.zkratka
-*/
-
-/*
-    Pokud budeme chtít ve výpisu mít nějaký kraj jako první, tak nastavíme proměnou "hlavniKraj" (-1 je bez přeřazení)
-
-    19	Hlavní město Praha
-    35	Jihočeský
-    116	Jihomoravský
-    51	Karlovarský
-    86	Královéhradecký
-    78	Liberecký
-    132	Moravskoslezský
-    124	Olomoucký
-    94	Pardubický
-    43	Plzeňský
-    27	Středočeský
-    60	Ústecký
-    108	Vysočina
-    141	Zlínský
-*/
-
+// Pokud budeme chtít ve výpisu mít nějaký kraj jako první, tak nastavíme proměnou "hlavniKraj" (-1 je bez přeřazení)
 var hlavniKraj = -1;
 
 // Chceme zobrazovat jevy ze všech krajů (používá se pouze pokud je nastaven i hlavní kraj)
 var zobrazovatVsechnyKraje = true;
+
+var KRAJE_NAZVY = {
+    "-1": "Česká republika",
+    "19": "Hlavní město Praha",
+    "27": "Středočeský kraj",
+    "35": "Jihočeský kraj",
+    "43": "Plzeňský kraj",
+    "51": "Karlovarský kraj",
+    "60": "Ústecký kraj",
+    "78": "Liberecký kraj",
+    "86": "Královéhradecký kraj",
+    "94": "Pardubický kraj",
+    "108": "Vysočina kraj",
+    "116": "Jihomoravský kraj",
+    "124": "Olomoucký kraj",
+    "132": "Moravskoslezský kraj",
+    "141": "Zlínský kraj"
+};
+
+var KRAJE_KODY  = {
+    "19": "PHA",
+    "27": "SČK",
+    "35": "JČK",
+    "43": "PLK",
+    "51": "KVK",
+    "60": "ULK",
+    "78": "LIK",
+    "86": "KHK",
+    "94": "PAK",
+    "108": "VYK",
+    "116": "JMK",
+    "124": "OLK",
+    "132": "MSK",
+    "141": "ZLK"
+};
 
 // Zjednodušené zobrazení rozdílů (porovnává se celý text)
 function SimpleHighlightDiff(newValue, oldValue)
@@ -56,57 +50,77 @@ function SimpleHighlightDiff(newValue, oldValue)
 
     if (oldText == newText)
     {
-        resultText += '<font color="black">' + oldText + '</font>';
+        resultText += oldText;
     }
     else
     {
-        resultText += '<font color="red"><s>' + oldText + '</s></font>';
+        resultText += '<del>' + oldText + '</del>';
         resultText += oldText && newText ? '<br/>' : '';
-        resultText += '<font color="green">' + newText + '</font>';
+        resultText += '<ins>' + newText + '</ins>';
     }
-    
+
     return resultText;
 }
 
-// Zvíraznění rozdílů dvou textů
+// Zvýraznění rozdílů dvou textů
 function HighlightDiff(newValue, oldValue)
 {
+    var resultText = '';
+
     // Převedeme na pole podle mezer
     var newValueSplit = newValue != undefined ? newValue.split(' ') : [];
     var oldValueSplit = oldValue != undefined ? oldValue.split(' ') : [];
 
-    // Spočteme si matici vzdáleností
-    var matrix = GetLCSLength(newValueSplit, oldValueSplit);
-
-    var i = newValueSplit.length;
-    var j = oldValueSplit.length;
-
-    var changeList = [];
-
-    while (i > 0 && j > 0)
+    if (newValueSplit.length == 0 || oldValueSplit.length == 0)
     {
-        if (newValueSplit[i - 1] == oldValueSplit[j - 1])
+        resultText = SimpleHighlightDiff(newValue, oldValue);
+    }
+    else
+    {
+        // Spočteme si matici vzdáleností
+        var matrix = GetLCSLength(newValueSplit, oldValueSplit);
+
+        var i = newValueSplit.length;
+        var j = oldValueSplit.length;
+
+        var changeList = [];
+
+        while (i > 0 && j > 0)
         {
-            var changeValue = {};
-            changeValue.text = newValueSplit[i - 1];
-            changeValue.change = 0;
+            if (newValueSplit[i - 1] == oldValueSplit[j - 1])
+            {
+                var changeValue = {};
+                changeValue.text = newValueSplit[i - 1];
+                changeValue.change = 0;
 
-            changeList.push(changeValue);
+                changeList.push(changeValue);
 
-            i--;
-            j--;
+                i--;
+                j--;
+            }
+            else if (matrix[i][j - 1] > matrix[i - 1][j])
+            {
+                var changeValue = {};
+                changeValue.text = oldValueSplit[j - 1];
+                changeValue.change = -1;
+
+                changeList.push(changeValue);
+
+                j--;
+            }
+            else
+            {
+                var changeValue = {};
+                changeValue.text = newValueSplit[i - 1];
+                changeValue.change = 1;
+
+                changeList.push(changeValue);
+
+                i--;
+            }
         }
-        else if (matrix[i][j - 1] > matrix[i - 1][j])
-        {
-            var changeValue = {};
-            changeValue.text = oldValueSplit[j - 1];
-            changeValue.change = -1;
 
-            changeList.push(changeValue);
-
-            j--;
-        }
-        else
+        while (i > 0)
         {
             var changeValue = {};
             changeValue.text = newValueSplit[i - 1];
@@ -116,46 +130,52 @@ function HighlightDiff(newValue, oldValue)
 
             i--;
         }
-    }
 
-    while (i > 0)
-    {
-        var changeValue = {};
-        changeValue.text = newValueSplit[i - 1];
-        changeValue.change = 1;
-
-        changeList.push(changeValue);
-
-        i--;
-    }
-
-    while (j > 0)
-    {
-        var changeValue = {};
-        changeValue.text = oldValueSplit[j - 1];
-        changeValue.change = -1;
-
-        changeList.push(changeValue);
-
-        j--;
-    }
-
-    var resultText = '';
-
-    // Slova máme v seznamu v opačném pořadí
-    for (var index = changeList.length; index > 0; index--)
-    {
-        if (changeList[index - 1].change == 1)
+        while (j > 0)
         {
-            resultText += '<font color="green">' + changeList[index - 1].text + '</font> ';
+            var changeValue = {};
+            changeValue.text = oldValueSplit[j - 1];
+            changeValue.change = -1;
+
+            changeList.push(changeValue);
+
+            j--;
         }
-        else if (changeList[index - 1].change == -1)
+
+        var lastChange = 0;
+
+        // Slova máme v seznamu v opačném pořadí
+        for (var index = changeList.length; index > 0; index--)
         {
-            resultText += '<font color="red"><s>' + changeList[index - 1].text + '</s></font> ';
+            if (lastChange != changeList[index - 1].change)
+            {
+                if (index != changeList.length)
+                {
+                    resultText += (lastChange == -1 ? '</del>' : '');
+                }
+
+                lastChange = changeList[index - 1].change;
+
+                if (lastChange == 1)
+                {
+                    resultText += '<ins>';
+                }
+                else if (lastChange == -1)
+                {
+                    resultText += '<del>';
+                }
+                else
+                {
+                    resultText += '';
+                }
+            }
+
+            resultText += changeList[index - 1].text + ' ';
         }
-        else
+
+        if (changeList.length > 0)
         {
-            resultText += '<font color="black">' + changeList[index - 1].text + '</font> ';
+            resultText += (lastChange == -1 ? '</del>' : '');
         }
     }
 
@@ -170,7 +190,12 @@ function GetLCSLength(newValueSplit, oldValueSplit)
 
     for (var i = 0; i < newValueSplit.length + 1; i++)
     {
-        matrix[i] = new Array(oldValueSplit.length + 1).fill(0);
+        matrix[i] = new Array(oldValueSplit.length + 1);
+
+        for (var j = 0; j < oldValueSplit.length + 1; j++)
+        {
+            matrix[i][j] = 0;
+        }
     }
 
     // Spočteme vzdálenosti
