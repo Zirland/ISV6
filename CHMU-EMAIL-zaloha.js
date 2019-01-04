@@ -916,6 +916,18 @@ if (hlavniKraj != -1)
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];
+var info;
+
+// Připravíme jednotlivé info jevy
+if (vystraha.info && vystraha.info.length > 0)
+{
+    krajList = PrepareInfo(orp, vystraha);
+}
+
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
+{
+    ref_krajList = PrepareInfo(orp, ref_vystraha);
+}
 
 // Hlavička HTML stránky
 resultText += '<HTML>';
@@ -950,21 +962,146 @@ resultText += '</HEAD>';
 resultText += '<BODY>';
 
 // Text v těle
-resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6); 
- 
-resultText += '<br/>'; 
-switch (vystraha.ucel) 
-{ 
-    case 'Actual': resultText += 'VÝSTRAŽNÁ INFORMACE'; break; 
-    case 'Exercise': resultText += 'Cvičná zpráva'; break; 
-    case 'System': resultText += 'Systémová zpráva'; break; 
-    case 'Test': resultText += 'Testovací zpráva'; break; 
-} 
-resultText += vystraha.HPPS && vystraha.HPPS == "1" ? ' <b>HPPS</b>' : ''; 
-resultText += vystraha.SIVS && vystraha.SIVS == "1" ? ' <b>SIVS</b>' : ''; 
-resultText += vystraha.SVRS && vystraha.SVRS == "1" ? ' <b>SVRS</b>' : ''; 
- 
-resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano; 
+resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
+
+resultText += '<br/>';
+switch (vystraha.ucel)
+{
+    case 'Actual':
+        // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
+        var found = false;
+        for (var k = 0; k < krajList.length && found == false; k++)
+        {
+            for (var i = 0; i < krajList[k].info.length && found == false; i++)
+            {
+                info = krajList[k].info[i];
+
+                if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                {
+                    found = true;
+                }
+            }
+
+            // Výstrahy pro okres
+            for (var o = 0; o < krajList[k].okresList.length && found == false; o++)
+            {
+                for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+                {
+                    info = krajList[k].okresList[o].info[i];
+
+                    if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                    {
+                        found = true;
+                    }
+                }
+
+                // Výstrahy pro orp
+                for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++)
+                {
+                    for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+                    {
+                        info = krajList[k].okresList[o].orpList[ol].info[i];
+
+                        if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                        {
+                            found = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        resultText += found ? 'VÝSTRAŽNÁ INFORMACE' : 'Informační zpráva';
+        break;
+
+    case 'Exercise': resultText += 'Cvičná zpráva'; break;
+    case 'System': resultText += 'Systémová zpráva'; break;
+    case 'Test': resultText += 'Testovací zpráva'; break;
+    default: resultText += 'Informační zpráva'; break;
+}
+
+// Zjistíme zda je někde příznak HPPS, SIVS nebo SVRS
+var hpps = false;
+var sivs = false;
+var svrs = false;
+
+// Výstrahy pro kraj
+for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs == false); k++)
+{
+    for (var i = 0; i < krajList[k].info.length && (hpps == false || sivs == false || svrs == false); i++)
+    {
+        info = krajList[k].info[i];
+
+        if (info.HPPS && info.HPPS == "1")
+        {
+            hpps = true;
+        }
+
+        if (info.SIVS && info.SIVS == "1")
+        {
+            sivs = true;
+        }
+
+        if (info.SVRS && info.SVRS == "1")
+        {
+            svrs = true;
+        }
+    }
+
+    // Výstrahy pro okres
+    for (var o = 0; o < krajList[k].okresList.length && (hpps == false || sivs == false || svrs == false); o++)
+    {
+        for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+        {
+            info = krajList[k].okresList[o].info[i];
+
+            if (info.HPPS && info.HPPS == "1")
+            {
+                hpps = true;
+            }
+
+            if (info.SIVS && info.SIVS == "1")
+            {
+                sivs = true;
+            }
+
+            if (info.SVRS && info.SVRS == "1")
+            {
+                svrs = true;
+            }
+        }
+
+        // Výstrahy pro orp
+        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps == false || sivs == false || svrs == false); ol++)
+        {
+            for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+            {
+                info = krajList[k].okresList[o].orpList[ol].info[i];
+
+                if (info.HPPS && info.HPPS == "1")
+                {
+                    hpps = true;
+                }
+
+                if (info.SIVS && info.SIVS == "1")
+                {
+                    sivs = true;
+                }
+
+                if (info.SVRS && info.SVRS == "1")
+                {
+                    svrs = true;
+                }
+            }
+        }
+    }
+}
+
+resultText += hpps ? ' <b>HPPS</b>' : '';
+resultText += sivs ? ' <b>SIVS</b>' : '';
+resultText += svrs ? ' <b>SVRS</b>' : '';
+
+resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano;
 
 if (vystraha.reference)
 {
@@ -1038,14 +1175,6 @@ if (vystraha.info && vystraha.info.length > 0)
         resultText += '<hr/>';
     }
 
-    // Připravíme jednotlivé info jevy
-    krajList = PrepareInfo(orp, vystraha);
-
-    if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info)
-    {
-        ref_krajList = PrepareInfo(orp, ref_vystraha);
-    }
-
     // Provedeme výpis
     resultText += PrintInfoList(krajList, ref_krajList);
 
@@ -1063,10 +1192,7 @@ else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystrah
     // Výstraha ruší všechny předchozí jevy, tak je vypíšeme
 
     // Připravíme jednotlivé info jevy
-    if (ref_vystraha.info)
-    {
-        ref_krajList = PrepareInfo(orp, ref_vystraha);
-    }
+    ref_krajList = PrepareInfo(orp, ref_vystraha);
 
     // Provedeme výpis
     resultText += PrintInfoList(krajList, ref_krajList);
@@ -1134,4 +1260,3 @@ resultText += '</HTML>';
 
 // Vrácení výsledku
 return resultText;
-
