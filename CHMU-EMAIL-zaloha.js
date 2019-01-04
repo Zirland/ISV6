@@ -407,7 +407,7 @@ function PrintInfoList(krajList, ref_krajList)
                         resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                     }
 
-                    ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
+                    ref_zpracovanyInfoStupen.push(ref_info.stupen_kod);
                     resultText += PrintInfo(null, ref_info);
                 }
             }
