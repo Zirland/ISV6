@@ -295,7 +295,7 @@ function PrepareInfo(orp, vystraha)
             // Uložíme si info jevy, které jsou pro celý kraj
             for (var j = 0; j < infoList.length; j++)
             {
-                if (infoList[j].krajPom)
+                if (posledniKraj.info && infoList[j].krajPom)
                 {
                     posledniKraj.info.push(infoList[j]);
                 }
@@ -322,7 +322,7 @@ function PrepareInfo(orp, vystraha)
             // Uložíme si info jevy, které jsou pro celý okres
             for (var j = 0; j < infoList.length; j++)
             {
-                if (infoList[j].okresPom)
+                if (posledniOkres.info && infoList[j].okresPom)
                 {
                     posledniOkres.info.push(infoList[j]);
                 }
