@@ -745,19 +745,36 @@ function PrintInfo(info, ref_info)
     var resultText = '';
 
     resultText += '<table border="1" width="99%">';
+    if (info) {
+        if (info.jistota_kod == 'Observed') {
+            vyskyt = '<b>Výskyt jevu</b><br>';
+        } else {
+            vyskyt = '';
+        }
+    } 
+    if (ref_info) {
+        if (ref_info.jistota_kod == 'Observed') {
+            ref_vyskyt = '<b>Výskyt jevu</b><br>';
+        } else {
+            ref_vyskyt = '';
+        }
+    } 
 
-    // První řádek
+    resultText += '<div><table class="tg" width="99%">';
+
+    // Hlavička
     resultText += '<tr>';
-        resultText += '<td width="20%">' + HighlightDiff(info != null ? info.stupen_kod : '', ref_info != null ? ref_info.stupen_kod : '') + '<br/>' + HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
-        resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
-        resultText += '<td><table border="0">';
+        resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
+        resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
+        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
+        resultText += '<td><table class="no">';
             resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? info.dc_zacatek : '', ref_info != null ? ref_info.dc_zacatek : '') + '</td>';
             resultText += '<td> - </td>';
             resultText += '<td>' + SimpleHighlightDiff(info != null ? info.dc_konec : '', ref_info != null ? ref_info.dc_konec : '') + '<td><tr>';
         resultText += '</table></td>';
     resultText += '</tr>';
 
-    // Druhý řádek
+    // Popis
     resultText += '<tr>';
         resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? info.popis : '', ref_info != null ? ref_info.popis : '') + '</td>';
     resultText += '</tr>';
@@ -838,15 +855,33 @@ function PrintInfo(info, ref_info)
         resultText += '</tr>';
     }
 
-    // Třetí řádek
+    // Doporučení
     resultText += '<tr>';
         resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? info.doporuceni : '', ref_info != null ? ref_info.doporuceni : '') + '</td>';
     resultText += '</tr>';
 
-    resultText += '</table>';
+    resultText += '</table></div>';
 
     return resultText;
 }
+
+var orpSort = orp;
+orpSort.sort(function (a, b) {
+  var kraj1 = parseFloat(a.kraj.id);
+  var kraj2 = parseFloat(b.kraj.id);
+  var okres1 = parseFloat(a.okres.id);
+  var okres2 = parseFloat(b.okres.id);
+  var orp1 = parseFloat(a.id);
+  var orp2 = parseFloat(b.id);
+
+  if (kraj1 < kraj2) return -1;
+  if (kraj1 > kraj2) return 1;
+  if (okres1 < okres2) return -1;
+  if (okres1 > okres2) return 1;
+  if (orp1 < orp2) return -1;
+  if (orp1 > orp2) return 1;
+  return 0;
+});
 
 if (hlavniKraj != -1)
 {
