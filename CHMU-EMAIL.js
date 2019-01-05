@@ -5,7 +5,7 @@ var hlavniKraj = -1;
 
 // Chceme zobrazovat jevy ze všech krajů (používá se pouze pokud je nastaven i hlavní kraj)
 var zobrazovatVsechnyKraje = true;
-
+var zobrazitVyhled = false;
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
     "19": "Hlavní město Praha",
@@ -288,6 +288,16 @@ function PrepareInfo(orp, vystraha)
         }
     }
 
+    var infoListFilter = [];
+    for (var x = 0; x < infoList.length; x++) {
+        if (infoList.stupen_kod != "OUTLOOK") {
+            infoListFilter.push(infoList[x]);
+        }
+    }
+    if (!zobrazitVyhled) {
+        infoList = infoListFilter;
+    }
+    
     var krajList = [];
     var posledniKraj = {};
     var posledniOkres = {};
