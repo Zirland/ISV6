@@ -17,7 +17,7 @@ var KRAJE_NAZVY = {
     "78": "Liberecký kraj",
     "86": "Královéhradecký kraj",
     "94": "Pardubický kraj",
-    "108": "Vysočina kraj",
+    "108": "Kraj Vysočina",
     "116": "Jihomoravský kraj",
     "124": "Olomoucký kraj",
     "132": "Moravskoslezský kraj",
@@ -990,19 +990,29 @@ resultText += '</HEAD>';
 resultText += '<BODY>';
 
 // Text v těle
-resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
 
-resultText += '<br/>';
-switch (vystraha.ucel)
-{
-    case 'Actual':
-        // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
-        var found = false;
-        for (var k = 0; k < krajList.length && found == false; k++)
+
+var found = false;
+if (vystraha.ucel == 'Actual') {
+    // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
+    for (var k = 0; k < krajList.length && found == false; k++)
+    {
+        for (var i = 0; i < krajList[k].info.length && found == false; i++)
         {
-            for (var i = 0; i < krajList[k].info.length && found == false; i++)
+            info = krajList[k].info[i];
+
+            if (info.jev_kod && info.jev_kod != "OUTLOOK")
             {
-                info = krajList[k].info[i];
+                found = true;
+            }
+        }
+
+        // Výstrahy pro okres
+        for (var o = 0; o < krajList[k].okresList.length && found == false; o++)
+        {
+            for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+            {
+                info = krajList[k].okresList[o].info[i];
 
                 if (info.jev_kod && info.jev_kod != "OUTLOOK")
                 {
@@ -1010,42 +1020,21 @@ switch (vystraha.ucel)
                 }
             }
 
-            // Výstrahy pro okres
-            for (var o = 0; o < krajList[k].okresList.length && found == false; o++)
+            // Výstrahy pro orp
+            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++)
             {
-                for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+                for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
                 {
-                    info = krajList[k].okresList[o].info[i];
+                    info = krajList[k].okresList[o].orpList[ol].info[i];
 
                     if (info.jev_kod && info.jev_kod != "OUTLOOK")
                     {
                         found = true;
                     }
                 }
-
-                // Výstrahy pro orp
-                for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++)
-                {
-                    for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
-                    {
-                        info = krajList[k].okresList[o].orpList[ol].info[i];
-
-                        if (info.jev_kod && info.jev_kod != "OUTLOOK")
-                        {
-                            found = true;
-                        }
-                    }
-                }
             }
         }
-
-        resultText += found ? 'VÝSTRAŽNÁ INFORMACE' : 'Informační zpráva';
-        break;
-
-    case 'Exercise': resultText += 'Cvičná zpráva'; break;
-    case 'System': resultText += 'Systémová zpráva'; break;
-    case 'Test': resultText += 'Testovací zpráva'; break;
-    default: resultText += 'Informační zpráva'; break;
+    }
 }
 
 // Zjistíme zda je někde příznak HPPS, SIVS nebo SVRS
@@ -1125,10 +1114,63 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
     }
 }
 
-resultText += hpps ? ' <b>HPPS</b>' : '';
-resultText += sivs ? ' <b>SIVS</b>' : '';
-resultText += svrs ? ' <b>SVRS</b>' : '';
+switch (vystraha.ucel) {
+    case 'Exercise' :
+        header = "ÚČELOVÁ INFORMACE ČHMÚ - CVIČNÁ ZPRÁVA";
+        if (svrs) {
+            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
+        }
+        if (sivs) {
+            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
+        }
+        if (hpps) {
+            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
+        }
+    break;
+    case 'System' :
+        header = "ÚČELOVÁ INFORMACE ČHMÚ - SYSTÉMOVÁ ZPRÁVA";
+        if (svrs) {
+            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
+        }
+        if (sivs) {
+            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
+        }
+        if (hpps) {
+            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
+        }
+    break;
+    case 'Test' :
+        header = "ÚČELOVÁ INFORMACE ČHMÚ - TESTOVCÍ ZPRÁVA";
+        if (svrs) {
+            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
+        }
+        if (sivs) {
+            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
+        }
+        if (hpps) {
+            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
+        }
+    break;
+    case 'Actual' :
+        header = "VÝSTRAHA ČHMÚ";
+        if (svrs) {
+            header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU'
+        }
+        if (sivs) {
+            header += '';
+        }
+        if (hpps) {
+            header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
+        }
+        if (!found) {
+            header = "INFORMAČNÍ ZPRÁVA ČHMÚ";
+        }
+    break;
 
+}
+
+resultText += '<div style="text-align:center;">' + header + '</div>';
+resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
 resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano;
 
 if (vystraha.reference)
@@ -1140,6 +1182,13 @@ if (vystraha.reference)
 }
 
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
+
+resultText += '<br/>Územní platnost: ';
+if (hlavniKraj == '-1' || zobrazovatVsechnyKraje) {
+    resultText += "Česká republika";
+} else {
+    resultText += KRAJE_NAZVY[hlavniKraj];
+}
 
 resultText += '<hr/>';
 
@@ -1228,7 +1277,7 @@ else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystrah
 else
 {
     // Sem by se to nikdy nemělo dostat, ale pro jistotu
-    resultText += '<br/>Výstraha je prázdná';
+    resultText += '<br/>Na zvoleném území není v platnosti nebezpečný jev.';
 }
 
 resultText += '<hr/>';

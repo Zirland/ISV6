@@ -14,7 +14,7 @@ var KRAJE_NAZVY = {
     "78": "Liberecký kraj",
     "86": "Královéhradecký kraj",
     "94": "Pardubický kraj",
-    "108": "Vysočina kraj",
+    "108": "Kraj Vysočina",
     "116": "Jihomoravský kraj",
     "124": "Olomoucký kraj",
     "132": "Moravskoslezský kraj",
