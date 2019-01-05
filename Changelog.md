@@ -4,10 +4,11 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ## vývoj
 ### [CHMU-EMAIL]
 #### Přidáno
-- Vyloučení jevu Outlook - Výhled nebezpečných jevů.
+- Možnost vyloučení jevu Výhled nebezpečných jevů - parametr.
 
 #### Změněno
 - Úprava formátu data a času.
+- Způsob řazení je možno nastavit parametrem.
 
 ## verze 11 – 2019-01-07
 ### [CHMU-EMAIL]
