@@ -9,6 +9,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Změněno
 - Úprava formátu data a času
 
+### [CHMU-SMS]
+#### Změněno
+- Úprava způsobu určení typu zprávy.
+
 ## verze 10 – 2019-01-05
 ### [CHMU-EMAIL]
 #### Změněno
