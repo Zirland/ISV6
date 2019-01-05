@@ -17,7 +17,7 @@ var KRAJE_NAZVY = {
     "78": "Liberecký kraj",
     "86": "Královéhradecký kraj",
     "94": "Pardubický kraj",
-    "108": "Vysočina kraj",
+    "108": "Kraj Vysočina",
     "116": "Jihomoravský kraj",
     "124": "Olomoucký kraj",
     "132": "Moravskoslezský kraj",
@@ -990,9 +990,7 @@ resultText += '</HEAD>';
 resultText += '<BODY>';
 
 // Text v těle
-resultText += 'Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
 
-resultText += '<br/>';
 
 var found = false;
 if (vystraha.ucel == 'Actual') {
@@ -1171,6 +1169,8 @@ switch (vystraha.ucel) {
 
 }
 
+resultText += '<div style="text-align:center;">' + header + '</div><br/>';
+resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
 resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano;
 
 if (vystraha.reference)
@@ -1182,6 +1182,13 @@ if (vystraha.reference)
 }
 
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
+
+resultText += 'Územní platnost: ';
+if (hlavniKraj == '-1' || zobrazovatVsechnyKraje) {
+    resultText += "Česká republika";
+} else {
+    resultText += KRAJE_NAZVY[hlavniKraj];
+}
 
 resultText += '<hr/>';
 
@@ -1270,7 +1277,7 @@ else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystrah
 else
 {
     // Sem by se to nikdy nemělo dostat, ale pro jistotu
-    resultText += '<br/>Výstraha je prázdná';
+    resultText += '<br/>Na zvoleném území není v platnosti nebezpečný jev.';
 }
 
 resultText += '<hr/>';
