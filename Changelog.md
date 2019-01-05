@@ -4,10 +4,26 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ## vývoj
 ### [CHMU-EMAIL]
 #### Přidáno
-- Vyloučení jevu Outlook - Výhled nebezpečných jevů
+- Vyloučení jevu Outlook - Výhled nebezpečných jevů.
 
 #### Změněno
-- Úprava formátu data a času
+- Úprava formátu data a času.
+
+## verze 11 – 2019-01-07
+### [CHMU-EMAIL]
+#### Přidáno
+- Zobrazení územní platnosti sestavy.
+- Zobrazení nadmořských výšek platnosti jevů. (řeší SU 37778)
+
+#### Změněno
+- Úprava textu nadpisů a hlavičky.
+
+#### Záplata
+- Oprava zvýraznění změn.
+
+#### Známé chyby
+- Jsou zobrazeny vypršelé výstrahy, jejichž platnost skončila před vydáním zobrazené výstrahy. (SU 37795)
+- Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
 
 ### [CHMU-SMS]
 #### Změněno
