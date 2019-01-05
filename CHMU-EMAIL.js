@@ -289,7 +289,7 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList[x].jev_kod != "OUTLOOK" && infoList[x].dc_konec > vytvoreni) {
+        if (infoList[x].jev_kod != "OUTLOOK") { // && infoList[x].dc_konec > vytvoreni
             infoListFilter.push(infoList[x]);
         }
     }
