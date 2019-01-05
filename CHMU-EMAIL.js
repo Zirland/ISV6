@@ -166,7 +166,7 @@ function HighlightDiff(newValue, oldValue)
                 }
                 else
                 {
-                    resultText += '';
+                    resultText += '<plain>';
                 }
             }
 
@@ -176,13 +176,13 @@ function HighlightDiff(newValue, oldValue)
         if (changeList.length > 0)
         {
             if (lastChange == 1) {
-                resultText += '<ins>';
+                resultText += '</ins>';
             }
             else if (lastChange == -1) {
-                resultText += '<del>';
+                resultText += '</del>';
             }
             else {
-                resultText += '';
+                resultText += '</plain>';
             }
         }
     }
@@ -981,6 +981,11 @@ resultText += '<HEAD>';
     resultText += '        color: red;';
     resultText += '        background: #fdd;';
     resultText += '        text-decoration: line-through;';
+    resultText += '        }';
+    resultText += '    plain {';
+    resultText += '        color: black;';
+    resultText += '        background: white;';
+    resultText += '        text-decoration: none;';
     resultText += '        }';
     resultText += '    body {font-family:serif;font-size:14px;height:100%;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
