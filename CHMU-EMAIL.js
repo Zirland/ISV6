@@ -289,7 +289,7 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList[x].jev_kod != "OUTLOOK") {
+        if (infoList[x].jev_kod != "OUTLOOK" && infoList[x].dc_konec > vytvoreni) {
             infoListFilter.push(infoList[x]);
         }
     }
@@ -1003,6 +1003,7 @@ var resultText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
+var vytvoreni = vystraha.dc_odeslano;
 
 // Připravíme jednotlivé info jevy
 if (vystraha.info && vystraha.info.length > 0)
