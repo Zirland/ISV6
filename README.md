@@ -12,6 +12,11 @@ Parametr **zobrazovatVsechnyKraje** může nabývat logických hodnot *false* ne
 - Při hodnotě *false* jsou zobrazeny pouze jevy týkající se zvoleného hlavního kraje. Záhlaví sestavy (HPPS/SIVS) pak odpovídá situaci ve zvoleném kraji.
 - Při hodnotě *true* jsou pod výpisem jevů týkajících se zvoleného hlavního kraje zobrazeny rovněž jevy týkající se ostatních krajů. Záhlaví sestavy (HPPS/SIVS) pak odpovídá situaci v celé ČR.
 
+Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
+- Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
+
 ## [CHMU-SMS]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ.
 
