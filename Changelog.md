@@ -4,7 +4,6 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ## vývoj
 ### [CHMU-EMAIL]
 #### Přidáno
-- Možnost vyloučení jevu Výhled nebezpečných jevů - parametr.
 
 #### Změněno
 - Úprava formátu data a času.
@@ -14,6 +13,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Přidáno
 - Zobrazení územní platnosti sestavy.
 - Zobrazení nadmořských výšek platnosti jevů. (řeší SU 37778)
+- Možnost vyloučení jevu Výhled nebezpečných jevů - parametr.
 
 #### Změněno
 - Úprava textu nadpisů a hlavičky.

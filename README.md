@@ -17,6 +17,11 @@ Parametr **razeniPodleNazvu** může nabývat logických hodnot *false* nebo *tr
 - Při hodnotě *false* je pořadí ostatních krajů určeno kódem kraje. Tj. Hl. m. Praha, Středočeský, Jihočeský atd.
 - Při hodnotě *true* je pořadí ostatních krajů určeno abecedním řazením názvu. Tj. Hl m. Praha, Jihočeský, Jihomoravský atd.
 
+Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
+- Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
+
 ## [CHMU-SMS]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ.
 

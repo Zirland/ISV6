@@ -3,6 +3,7 @@
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
 var razeniPodleNazvu = false;
+var zobrazitVyhled = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -286,6 +287,16 @@ function PrepareInfo(orp, vystraha)
         }
     }
 
+    var infoListFilter = [];
+    for (var x = 0; x < infoList.length; x++) {
+        if (infoList[x].jev_kod != "OUTLOOK") {
+            infoListFilter.push(infoList[x]);
+        }
+    }
+    if (!zobrazitVyhled) {
+        infoList = infoListFilter;
+    }
+    
     var krajList = [];
     var posledniKraj = {};
     var posledniOkres = {};
