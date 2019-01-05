@@ -290,7 +290,7 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList.stupen_kod != "OUTLOOK") {
+        if (infoList[x].jev_kod != "OUTLOOK") {
             infoListFilter.push(infoList[x]);
         }
     }
