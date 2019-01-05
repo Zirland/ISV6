@@ -175,7 +175,15 @@ function HighlightDiff(newValue, oldValue)
 
         if (changeList.length > 0)
         {
-            resultText += (lastChange == -1 ? '</del>' : '');
+            if (lastChange == 1) {
+                resultText += '<ins>';
+            }
+            else if (lastChange == -1) {
+                resultText += '<del>';
+            }
+            else {
+                resultText += '';
+            }
         }
     }
 
