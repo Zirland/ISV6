@@ -794,15 +794,15 @@ function PrintInfo(info, ref_info)
         {
             if (vyskaSplit[0] && vyskaSplit[1])
             {
-                resultText += 'mezi ' + vyskaSplit[0] + ' až ' + vyskaSplit[1] + ' metrů';
+                resultText += 'mezi ' + Math.round(vyskaSplit[0] * 0.3048) + ' až ' + Math.round(vyskaSplit[1] * 0.3048) + ' metrů';
             }
             else if (vyskaSplit[0])
             {
-                resultText += 'nad ' + vyskaSplit[0] + ' metrů';
+                resultText += 'nad ' + Math.round(vyskaSplit[0] * 0.3048) + ' metrů';
             }
             else if (vyskaSplit[1])
             {
-                resultText += 'pod ' + vyskaSplit[1] + ' metrů';
+                resultText += 'pod ' + Math.round(vyskaSplit[1] * 0.3048) + ' metrů';
             }
         }
         else
