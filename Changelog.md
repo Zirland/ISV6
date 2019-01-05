@@ -4,9 +4,9 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ## vývoj
 ### [CHMU-EMAIL]
 #### Přidáno
-
+- Odstranění vypršelých jevů. (řeší SU 37795, blokováno SU 37745)
 #### Změněno
-- Úprava formátu data a času.
+- Úprava formátu data a času. (blokováno SU 37745)
 
 ## verze 11 – 2019-01-07
 ### [CHMU-EMAIL]
