@@ -1169,7 +1169,7 @@ switch (vystraha.ucel) {
 
 }
 
-resultText += '<div style="text-align:center;">' + header + '</div><br/>';
+resultText += '<div style="text-align:center;">' + header + '</div>';
 resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
 resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano;
 
@@ -1183,7 +1183,7 @@ if (vystraha.reference)
 
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
 
-resultText += 'Územní platnost: ';
+resultText += '<br/>Územní platnost: ';
 if (hlavniKraj == '-1' || zobrazovatVsechnyKraje) {
     resultText += "Česká republika";
 } else {
