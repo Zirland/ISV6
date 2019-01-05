@@ -807,7 +807,7 @@ function PrintInfo(info, ref_info)
         }
         else
         {
-            resultText += vyska;
+            resultText += Math.round(vyska * 0.3048);
         }
     }
 
