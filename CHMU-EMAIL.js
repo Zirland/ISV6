@@ -1,10 +1,8 @@
 //Verze 10
 
-// Pokud budeme chtít ve výpisu mít nějaký kraj jako první, tak nastavíme proměnou "hlavniKraj" (-1 je bez přeřazení)
 var hlavniKraj = -1;
-
-// Chceme zobrazovat jevy ze všech krajů (používá se pouze pokud je nastaven i hlavní kraj)
 var zobrazovatVsechnyKraje = true;
+var razeniPodleNazvu = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -939,23 +937,25 @@ function PrintInfo(info, ref_info)
     return resultText;
 }
 
-var orpSort = orp;
-orpSort.sort(function (a, b) {
-  var kraj1 = parseFloat(a.kraj.id);
-  var kraj2 = parseFloat(b.kraj.id);
-  var okres1 = parseFloat(a.okres.id);
-  var okres2 = parseFloat(b.okres.id);
-  var orp1 = parseFloat(a.id);
-  var orp2 = parseFloat(b.id);
+if (!razeniPodleNazvu) {
+    var orpSort = orp;
+    orpSort.sort(function (a, b) {
+        var kraj1 = parseFloat(a.kraj.id);
+        var kraj2 = parseFloat(b.kraj.id);
+        var okres1 = parseFloat(a.okres.id);
+        var okres2 = parseFloat(b.okres.id);
+        var orp1 = parseFloat(a.id);
+        var orp2 = parseFloat(b.id);
 
-  if (kraj1 < kraj2) return -1;
-  if (kraj1 > kraj2) return 1;
-  if (okres1 < okres2) return -1;
-  if (okres1 > okres2) return 1;
-  if (orp1 < orp2) return -1;
-  if (orp1 > orp2) return 1;
-  return 0;
-});
+        if (kraj1 < kraj2) return -1;
+        if (kraj1 > kraj2) return 1;
+        if (okres1 < okres2) return -1;
+        if (okres1 > okres2) return 1;
+        if (orp1 < orp2) return -1;
+        if (orp1 > orp2) return 1;
+        return 0;
+    });
+}
 
 if (hlavniKraj != -1)
 {
