@@ -1351,7 +1351,7 @@ else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystrah
 if (empty)
 {
     // Sem by se to nikdy nemělo dostat, ale pro jistotu
-    resultText += '<br/>Na zvoleném území není v platnosti nebezpečný jev.';
+    resultText += '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
 resultText += '<hr/>';
