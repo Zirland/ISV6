@@ -226,20 +226,34 @@ function GetLCSLength(newValueSplit, oldValueSplit)
 
 // Úprava formátu data
 function Normalize(datum) {
+    datum = datum.toString();
     if (datum.includes("T")) {
-        endDen = Number(end.substring(8,10));
-        endMesic = Number(end.substring(5,7));
-        endRok = Number(end.substring(0,4));
-        endCas = end.substring(11,19);
+        var date = new Date(datum);
+
+        endDen = date.getDate();
+        endMesic = date.getMonth()+1;
+        endRok = date.getFullYear();
+        endHodiny = date.getHours();
+        endMinuty = date.getMinutes();
+        if (endMinuty < 10) {
+            endMinuty = '0' + endMinuty;
+        }
+        endSekundy = date.getSeconds()
+        if (endSekundy < 10) {
+            endSekundy = '0' + endSekundy;
+        }
         
-        datum = endDen + '.' + endMesic + '.' + endRok + " " + endCas;
+        datum = endDen + '.' + endMesic + '.' + endRok + " " + endHodiny + ":" + endMinuty + ":" + endSekundy;
     }
     return datum;
 }
 
 // Zjišťuje, zda je datum1 nižší než datum2
 function DatumDrive(datum1, datum2) {
-datum1Den = datum1.substring(0,2);
+    datum1 = datum1.toString();
+    datum2 = datum2.toString();
+
+    datum1Den = datum1.substring(0,2);
     datum1Den_porovn = datum1Den.replace(/\.$/, "");
     if (datum1Den == datum1Den_porovn) {
         datum1Mesic = datum1.substring(3,5);
@@ -960,11 +974,6 @@ function PrintInfo(info, ref_info)
         }
     } 
 
-    var zacatekJevu = Normalize(info.dc_zacatek);
-    var konecJevu = Normalize(info.dc_konec);
-    var ref_zacatekJevu = Normalize(ref_info.dc_zacatek);
-    var ref_konecJevu = Normalize(ref_info.dc_konec);
-
     resultText += '<div><table class="tg" width="99%">';
 
     // Hlavička
@@ -973,9 +982,9 @@ function PrintInfo(info, ref_info)
         resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
         resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table class="no">';
-            resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? zacatekJevu : '', ref_info != null ? ref_zacatekJevu : '') + '</td>';
+            resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? Normalize(info.dc_zacatek) : '', ref_info != null ? Normalize(ref_info.dc_zacatek) : '') + '</td>';
             resultText += '<td> - </td>';
-            resultText += '<td>' + SimpleHighlightDiff(info != null ? konecJevu : '', ref_info != null ? ref_konecJevu : '') + '<td><tr>';
+            resultText += '<td>' + SimpleHighlightDiff(info != null ?  Normalize(info.dc_konec) : '', ref_info != null ?  Normalize(ref_info.dc_konec) : '') + '<td><tr>';
         resultText += '</table></td>';
     resultText += '</tr>';
 
