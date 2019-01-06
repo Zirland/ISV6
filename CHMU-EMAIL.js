@@ -1306,11 +1306,27 @@ var empty = true;
 
 if (vystraha.info && vystraha.info.length > 0)
 {
-    // Vypíšeme situaci
-    resultText += '<br/><b>Meteorologická situace:</b> ' + vystraha.info[0].situace;
-    resultText += '<hr/>';
+    // Najdeme všechny situace a doplňkové informace
+    var situace = [];
 
-    // Provedeme výpis jevů v krajích
+    for (var i = 0; i < vystraha.info.length; i++)
+    {
+        if (vystraha.info[i].situace)
+        {
+            if (situace.indexOf(vystraha.info[i].situace) == -1)
+            {
+                // Vložíme situaci, kterou ještě nemáme
+                situace.push(vystraha.info[i].situace);
+            }
+        }
+    }
+
+   if (situace.length > 0)
+    {
+        resultText += '<br/><b>Meteorologická situace:</b> ' + situace[0];
+        resultText += '<hr/>';
+    }
+
     resultText += PrintInfoList(krajList, ref_krajList);
 }
 else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
