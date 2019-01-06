@@ -3,11 +3,37 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 ## vývoj
 ### [CHMU-EMAIL]
-#### Přidáno
-- Vyloučení jevu Outlook - Výhled nebezpečných jevů
+#### Přidáno
+- Vymazání tagu *\<br/>* z popisu, doporučení a hydrologické zprávy.
 
 #### Změněno
-- Úprava formátu data a času
+- Zkrácení názvu některých jevů ve výpisu.
+
+## verze 11 – 2019-01-07
+### [CHMU-EMAIL]
+#### Přidáno
+- Zobrazení územní platnosti sestavy.
+- Zobrazení nadmořských výšek platnosti jevů. (řeší SU 37778)
+- Možnost vyloučení jevu Výhled nebezpečných jevů - parametr.
+- Odstranění vypršelých jevů. (řeší SU 37795)
+
+#### Změněno
+- Úprava textu nadpisů a hlavičky.
+- Způsob řazení je možno nastavit parametrem.
+- Úprava formátu data a času. (řeší SU 37745)
+
+#### Odstraněno
+- Odstraněna pole "Doplňková informace" a výpis měřících profilů na tocích na základě změny směrnice ČHMÚ.
+
+#### Záplata
+- Oprava zvýraznění změn.
+
+#### Známé chyby
+- Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
+
+### [CHMU-SMS]
+#### Změněno
+- Úprava způsobu určení typu zprávy.
 
 ## verze 10 – 2019-01-05
 ### [CHMU-EMAIL]
