@@ -3,8 +3,6 @@
 ## [CHMU-EMAIL]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ.
 
-Jev "Výhled nebezpečných jevů" je do výstupu zahrnut.
-
 Parametr **hlavniKraj** posunuje zvolený kraj na začátek výpisu, při hodnotě *-1* nedochází ke změně řazení. Číselník území je v proměnné *KRAJE_NAZVY*.
 
 Parametr **zobrazovatVsechnyKraje** může nabývat logických hodnot *false* nebo *true*. Hodnota parametru se zohledňuje pouze v případě, že parametr **hlavniKraj** je nastaven na hodnotu odlišnou od *-1*.
