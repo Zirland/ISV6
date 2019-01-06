@@ -226,117 +226,71 @@ function GetLCSLength(newValueSplit, oldValueSplit)
 
 // Úprava formátu data
 function Normalize(datum) {
-    datum = datum.toString();
-    if (datum.includes("T")) {
+    var datumString = datum.toString();
+    if (datumString.includes("T")) {
         var date = new Date(datum);
 
-        endDen = date.getDate();
-        endMesic = date.getMonth()+1;
-        endRok = date.getFullYear();
-        endHodiny = date.getHours();
-        endMinuty = date.getMinutes();
-        if (endMinuty < 10) {
-            endMinuty = '0' + endMinuty;
+        datumDen = date.getDate();
+        datumMesic = date.getMonth()+1;
+        datumRok = date.getFullYear();
+        datumHodiny = date.getHours();
+        datumMinuty = date.getMinutes();
+        if (datumMinuty < 10) {
+            datumMinuty = '0' + datumMinuty;
         }
-        endSekundy = date.getSeconds()
-        if (endSekundy < 10) {
-            endSekundy = '0' + endSekundy;
+    } else {
+        datumDen = datum.substring(0,2);
+        datumDen_porovn = datumDen.replace(/\.$/, "");
+        if (datumDen == datumDen_porovn) {
+            datumMesic = datum.substring(3,5);
+            datumMesic_porovn = datumMesic.replace(/\.$/, "");
+            if (datumMesic == datumMesic_porovn) {
+                datumRok = datum.substring(6,10)
+                datumCas = datum.substring(11,16);
+                datumCas = datumCas.replace(/\:$/, "");
+            } else {
+                datumMesic = '0' + datumMesic_porovn;
+                datumRok = datum.substring(5,9)
+                datumCas = datum.substring(10,15);
+                datumCas = datumCas.replace(/\:$/, "");
+            }
+        } else {
+            datumDen = '0' + datumDen_porovn;
+            datumMesic = datum.substring(2,4);
+            datumMesic_porovn = datumMesic.replace(/\.$/, "");
+            if (datumMesic == datumMesic_porovn) {
+                datumRok = datum.substring(5,9)
+                datumCas = datum.substring(10,15);
+                datumCas = datumCas.replace(/\:$/, "");
+            } else {
+                datumMesic = '0' + datumMesic_porovn;
+                datumRok = datum.substring(4,8)
+                datumCas = datum.substring(9,14);
+                datumCas = datumCas.replace(/\:$/, "");
+            }
         }
-        
-        datum = endDen + '.' + endMesic + '.' + endRok + " " + endHodiny + ":" + endMinuty + ":" + endSekundy;
+
+        datumHodina = datumCas.substring(0,2);
+        datumHodina_porovn = datumHodina.replace(/\:$/, "");
+        if (datumHodina == datumHodina_porovn) {
+            datumMinuta = datumCas.substring(3,5);
+        } else {
+            datumHodina = '0' + datumHodina_porovn;
+            datumMinuta = datumCas.substring(2,4);
+        }
     }
+
+    datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty;
+
     return datum;
 }
 
 // Zjišťuje, zda je datum1 nižší než datum2
 function DatumDrive(datum1, datum2) {
-    datum1 = datum1.toString();
-    datum2 = datum2.toString();
+    var datum1_format = Normalize(datum1);
+    var datum2_format = Normalize(datum2);
 
-    datum1Den = datum1.substring(0,2);
-    datum1Den_porovn = datum1Den.replace(/\.$/, "");
-    if (datum1Den == datum1Den_porovn) {
-        datum1Mesic = datum1.substring(3,5);
-        datum1Mesic_porovn = datum1Mesic.replace(/\.$/, "");
-        if (datum1Mesic == datum1Mesic_porovn) {
-            datum1Rok = datum1.substring(6,10)
-            datum1Cas = datum1.substring(11,16);
-            datum1Cas = datum1Cas.replace(/\:$/, "");
-        } else {
-            datum1Mesic = '0' + datum1Mesic_porovn;
-            datum1Rok = datum1.substring(5,9)
-            datum1Cas = datum1.substring(10,15);
-            datum1Cas = datum1Cas.replace(/\:$/, "");
-        }
-    } else {
-        datum1Den = '0' + datum1Den_porovn;
-        datum1Mesic = datum1.substring(2,4);
-        datum1Mesic_porovn = datum1Mesic.replace(/\.$/, "");
-        if (datum1Mesic == datum1Mesic_porovn) {
-            datum1Rok = datum1.substring(5,9)
-            datum1Cas = datum1.substring(10,15);
-            datum1Cas = datum1Cas.replace(/\:$/, "");
-        } else {
-            datum1Mesic = '0' + datum1Mesic_porovn;
-            datum1Rok = datum1.substring(4,8)
-            datum1Cas = datum1.substring(9,14);
-            datum1Cas = datum1Cas.replace(/\:$/, "");
-        }
-    }
-
-    datum1Hodina = datum1Cas.substring(0,2);
-    datum1Hodina_porovn = datum1Hodina.replace(/\:$/, "");
-    if (datum1Hodina == datum1Hodina_porovn) {
-        datum1Minuta = datum1Cas.substring(3,5);
-    } else {
-        datum1Hodina = '0' + datum1Hodina_porovn;
-        datum1Minuta = datum1Cas.substring(2,4);
-    }
-
-    datum1_format = datum1Rok + datum1Mesic + datum1Den + datum1Hodina + datum1Minuta;
     datum1_format_num = Number(datum1_format);
-
-    datum2Den = datum2.substring(0,2);
-    datum2Den_porovn = datum2Den.replace(/\.$/, "");
-    if (datum2Den == datum2Den_porovn) {
-        datum2Mesic = datum2.substring(3,5);
-        datum2Mesic_porovn = datum2Mesic.replace(/\.$/, "");
-        if (datum2Mesic == datum2Mesic_porovn) {
-            datum2Rok = datum2.substring(6,10)
-            datum2Cas = datum2.substring(11,16);
-            datum2Cas = datum2Cas.replace(/\:$/, "");
-        } else {
-            datum2Mesic = '0' + datum2Mesic_porovn;
-            datum2Rok = datum2.substring(5,9)
-            datum2Cas = datum2.substring(10,15);
-            datum2Cas = datum2Cas.replace(/\:$/, "");
-        }
-    } else {
-        datum2Den = '0' + datum2Den_porovn;
-        datum2Mesic = datum2.substring(2,4);
-        datum2Mesic_porovn = datum2Mesic.replace(/\.$/, "");
-        if (datum2Mesic == datum2Mesic_porovn) {
-            datum2Rok = datum2.substring(5,9)
-            datum2Cas = datum2.substring(10,15);
-            datum2Cas = datum2Cas.replace(/\:$/, "");
-        } else {
-            datum2Mesic = '0' + datum2Mesic_porovn;
-            datum2Rok = datum2.substring(4,8)
-            datum2Cas = datum2.substring(9,14);
-            datum2Cas = datum2Cas.replace(/\:$/, "");
-        }
-    }
-
-    datum2Hodina = datum2Cas.substring(0,2);
-    datum2Hodina_porovn = datum2Hodina.replace(/\:$/, "");
-    if (datum2Hodina == datum2Hodina_porovn) {
-        datum2Minuta = datum2Cas.substring(3,5);
-    } else {
-        datum2Hodina = '0' + datum2Hodina_porovn;
-        datum2Minuta = datum2Cas.substring(2,4);
-    }
-
-    datum2_format = datum2Rok + datum2Mesic + datum2Den + datum2Hodina + datum2Minuta;
     datum2_format_num = Number(datum2_format);
 
     if (datum1_format_num < datum2_format_num) {
@@ -349,48 +303,13 @@ function DatumDrive(datum1, datum2) {
 function ZobrazDatum(datum) {
     var normDatum = Normalize(datum);
 
-    normDatumDen = normDatum.substring(0,2);
-    normDatumDen_porovn = normDatumDen.replace(/\.$/, "");
-    if (normDatumDen == normDatumDen_porovn) {
-        normDatumMesic = normDatum.substring(3,5);
-        normDatumMesic_porovn = normDatumMesic.replace(/\.$/, "");
-        if (normDatumMesic == normDatumMesic_porovn) {
-            normDatumRok = normDatum.substring(6,10)
-            normDatumCas = normDatum.substring(11,16);
-            normDatumCas = normDatumCas.replace(/\:$/, "");
-        } else {
-            normDatumMesic = '0' + normDatumMesic_porovn;
-            normDatumRok = normDatum.substring(5,9)
-            normDatumCas = normDatum.substring(10,15);
-            normDatumCas = normDatumCas.replace(/\:$/, "");
-        }
-    } else {
-        normDatumDen = '0' + normDatumDen_porovn;
-        normDatumMesic = normDatum.substring(2,4);
-        normDatumMesic_porovn = normDatumMesic.replace(/\.$/, "");
-        if (normDatumMesic == normDatumMesic_porovn) {
-            normDatumRok = normDatum.substring(5,9)
-            normDatumCas = normDatum.substring(10,15);
-            normDatumCas = normDatumCas.replace(/\:$/, "");
-        } else {
-            normDatumMesic = '0' + normDatumMesic_porovn;
-            normDatumRok = normDatum.substring(4,8)
-            normDatumCas = normDatum.substring(9,14);
-            normDatumCas = normDatumCas.replace(/\:$/, "");
-        }
-    }
-
-    normDatumHodina = normDatumCas.substring(0,2);
-    normDatumHodina_porovn = normDatumHodina.replace(/\:$/, "");
-    if (normDatumHodina == normDatumHodina_porovn) {
-        normDatumMinuta = normDatumCas.substring(3,5);
-    } else {
-        normDatumHodina = '0' + normDatumHodina_porovn;
-        normDatumMinuta = normDatumCas.substring(2,4);
-    }
+    normDatumMesic = normDatum.substring(5,6);
+    normDatumDen = normDatum.substring(7,8);
+    normDatumHodina = normDatum.substring(9,10);
+    normDatumMinuta = normDatum.substring(11,12);
 
     format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + "." + " " + normDatumHodina + ":" + normDatumMinuta;
-    
+
     return format_datum;
 }
 
@@ -459,7 +378,7 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(Normalize(infoList[x].dc_konec), Normalize(vytvoreni))) {
+        if (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(infoList[x].dc_konec, vytvoreni)) {
             infoListFilter.push(infoList[x]);
         }
     }
