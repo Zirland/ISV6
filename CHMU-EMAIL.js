@@ -228,55 +228,73 @@ function GetLCSLength(newValueSplit, oldValueSplit)
 function Normalize(datum) {
     var datumString = datum.toString();
     if (datumString.includes("T")) {
-        var date = new Date(datum);
+        var date = new Date(datumString);
 
         datumDen = date.getDate();
+        if (datumDen < 10) {
+            datumDen = '0' + datumDen;
+        } else {
+            datumDen = datumDen.toString()
+        }
         datumMesic = date.getMonth()+1;
-        datumRok = date.getFullYear();
+        if (datumMesic < 10) {
+            datumMesic = '0' + datumMesic;
+        } else {
+            datumMesic = datumMesic.toString()
+        }
+        datumRok = date.getFullYear().toString();
+
         datumHodiny = date.getHours();
+        if (datumHodiny < 10) {
+            datumHodiny = '0' + datumHodiny;
+        } else {
+            datumHodiny = datumHodiny.toString()
+        }
         datumMinuty = date.getMinutes();
         if (datumMinuty < 10) {
             datumMinuty = '0' + datumMinuty;
+        } else {
+            datumMinuty = datumMinuty.toString()
         }
     } else {
-        datumDen = datum.substring(0,2);
+        datumDen = datumString.substring(0,2);
         datumDen_porovn = datumDen.replace(/\.$/, "");
         if (datumDen == datumDen_porovn) {
-            datumMesic = datum.substring(3,5);
+            datumMesic = datumString.substring(3,5);
             datumMesic_porovn = datumMesic.replace(/\.$/, "");
             if (datumMesic == datumMesic_porovn) {
-                datumRok = datum.substring(6,10)
-                datumCas = datum.substring(11,16);
+                datumRok = datumString.substring(6,10)
+                datumCas = datumString.substring(11,16);
                 datumCas = datumCas.replace(/\:$/, "");
             } else {
                 datumMesic = '0' + datumMesic_porovn;
-                datumRok = datum.substring(5,9)
-                datumCas = datum.substring(10,15);
+                datumRok = datumString.substring(5,9)
+                datumCas = datumString.substring(10,15);
                 datumCas = datumCas.replace(/\:$/, "");
             }
         } else {
             datumDen = '0' + datumDen_porovn;
-            datumMesic = datum.substring(2,4);
+            datumMesic = datumString.substring(2,4);
             datumMesic_porovn = datumMesic.replace(/\.$/, "");
             if (datumMesic == datumMesic_porovn) {
-                datumRok = datum.substring(5,9)
-                datumCas = datum.substring(10,15);
+                datumRok = datumString.substring(5,9)
+                datumCas = datumString.substring(10,15);
                 datumCas = datumCas.replace(/\:$/, "");
             } else {
                 datumMesic = '0' + datumMesic_porovn;
-                datumRok = datum.substring(4,8)
-                datumCas = datum.substring(9,14);
+                datumRok = datumString.substring(4,8)
+                datumCas = datumString.substring(9,14);
                 datumCas = datumCas.replace(/\:$/, "");
             }
         }
 
-        datumHodina = datumCas.substring(0,2);
-        datumHodina_porovn = datumHodina.replace(/\:$/, "");
-        if (datumHodina == datumHodina_porovn) {
-            datumMinuta = datumCas.substring(3,5);
+        datumHodiny = datumCas.substring(0,2);
+        datumHodiny_porovn = datumHodiny.replace(/\:$/, "");
+        if (datumHodiny == datumHodiny_porovn) {
+            datumMinuty = datumCas.substring(3,5);
         } else {
-            datumHodina = '0' + datumHodina_porovn;
-            datumMinuta = datumCas.substring(2,4);
+            datumHodiny = '0' + datumHodiny_porovn;
+            datumMinuty = datumCas.substring(2,4);
         }
     }
 
@@ -302,13 +320,14 @@ function DatumDrive(datum1, datum2) {
 
 function ZobrazDatum(datum) {
     var normDatum = Normalize(datum);
+    
+    normDatumRok = normDatum.substring(0,4);
+    normDatumMesic = normDatum.substring(4,6);
+    normDatumDen = normDatum.substring(6,8);
+    normDatumHodina = normDatum.substring(8,10);
+    normDatumMinuta = normDatum.substring(10,12);
 
-    normDatumMesic = normDatum.substring(5,6);
-    normDatumDen = normDatum.substring(7,8);
-    normDatumHodina = normDatum.substring(9,10);
-    normDatumMinuta = normDatum.substring(11,12);
-
-    format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + "." + " " + normDatumHodina + ":" + normDatumMinuta;
+    format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + ". " + normDatumHodina + ":" + normDatumMinuta;
 
     return format_datum;
 }
