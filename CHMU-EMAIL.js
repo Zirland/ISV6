@@ -411,7 +411,7 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList[x].jev_kod != "OUTLOOK" && DatumDrive(Normalize(infoList[x].dc_konec), Normalize(vytvoreni))) {
+        if (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(Normalize(infoList[x].dc_konec), Normalize(vytvoreni))) {
             infoListFilter.push(infoList[x]);
         }
     }
