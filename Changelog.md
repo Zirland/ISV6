@@ -12,7 +12,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Zobrazení územní platnosti sestavy.
 - Zobrazení nadmořských výšek platnosti jevů. (řeší SU 37778)
 - Možnost vyloučení jevu Výhled nebezpečných jevů - parametr.
-- Odstranění vypršelých jevů. (řeší SU 37795, řeší SU 37745)
+- Odstranění vypršelých jevů. (řeší SU 37795)
 
 #### Změněno
 - Úprava textu nadpisů a hlavičky.
@@ -26,7 +26,6 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Oprava zvýraznění změn.
 
 #### Známé chyby
-- Jsou zobrazeny vypršelé výstrahy, jejichž platnost skončila před vydáním zobrazené výstrahy. (SU 37795)
 - Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
 
 ### [CHMU-SMS]
