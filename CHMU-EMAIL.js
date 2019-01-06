@@ -224,6 +224,114 @@ function GetLCSLength(newValueSplit, oldValueSplit)
     return matrix;
 }
 
+// Úprava formátu data
+function Normalize(datum) {
+    if (datum.includes("T")) {
+        endDen = Number(end.substring(8,10));
+        endMesic = Number(end.substring(5,7));
+        endRok = Number(end.substring(0,4));
+        endCas = end.substring(11,19);
+        
+        datum = endDen + '.' + endMesic + '.' + endRok + " " + endCas;
+    }
+    return datum;
+}
+
+// Zjišťuje, zda je datum1 nižší než datum2
+function DatumDrive(datum1, datum2) {
+datum1Den = datum1.substring(0,2);
+    datum1Den_porovn = datum1Den.replace(/\.$/, "");
+    if (datum1Den == datum1Den_porovn) {
+        datum1Mesic = datum1.substring(3,5);
+        datum1Mesic_porovn = datum1Mesic.replace(/\.$/, "");
+        if (datum1Mesic == datum1Mesic_porovn) {
+            datum1Rok = datum1.substring(6,10)
+            datum1Cas = datum1.substring(11,16);
+            datum1Cas = datum1Cas.replace(/\:$/, "");
+        } else {
+            datum1Mesic = '0' + datum1Mesic_porovn;
+            datum1Rok = datum1.substring(5,9)
+            datum1Cas = datum1.substring(10,15);
+            datum1Cas = datum1Cas.replace(/\:$/, "");
+        }
+    } else {
+        datum1Den = '0' + datum1Den_porovn;
+        datum1Mesic = datum1.substring(2,4);
+        datum1Mesic_porovn = datum1Mesic.replace(/\.$/, "");
+        if (datum1Mesic == datum1Mesic_porovn) {
+            datum1Rok = datum1.substring(5,9)
+            datum1Cas = datum1.substring(10,15);
+            datum1Cas = datum1Cas.replace(/\:$/, "");
+        } else {
+            datum1Mesic = '0' + datum1Mesic_porovn;
+            datum1Rok = datum1.substring(4,8)
+            datum1Cas = datum1.substring(9,14);
+            datum1Cas = datum1Cas.replace(/\:$/, "");
+        }
+    }
+
+    datum1Hodina = datum1Cas.substring(0,2);
+    datum1Hodina_porovn = datum1Hodina.replace(/\:$/, "");
+    if (datum1Hodina == datum1Hodina_porovn) {
+        datum1Minuta = datum1Cas.substring(3,5);
+    } else {
+        datum1Hodina = '0' + datum1Hodina_porovn;
+        datum1Minuta = datum1Cas.substring(2,4);
+    }
+
+    datum1_format = datum1Rok + datum1Mesic + datum1Den + datum1Hodina + datum1Minuta;
+    datum1_format_num = Number(datum1_format);
+
+    datum2Den = datum2.substring(0,2);
+    datum2Den_porovn = datum2Den.replace(/\.$/, "");
+    if (datum2Den == datum2Den_porovn) {
+        datum2Mesic = datum2.substring(3,5);
+        datum2Mesic_porovn = datum2Mesic.replace(/\.$/, "");
+        if (datum2Mesic == datum2Mesic_porovn) {
+            datum2Rok = datum2.substring(6,10)
+            datum2Cas = datum2.substring(11,16);
+            datum2Cas = datum2Cas.replace(/\:$/, "");
+        } else {
+            datum2Mesic = '0' + datum2Mesic_porovn;
+            datum2Rok = datum2.substring(5,9)
+            datum2Cas = datum2.substring(10,15);
+            datum2Cas = datum2Cas.replace(/\:$/, "");
+        }
+    } else {
+        datum2Den = '0' + datum2Den_porovn;
+        datum2Mesic = datum2.substring(2,4);
+        datum2Mesic_porovn = datum2Mesic.replace(/\.$/, "");
+        if (datum2Mesic == datum2Mesic_porovn) {
+            datum2Rok = datum2.substring(5,9)
+            datum2Cas = datum2.substring(10,15);
+            datum2Cas = datum2Cas.replace(/\:$/, "");
+        } else {
+            datum2Mesic = '0' + datum2Mesic_porovn;
+            datum2Rok = datum2.substring(4,8)
+            datum2Cas = datum2.substring(9,14);
+            datum2Cas = datum2Cas.replace(/\:$/, "");
+        }
+    }
+
+    datum2Hodina = datum2Cas.substring(0,2);
+    datum2Hodina_porovn = datum2Hodina.replace(/\:$/, "");
+    if (datum2Hodina == datum2Hodina_porovn) {
+        datum2Minuta = datum2Cas.substring(3,5);
+    } else {
+        datum2Hodina = '0' + datum2Hodina_porovn;
+        datum2Minuta = datum2Cas.substring(2,4);
+    }
+
+    datum2_format = datum2Rok + datum2Mesic + datum2Den + datum2Hodina + datum2Minuta;
+    datum2_format_num = Number(datum2_format);
+
+    if (datum1_format_num < datum2_format_num) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Připravíme seznam jevů podle území
 function PrepareInfo(orp, vystraha)
 {
@@ -289,7 +397,7 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList[x].jev_kod != "OUTLOOK") { // && infoList[x].dc_konec > vytvoreni
+        if (infoList[x].jev_kod != "OUTLOOK" && DatumDrive(Normalize(infoList[x].dc_konec), Normalize(vytvoreni))) {
             infoListFilter.push(infoList[x]);
         }
     }
@@ -852,6 +960,11 @@ function PrintInfo(info, ref_info)
         }
     } 
 
+    var zacatekJevu = Normalize(info.dc_zacatek);
+    var konecJevu = Normalize(info.dc_konec);
+    var ref_zacatekJevu = Normalize(ref_info.dc_zacatek);
+    var ref_konecJevu = Normalize(ref_info.dc_konec);
+
     resultText += '<div><table class="tg" width="99%">';
 
     // Hlavička
@@ -860,9 +973,9 @@ function PrintInfo(info, ref_info)
         resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
         resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table class="no">';
-            resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? info.dc_zacatek : '', ref_info != null ? ref_info.dc_zacatek : '') + '</td>';
+            resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? zacatekJevu : '', ref_info != null ? ref_zacatekJevu : '') + '</td>';
             resultText += '<td> - </td>';
-            resultText += '<td>' + SimpleHighlightDiff(info != null ? info.dc_konec : '', ref_info != null ? ref_info.dc_konec : '') + '<td><tr>';
+            resultText += '<td>' + SimpleHighlightDiff(info != null ? konecJevu : '', ref_info != null ? ref_konecJevu : '') + '<td><tr>';
         resultText += '</table></td>';
     resultText += '</tr>';
 
