@@ -3,11 +3,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 ## vývoj
 ### [CHMU-EMAIL]
-#### Přidáno
-- Odstranění vypršelých jevů. (řeší SU 37795, blokováno SU 37745)
-
 #### Změněno
-- Úprava formátu data a času. (blokováno SU 37745)
 - Zkrácení názvu některých jevů ve výpisu.
 
 ## verze 11 – 2019-01-07
@@ -16,10 +12,12 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Zobrazení územní platnosti sestavy.
 - Zobrazení nadmořských výšek platnosti jevů. (řeší SU 37778)
 - Možnost vyloučení jevu Výhled nebezpečných jevů - parametr.
+- Odstranění vypršelých jevů. (řeší SU 37795, řeší SU 37745)
 
 #### Změněno
 - Úprava textu nadpisů a hlavičky.
 - Způsob řazení je možno nastavit parametrem.
+- Úprava formátu data a času. (řeší SU 37745)
 
 #### Odstraněno
 - Odstraněna pole "Doplňková informace" a výpis měřících profilů na tocích na základě změny směrnice ČHMÚ.
