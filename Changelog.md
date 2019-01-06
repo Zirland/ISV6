@@ -5,8 +5,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [CHMU-EMAIL]
 #### Přidáno
 - Odstranění vypršelých jevů. (řeší SU 37795, blokováno SU 37745)
+
 #### Změněno
 - Úprava formátu data a času. (blokováno SU 37745)
+- Zkrácení názvu některých jevů ve výpisu.
 
 ## verze 11 – 2019-01-07
 ### [CHMU-EMAIL]
@@ -18,6 +20,9 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Změněno
 - Úprava textu nadpisů a hlavičky.
 - Způsob řazení je možno nastavit parametrem.
+
+#### Odstraněno
+- Odstraněna pole "Doplňková informace" a výpis měřících profilů na tocích na základě změny směrnice ČHMÚ.
 
 #### Záplata
 - Oprava zvýraznění změn.

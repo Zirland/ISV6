@@ -932,7 +932,7 @@ function PrintInfoList(krajList, ref_krajList)
 function GetWarningColor(info)
 {
     // Barva podle závažnosti
-    var color = 'Zelená';
+    var color = '';
 
     if (info)
     {
@@ -1041,85 +1041,16 @@ function PrintInfo(info, ref_info)
         resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? info.popis : '', ref_info != null ? ref_info.popis : '') + '</td>';
     resultText += '</tr>';
 
-    // Toky řek
-    if (info && (info.hydro1SPA || info.hydro2SPA || info.hydro3SPA))
-    {
+    // Hydrologická zpráva
+    if (info && (info.hydroPredpoved)) {
         resultText += '<tr>';
-        resultText += '<td colspan="3">';
-        resultText += '<table border="1">';
-        resultText += '<tr><th>SPA</th><th>Tok</th><th>Stanice</th><th>Stav [cm]</th><th>Průtok [m3/s]</th><th>Tendence</th></tr>';
-
-        if (info.hydro1SPA)
-        {
-            var rowSplit = info.hydro1SPA.split('&lt;br/&gt;');
-            for (var i = 0; i < rowSplit.length; i++)
-            {
-                var columnSplit = rowSplit[i].split(',');
-                if (columnSplit.length == 5)
-                {
-                    resultText += '<tr>';
-                    resultText += '<td>' + 'I.' + '</td>';
-                    resultText += '<td>' + columnSplit[0] + '</td>';
-                    resultText += '<td>' + columnSplit[1] + '</td>';
-                    resultText += '<td>' + columnSplit[2].substring(0, columnSplit[2].length - 3) + '</td>';
-                    resultText += '<td>' + columnSplit[3].substring(0, columnSplit[3].length - 6) + '</td>';
-                    resultText += '<td>' + (columnSplit[4] == ' rising' ? 'stoupá' : (columnSplit[4] == ' decreasing' ? 'klesá' : (columnSplit[4] == ' steady' ? 'setrvalý stav' : columnSplit[4]))) + '<td>';
-                    resultText += '</tr>';
-                }
-            }
-        }
-
-        if (info.hydro2SPA)
-        {
-            var rowSplit = info.hydro2SPA.split('&lt;br/&gt;');
-            for (var i = 0; i < rowSplit.length; i++)
-            {
-                var columnSplit = rowSplit[i].split(',');
-                if (columnSplit.length == 5)
-                {
-                    resultText += '<tr>';
-                    resultText += '<td>' + 'II.' + '</td>';
-                    resultText += '<td>' + columnSplit[0] + '</td>';
-                    resultText += '<td>' + columnSplit[1] + '</td>';
-                    resultText += '<td>' + columnSplit[2].substring(0, columnSplit[2].length - 3) + '</td>';
-                    resultText += '<td>' + columnSplit[3].substring(0, columnSplit[3].length - 6) + '</td>';
-                    resultText += '<td>' + (columnSplit[4] == ' rising' ? 'stoupá' : (columnSplit[4] == ' decreasing' ? 'klesá' : (columnSplit[4] == ' steady' ? 'setrvalý stav' : columnSplit[4]))) + '<td>';
-                    resultText += '</tr>';
-                }
-            }
-        }
-
-        if (info.hydro3SPA)
-        {
-            var rowSplit = info.hydro3SPA.split('&lt;br/&gt;');
-            for (var i = 0; i < rowSplit.length; i++)
-            {
-                if (rowSplit[i])
-                {
-                    var columnSplit = rowSplit[i].split(',');
-                    if (columnSplit.length == 5)
-                    {
-                        resultText += '<tr>';
-                        resultText += '<td>' + 'III.' + '</td>';
-                        resultText += '<td>' + columnSplit[0] + '</td>';
-                        resultText += '<td>' + columnSplit[1] + '</td>';
-                        resultText += '<td>' + columnSplit[2].substring(0, columnSplit[2].length - 3) + '</td>';
-                        resultText += '<td>' + columnSplit[3].substring(0, columnSplit[3].length - 6) + '</td>';
-                        resultText += '<td>' + (columnSplit[4] == ' rising' ? 'stoupá' : (columnSplit[4] == ' decreasing' ? 'klesá' : (columnSplit[4] == ' steady' ? 'setrvalý stav' : columnSplit[4]))) + '<td>';
-                        resultText += '</tr>';
-                    }
-                }
-            }
-        }
-
-        resultText += '</table>';
-        resultText += '</td>';
+        resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + HighlightDiff(info != null ? info.hydroPredpoved : '', ref_info != null ? ref_info.hydroPredpoved : '') + '</td>';
         resultText += '</tr>';
     }
 
     // Doporučení
     resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? info.doporuceni : '', ref_info != null ? ref_info.doporuceni : '') + '</td>';
+    resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? info.doporuceni : '', ref_info != null ? ref_info.doporuceni : '') + '</td>';
     resultText += '</tr>';
 
     resultText += '</table></div>';
@@ -1437,75 +1368,12 @@ var empty = true;
 
 if (vystraha.info && vystraha.info.length > 0)
 {
-    // Najdeme všechny situace a doplňkové informace
-    var situace = [];
-    var doplnkovaInformace = [];
-    var hydroPredpoved = [];
-
-    for (var i = 0; i < vystraha.info.length; i++)
-    {
-        if (vystraha.info[i].situace)
-        {
-            if (situace.indexOf(vystraha.info[i].situace) == -1)
-            {
-                // Vložíme situaci, kterou ještě nemáme
-                situace.push(vystraha.info[i].situace);
-            }
-        }
-
-        if (vystraha.info[i].dopresneni)
-        {
-            if (doplnkovaInformace.indexOf(vystraha.info[i].dopresneni) == -1)
-            {
-                // Vložíme dopřesnění, které ještě nemáme
-                doplnkovaInformace.push(vystraha.info[i].dopresneni);
-            }
-        }
-
-        if (vystraha.info[i].hydroPredpoved)
-        {
-            if (hydroPredpoved.indexOf(vystraha.info[i].hydroPredpoved) == -1)
-            {
-                // Vložíme předpověď, kterou ještě nemáme
-                doplnkovaInformace.push(vystraha.info[i].hydroPredpoved);
-            }
-        }
-    }
-
     // Vypíšeme situaci
-    if (situace.length > 0)
-    {
-        for (var i = 0; i < situace.length; i++)
-        {
-            resultText += '<br/><b>Situace '+ (i + 1) + ':</b> ' + situace[i];
-        }
-    }
+    resultText += '<br/><b>Meteorologická situace:</b> ' + vystraha.info[0].situace;
+    resultText += '<hr/>';
 
-    // Vypíšeme povodňovou situaci
-    if (hydroPredpoved.length > 0)
-    {
-        for (var i = 0; i < hydroPredpoved.length; i++)
-        {
-            resultText += '<br/><b>Povodňová situace '+ (i + 1) + ':</b> ' + hydroPredpoved[i];
-        }
-    }
-
-    if (situace.length > 0 || hydroPredpoved.length > 0)
-    {
-        resultText += '<hr/>';
-    }
-
-    // Provedeme výpis
+    // Provedeme výpis jevů v krajích
     resultText += PrintInfoList(krajList, ref_krajList);
-
-    // Vypíšeme doplňkovou informaci
-    if (doplnkovaInformace.length > 0)
-    {
-        for (var i = 0; i < doplnkovaInformace.length; i++)
-        {
-            resultText += '<br/><br/><b>Doplňková informace '+ (i + 1) + ':</b> ' + doplnkovaInformace[i];
-        }
-    }
 }
 else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
@@ -1520,7 +1388,6 @@ else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystrah
 
 if (empty)
 {
-    // Sem by se to nikdy nemělo dostat, ale pro jistotu
     resultText += '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
