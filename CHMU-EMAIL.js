@@ -305,6 +305,9 @@ function Normalize(datum) {
 
 // Zjišťuje, zda je datum1 nižší než datum2
 function DatumDrive(datum1, datum2) {
+    if (!datum1) {
+        datum1 = "1.1.2100 01:00";
+    }
     var datum1_format = Normalize(datum1);
     var datum2_format = Normalize(datum2);
 
@@ -319,15 +322,19 @@ function DatumDrive(datum1, datum2) {
 }
 
 function ZobrazDatum(datum) {
-    var normDatum = Normalize(datum);
-    
-    normDatumRok = normDatum.substring(0,4);
-    normDatumMesic = normDatum.substring(4,6);
-    normDatumDen = normDatum.substring(6,8);
-    normDatumHodina = normDatum.substring(8,10);
-    normDatumMinuta = normDatum.substring(10,12);
+    if (!datum) {
+        format_datum = 'do odvolání';
+    } else {
+        var normDatum = Normalize(datum);
 
-    format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + ". " + normDatumHodina + ":" + normDatumMinuta;
+        normDatumRok = normDatum.substring(0,4);
+        normDatumMesic = normDatum.substring(4,6);
+        normDatumDen = normDatum.substring(6,8);
+        normDatumHodina = normDatum.substring(8,10);
+        normDatumMinuta = normDatum.substring(10,12);
+
+        format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + ". " + normDatumHodina + ":" + normDatumMinuta;
+    }
 
     return format_datum;
 }
@@ -916,11 +923,10 @@ function PozadiColor(info)
 function PrintInfo(info, ref_info)
 {
     var resultText = '';
-    
+    var vyskaText = '';
+
     if (info && info.vyska)
     {
-        resultText += '<br/>Výskyt je omezený nadmořskou výškou ';
-        
         var vyska = info.vyska.substring(1, info.vyska.length - 1);
         var vyskaSplit = vyska.split('-');
 
@@ -928,20 +934,20 @@ function PrintInfo(info, ref_info)
         {
             if (vyskaSplit[0] && vyskaSplit[1])
             {
-                resultText += 'mezi ' + Math.round(vyskaSplit[0] * 0.3048) + ' až ' + Math.round(vyskaSplit[1] * 0.3048) + ' metrů';
+                vyskaText = '<br/>mezi ' + Math.round(vyskaSplit[0] * 0.3048) + ' a ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
             }
             else if (vyskaSplit[0])
             {
-                resultText += 'nad ' + Math.round(vyskaSplit[0] * 0.3048) + ' metrů';
+                vyskaText = '<br/>nad ' + Math.round(vyskaSplit[0] * 0.3048) + ' m n.m.';
             }
             else if (vyskaSplit[1])
             {
-                resultText += 'pod ' + Math.round(vyskaSplit[1] * 0.3048) + ' metrů';
+                vyskaText = '<br/>pod ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
             }
         }
         else
         {
-            resultText += Math.round(vyska * 0.3048);
+            vyskaText = '<br/>' + Math.round(vyska * 0.3048);
         }
     }
 
@@ -965,7 +971,8 @@ function PrintInfo(info, ref_info)
     // Hlavička
     resultText += '<tr>';
         resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
-        resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
+        resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '');
+        resultText += vyskaText + '</td>';
         resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table class="no">';
             resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '') + '</td>';
@@ -1227,10 +1234,10 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
 switch (vystraha.ucel) {
     case 'Exercise' :
         header = "ÚČELOVÁ INFORMACE ČHMÚ - CVIČNÁ ZPRÁVA";
-        if (svrs) {
+        if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
-        if (sivs) {
+        if (sivs && !hpps) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
@@ -1239,10 +1246,10 @@ switch (vystraha.ucel) {
     break;
     case 'System' :
         header = "ÚČELOVÁ INFORMACE ČHMÚ - SYSTÉMOVÁ ZPRÁVA";
-        if (svrs) {
+        if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
-        if (sivs) {
+        if (sivs && !hpps) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
@@ -1251,10 +1258,10 @@ switch (vystraha.ucel) {
     break;
     case 'Test' :
         header = "ÚČELOVÁ INFORMACE ČHMÚ - TESTOVCÍ ZPRÁVA";
-        if (svrs) {
+        if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
-        if (sivs) {
+        if (sivs && !hpps) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
@@ -1263,10 +1270,10 @@ switch (vystraha.ucel) {
     break;
     case 'Actual' :
         header = "VÝSTRAHA ČHMÚ";
-        if (svrs) {
+        if (svrs && !sivs && !hpps) {
             header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU'
         }
-        if (sivs) {
+        if (sivs && !hpps) {
             header += '';
         }
         if (hpps) {
