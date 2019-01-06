@@ -346,6 +346,54 @@ function DatumDrive(datum1, datum2) {
     }
 }
 
+function ZobrazDatum(datum) {
+    var normDatum = Normalize(datum);
+
+    normDatumDen = normDatum.substring(0,2);
+    normDatumDen_porovn = normDatumDen.replace(/\.$/, "");
+    if (normDatumDen == normDatumDen_porovn) {
+        normDatumMesic = normDatum.substring(3,5);
+        normDatumMesic_porovn = normDatumMesic.replace(/\.$/, "");
+        if (normDatumMesic == normDatumMesic_porovn) {
+            normDatumRok = normDatum.substring(6,10)
+            normDatumCas = normDatum.substring(11,16);
+            normDatumCas = normDatumCas.replace(/\:$/, "");
+        } else {
+            normDatumMesic = '0' + normDatumMesic_porovn;
+            normDatumRok = normDatum.substring(5,9)
+            normDatumCas = normDatum.substring(10,15);
+            normDatumCas = normDatumCas.replace(/\:$/, "");
+        }
+    } else {
+        normDatumDen = '0' + normDatumDen_porovn;
+        normDatumMesic = normDatum.substring(2,4);
+        normDatumMesic_porovn = normDatumMesic.replace(/\.$/, "");
+        if (normDatumMesic == normDatumMesic_porovn) {
+            normDatumRok = normDatum.substring(5,9)
+            normDatumCas = normDatum.substring(10,15);
+            normDatumCas = normDatumCas.replace(/\:$/, "");
+        } else {
+            normDatumMesic = '0' + normDatumMesic_porovn;
+            normDatumRok = normDatum.substring(4,8)
+            normDatumCas = normDatum.substring(9,14);
+            normDatumCas = normDatumCas.replace(/\:$/, "");
+        }
+    }
+
+    normDatumHodina = normDatumCas.substring(0,2);
+    normDatumHodina_porovn = normDatumHodina.replace(/\:$/, "");
+    if (normDatumHodina == normDatumHodina_porovn) {
+        normDatumMinuta = normDatumCas.substring(3,5);
+    } else {
+        normDatumHodina = '0' + normDatumHodina_porovn;
+        normDatumMinuta = normDatumCas.substring(2,4);
+    }
+
+    format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + "." + " " + normDatumHodina + ":" + normDatumMinuta;
+    
+    return format_datum;
+}
+
 // Připravíme seznam jevů podle území
 function PrepareInfo(orp, vystraha)
 {
@@ -982,9 +1030,9 @@ function PrintInfo(info, ref_info)
         resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '') + '</td>';
         resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table class="no">';
-            resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? Normalize(info.dc_zacatek) : '', ref_info != null ? Normalize(ref_info.dc_zacatek) : '') + '</td>';
-            resultText += '<td> - </td>';
-            resultText += '<td>' + SimpleHighlightDiff(info != null ?  Normalize(info.dc_konec) : '', ref_info != null ?  Normalize(ref_info.dc_konec) : '') + '<td><tr>';
+            resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '') + '</td>';
+            resultText += '<td> – </td>';
+            resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '') + '<td><tr>';
         resultText += '</table></td>';
     resultText += '</tr>';
 
