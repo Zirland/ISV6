@@ -448,13 +448,19 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(infoList[x].dc_konec, vytvoreni)) {
+        var podminka = true;
+        if (zobrazitVyhled) {
+            podminka = (!DatumDrive(infoList[x].dc_konec, vytvoreni));
+        } else {
+            podminka = (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(infoList[x].dc_konec, vytvoreni));
+        }
+        
+        if (podminka) {
             infoListFilter.push(infoList[x]);
         }
     }
-    if (!zobrazitVyhled) {
-        infoList = infoListFilter;
-    }
+    
+    infoList = infoListFilter;
     
     var krajList = [];
     var posledniKraj = {};
