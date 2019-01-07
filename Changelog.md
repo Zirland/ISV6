@@ -9,6 +9,14 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Změněno
 - Zkrácení názvu některých jevů ve výpisu.
 
+#### Známé chyby
+- Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
+- Při tisku dochází k postupnému zužování šířky stránky (SU 37816)
+
+### [CHMU-SMS]
+#### Změněno
+- Zkrácení názvu některých jevů ve výpisu.
+
 ## verze 11 – 2019-01-07
 ### [CHMU-EMAIL]
 #### Přidáno
