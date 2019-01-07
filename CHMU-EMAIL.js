@@ -981,21 +981,32 @@ function PrintInfo(info, ref_info)
         resultText += '</table></td>';
     resultText += '</tr>';
 
+    if (info) {
+        if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g," ");}
+        if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+        if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+    }
+    if (ref_info) {
+        if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g," ");}
+        if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+        if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+    }
+
     // Popis
     resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? info.popis : '', ref_info != null ? ref_info.popis : '') + '</td>';
+        resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '') + '</td>';
     resultText += '</tr>';
 
     // Hydrologická zpráva
     if (info && (info.hydroPredpoved)) {
         resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + HighlightDiff(info != null ? info.hydroPredpoved : '', ref_info != null ? ref_info.hydroPredpoved : '') + '</td>';
+        resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '') + '</td>';
         resultText += '</tr>';
     }
 
     // Doporučení
     resultText += '<tr>';
-    resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? info.doporuceni : '', ref_info != null ? ref_info.doporuceni : '') + '</td>';
+    resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '') + '</td>';
     resultText += '</tr>';
 
     resultText += '</table>';
@@ -1094,7 +1105,7 @@ resultText += '<HEAD>';
     resultText += '        text-decoration: none;';
     resultText += '        }';
     resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
-    resultText += '    .header {font-size:15px;}';
+    resultText += '    .header {font-size:15px;text-align:center;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
     resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
     resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
