@@ -15,6 +15,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [CHMU-SMS]
 #### Přidáno
 - Sloučení krajů, ve kterých platí stejný jev, např. v odlišném časovém období.
+
 #### Změněno
 - Zkrácení názvu některých jevů ve výpisu.
 
