@@ -257,9 +257,9 @@ if (vystraha.info)
                 resultText += seznkraje + '\n';
             } else {
                 if (detailni) {
-                    resultText += vystraha.info[i].jev + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
+                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
                 } else {
-                    resultText += vystraha.info[i].jev + '\n';
+                    resultText += JEVY_NAZVY[poleJevy[h]] + '\n';
                 }
             }
         }
