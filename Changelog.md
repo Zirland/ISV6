@@ -1,6 +1,14 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 13 – 2019-01-08
+### [CHMU-EMAIL]
+#### Změněno
+- Úprava záhlaví SIVS dle videokonference.
+
+#### Známé chyby
+- Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
+
 ## verze 12 – 2019-01-08
 ### [CHMU-EMAIL]
 #### Přidáno
