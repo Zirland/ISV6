@@ -3,7 +3,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 ## verze 12 – 2019-01-08
 ### [CHMU-EMAIL]
-#### Přidáno
+#### Přidáno
 - Vymazání tagu *\<br/>* z popisu, doporučení a hydrologické zprávy.
 
 #### Změněno
