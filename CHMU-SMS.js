@@ -1,4 +1,4 @@
-// Verze 11
+// Verze 12
 
 var omezitNaKraj = -1;
 var detailni = 0;
