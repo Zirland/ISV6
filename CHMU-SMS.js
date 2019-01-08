@@ -42,160 +42,224 @@ var KRAJE_KODY  = {
     "141": "ZLK"
 };
 
+var JEVY_NAZVY = {
+    "I.1" : "Vysoké teploty",
+    "I.2" : "Velmi vysoké teploty",
+    "I.3" : "Extrémně vysoké teploty",
+    "I.4" : "Silný mráz",
+    "I.5" : "Velmi silný mráz",
+    "I.6" : "Extrémní mráz",
+    "II.1" : "Mráz ve vegetačním období",
+    "II.2" : "Prudký pokles teploty",
+    "III.1" : "Silný vítr",
+    "III.2" : "Velmi silný vítr",
+    "III.3" : "Extrémně silný vítr",
+    "IV.1" : "Nová sněhová pokrývka",
+    "IV.2" : "Vysoká nová sněhová pokrývka",
+    "IV.3" : "Extrémní sněhová pokrývka",
+    "IV.4" : "Vysoká celková sněhová pokrývka",
+    "V.1" : "Silné sněžení",
+    "V.2" : "Extrémně silné sněžení",
+    "VI.1" : "Sněhové jazyky",
+    "VI.2" : "Závěje",
+    "VI.3" : "Sněhová bouře",
+    "VII.1" : "Náledí",
+    "VIII.1" : "Ledovka",
+    "VIII.2" : "Silná ledovka",
+    "VIII.3" : "Velmi silná ledovka",
+    "IX.1" : "Mrznoucí mlhy",
+    "IX.2" : "Silná námraza ",
+    "X.1" : "Silné bouřky",
+    "X.2" : "Velmi silné bouřky",
+    "X.2a" : "Velmi silné bouřky s přívalovými srážkami",
+    "X.3" : "Extrémně silné bouřky",
+    "X.3a" : "Extrémně silné bouřky s přívalovými srážkami",
+    "XI.1" : "Vydatný déšť",
+    "XI.2" : "Velmi vydatný déšť",
+    "XI.3" : "Extrémní srážky",
+    "XII.1" : "Povodňová bdělost",
+    "XII.2" : "Povodňová pohotovost",
+    "XII.3" : "Povodňové ohrožení",
+    "XII.4" : "Extrémní povodňové ohrožení",
+    "XIII.1" : "Povodňová bdělost – dotok",
+    "XIII.2" : "Povodňová pohotovost – dotok",
+    "XIII.3" : "Povodňové ohrožení – dotok",
+    "XIII.4" : "Extrémní povodňové ohrožení – dotok",
+    "XIV.1" : "Nebezpečí požárů",
+    "XIV.2" : "Vysoké nebezpečí požárů",
+    "XV.1" : "Jiný jev",
+    "XV.2" : "Jiný jev",
+    "XV.3" : "Jiný jev",
+    "OUTLOOK" : "Výhled nebezpečných jevů",
+    "SMOGSIT.O3" : "Smogová situace O3",
+    "WARN.O3" : "Varování O3",
+    "SMOGSIT.PM10" : "Smogová situace PM10",
+    "REG.PM10" : "Regulace PM10",
+    "SMOGSIT.SO2" : "Smogová situace SO2",
+    "REG.SO2" : "Regulace SO2",
+    "SMOGSIT.NO2" : "Smogová situace NO2",
+    "REG.NO2" : "Regulace NO2",
+};
+
+function removeDuplicates(arr) {
+    var unique_array = []
+    for(var i = 0;i < arr.length; i++){
+        if(unique_array.indexOf(arr[i]) == -1){
+            unique_array.push(arr[i])
+        }
+    }
+    return unique_array
+}
+
+// Úprava formátu data
+function Normalize(datum) {
+    var datumString = datum.toString();
+    if (datumString.includes("T")) {
+        var date = new Date(datumString);
+
+        datumDen = date.getDate();
+        if (datumDen < 10) {
+            datumDen = '0' + datumDen;
+        } else {
+            datumDen = datumDen.toString()
+        }
+        datumMesic = date.getMonth()+1;
+        if (datumMesic < 10) {
+            datumMesic = '0' + datumMesic;
+        } else {
+            datumMesic = datumMesic.toString()
+        }
+        datumRok = date.getFullYear().toString();
+
+        datumHodiny = date.getHours();
+        if (datumHodiny < 10) {
+            datumHodiny = '0' + datumHodiny;
+        } else {
+            datumHodiny = datumHodiny.toString()
+        }
+        datumMinuty = date.getMinutes();
+        if (datumMinuty < 10) {
+            datumMinuty = '0' + datumMinuty;
+        } else {
+            datumMinuty = datumMinuty.toString()
+        }
+    } else {
+        datumDen = datumString.substring(0,2);
+        datumDen_porovn = datumDen.replace(/\.$/, "");
+        if (datumDen == datumDen_porovn) {
+            datumMesic = datumString.substring(3,5);
+            datumMesic_porovn = datumMesic.replace(/\.$/, "");
+            if (datumMesic == datumMesic_porovn) {
+                datumRok = datumString.substring(6,10)
+                datumCas = datumString.substring(11,16);
+                datumCas = datumCas.replace(/\:$/, "");
+            } else {
+                datumMesic = '0' + datumMesic_porovn;
+                datumRok = datumString.substring(5,9)
+                datumCas = datumString.substring(10,15);
+                datumCas = datumCas.replace(/\:$/, "");
+            }
+        } else {
+            datumDen = '0' + datumDen_porovn;
+            datumMesic = datumString.substring(2,4);
+            datumMesic_porovn = datumMesic.replace(/\.$/, "");
+            if (datumMesic == datumMesic_porovn) {
+                datumRok = datumString.substring(5,9)
+                datumCas = datumString.substring(10,15);
+                datumCas = datumCas.replace(/\:$/, "");
+            } else {
+                datumMesic = '0' + datumMesic_porovn;
+                datumRok = datumString.substring(4,8)
+                datumCas = datumString.substring(9,14);
+                datumCas = datumCas.replace(/\:$/, "");
+            }
+        }
+
+        datumHodiny = datumCas.substring(0,2);
+        datumHodiny_porovn = datumHodiny.replace(/\:$/, "");
+        if (datumHodiny == datumHodiny_porovn) {
+            datumMinuty = datumCas.substring(3,5);
+        } else {
+            datumHodiny = '0' + datumHodiny_porovn;
+            datumMinuty = datumCas.substring(2,4);
+        }
+    }
+
+    datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty;
+
+    return datum;
+}
+
 var resultText = vystupText = '';
 
 if (vystraha.info)
 {
-    for (var i = 0; i < vystraha.info.length; i++)
-    {
-        var found = omezitNaKraj == -1;
-        for (var j = 0; j < vystraha.info[i].kraj.length && !found; j++)
-        {
-            found = vystraha.info[i].kraj[j].UID == omezitNaKraj;
+    var poleJevy = [];
+    var posledniJev = "";
+    for (var i = 0; i < vystraha.info.length; i++) {
+        if (posledniJev != vystraha.info[i].stupen_kod && vystraha.info[i].stupen_kod != "OUTLOOK") {
+            poleJevy.push(vystraha.info[i].stupen_kod);
         }
+    }
 
-        if (found)
-        {
-            zacatek = vystraha.info[i].dc_zacatek.toString();
-            zacatekDen = zacatek.substring(0,2);
-            zacatekDen_porovn = zacatekDen.replace(/\.$/, "");
-            if (zacatekDen == zacatekDen_porovn) {
-                zacatekMesic = zacatek.substring(3,5);
-                zacatekMesic_porovn = zacatekMesic.replace(/\.$/, "");
-                if (zacatekMesic == zacatekMesic_porovn) {
-                    zacatekRok = zacatek.substring(6,10)
-                    zacatekCas = zacatek.substring(11,16);
-                    zacatekCas = zacatekCas.replace(/\:$/, "");
-                } else {
-                    zacatekMesic = '0' + zacatekMesic_porovn;
-                    zacatekRok = zacatek.substring(5,9)
-                    zacatekCas = zacatek.substring(10,15);
-                    zacatekCas = zacatekCas.replace(/\:$/, "");
+    poleJevy = removeDuplicates(poleJevy);
+
+    for (var h = 0; h < poleJevy.length; h++) {
+        var jevKrajeList = [];
+        for (var i = 0; i < vystraha.info.length; i++) {
+            if (poleJevy[h] == vystraha.info[i].stupen_kod) {
+                var found = omezitNaKraj == -1;
+                for (var j = 0; j < vystraha.info[i].kraj.length && !found; j++) {
+                    found = vystraha.info[i].kraj[j].UID == omezitNaKraj;
                 }
-            } else {
-                zacatekDen = '0' + zacatekDen_porovn;
-                zacatekMesic = zacatek.substring(2,4);
-                zacatekMesic_porovn = zacatekMesic.replace(/\.$/, "");
-                if (zacatekMesic == zacatekMesic_porovn) {
-                    zacatekRok = zacatek.substring(5,9)
-                    zacatekCas = zacatek.substring(10,15);
-                    zacatekCas = zacatekCas.replace(/\:$/, "");
-                } else {
-                    zacatekMesic = '0' + zacatekMesic_porovn;
-                    zacatekRok = zacatek.substring(4,8)
-                    zacatekCas = zacatek.substring(9,14);
-                    zacatekCas = zacatekCas.replace(/\:$/, "");
-                }
-            }
+                for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
+                    if (found) {
+                        jevKrajeList.push(vystraha.info[i].kraj[j].UID);
+                        warn_type = "SVRS";
+                        if (vystraha.info[i].SIVS == "1") {
+                            warn_type = "SIVS";
+                        }
+                        if (vystraha.info[i].HPPS == "1") {
+                            warn_type = "HPPS";
+                        }
+                        seznjevu.push(warn_type);
+                        zacatek = Normalize(vystraha.info[i].dc_zacatek);
+                        zacatky.push(zacatek);
+                        konec = 999999999999;
+                        if (vystraha.info[i].dc_konec) {
+                            konec = Normalize(vystraha.info[i].dc_konec);
+                        }
+                        konce.push(konec);
 
-            zacatekHodina = zacatekCas.substring(0,2);
-            zacatekHodina_porovn = zacatekHodina.replace(/\:$/, "");
-            if (zacatekHodina == zacatekHodina_porovn) {
-                zacatekMinuta = zacatekCas.substring(3,5);
-            } else {
-                zacatekHodina = '0' + zacatekHodina_porovn;
-                zacatekMinuta = zacatekCas.substring(2,4);
-            }
-
-            zacatek_format = zacatekRok + zacatekMesic + zacatekDen + zacatekHodina + zacatekMinuta;
-            zacatek_format_num = Number(zacatek_format);
-
-            if (vystraha.info[i].jev_kod != "OUTLOOK") {
-                zacatky.push(zacatek_format_num);
-            }
-
-            konec = '999999999999';
-            if (vystraha.info[i].dc_konec) {
-                konec = vystraha.info[i].dc_konec.toString();
-            }
-            
-            konecDen = konec.substring(0,2);
-            konecDen_porovn = konecDen.replace(/\.$/, "");
-            if (konecDen == konecDen_porovn) {
-                konecMesic = konec.substring(3,5);
-                konecMesic_porovn = konecMesic.replace(/\.$/, "");
-                if (konecMesic == konecMesic_porovn) {
-                    konecRok = konec.substring(6,10)
-                    konecCas = konec.substring(11,16);
-                    konecCas = konecCas.replace(/\:$/, "");
-                } else {
-                    konecMesic = '0' + konecMesic_porovn;
-                    konecRok = konec.substring(5,9)
-                    konecCas = konec.substring(10,15);
-                    konecCas = konecCas.replace(/\:$/, "");
-                }
-            } else {
-                konecDen = '0' + konecDen_porovn;
-                konecMesic = konec.substring(2,4);
-                konecMesic_porovn = konecMesic.replace(/\.$/, "");
-                if (konecMesic == konecMesic_porovn) {
-                    konecRok = konec.substring(5,9)
-                    konecCas = konec.substring(10,15);
-                    konecCas = konecCas.replace(/\:$/, "");
-                } else {
-                    konecMesic = '0' + konecMesic_porovn;
-                    konecRok = konec.substring(4,8)
-                    konecCas = konec.substring(9,14);
-                    konecCas = konecCas.replace(/\:$/, "");
-                }
-            }
-
-            konecHodina = konecCas.substring(0,2);
-            konecHodina_porovn = konecHodina.replace(/\:$/, "");
-            if (konecHodina == konecHodina_porovn) {
-                konecMinuta = konecCas.substring(3,5);
-            } else {
-                konecHodina = '0' + konecHodina_porovn;
-                konecMinuta = konecCas.substring(2,4);
-            }
-
-            konec_format = konecRok + konecMesic + konecDen + konecHodina + konecMinuta;
-            konec_format_num = Number(konec_format);
-            if (konec == "999999999999") {
-                konec_format_num = 999999999999;
-            }
-
-            zahajeni = zacatek_format.substring(6,8) + '.' + zacatek_format.substring(4,6) + '. ' + zacatek_format.substring(8,10) + ':' + zacatek_format.substring(10,12);
-            ukonceni = konec_format.substring(6,8) + '.' + konec_format.substring(4,6) + '. ' + konec_format.substring(8,10) + ':' + konec_format.substring(10,12);
-            if (konec == "999999999999") {
-                ukonceni = 'odvolání.';
-            }
-
-            if (vystraha.info[i].jev_kod != "OUTLOOK") {
-                konce.push(konec_format_num);
-                warn_type = "SVRS";
-                if (vystraha.info[i].SIVS == "1") {
-                    warn_type = "SIVS";
-                }
-                if (vystraha.info[i].HPPS == "1") {
-                    warn_type = "HPPS";
-                }
-                seznjevu.push(warn_type);
-
-                if (omezitNaKraj == -1) {
-                    resultText += vystraha.info[i].jev;
-                    resultText += ' pro kraje ';
-
-                    var seznkraje = '';
-                    var kraje_pole = [];
-
-                    for (var t = 0; t < vystraha.info[i].kraj.length; t++) {
-                        kraje_pole.push(vystraha.info[i].kraj[t].UID);
+                        zahajeni = zacatek.substring(6,8) + '.' + zacatek.substring(4,6) + '. ' + zacatek.substring(8,10) + ':' + zacatek.substring(10,12);
+                        ukonceni = konec.substring(6,8) + '.' + konec.substring(4,6) + '. ' + konec.substring(8,10) + ':' + konec.substring(10,12);
+                        if (konec == 999999999999) {
+                            ukonceni = 'odvolání.';
+                        }
                     }
+                }
+            }
+        }
+        jevKrajeList = removeDuplicates(jevKrajeList);
+        jevKrajeList = jevKrajeList.sort(function (a, b) {return a-b});
 
-                    kraje_pole.sort(function(a, b){return a - b});
+        if (jevKrajeList.length > 0) {
+            if (omezitNaKraj == -1) {
+                resultText += JEVY_NAZVY[poleJevy[h]];
+                resultText += ' pro kraje ';
 
-                    for (var t = 0; t < vystraha.info[i].kraj.length; t++) {
-                        seznkraje += '' + KRAJE_KODY[kraje_pole[t]] + ', ';
-                    }
-                    seznkraje = seznkraje.substring(0, seznkraje.length-2);
-                    resultText += seznkraje + '\n';
+                var seznkraje = '';
+
+                for (var t = 0; t < jevKrajeList.length; t++) {
+                    seznkraje += KRAJE_KODY[jevKrajeList[t]] + ', ';
+                }
+                seznkraje = seznkraje.substring(0, seznkraje.length-2);
+                resultText += seznkraje + '\n';
+            } else {
+                if (detailni) {
+                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
                 } else {
-                    if (detailni) {
-                        resultText += vystraha.info[i].jev + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
-                    } else {
-                        resultText += vystraha.info[i].jev + '\n';
-                    }
+                    resultText += JEVY_NAZVY[poleJevy[h]] + '\n';
                 }
             }
         }
