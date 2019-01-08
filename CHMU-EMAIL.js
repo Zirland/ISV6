@@ -1,4 +1,4 @@
-//Verze 12
+//Verze 13
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -1295,29 +1295,7 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
 // Text v těle
 switch (vystraha.ucel) {
     case 'Exercise' :
-        header = "ÚČELOVÁ INFORMACE ČHMÚ - CVIČNÁ ZPRÁVA";
-        if (svrs && !sivs && !hpps) {
-            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
-        }
-        if (sivs && !hpps) {
-            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
-        }
-        if (hpps) {
-            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
-        }
-    break;
     case 'System' :
-        header = "ÚČELOVÁ INFORMACE ČHMÚ - SYSTÉMOVÁ ZPRÁVA";
-        if (svrs && !sivs && !hpps) {
-            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
-        }
-        if (sivs && !hpps) {
-            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
-        }
-        if (hpps) {
-            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
-        }
-    break;
     case 'Test' :
         header = "ÚČELOVÁ INFORMACE ČHMÚ - TESTOVCÍ ZPRÁVA";
         if (svrs && !sivs && !hpps) {
@@ -1336,7 +1314,7 @@ switch (vystraha.ucel) {
             header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU'
         }
         if (sivs && !hpps) {
-            header += '';
+            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
             header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
