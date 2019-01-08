@@ -23,22 +23,66 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-var KRAJE_KODY  = {
-    "19": "PHA",
-    "27": "SČK",
-    "35": "JČK",
-    "43": "PLK",
-    "51": "KVK",
-    "60": "ULK",
-    "78": "LIK",
-    "86": "KHK",
-    "94": "PAK",
-    "108": "VYK",
-    "116": "JMK",
-    "124": "OLK",
-    "132": "MSK",
-    "141": "ZLK"
-};
+var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
+
+var JEVY_NAZVY = {
+    "I.1" : "Vysoké teploty",
+    "I.2" : "Velmi vysoké teploty",
+    "I.3" : "Extrémně vysoké teploty",
+    "I.4" : "Silný mráz",
+    "I.5" : "Velmi silný mráz",
+    "I.6" : "Extrémní mráz",
+    "II.1" : "Mráz ve vegetačním období",
+    "II.2" : "Prudký pokles teploty",
+    "III.1" : "Silný vítr",
+    "III.2" : "Velmi silný vítr",
+    "III.3" : "Extrémně silný vítr",
+    "IV.1" : "Nová sněhová pokrývka",
+    "IV.2" : "Vysoká nová sněhová pokrývka",
+    "IV.3" : "Extrémní sněhová pokrývka",
+    "IV.4" : "Vysoká celková sněhová pokrývka",
+    "V.1" : "Silné sněžení",
+    "V.2" : "Extrémně silné sněžení",
+    "VI.1" : "Sněhové jazyky",
+    "VI.2" : "Závěje",
+    "VI.3" : "Sněhová bouře",
+    "VII.1" : "Náledí",
+    "VIII.1" : "Ledovka",
+    "VIII.2" : "Silná ledovka",
+    "VIII.3" : "Velmi silná ledovka",
+    "IX.1" : "Mrznoucí mlhy",
+    "IX.2" : "Silná námraza ",
+    "X.1" : "Silné bouřky",
+    "X.2" : "Velmi silné bouřky",
+    "X.2a" : "Velmi silné bouřky s přívalovými srážkami",
+    "X.3" : "Extrémně silné bouřky",
+    "X.3a" : "Extrémně silné bouřky s přívalovými srážkami",
+    "XI.1" : "Vydatný déšť",
+    "XI.2" : "Velmi vydatný déšť",
+    "XI.3" : "Extrémní srážky",
+    "XII.1" : "Povodňová bdělost",
+    "XII.2" : "Povodňová pohotovost",
+    "XII.3" : "Povodňové ohrožení",
+    "XII.4" : "Extrémní povodňové ohrožení",
+    "XIII.1" : "Povodňová bdělost – dotok",
+    "XIII.2" : "Povodňová pohotovost – dotok",
+    "XIII.3" : "Povodňové ohrožení – dotok",
+    "XIII.4" : "Extrémní povodňové ohrožení – dotok",
+    "XIV.1" : "Nebezpečí požárů",
+    "XIV.2" : "Vysoké nebezpečí požárů",
+    "XV.1" : "Jiný jev",
+    "XV.2" : "Jiný jev",
+    "XV.3" : "Jiný jev",
+    "OUTLOOK" : "Výhled nebezpečných jevů",
+    "SMOGSIT.O3" : "Smogová situace O3",
+    "WARN.O3" : "Varování O3",
+    "SMOGSIT.PM10" : "Smogová situace PM10",
+    "REG.PM10" : "Regulace PM10",
+    "SMOGSIT.SO2" : "Smogová situace SO2",
+    "REG.SO2" : "Regulace SO2",
+    "SMOGSIT.NO2" : "Smogová situace NO2",
+    "REG.NO2" : "Regulace NO2",
+}
 
 // Zjednodušené zobrazení rozdílů (porovnává se celý text)
 function SimpleHighlightDiff(newValue, oldValue)
@@ -404,13 +448,19 @@ function PrepareInfo(orp, vystraha)
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
-        if (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(infoList[x].dc_konec, vytvoreni)) {
+        var podminka = true;
+        if (zobrazitVyhled) {
+            podminka = (!DatumDrive(infoList[x].dc_konec, vytvoreni));
+        } else {
+            podminka = (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(infoList[x].dc_konec, vytvoreni));
+        }
+        
+        if (podminka) {
             infoListFilter.push(infoList[x]);
         }
     }
-    if (!zobrazitVyhled) {
-        infoList = infoListFilter;
-    }
+    
+    infoList = infoListFilter;
     
     var krajList = [];
     var posledniKraj = {};
@@ -575,7 +625,7 @@ function PrintInfoList(krajList, ref_krajList)
                     if (first)
                     {
                         first = false;
-                        resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
+                        resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                         empty = false;
                     }
 
@@ -610,7 +660,7 @@ function PrintInfoList(krajList, ref_krajList)
             if (first)
             {
                 first = false;
-                resultText += '<br/><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>';
+                resultText += '</div><br/><div><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>';
                 empty = false;
             }
 
@@ -654,7 +704,7 @@ function PrintInfoList(krajList, ref_krajList)
                             if (first)
                             {
                                 first = false;
-                                resultText += '<br/><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
+                                resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                                 empty = false;
                             }
 
@@ -696,7 +746,7 @@ function PrintInfoList(krajList, ref_krajList)
                     if (first)
                     {
                         first = false;
-                        resultText += '<br/><b>Okres ' + krajList[k].okresList[o].nazev + '</b>';
+                        resultText += '</div><br/><div><b>Okres ' + krajList[k].okresList[o].nazev + '</b>';
                         empty = false;
                     }
 
@@ -741,7 +791,7 @@ function PrintInfoList(krajList, ref_krajList)
                                 if (first)
                                 {
                                     first = false;
-                                    resultText += '<br/><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                                    resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                                     empty = false;
                                 }
 
@@ -782,7 +832,7 @@ function PrintInfoList(krajList, ref_krajList)
                         if (first)
                         {
                             first = false;
-                            resultText += '<br/><b>ORP ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                            resultText += '</div><br/><div><b>ORP ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                             empty = false;
                         }
 
@@ -808,7 +858,7 @@ function PrintInfoList(krajList, ref_krajList)
                 if (first)
                 {
                     first = false;
-                    resultText += '<br/><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
+                    resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                     empty = false;
                 }
 
@@ -833,7 +883,7 @@ function PrintInfoList(krajList, ref_krajList)
                         if (first)
                         {
                             first = false;
-                            resultText += '<br/><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
+                            resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                             empty = false;
                         }
 
@@ -859,7 +909,7 @@ function PrintInfoList(krajList, ref_krajList)
                             if (first)
                             {
                                 first = false;
-                                resultText += '<br/><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                                resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                                 empty = false;
                             }
 
@@ -966,39 +1016,50 @@ function PrintInfo(info, ref_info)
         }
     } 
 
-    resultText += '<div><table class="tg" width="99%">';
+    resultText += '<table class="tg" width="100%">';
 
     // Hlavička
     resultText += '<tr>';
         resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
-        resultText += HighlightDiff(info != null ? info.stupen_nazev : '', ref_info != null ? ref_info.stupen_nazev : '');
+        resultText += HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
         resultText += vyskaText + '</td>';
         resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table class="no">';
             resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '') + '</td>';
             resultText += '<td>&nbsp;–&nbsp;</td>';
-            resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '') + '<td><tr>';
+            resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '') + '</td></tr>';
         resultText += '</table></td>';
     resultText += '</tr>';
 
+    if (info) {
+        if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g," ");}
+        if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+        if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+    }
+    if (ref_info) {
+        if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g," ");}
+        if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+        if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+    }
+
     // Popis
     resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? info.popis : '', ref_info != null ? ref_info.popis : '') + '</td>';
+        resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '') + '</td>';
     resultText += '</tr>';
 
     // Hydrologická zpráva
     if (info && (info.hydroPredpoved)) {
         resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + HighlightDiff(info != null ? info.hydroPredpoved : '', ref_info != null ? ref_info.hydroPredpoved : '') + '</td>';
+        resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '') + '</td>';
         resultText += '</tr>';
     }
 
     // Doporučení
     resultText += '<tr>';
-    resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? info.doporuceni : '', ref_info != null ? ref_info.doporuceni : '') + '</td>';
+    resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '') + '</td>';
     resultText += '</tr>';
 
-    resultText += '</table></div>';
+    resultText += '</table>';
 
     return resultText;
 }
@@ -1093,13 +1154,14 @@ resultText += '<HEAD>';
     resultText += '        background: white;';
     resultText += '        text-decoration: none;';
     resultText += '        }';
-    resultText += '    body {font-family:serif;font-size:14px;height:100%;}';
+    resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
+    resultText += '    .header {font-size:15px;text-align:center;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:13x;font-variant:bold;}';
-    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;}';
+    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
+    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;font-variant:bold;}';
-    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:13px;}';
+    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
+    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    @media print {';
     resultText += '        div {page-break-inside: avoid;}';
     resultText += '    }';
@@ -1234,10 +1296,10 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
 switch (vystraha.ucel) {
     case 'Exercise' :
         header = "ÚČELOVÁ INFORMACE ČHMÚ - CVIČNÁ ZPRÁVA";
-        if (svrs && !sivs && !hpps) {
+        if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
-        if (sivs && !hpps) {
+        if (sivs && !hpps) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
@@ -1246,7 +1308,7 @@ switch (vystraha.ucel) {
     break;
     case 'System' :
         header = "ÚČELOVÁ INFORMACE ČHMÚ - SYSTÉMOVÁ ZPRÁVA";
-        if (svrs && !sivs && !hpps) {
+        if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
         if (sivs && !hpps) {
@@ -1286,7 +1348,7 @@ switch (vystraha.ucel) {
 
 }
 
-resultText += '<div style="text-align:center;">' + header + '</div>';
+resultText += '<div class="header">' + header + '</div>';
 resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
 resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano;
 
@@ -1331,7 +1393,7 @@ if (vystraha.info && vystraha.info.length > 0)
    if (situace.length > 0)
     {
         resultText += '<br/><b>Meteorologická situace:</b> ' + situace[0];
-        resultText += '<hr/>';
+        resultText += '<hr/><div>';
     }
 
     resultText += PrintInfoList(krajList, ref_krajList);
@@ -1349,10 +1411,10 @@ else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystrah
 
 if (empty)
 {
-    resultText += '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
+    resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-resultText += '<hr/>';
+resultText += '</div><hr/>';
 resultText += '<br/>Distribuce: ';
 
 var dist = '';

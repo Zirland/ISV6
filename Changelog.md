@@ -1,11 +1,20 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## vývoj
+## verze 12 – 2019-01-08
 ### [CHMU-EMAIL]
 #### Přidáno
 - Vymazání tagu *\<br/>* z popisu, doporučení a hydrologické zprávy.
 
+#### Změněno
+- Zkrácení názvu některých jevů ve výpisu.
+
+#### Známé chyby
+- Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
+
+### [CHMU-SMS]
+#### Přidáno
+- Sloučení krajů, ve kterých platí stejný jev, např. v odlišném časovém období.
 #### Změněno
 - Zkrácení názvu některých jevů ve výpisu.
 
