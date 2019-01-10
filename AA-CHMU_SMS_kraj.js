@@ -130,6 +130,24 @@ function Normalize(datum) {
     return datum;
 }
 
+function ZobrazDatum(datum) {
+    if (datum = 999999999999) {
+        format_datum = 'odvolání';
+    } else {
+        var normDatum = Normalize(datum);
+
+        normDatumRok = normDatum.substring(0,4);
+        normDatumMesic = normDatum.substring(4,6);
+        normDatumDen = normDatum.substring(6,8);
+        normDatumHodina = normDatum.substring(8,10);
+        normDatumMinuta = normDatum.substring(10,12);
+
+        format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + ". " + normDatumHodina + ":" + normDatumMinuta;
+    }
+
+    return format_datum;
+}
+
 var resultText = vystupText = '';
 
 if (vystraha.info)
@@ -175,11 +193,8 @@ if (vystraha.info)
                         }
                         konce.push(konec);
 
-                        zahajeni = zacatek.substring(6,8) + '.' + zacatek.substring(4,6) + '. ' + zacatek.substring(8,10) + ':' + zacatek.substring(10,12);
-                        ukonceni = konec.substring(6,8) + '.' + konec.substring(4,6) + '. ' + konec.substring(8,10) + ':' + konec.substring(10,12);
-                        if (konec == 999999999999) {
-                            ukonceni = 'odvolání.';
-                        }
+                        zahajeni = ZobrazDatum(zacatek);
+                        ukonceni = ZobrazDatum(konec);
                     }
                 }
             }
@@ -218,18 +233,15 @@ if (vystraha.info)
     endy = Math.max.apply(null, konce);
     end = endy.toString();
 
-    total_zahajeni = start.substring(6,8) + '.' + start.substring(4,6) + '. ' + start.substring(8,10) + ':' + start.substring(10,12);
-    total_ukonceni = end.substring(6,8) + '.' + end.substring(4,6) + '. ' + end.substring(8,10) + ':' + end.substring(10,12);
-    if (end == "999999999999") {
-        total_ukonceni = 'odvolání.';
-    }
+    total_zahajeni = ZobrazDatum(start);
+    total_ukonceni = ZobrazDatum(end);
 
     // Sestavíme hlavičku zprávy
     rezim = "SVRS";
-    if (seznjevu.includes("SIVS")) {
+    if (seznjevu.indexOf("SIVS") > -1) {
         rezim = "SIVS";
     }
-    if (seznjevu.includes("HPPS")) {
+    if (seznjevu.indexOf("HPPS") > -1) {
         rezim = "HPPS";
     }
 
