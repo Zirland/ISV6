@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha SMS pro ORP" ----- 
 //!JS
-// Verze 14
+// Verze 15
 
 // zde např. Mělník. Číselník ORP viz samostatný soubor
 var omezitNaOrp = 141; 
@@ -19,7 +19,7 @@ print(vystupText);
 
 //----- Knihovna JS "CHMU_SMS_ORP" -----
 //!JS
-// Verze 14
+// Verze 15
 
 var zacatky = [];
 var konce = [];
@@ -109,6 +109,24 @@ function Normalize(datum) {
     datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty;
 
     return datum;
+}
+
+function ZobrazDatum(datum) {
+    if (datum = 999999999999) {
+        format_datum = 'odvolání';
+    } else {
+        var normDatum = Normalize(datum);
+
+        normDatumRok = normDatum.substring(0,4);
+        normDatumMesic = normDatum.substring(4,6);
+        normDatumDen = normDatum.substring(6,8);
+        normDatumHodina = normDatum.substring(8,10);
+        normDatumMinuta = normDatum.substring(10,12);
+
+        format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + ". " + normDatumHodina + ":" + normDatumMinuta;
+    }
+
+    return format_datum;
 }
 
 // Připravíme si obsah výstrahy
@@ -208,11 +226,8 @@ if (infoList) {
                     }
                     konce.push(konec);
 
-                    zahajeni = zacatek.substring(6,8) + '.' + zacatek.substring(4,6) + '. ' + zacatek.substring(8,10) + ':' + zacatek.substring(10,12);
-                    ukonceni = konec.substring(6,8) + '.' + konec.substring(4,6) + '. ' + konec.substring(8,10) + ':' + konec.substring(10,12);
-                    if (konec == 999999999999) {
-                        ukonceni = 'odvolání.';
-                    }
+                    zahajeni = ZobrazDatum(zacatek);
+                    ukonceni = ZobrazDatum(konec);
                 }
             }
         }
@@ -227,18 +242,15 @@ if (infoList) {
         }
     }
 
+    // Vypočítáme celkovou dobu platnosti výstrahy
     starty = Math.min.apply(null, zacatky);
     start = starty.toString();
 
     endy = Math.max.apply(null, konce);
     end = endy.toString();
 
-    // Vypočítáme celkovou dobu platnosti výstrahy
-    total_zahajeni = start.substring(6,8) + '.' + start.substring(4,6) + '. ' + start.substring(8,10) + ':' + start.substring(10,12);
-    total_ukonceni = end.substring(6,8) + '.' + end.substring(4,6) + '. ' + end.substring(8,10) + ':' + end.substring(10,12);
-    if (end == "999999999999") {
-        total_ukonceni = 'odvolání.';
-    }
+    total_zahajeni = ZobrazDatum(start);
+    total_ukonceni = ZobrazDatum(end);
 
     // Sestavíme hlavičku zprávy
     rezim = "SVRS";

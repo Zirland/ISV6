@@ -1,6 +1,22 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 15 – 2019-01-10
+### [AA-CHMU_SMS_ORP]
+#### Změněno
+- Úprava práce se zobrazením data.
+
+### [AA-CHMU_SMS_kraj]
+#### Změněno
+- Úprava práce se zobrazením data.
+
+### [CHMU-SMS]
+#### Změněno
+- Úprava práce se zobrazením data.
+
+#### Záplata
+- Úprava syntaxe pro AA.
+
 ## verze 14 – 2019-01-10
 ### [CHMU-EMAIL]
 #### Změněno
