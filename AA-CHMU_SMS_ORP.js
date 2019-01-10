@@ -1,20 +1,25 @@
------- Automatická akce "Výstraha SMS pro ORP" ----- 
+//------ Automatická akce "Výstraha SMS pro ORP" ----- 
 //!JS
 // Verze 13
 
-var omezitNaOrp = 141; // Mělník
-var detailni = 1; // viz dokumentace k [CHMU-SMS]
+// zde např. Mělník. Číselník ORP viz samostatný soubor
+var omezitNaOrp = 141; 
+var detailni = 1; 
+// viz dokumentace k [CHMU-SMS]
 
-#import "CHMU_SMS_ORP";
+// zde vytvoříme tělo SMS dle obsahu CAP pomocí skriptu z knihovny
+#import "CHMU_SMS_ORP"; 
 
+// Upozorňuji, že tělo SMS zprávy nekončí zalomením řádku. Já si proto odřádkuji. Ale vy nemusíte, pokud nechcete.
+vystupText += "\n";
+
+// Podpis na konci každé SMS.
+vystupText += "OPIS GŘ HZS ČR";
 print(vystupText);
 
------ Knihovna JS "CHMU_SMS_ORP" -----
+//----- Knihovna JS "CHMU_SMS_ORP" -----
 //!JS
 // Verze 13
-
-var omezitNaOrp = 141;
-var detailni = 0;
 
 var zacatky = [];
 var konce = [];
@@ -79,6 +84,7 @@ var JEVY_NAZVY = {
     "REG.NO2" : "Regulace NO2",
 };
 
+// Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
     var unique_array = []
     for(var i = 0;i < arr.length; i++){
@@ -105,6 +111,7 @@ function Normalize(datum) {
     return datum;
 }
 
+// Připravíme si obsah výstrahy
 function PrepareInfo (vystraha) {
     var infoList = [];
 
@@ -120,17 +127,19 @@ function PrepareInfo (vystraha) {
         {
             // Najdeme, jestli se nejedná o údaj s výškou
             var index = orpSplit[j].indexOf('[');
+            // nemáme výšku, do seznamu přidáme kód ORP
             if (index == -1)
             {
                 vystraha.info[i].orp.push(orpSplit[j]);
             }
-            else
+            // máme výšku, do seznamu přidáme pouze kód ORP bez výšky
+            else 
             {
                 vystraha.info[i].orp.push(orpSplit[j].substring(0, index));
             }
         }
 
-        // Pokud máme alespoň jedno ORP bez určení výšky
+        // Pokud máme jev alespoň v jednom ORP
         if (vystraha.info[i].orp.length > 0)
         {
             infoList.push(vystraha.info[i]);
@@ -139,6 +148,7 @@ function PrepareInfo (vystraha) {
 
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
+        // vyloučíme z výpisu SMS všechny Výhledy nebezpečných jevů
         if (infoList[x].jev_kod != "OUTLOOK") {
             infoListFilter.push(infoList[x]);
         }
@@ -157,17 +167,18 @@ if (vystraha.info && vystraha.info.length > 0) {
 
 if (infoList) {
     var poleJevy = [];
-    var posledniJev = "";
+    // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < vystraha.info.length; i++) {
-        if (posledniJev != vystraha.info[i].stupen_kod && vystraha.info[i].stupen_kod != "OUTLOOK") {
-            poleJevy.push(vystraha.info[i].stupen_kod);
+            poleJevy.push(vystraha.info[i].stupen_kod);  
         }
     }
-
-    poleJevy = removeDuplicates(poleJevy);
+    
+    // Promažeme duplicity
+    poleJevy = removeDuplicates(poleJevy);  
 
     var platne = [];
 
+    // Vyhodnotíme zda jev platí v tomto ORP
     for (var h = 0; h < poleJevy.length; h++) {
         for (var i = 0; i < vystraha.info.length; i++) {
             if (poleJevy[h] == vystraha.info[i].stupen_kod) {
@@ -208,6 +219,7 @@ if (infoList) {
         }
     }
 
+    // Vypíšeme seznam platných jevů na tomto území, případně i včetně detailní platnosti
     for (j = 0; j < platne.length; j++) { 
         if (detailni) {
             resultText += JEVY_NAZVY[platne[j].stupen_kod] + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
@@ -222,12 +234,14 @@ if (infoList) {
     endy = Math.max.apply(null, konce);
     end = endy.toString();
 
+    // Vypočítáme celkovou dobu platnosti výstrahy
     total_zahajeni = start.substring(6,8) + '.' + start.substring(4,6) + '. ' + start.substring(8,10) + ':' + start.substring(10,12);
     total_ukonceni = end.substring(6,8) + '.' + end.substring(4,6) + '. ' + end.substring(8,10) + ':' + end.substring(10,12);
     if (end == "999999999999") {
         total_ukonceni = 'odvolání.';
     }
 
+    // Sestavíme hlavičku zprávy
     rezim = "SVRS";
     if (seznjevu.indexOf("SIVS") > -1) {
         rezim = "SIVS";
@@ -264,7 +278,11 @@ if (infoList) {
         }
 
         vystupText += uvod;
+
+        // Připojíme připravený výpis jevů
         vystupText += resultText;
+
+        // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (omezitNaOrp == -1 || !detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
         }
