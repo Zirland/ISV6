@@ -65,7 +65,7 @@ Předpis pro vytvoření automatické akce tvorby SMS zprávy pro konkrétní kr
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
 
-Parametr **omezitNaKraj** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP, případně celou Českou republiku. Číselník území je v samostatném souboru "seznam_ORP.csv".
+Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v parametru "KRAJE_NAZVY".
 
 Parametr **detailni** může nabývat hodnot *false* nebo *true*. Hodnota parametru se zohledňuje pouze v případě, že parametr **hlavniKraj** je nastaven na hodnotu odlišnou od *-1*. Celostátní sestava má hodnotu vždy *false*.
 
