@@ -14,6 +14,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Vytvořen skript pro automatické akce (upravená syntaxe).
 - Využití nové funkcionality ISV6 - Knihovna JS.
 
+### [AA-CHMU_SMS_kraj]
+#### Přidáno
+- Vytvořen skript pro automatické akce (upravená syntaxe).
+- Využití nové funkcionality ISV6 - Knihovna JS.
 
 ## verze 13 – 2019-01-08
 ### [CHMU-EMAIL]

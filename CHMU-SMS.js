@@ -1,6 +1,7 @@
 // Verze 13
 
-var omezitNaKraj = -1;
+// zde např. Kraj Vysočina. Číselník krajů viz níže
+var omezitNaKraj = 108;
 var detailni = 0;
 
 var KRAJE_NAZVY = {
@@ -20,7 +21,7 @@ var KRAJE_NAZVY = {
     "132": "Moravskoslezský kraj",
     "141": "Zlínský kraj"
 };
- 
+
 var zacatky = [];
 var konce = [];
 var seznjevu = [];
@@ -86,6 +87,7 @@ var JEVY_NAZVY = {
     "REG.NO2" : "Regulace NO2",
 };
 
+// Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
     var unique_array = []
     for(var i = 0;i < arr.length; i++){
@@ -180,15 +182,18 @@ var resultText = vystupText = '';
 if (vystraha.info)
 {
     var poleJevy = [];
-    var posledniJev = "";
+    // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < vystraha.info.length; i++) {
-        if (posledniJev != vystraha.info[i].stupen_kod && vystraha.info[i].stupen_kod != "OUTLOOK") {
+        // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
+        if (vystraha.info[i].stupen_kod != "OUTLOOK") { 
             poleJevy.push(vystraha.info[i].stupen_kod);
         }
     }
 
+    // Promažeme duplicity
     poleJevy = removeDuplicates(poleJevy);
 
+    // Vezmeme kód jevu a najdeme si všechny časové období v tomto kraji.
     for (var h = 0; h < poleJevy.length; h++) {
         var jevKrajeList = [];
         for (var i = 0; i < vystraha.info.length; i++) {
@@ -199,6 +204,7 @@ if (vystraha.info)
                 }
                 for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
                     if (found) {
+                        // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList.push(vystraha.info[i].kraj[j].UID);
                         warn_type = "SVRS";
                         if (vystraha.info[i].SIVS == "1") {
@@ -225,9 +231,11 @@ if (vystraha.info)
                 }
             }
         }
+        // Vymažeme duplicity, kdy je v jednom kraji jev opakovaně a následně kraje seřadíme
         jevKrajeList = removeDuplicates(jevKrajeList);
         jevKrajeList = jevKrajeList.sort(function (a, b) {return a-b});
 
+        // Pokud máme ve zvoleném kraji výstrahu, přípravíme tělo se seznamem jevů, případně seznamem krajů a detailní platností
         if (jevKrajeList.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy[h]];
@@ -250,6 +258,7 @@ if (vystraha.info)
         }
     }
 
+    // Vypočítáme celkovou dobu platnosti výstrahy
     starty = Math.min.apply(null, zacatky);
     start = starty.toString();
 
@@ -262,6 +271,7 @@ if (vystraha.info)
         total_ukonceni = 'odvolání.';
     }
 
+    // Sestavíme hlavičku zprávy
     rezim = "SVRS";
     if (seznjevu.includes("SIVS")) {
         rezim = "SIVS";
@@ -298,7 +308,12 @@ if (vystraha.info)
         }
 
         vystupText += uvod;
+
+        // Připojíme připravený výpis jevů
         vystupText += resultText;
+        
+
+        // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (omezitNaKraj == -1 || !detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
         }
