@@ -58,7 +58,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Způsob řazení je možno nastavit parametrem.
 - Úprava formátu data a času. (řeší SU 37745)
 
-#### Odstraněno
+#### Odstraněno
 - Odstraněna pole "Doplňková informace" a výpis měřících profilů na tocích na základě změny směrnice ČHMÚ.
 
 #### Záplata
