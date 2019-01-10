@@ -1,6 +1,14 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 14 – 2019-01-10
+### [CHMU-EMAIL]
+#### Změněno
+- Úprava zpracování datumu a času (autor: Stratil Petr, RCS Kladno)
+
+#### Známé chyby
+- Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
+
 ## verze 13 – 2019-01-08
 ### [CHMU-EMAIL]
 #### Změněno
