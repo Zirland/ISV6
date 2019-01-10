@@ -9,6 +9,12 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Známé chyby
 - Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
 
+### [AA-CHMU_SMS_ORP]
+#### Přidáno
+- Vytvořen skript pro automatické akce (upravená syntaxe).
+- Využití nové funkcionality ISV6 - Knihovna JS.
+
+
 ## verze 13 – 2019-01-08
 ### [CHMU-EMAIL]
 #### Změněno

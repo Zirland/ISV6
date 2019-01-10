@@ -25,7 +25,27 @@ Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů ve výstr
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
 
-Parametr **omezitNaKraj** obsahuje číselný kód území, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v proměnné *KRAJE_NAZVY*
+Parametr **omezitNaKraj** obsahuje číselný kód území kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v proměnné *KRAJE_NAZVY*
+
+Parametr **detailni** může nabývat hodnot *false* nebo *true*. Hodnota parametru se zohledňuje pouze v případě, že parametr **hlavniKraj** je nastaven na hodnotu odlišnou od *-1*. Celostátní sestava má hodnotu vždy *false*.
+
+- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů jevů platných pro zvolený kraj. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev platí. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
+- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy jevů platných pro zvolený kraj následované rozsahem platnosti tohoto jevu. Rozsah platnosti celé výstrahy se neuvádí.
+
+V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
+
+Skript naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+```javascript
+//!JS
+print(N.textSMS);
+```
+
+## [AA-CHMU_SMS_ORP]
+Předpis pro vytvoření automatické akce tvorby SMS zprávy pro konkrétní ORP s přehledem nebezpečných jevů ve výstraze ČHMÚ pomocí využití knihovny JS.
+
+Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
+
+Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP, případně celou Českou republiku. Číselník území je v samostatném souboru "seznam_ORP.csv".
 
 Parametr **detailni** může nabývat hodnot *false* nebo *true*. Hodnota parametru se zohledňuje pouze v případě, že parametr **hlavniKraj** je nastaven na hodnotu odlišnou od *-1*. Celostátní sestava má hodnotu vždy *false*.
 
