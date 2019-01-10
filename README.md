@@ -47,7 +47,7 @@ print(N.textSMS);
 ```
 
 ## [AA-CHMU_SMS_ORP]
-Předpis pro vytvoření automatické akce tvorby SMS zprávy pro konkrétní ORP s přehledem nebezpečných jevů ve výstraze ČHMÚ pomocí využití knihovny JS.
+Předpis pro vytvoření automatické akce tvorby SMS zprávy pro konkrétní ORP s přehledem nebezpečných jevů ve výstraze ČHMÚ pomocí knihovny JS.
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
 
@@ -61,7 +61,7 @@ Parametr **detailni** může nabývat hodnot *false* nebo *true*. Hodnota parame
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
 ## [AA-CHMU_SMS_kraj]
-Předpis pro vytvoření automatické akce tvorby SMS zprávy pro konkrétní kraj s přehledem nebezpečných jevů ve výstraze ČHMÚ pomocí využití knihovny JS.
+Předpis pro vytvoření automatické akce tvorby SMS zprávy pro konkrétní kraj s přehledem nebezpečných jevů ve výstraze ČHMÚ pomocí knihovny JS.
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
 

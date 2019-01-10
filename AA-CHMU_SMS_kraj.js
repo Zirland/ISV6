@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha SMS pro kraj" ----- 
 //!JS
-// Verze 13
+// Verze 14
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;
@@ -36,6 +36,8 @@ vystupText += "OPIS GŘ HZS ČR";
 print(vystupText);
 
 //----- Knihovna JS "CHMU_SMS_KRAJ" -----
+//!JS
+// Verze 14
 var zacatky = [];
 var konce = [];
 var seznjevu = [];
