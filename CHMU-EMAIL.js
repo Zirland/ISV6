@@ -1,4 +1,4 @@
-//Verze 13
+//Verze 14
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -1273,7 +1273,7 @@ switch (vystraha.ucel) {
     case 'Exercise' :
     case 'System' :
     case 'Test' :
-        header = "ÚČELOVÁ INFORMACE ČHMÚ - TESTOVCÍ ZPRÁVA";
+        header = "ÚČELOVÁ INFORMACE ČHMÚ - TESTOVACÍ ZPRÁVA";
         if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
@@ -1329,7 +1329,7 @@ var empty = true;
 
 if (vystraha.info && vystraha.info.length > 0)
 {
-    // Najdeme všechny situace a doplňkové informace
+    // Najdeme všechny situace
     var situace = [];
 
     for (var i = 0; i < vystraha.info.length; i++)
