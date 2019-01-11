@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha SMS pro kraj" ----- 
 //!JS
-// Verze 15
+// Verze 16
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;
@@ -37,7 +37,7 @@ print(vystupText);
 
 //----- Knihovna JS "CHMU_SMS_KRAJ" -----
 //!JS
-// Verze 15
+// Verze 16
 var zacatky = [];
 var konce = [];
 var seznjevu = [];
@@ -131,10 +131,10 @@ function Normalize(datum) {
 }
 
 function ZobrazDatum(datum) {
-    if (datum = 999999999999) {
+    if (datum == 999999999999) {
         format_datum = 'odvolání';
     } else {
-        var normDatum = Normalize(datum);
+        var normDatum = datum.toString();
 
         normDatumRok = normDatum.substring(0,4);
         normDatumMesic = normDatum.substring(4,6);

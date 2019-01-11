@@ -1,4 +1,4 @@
-// Verze 15
+// Verze 16
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;
