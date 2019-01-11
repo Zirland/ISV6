@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha SMS pro ORP" ----- 
 //!JS
-// Verze 15
+// Verze 16
 
 // zde např. Mělník. Číselník ORP viz samostatný soubor
 var omezitNaOrp = 141; 
@@ -19,7 +19,7 @@ print(vystupText);
 
 //----- Knihovna JS "CHMU_SMS_ORP" -----
 //!JS
-// Verze 15
+// Verze 16
 
 var zacatky = [];
 var konce = [];
@@ -112,10 +112,10 @@ function Normalize(datum) {
 }
 
 function ZobrazDatum(datum) {
-    if (datum = 999999999999) {
+    if (datum == 999999999999) {
         format_datum = 'odvolání';
     } else {
-        var normDatum = Normalize(datum);
+        var normDatum = datum.toString();
 
         normDatumRok = normDatum.substring(0,4);
         normDatumMesic = normDatum.substring(4,6);
@@ -198,7 +198,7 @@ if (infoList) {
     // Vyhodnotíme zda jev platí v tomto ORP
     for (var h = 0; h < poleJevy.length; h++) {
         for (var i = 0; i < vystraha.info.length; i++) {
-            if (poleJevy[h] == vystraha.info[i].stupen_kod) {
+            if (poleJevy[h] == vystraha.info[i].stupen_kod && vystraha.info[i].jev_kod != "OUTLOOK") {
                 var found = omezitNaOrp == -1;
                 var orp_list = '';
                 if (vystraha.info[i].orp) {
