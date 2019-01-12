@@ -1001,7 +1001,15 @@ function PrintInfo(info, ref_info)
         resultText += vyskaText + '</td>';
         resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
         resultText += '<td><table class="no">';
-            resultText += '<tr><td>' + SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '') + '</td>';
+            resultText += '<tr><td>';
+            
+            if (ref_info && info.dc_zacatek < ref_info.dc_konec && info.nalehavost_kod == "Immediate") {
+                resultText += ZobrazDatum(info.dc_zacatek);
+            } else {
+                resultText += SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '');
+            }
+            
+            resultText += '</td>';
             resultText += '<td>&nbsp;–&nbsp;</td>';
             resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '') + '</td></tr>';
         resultText += '</table></td>';
