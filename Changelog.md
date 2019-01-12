@@ -1,6 +1,11 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 17 – 2019-01-14
+### [CHMU-EMAIL]
+#### Přidáno
+- Pokud je jev v platnosti již od minulé výstrahy, nepovažuje se hodnota "čas začátku" za změněnou.
+
 ## verze 16 – 2019-01-11
 ### [AA-CHMU_SMS_ORP]
 #### Záplata
