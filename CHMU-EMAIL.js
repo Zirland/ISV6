@@ -335,12 +335,11 @@ function UkoncenyJev(konecJev, casZprava) {
     myEndTime.setMinutes(myEndTime.getMinutes() - 30);
     konecJev_format = Normalize(myEndTime);
 
-    resultText += konecJev_format;
     konecJev_format_num = Number(konecJev_format);
     casZprava_format_num = Number(casZprava_format);
 
     output = konecJev_format_num + '<' + casZprava_format_num;
-    resultText += output;
+
     if (konecJev_format_num < casZprava_format_num) {
         return true;
     } else {
