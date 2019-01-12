@@ -316,18 +316,32 @@ function Normalize(datum) {
     return datum;
 }
 
-// Zjišťuje, zda je datum1 nižší než datum2
-function DatumDrive(datum1, datum2) {
-    if (!datum1) {
-        datum1 = "1.1.2100 01:00";
+// Zjišťuje, zda je konecJev nenastane v období 30 minut od casZpravy
+function UkoncenyJev(konecJev, casZprava) {
+    if (!konecJev) {
+        konecJev = "1.1.2100 01:00";
     }
-    var datum1_format = Normalize(datum1);
-    var datum2_format = Normalize(datum2);
 
-    datum1_format_num = Number(datum1_format);
-    datum2_format_num = Number(datum2_format);
+    var konecJev_format = Normalize(konecJev);
+    var casZprava_format = Normalize(casZprava);
 
-    if (datum1_format_num < datum2_format_num) {
+    var kjYear = konecJev_format.substring(0,4);
+    var kjMonth = konecJev_format.substring(4,6);
+    var kjDay = konecJev_format.substring(6,8);
+    var kjHour = konecJev_format.substring(8,10);
+    var kjMinute = konecJev_format.substring(10,12);
+    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute);
+
+    myEndTime.setMinutes(myEndTime.getMinutes() - 30);
+    konecJev_format = Normalize(myEndTime);
+
+    resultText += konecJev_format;
+    konecJev_format_num = Number(konecJev_format);
+    casZprava_format_num = Number(casZprava_format);
+
+    output = konecJev_format_num + '<' + casZprava_format_num;
+    resultText += output;
+    if (konecJev_format_num < casZprava_format_num) {
         return true;
     } else {
         return false;
@@ -426,9 +440,9 @@ function PrepareInfo(orp, vystraha)
     for (var x = 0; x < infoList.length; x++) {
         var podminka = true;
         if (zobrazitVyhled) {
-            podminka = (!DatumDrive(infoList[x].dc_konec, vytvoreni));
+            podminka = (!UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         } else {
-            podminka = (infoList[x].jev_kod != "OUTLOOK" && !DatumDrive(infoList[x].dc_konec, vytvoreni));
+            podminka = (infoList[x].jev_kod != "OUTLOOK" && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         }
         
         if (podminka) {
