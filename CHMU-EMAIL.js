@@ -1003,7 +1003,7 @@ function PrintInfo(info, ref_info)
         resultText += '<td><table class="no">';
             resultText += '<tr><td>';
             
-            if (ref_info && info.dc_zacatek < ref_info.dc_konec && info.nalehavost_kod == "Immediate") {
+            if (info && ref_info && info.dc_zacatek < ref_info.dc_konec && info.nalehavost_kod == "Immediate") {
                 resultText += ZobrazDatum(info.dc_zacatek);
             } else {
                 resultText += SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '');
