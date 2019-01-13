@@ -1,7 +1,7 @@
 //Verze 16
 
-var omezitORP = 19;
-var zobrazitVyhled = false;
+var omezitORP = 337;
+var zobrazitVyhled = true;
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
@@ -1272,13 +1272,13 @@ resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
 resultText += '<br/>Územní platnost: ';
 
 var findOrp = orp.filter(function(e) {
-    return e.id == orp_pole[c];
+    return e.id == omezitORP;
 });
 if (findOrp.length > 0) {
     var nazevORP = findOrp[0].nazev;
 }
 
-resultText += nazevORP;
+resultText += 'ORP' + nazevORP;
 resultText += '<hr/>';
 
 var empty = true;
