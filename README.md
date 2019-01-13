@@ -1,5 +1,4 @@
 # JavaScript předpisy pro ISV6
-[TOC]
 
 ## [CHMU-EMAIL]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ. Slouží pro náhled výstrahy v okně Spojaře (levý sloupec) při zpracování CAP protokolu.
