@@ -1,27 +1,7 @@
 //Verze 16
 
-var omezitORP = -1;
+var omezitORP = 19;
 var zobrazitVyhled = false;
-
-var KRAJE_NAZVY = {
-    "-1": "Česká republika",
-    "19": "Hlavní město Praha",
-    "27": "Středočeský kraj",
-    "35": "Jihočeský kraj",
-    "43": "Plzeňský kraj",
-    "51": "Karlovarský kraj",
-    "60": "Ústecký kraj",
-    "78": "Liberecký kraj",
-    "86": "Královéhradecký kraj",
-    "94": "Pardubický kraj",
-    "108": "Kraj Vysočina",
-    "116": "Jihomoravský kraj",
-    "124": "Olomoucký kraj",
-    "132": "Moravskoslezský kraj",
-    "141": "Zlínský kraj"
-};
-
-var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
@@ -1299,7 +1279,7 @@ if (vystraha.reference)
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
 
 resultText += '<br/>Územní platnost: ';
-resultText += KRAJE_NAZVY[hlavniKraj];
+resultText += omezitORP;
 
 
 resultText += '<hr/>';
@@ -1347,56 +1327,7 @@ if (empty)
     resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-resultText += '</div><hr/>';
-resultText += '<br/>Distribuce: ';
-
-var dist = '';
-
-// Vytáhneme informaci, kterých krajů se výstraha týká
-for (var k = 0; k < krajList.length; k++)
-{
-    var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
-
-    for (var o = 0; o < krajList[k].okresList.length && !found; o++)
-    {
-        found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
-
-        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++)
-        {
-            found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
-        }
-    }
-
-    if (found)
-    {
-        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-    }
-}
-
-if (krajList.length == 0)
-{
-    for (var k = 0; k < ref_krajList.length; k++)
-    {
-        var found = ref_krajList[k].info.length > 0;
-
-        for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++)
-        {
-            found = ref_krajList[k].okresList[o].info.length > 0;
-
-            for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++)
-            {
-                found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
-            }
-        }
-
-        if (found)
-        {
-            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
-        }
-    }
-}
-
-resultText += dist;
+resultText += '</div>';
 
 // Ukončení stránky
 resultText += '</BODY>';
