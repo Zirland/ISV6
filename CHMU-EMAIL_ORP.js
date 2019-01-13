@@ -1,7 +1,19 @@
-//Verze 16
+//------ Automatická akce "Výstraha e-mail pro ORP" ----- 
+//!JS
+// Verze 16
 
-var omezitORP = 337;
-var zobrazitVyhled = true;
+//Číselník ORP viz samostatný soubor
+var omezitNaOrp = 337; 
+var zobrazitVyhled = false; 
+// viz dokumentace
+
+// zde vytvoříme tělo SMS dle obsahu CAP pomocí skriptu z knihovny
+#import "CHMU_EMAIL_ORP"; 
+
+print(resultText);
+
+//----- Knihovna JS "CHMU_EMAIL_ORP" -----
+//Verze 16
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
@@ -1302,7 +1314,8 @@ if (vystraha.info && vystraha.info.length > 0)
 
    if (situace.length > 0)
     {
-        resultText += '<br/><b>Meteorologická situace:</b> ' + situace[0];
+        var upr_situace = situace[0].replace(/&lt;br\/&gt;/g," ");}
+        resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/><div>';
     }
 
@@ -1329,6 +1342,3 @@ resultText += '</div>';
 // Ukončení stránky
 resultText += '</BODY>';
 resultText += '</HTML>';
-
-// Vrácení výsledku
-return resultText;
