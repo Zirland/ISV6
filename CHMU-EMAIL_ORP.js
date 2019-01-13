@@ -592,7 +592,6 @@ function PrintInfoList(krajList, ref_krajList)
                     if (first)
                     {
                         first = false;
-                        resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                         empty = false;
                     }
 
@@ -627,7 +626,6 @@ function PrintInfoList(krajList, ref_krajList)
             if (first)
             {
                 first = false;
-                resultText += '</div><br/><div><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>';
                 empty = false;
             }
 
@@ -671,7 +669,6 @@ function PrintInfoList(krajList, ref_krajList)
                             if (first)
                             {
                                 first = false;
-                                resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                                 empty = false;
                             }
 
@@ -713,7 +710,6 @@ function PrintInfoList(krajList, ref_krajList)
                     if (first)
                     {
                         first = false;
-                        resultText += '</div><br/><div><b>Okres ' + krajList[k].okresList[o].nazev + '</b>';
                         empty = false;
                     }
 
@@ -758,7 +754,6 @@ function PrintInfoList(krajList, ref_krajList)
                                 if (first)
                                 {
                                     first = false;
-                                    resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                                     empty = false;
                                 }
 
@@ -799,7 +794,6 @@ function PrintInfoList(krajList, ref_krajList)
                         if (first)
                         {
                             first = false;
-                            resultText += '</div><br/><div><b>ORP ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                             empty = false;
                         }
 
@@ -825,7 +819,6 @@ function PrintInfoList(krajList, ref_krajList)
                 if (first)
                 {
                     first = false;
-                    resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                     empty = false;
                 }
 
@@ -850,7 +843,6 @@ function PrintInfoList(krajList, ref_krajList)
                         if (first)
                         {
                             first = false;
-                            resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                             empty = false;
                         }
 
@@ -876,7 +868,6 @@ function PrintInfoList(krajList, ref_krajList)
                             if (first)
                             {
                                 first = false;
-                                resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                                 empty = false;
                             }
 
@@ -1279,9 +1270,15 @@ if (vystraha.reference)
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
 
 resultText += '<br/>Územní platnost: ';
-resultText += omezitORP;
 
+var findOrp = orp.filter(function(e) {
+    return e.id == orp_pole[c];
+});
+if (findOrp.length > 0) {
+    var nazevORP = findOrp[0].nazev;
+}
 
+resultText += nazevORP;
 resultText += '<hr/>';
 
 var empty = true;
