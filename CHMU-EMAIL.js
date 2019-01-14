@@ -1367,7 +1367,8 @@ if (vystraha.info && vystraha.info.length > 0)
 
    if (situace.length > 0)
     {
-        resultText += '<br/><b>Meteorologická situace:</b> ' + situace[0];
+        var upr_situace = situace[0].replace(/&lt;br\/&gt;/g," ");
+        resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/><div>';
     }
 
