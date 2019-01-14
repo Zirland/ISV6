@@ -106,7 +106,7 @@ Parametr **zobrazovatVsechnyKraje** a parametr **razeniPodleNazvu** byly z kódu
 Oproti krajské sestavě byl z výstupu rovněž vypuštěn výpis "Distribuce", který v kontextu jednoho ORP nedává smysl.
 
 
-## [AA-CHMU-EMAIL-ORP]
+## [AA-CHMU-EMAIL-KRAJ]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
 Parametr **hlavniKraj** posunuje zvolený kraj na začátek výpisu, při hodnotě *-1* nedochází ke změně řazení. Číselník území je v proměnné *KRAJE_NAZVY*.
