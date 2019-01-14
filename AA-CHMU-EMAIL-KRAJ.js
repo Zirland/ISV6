@@ -7,7 +7,7 @@ var hlavniKraj = 132;
 var zobrazovatVsechnyKraje = false;
 var razeniPodleNazvu = false;
 var zobrazitVyhled = false;
-var zmeny = false;
+var zmeny = true;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
