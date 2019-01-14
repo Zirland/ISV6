@@ -1,8 +1,9 @@
-// Verze 16
+// Verze 17
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;
 var detailni = 0;
+var oddelovac = '\n';
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -147,10 +148,10 @@ function Normalize(datum) {
 }
 
 function ZobrazDatum(datum) {
-    if (datum = 999999999999) {
+    if (datum == 999999999999) {
         format_datum = 'odvolání';
     } else {
-        var normDatum = Normalize(datum);
+        var normDatum = datum.toString();
 
         normDatumRok = normDatum.substring(0,4);
         normDatumMesic = normDatum.substring(4,6);
@@ -231,12 +232,12 @@ if (vystraha.info)
                     seznkraje += KRAJE_KODY[jevKrajeList[t]] + ', ';
                 }
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
-                resultText += seznkraje + '\n';
+                resultText += seznkraje + oddelovac;
             } else {
                 if (detailni) {
-                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
+                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
-                    resultText += JEVY_NAZVY[poleJevy[h]] + '\n';
+                    resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
                 }
             }
         }
@@ -262,7 +263,7 @@ if (vystraha.info)
     }
 
     if (start == "Infinity") {
-        vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
+        vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
     } else {
         switch (vystraha.ucel) {
             case 'Exercise' :
@@ -296,14 +297,14 @@ if (vystraha.info)
 
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (omezitNaKraj == -1 || !detailni) {
-            vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
+            vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
         }
         if (omezitNaKraj == -1) {
-            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
+            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
         }
     }
 }
 
-vystupText = vystupText.substring(0, vystupText.length-1);
+vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
 
 return vystupText;
