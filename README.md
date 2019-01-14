@@ -23,7 +23,7 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
-- Při hodnotě *true* je obsah výstrahy porovnáíván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
@@ -98,7 +98,7 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
-- Při hodnotě *true* je obsah výstrahy porovnáíván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
 
 
 Parametr **zobrazovatVsechnyKraje** a parametr **razeniPodleNazvu** byly z kódu vypuštěny, protože skript generuje výstup pouze pro jedno ORP.
@@ -129,4 +129,4 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
-- Při hodnotě *true* je obsah výstrahy porovnáíván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
