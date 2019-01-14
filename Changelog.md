@@ -7,6 +7,18 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Pokud je jev v platnosti již od minulé výstrahy, nepovažuje se hodnota "čas začátku" za změněnou.
 - Při vydání nové výstrahy se jevy končící v období 30 minut před začátkem nové výstrahy považují již za vypršelé.
 
+### [CHMU-SMS]
+#### Přidáno
+- Zavedení parametru oddělovače pro formátování zprávy.
+
+### [AA-CHMU_SMS_ORP]
+#### Přidáno
+- Zavedení parametru oddělovače pro formátování zprávy.
+
+### [AA-CHMU_SMS_kraj]
+#### Přidáno
+- Zavedení parametru oddělovače pro formátování zprávy.
+
 ### [AA-CHMU_EMAIL_ORP]
 #### Přidáno
 - Vytvořen skript pro automatické akce.
