@@ -20,6 +20,11 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
+Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
+- Při hodnotě *true* je obsah výstrahy porovnáíván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
 //!JS
@@ -89,6 +94,12 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
+
+Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
+- Při hodnotě *true* je obsah výstrahy porovnáíván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+
 
 Parametr **zobrazovatVsechnyKraje** a parametr **razeniPodleNazvu** byly z kódu vypuštěny, protože skript generuje výstup pouze pro jedno ORP.
 
