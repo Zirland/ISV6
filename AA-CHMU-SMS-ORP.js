@@ -4,7 +4,8 @@
 
 // zde např. Mělník. Číselník ORP viz samostatný soubor
 var omezitNaOrp = 141; 
-var detailni = 1; 
+var detailni = 1;
+var oddelovac = '\n'; 
 // viz dokumentace k [CHMU-SMS]
 
 // zde vytvoříme tělo SMS dle obsahu CAP pomocí skriptu z knihovny
@@ -236,9 +237,9 @@ if (infoList) {
     // Vypíšeme seznam platných jevů na tomto území, případně i včetně detailní platnosti
     for (j = 0; j < platne.length; j++) { 
         if (detailni) {
-            resultText += JEVY_NAZVY[platne[j].stupen_kod] + ' od ' + zahajeni + ' do ' + ukonceni + '\n';
+            resultText += JEVY_NAZVY[platne[j].stupen_kod] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
         } else {
-            resultText += JEVY_NAZVY[platne[j].stupen_kod] + '\n';
+            resultText += JEVY_NAZVY[platne[j].stupen_kod] + oddelovac;
         }
     }
 
@@ -262,7 +263,7 @@ if (infoList) {
     }
 
     if (start == "Infinity") {
-        vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.\n';
+        vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
     } else {
         switch (vystraha.ucel) {
             case 'Exercise' :
@@ -295,12 +296,12 @@ if (infoList) {
 
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (omezitNaOrp == -1 || !detailni) {
-            vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + '\n';
+            vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
         }
         if (omezitNaOrp == -1) {
-            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG\n';
+            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
         }
     }
 }
 
-vystupText = vystupText.substring(0, vystupText.length-1);
+vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
