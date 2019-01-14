@@ -24,6 +24,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Přidáno
 - Vytvořen skript pro automatické akce.
 
+### [AA-CHMU_EMAIL_KRAJ]
+#### Přidáno
+- Vytvořen skript pro automatické akce.
+
 ## verze 16 – 2019-01-11
 ### [AA-CHMU_SMS_ORP]
 #### Záplata
