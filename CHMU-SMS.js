@@ -1,4 +1,4 @@
-// Verze 16
+// Verze 17
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;
@@ -148,10 +148,10 @@ function Normalize(datum) {
 }
 
 function ZobrazDatum(datum) {
-    if (datum = 999999999999) {
+    if (datum == 999999999999) {
         format_datum = 'odvolání';
     } else {
-        var normDatum = Normalize(datum);
+        var normDatum = datum.toString();
 
         normDatumRok = normDatum.substring(0,4);
         normDatumMesic = normDatum.substring(4,6);
