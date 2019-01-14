@@ -1019,14 +1019,14 @@ function PrintInfo(info, ref_info)
                 resultText += '<tr><td>';
                 
                 if (info && ref_info && info.dc_zacatek < ref_info.dc_konec && info.nalehavost_kod == "Immediate") {
-                    resultText += ZobrazDatum(info.dc_zacatek, 'short');
+                    resultText += ZobrazDatum(info.dc_zacatek);
                 } else {
-                    resultText += SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
+                    resultText += SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '');
                 }
                 
                 resultText += '</td>';
                 resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short') : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short') : '') + '</td></tr>';
+                resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '') + '</td></tr>';
             resultText += '</table></td>';
         resultText += '</tr>';
 
@@ -1069,9 +1069,9 @@ function PrintInfo(info, ref_info)
             resultText += vyskaText + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
             resultText += '<td><table class="no">';
-                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
+                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek) : '') + '</td>';
                 resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short') : '') + '</td></tr>';
+                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec) : '') + '</td></tr>';
             resultText += '</table></td>';
         resultText += '</tr>';
 

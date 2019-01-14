@@ -1,8 +1,9 @@
 //Verze 17
 
-var hlavniKraj = 108;
-var zobrazovatVsechnyKraje = false;
+var hlavniKraj = -1;
+var zobrazovatVsechnyKraje = true;
 var zobrazitVyhled = false;
+var zmeny = true;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -84,7 +85,8 @@ var JEVY_NAZVY = {
 }
 
 // Zjednodušené zobrazení rozdílů (porovnává se celý text)
-function SimpleHighlightDiff(newValue, oldValue) {
+function SimpleHighlightDiff(newValue, oldValue)
+{
     var resultText = '';
     var newText = newValue ? newValue.toString() : '';
     var oldText = oldValue ? oldValue.toString() : '';
@@ -104,7 +106,8 @@ function SimpleHighlightDiff(newValue, oldValue) {
 }
 
 // Zvýraznění rozdílů dvou textů
-function HighlightDiff(newValue, oldValue) {
+function HighlightDiff(newValue, oldValue)
+{
     var resultText = '';
 
     // Převedeme na pole podle mezer
@@ -231,7 +234,8 @@ function HighlightDiff(newValue, oldValue) {
 }
 
 // Metoda pro spočtení vzdálenosti slov (dvou polí)
-function GetLCSLength(newValueSplit, oldValueSplit) {
+function GetLCSLength(newValueSplit, oldValueSplit)
+{
     // Vytvoříme dvojrozměrné pole a inicializujeme ho nulou
     var matrix = new Array(newValueSplit.length + 1);
 
@@ -335,6 +339,7 @@ function UkoncenyJev(konecJev, casZprava) {
     casZprava_format_num = Number(casZprava_format);
 
     output = konecJev_format_num + '<' + casZprava_format_num;
+
     if (konecJev_format_num < casZprava_format_num) {
         return true;
     } else {
@@ -360,7 +365,9 @@ function ZobrazDatum(datum) {
     return format_datum;
 }
 
-function PrepareInfo (vystraha) {
+// Připravíme seznam jevů podle území
+function PrepareInfo(orp, vystraha)
+{
     var infoList = [];
 
     // Připravíme si pole info jevů
@@ -441,14 +448,9 @@ function PrepareInfo (vystraha) {
             infoListFilter.push(infoList[x]);
         }
     }
-        
+    
     infoList = infoListFilter;
-
-    return infoList;
-}
-
-// Připravíme seznam území
-function PrepareKraje(orp, vystraha) {
+    
     var krajList = [];
     var posledniKraj = {};
     var posledniOkres = {};
@@ -570,7 +572,349 @@ function PrepareKraje(orp, vystraha) {
     return krajList;
 }
 
-function GetWarningColor(info) {
+function PrintInfoList(krajList, ref_krajList)
+{
+    var resultText = '';
+    var zpracovanyInfoStupen = [];
+    var zpracovanyInfoStupenOkres = [];
+    var ref_zpracovanyInfoStupen = [];
+    var ref_zpracovanyInfoStupenOkres = [];
+    var info;
+    var ref_info;
+    var found = false;
+    var first = true;
+
+    for (var k = 0; k < krajList.length; k++)
+    {
+        zpracovanyInfoStupen = [];
+        ref_zpracovanyInfoStupen = [];
+        first = true;
+
+        if (ref_krajList.length > 0)
+        {
+            // Všechny, které jsme v daném kraji zrušili
+            for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
+            {
+                ref_info = ref_krajList[k].info[ri];
+                found = false;
+
+                // Zkusíme najít odpovídající záznam ve výstraze
+                for (var i = 0; i < krajList[k].info.length; i++)
+                {
+                    if (krajList[k].info[i].stupen_kod == ref_info.stupen_kod)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                // Pokud jsme výstrahu nenašli
+                if (!found && zmeny)
+                {
+                    if (first)
+                    {
+                        first = false;
+                        resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
+                        empty = false;
+                    }
+
+                    ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
+                    resultText += PrintInfo(null, ref_info);
+                }
+            }
+        }
+
+        // Výstrahy pro celý kraj
+        for (var i = 0; i < krajList[k].info.length; i++)
+        {
+            info = krajList[k].info[i];
+            zpracovanyInfoStupen.push(info.stupen_kod + info.vyska);
+            ref_info = null;
+
+            // Pokud máme referenční výstrahu
+            if (ref_krajList.length > 0)
+            {
+                // Zkusíme najít odpovídající záznam v referenční / předchozí výstraze
+                for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
+                {
+                    if (ref_krajList[k].info[ri].stupen_kod == info.stupen_kod)
+                    {
+                        ref_info = ref_krajList[k].info[ri];
+                        ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
+                        break;
+                    }
+                }
+            }
+
+            if (first)
+            {
+                first = false;
+                resultText += '</div><br/><div><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>';
+                empty = false;
+            }
+
+            resultText += PrintInfo(info, ref_info);
+        }
+
+        // Výstrahy pro okres
+        for (var o = 0; o < krajList[k].okresList.length; o++)
+        {
+            first = true;
+            zpracovanyInfoStupenOkres = [];
+            ref_zpracovanyInfoStupenOkres = [];
+
+            if (ref_krajList.length > 0)
+            {
+                // Všechny, které jsme v daném okrese zrušili
+                for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
+                {
+                    ref_info = ref_krajList[k].okresList[o].info[ri];
+                    found = false;
+
+                    // Pokud tato výstraha není již zpracovaná z pokrytí kraje
+                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                    {
+                        if (zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                        {
+                            // Zkusíme najít odpovídající záznam ve výstraze
+                            for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+                            {
+                                if (krajList[k].okresList[o].info[i].stupen_kod == ref_info.stupen_kod)
+                                {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Pokud jsme výstrahu nenašli
+                        if (!found && zmeny)
+                        {
+                            if (first)
+                            {
+                                first = false;
+                                resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
+                                empty = false;
+                            }
+
+                            ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
+                            resultText += PrintInfo(null, ref_info);
+                        }
+                    }
+                }
+            }
+
+            for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+            {
+                info = krajList[k].okresList[o].info[i];
+
+                // Pokud zatím není zpracováno z pokrytí kraje
+                if (zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1)
+                {
+                    zpracovanyInfoStupenOkres.push(info.stupen_kod + info.vyska);
+                    ref_info = null;
+
+                    // Pokud máme referenční výstrahu
+                    if (ref_krajList.length > 0)
+                    {
+                        // Pokud zatím není zpracováno z pokrytí kraje
+                        if (ref_zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1)
+                        {
+                            for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
+                            {
+                                if (ref_krajList[k].okresList[o].info[ri].stupen_kod == info.stupen_kod)
+                                {
+                                    ref_info = ref_krajList[k].okresList[o].info[ri];
+                                    ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (first)
+                    {
+                        first = false;
+                        resultText += '</div><br/><div><b>Okres ' + krajList[k].okresList[o].nazev + '</b>';
+                        empty = false;
+                    }
+
+                    resultText += PrintInfo(info, ref_info);
+                }
+            }
+
+            // Výstrahy pro orp
+            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length; ol++)
+            {
+                first = true;
+
+                if (ref_krajList.length > 0)
+                {
+                    // Všechny, které jsme v daném ORP zrušili
+                    for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
+                    {
+                        ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
+                        found = false;
+
+                        // Pokud tato výstraha není již zpracovaná z pokrytí kraje nebo okresu
+                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1
+                            && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                        {
+                            if (zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1
+                                && zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                            {
+                                // Zkusíme najít odpovídající záznam ve výstraze
+                                for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+                                {
+                                    if (krajList[k].okresList[o].orpList[ol].info[i].stupen_kod == ref_info.stupen_kod)
+                                    {
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // Pokud jsme výstrahu nenašli
+                            if (!found && zmeny)
+                            {
+                                if (first)
+                                {
+                                    first = false;
+                                    resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                                    empty = false;
+                                }
+
+                                resultText += PrintInfo(null, ref_info);
+                            }
+                        }
+                    }
+                }
+
+                for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+                {
+                    info = krajList[k].okresList[o].orpList[ol].info[i];
+
+                    // Pokud zatím není zpracováno z pokrytí kraje nebo okresu
+                    if (zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1
+                        && zpracovanyInfoStupenOkres.indexOf(info.stupen_kod + info.vyska) == -1)
+                    {
+                        ref_info = null;
+
+                        // Pokud máme referenční výstrahu
+                        if (ref_krajList.length > 0)
+                        {
+                            // Pokud zatím není zpracováno z pokrytí kraje
+                            if (ref_zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1
+                                && ref_zpracovanyInfoStupenOkres.indexOf(info.stupen_kod + info.vyska) == -1)
+                            {
+                                for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
+                                {
+                                    if (ref_krajList[k].okresList[o].orpList[ol].info[ri].stupen_kod == info.stupen_kod)
+                                    {
+                                        ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (first)
+                        {
+                            first = false;
+                            resultText += '</div><br/><div><b>ORP ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                            empty = false;
+                        }
+
+                        resultText += PrintInfo(info, ref_info);
+                    }
+                }
+            }
+        }
+    }
+
+    // Pokud nemáme původní výstrahu, ale máme jen referenční
+    if (krajList.length == 0 && ref_krajList.length > 0 && zmeny)
+    {
+        for (var k = 0; k < ref_krajList.length; k++)
+        {
+            first = true;
+
+            // Všechny, které jsme v daném kraji zrušili
+            for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
+            {
+                ref_info = ref_krajList[k].info[ri];
+                
+                if (first)
+                {
+                    first = false;
+                    resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
+                    empty = false;
+                }
+
+                ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
+                resultText += PrintInfo(null, ref_info);
+            }
+
+            // Výstrahy pro okres
+            for (var o = 0; o < ref_krajList[k].okresList.length; o++)
+            {
+                first = true;
+                ref_zpracovanyInfoStupenOkres = [];
+
+                // Všechny, které jsme v daném okrese zrušili
+                for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
+                {
+                    ref_info = ref_krajList[k].okresList[o].info[ri];
+
+                    // Pokud tato výstraha není již zpracovaná z pokrytí kraje
+                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                    {
+                        if (first)
+                        {
+                            first = false;
+                            resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
+                            empty = false;
+                        }
+
+                        ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
+                        resultText += PrintInfo(null, ref_info);
+                    }
+                }
+
+                // Výstrahy pro orp
+                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length; ol++)
+                {
+                    first = true;
+
+                    // Všechny, které jsme v daném ORP zrušili
+                    for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
+                    {
+                        ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
+
+                        // Pokud tato výstraha není již zpracovaná z pokrytí kraje nebo okresu
+                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1
+                            && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                        {
+                            if (first)
+                            {
+                                first = false;
+                                resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
+                                empty = false;
+                            }
+
+                            resultText += PrintInfo(null, ref_info);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return resultText;
+}
+
+function GetWarningColor(info)
+{
     // Barva podle závažnosti
     var color = '';
 
@@ -592,7 +936,8 @@ function GetWarningColor(info) {
     return color;
 }
 
-function PozadiColor(info) {
+function PozadiColor(info)
+{
     // Barva podle závažnosti
     var pozadi = '#fff';
 
@@ -1355,64 +1700,115 @@ function PrintInfo(info, ref_info)
         }
     } 
 
-    resultText += '<div><table class="tg" width="100%">';
+    if (zmeny) {
+        resultText += '<div><table class="tg" width="100%">';
 
-    // Hlavička
-    resultText += '<tr>';
-        resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
-        resultText += HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
-        resultText += vyskaText + '</td>';
-        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
-        resultText += '<td><table class="no">';
-
-            resultText += '<tr><td>'; 
-             
-            if (ref_info && info.dc_zacatek < ref_info.dc_konec && info.nalehavost_kod == "Immediate") { 
-                resultText += ZobrazDatum(info.dc_zacatek); 
-            } else { 
-                resultText += SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : ''); 
-            } 
-             
-            resultText += '</td>'; 
-            resultText += '<td>&nbsp;–&nbsp;</td>';
-            resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '') + '</td></tr>';
-        resultText += '</table></td>';
-    resultText += '</tr>';
-
-    if (info) {
-        if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g," ");}
-        if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
-        if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
-    }
-    if (ref_info) {
-        if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g," ");}
-        if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
-        if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
-    }
-
-    // Popis
-    resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '') + '</td>';
-    resultText += '</tr>';
-
-    // Hydrologická zpráva
-    if (info && (info.hydroPredpoved)) {
+        // Hlavička
         resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '') + '</td>';
+            resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
+            resultText += HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
+            resultText += vyskaText + '</td>';
+            resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
+            resultText += '<td><table class="no">';
+                resultText += '<tr><td>';
+                
+                if (info && ref_info && info.dc_zacatek < ref_info.dc_konec && info.nalehavost_kod == "Immediate") {
+                    resultText += ZobrazDatum(info.dc_zacatek);
+                } else {
+                    resultText += SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '');
+                }
+                
+                resultText += '</td>';
+                resultText += '<td>&nbsp;–&nbsp;</td>';
+                resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '') + '</td></tr>';
+            resultText += '</table></td>';
         resultText += '</tr>';
+
+        if (info) {
+            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g," ");}
+            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+        }
+        if (ref_info) {
+            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g," ");}
+            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+        }
+
+        // Popis
+        resultText += '<tr>';
+            resultText += '<td colspan="3"><b>Popis:</b> ' + HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '') + '</td>';
+        resultText += '</tr>';
+
+        // Hydrologická zpráva
+        if (info && (info.hydroPredpoved)) {
+            resultText += '<tr>';
+            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '') + '</td>';
+            resultText += '</tr>';
+        }
+
+        // Doporučení
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '') + '</td>';
+        resultText += '</tr>';
+
+        // Územní platnost
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Územní platnost:</b> ' + HighlightDiff(info != null ? JevUzemi(info) : '', ref_info != null ? JevUzemi(ref_info) : '') + '</td>';
+        resultText += '</tr>';
+
+        resultText += '</table></div>';
+    } else {
+        resultText += '<div><table class="tg" width="100%">';
+
+        // Hlavička
+        resultText += '<tr>';
+            resultText += '<td width="20%">' + (info != null ? vyskyt : '');
+            resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
+            resultText += vyskaText + '</td>';
+            resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
+            resultText += '<td><table class="no">';
+                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek) : '') + '</td>';
+                resultText += '<td>&nbsp;–&nbsp;</td>';
+                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec) : '') + '</td></tr>';
+            resultText += '</table></td>';
+        resultText += '</tr>';
+
+        if (info) {
+            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g," ");}
+            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+        }
+        if (ref_info) {
+            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g," ");}
+            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
+            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+        }
+
+        // Popis
+        resultText += '<tr>';
+            resultText += '<td colspan="3"><b>Popis:</b> ' + (info != null ? upr_info : '') + '</td>';
+        resultText += '</tr>';
+
+        // Hydrologická zpráva
+        if (info && (info.hydroPredpoved)) {
+            resultText += '<tr>';
+            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
+            resultText += '</tr>';
+        }
+
+        // Doporučení
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Doporučení:</b> ' + (info != null ? upr_doporuceni : '') + '</td>';
+        resultText += '</tr>';
+
+        // Územní platnost
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Územní platnost:</b> ' + (info != null ? JevUzemi(info) : '') + '</td>';
+        resultText += '</tr>';
+
+        resultText += '</table></div>';
     }
-
-    // Doporučení
-    resultText += '<tr>';
-    resultText += '<td colspan="3"><b>Doporučení:</b> ' + HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '') + '</td>';
-    resultText += '</tr>';
-
-    resultText += '<tr>';
-    resultText += '<td colspan="3"><b>Územní platnost:</b> ';
-    resultText += JevUzemi(info);
-    resultText += '</td>';
-    resultText += '</tr>';
-    resultText += '</table></div>';
 
     return resultText;
 }
@@ -1449,36 +1845,20 @@ if (hlavniKraj != -1)
 
 // Samotná zpráva
 var resultText = '';
-var vytvoreni = vystraha.dc_odeslano;
-
-if (vystraha.info && vystraha.info.length > 0) {
-    infoList = PrepareInfo(vystraha);
-}
-
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
-{
-    ref_infoList = PrepareInfo(ref_vystraha);
-}
-
 var krajList = [];
 var ref_krajList = [];
+var info;
+var vytvoreni = vystraha.dc_odeslano;
 
 // Připravíme jednotlivé info jevy
 if (vystraha.info && vystraha.info.length > 0)
 {
-    krajList = PrepareKraje(orp, vystraha);
+    krajList = PrepareInfo(orp, vystraha);
 }
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
-    ref_krajList = PrepareKraje(orp, ref_vystraha);
-}
-
-var vystupText = '';
-if (infoList) {
-    for (var x = 0; x < infoList.length; x++) {
-        vystupText += PrintInfo(infoList[x]);
-    }
+    ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
 // Hlavička HTML stránky
@@ -1716,16 +2096,13 @@ if (vystraha.info && vystraha.info.length > 0)
         }
     }
 
-   if (situace.length > 0)
+    if (situace.length > 0)
     {
-        resultText += '<br/><b>Meteorologická situace:</b> ' + situace[0];
-        resultText += '<hr/>';
+        var upr_situace = situace[0].replace(/&lt;br\/&gt;/g," ");
+        resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
+        resultText += '<hr/><div>';
     }
-}
 
-resultText += '\n';
-resultText += vystupText;
-/*
     resultText += PrintInfoList(krajList, ref_krajList);
 }
 else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
@@ -1744,8 +2121,7 @@ if (empty)
     resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-*/
-resultText += '<hr/>';
+resultText += '</div><hr/>';
 resultText += '<br/>Distribuce: ';
 
 var dist = '';
