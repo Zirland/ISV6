@@ -1854,12 +1854,12 @@ var vytvoreni = vystraha.dc_odeslano;
 // Připravíme jednotlivé info jevy
 if (vystraha.info && vystraha.info.length > 0)
 {
-    krajList = PrepareInfo(orp, vystraha);
+    krajList = PrepareInfo(vystraha);
 }
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
-    ref_krajList = PrepareInfo(orp, ref_vystraha);
+    ref_krajList = PrepareInfo(ref_vystraha);
 }
 
 // Hlavička HTML stránky
