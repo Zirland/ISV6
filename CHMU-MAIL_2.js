@@ -1,4 +1,4 @@
-var hlavniKraj = -1;
+var hlavniKraj = 132;
 var zobrazitVyhled = false;
 var zmeny = false;
 
@@ -1124,6 +1124,7 @@ function JevUzemi(info) {
         resultText = "Česká republika";
     }
 
+    resultText += '|' + uzemiList.length;
     return resultText;
 }
 
@@ -1172,7 +1173,21 @@ function PrintInfo(info, ref_info) {
         }
     } 
 
-    if (zmeny) {
+    if (info) {
+        nactiUzemi = JevUzemi(info);
+        pole_uzemi = nactiUzemi.split("|");
+        uzemi_seznam = pole_uzemi[0];
+        uzemi_count = pole_uzemi[1];
+    }
+    
+    if (ref_info) {
+        ref_nactiUzemi = JevUzemi(ref_info);
+        ref_pole_uzemi = ref_nactiUzemi.split("|");
+        ref_uzemi_seznam = ref_pole_uzemi[0];
+        ref_uzemi_count = ref_pole_uzemi[1];
+    }
+
+    if (zmeny && uzemi_count > 0) {
         resultText += '<br/><div><table class="tg" width="100%">';
 
         // Hlavička
@@ -1226,12 +1241,12 @@ function PrintInfo(info, ref_info) {
 
         // Územní platnost
         resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Územní platnost:</b> ' + HighlightDiff(info != null ? JevUzemi(info) : '', ref_info != null ? JevUzemi(ref_info) : '') + '</td>';
+        resultText += '<td colspan="3"><b>Územní platnost:</b> ' + HighlightDiff(info != null ? uzemi_seznam : '', ref_info != null ? ref_uzemi_seznam : '') + '</td>';
         resultText += '</tr>';
 
         resultText += '</table></div>';
-    } else {
-        resultText += '<div><table class="tg" width="100%">';
+    } else if (uzemi_count > 0) {
+        resultText += '<br/><div><table class="tg" width="100%">';
 
         // Hlavička
         resultText += '<tr>';
@@ -1276,7 +1291,7 @@ function PrintInfo(info, ref_info) {
 
         // Územní platnost
         resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Územní platnost:</b> ' + (info != null ? JevUzemi(info) : '') + '</td>';
+        resultText += '<td colspan="3"><b>Územní platnost:</b> ' + (info != null ? uzemi_seznam : '') + '</td>';
         resultText += '</tr>';
 
         resultText += '</table></div>';
