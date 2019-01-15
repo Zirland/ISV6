@@ -145,6 +145,17 @@ function ZobrazDatum(datum) {
     return format_datum;
 }
 
+// Odstranění duplicitních výskytů kódů krajů
+function removeDuplicates(arr) {
+    var unique_array = []
+    for(var i = 0;i < arr.length; i++){
+        if(unique_array.indexOf(arr[i]) == -1){
+            unique_array.push(arr[i])
+        }
+    }
+    return unique_array
+}
+
 // Připravíme seznam jevů podle území
 function PrepareInfo(vystraha)
 {
@@ -212,6 +223,7 @@ function PrepareInfo(vystraha)
 
             // Uložíme do seznamu
             infoList.push(info);
+
         }
     }
 
@@ -1356,13 +1368,64 @@ if (vystraha.info && vystraha.info.length > 0)
     {
         var upr_situace = situace[0].replace(/&lt;br\/&gt;/g," ");
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
-        resultText += '<hr/><div>';
+        resultText += '<hr/>';
     }
 
     for (x = 0; x < infoList.length; x++) {
         var info = infoList[x];
         resultText += PrintInfo(info);
+        empty = false;
     }
 }
+
+if (empty)
+{
+    resultText += '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
+}
+
+resultText += '<hr/>';
+resultText += '<br/>Distribuce: ';
+
+var dist = '';
+
+if (hlavniKraj == -1) {
+    var kraje_sezn = [];
+    // Vytáhneme informaci, kterých krajů se výstraha týká
+    for (var k = 0; k < krajList.length; k++) {
+        for (l = 0; l < krajList[k].kraj.pocet; l++) {
+            kraje_sezn.push(krajList[k].kraj[l].UID);
+        }
+    }
+
+    kraje_sezn = removeDuplicates(kraje_sezn);
+    kraje_sezn = kraje_sezn.sort(function (a, b) {return a-b});
+
+    for (var k = 0; k < kraje_sezn.length; k++) {
+        dist += (dist ? ', ' : '') + KRAJE_KODY[kraje_sezn[k]];
+    }
+
+    if (krajList.length == 0) {
+        for (var k = 0; k < ref_krajList.length; k++) {
+            for (l = 0; l < ref_krajList[k].kraj.pocet; l++) {
+                kraje_sezn.push(ref_krajList[k].kraj[l].UID);
+            }
+        }
+
+        kraje_sezn = removeDuplicates(kraje_sezn);
+        kraje_sezn = kraje_sezn.sort(function (a, b) {return a-b});
+
+        for (var k = 0; k < kraje_sezn.length; k++) {
+            dist += (dist ? ', ' : '') + KRAJE_KODY[kraje_sezn[k]];
+        }
+    }
+} else {
+    dist += KRAJE_KODY[hlavniKraj];
+}
+
+resultText += dist;
+
+// Ukončení stránky
+resultText += '</BODY>';
+resultText += '</HTML>';
 
 return resultText;
