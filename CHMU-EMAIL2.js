@@ -1,9 +1,9 @@
 //Verze 17
 
 var hlavniKraj = -1;
-var zobrazovatVsechnyKraje = true;
+var zobrazovatVsechnyKraje = false;
 var zobrazitVyhled = false;
-var zmeny = true;
+var zmeny = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -85,8 +85,7 @@ var JEVY_NAZVY = {
 }
 
 // Zjednodušené zobrazení rozdílů (porovnává se celý text)
-function SimpleHighlightDiff(newValue, oldValue)
-{
+function SimpleHighlightDiff(newValue, oldValue) {
     var resultText = '';
     var newText = newValue ? newValue.toString() : '';
     var oldText = oldValue ? oldValue.toString() : '';
@@ -106,8 +105,7 @@ function SimpleHighlightDiff(newValue, oldValue)
 }
 
 // Zvýraznění rozdílů dvou textů
-function HighlightDiff(newValue, oldValue)
-{
+function HighlightDiff(newValue, oldValue) {
     var resultText = '';
 
     // Převedeme na pole podle mezer
@@ -234,8 +232,7 @@ function HighlightDiff(newValue, oldValue)
 }
 
 // Metoda pro spočtení vzdálenosti slov (dvou polí)
-function GetLCSLength(newValueSplit, oldValueSplit)
-{
+function GetLCSLength(newValueSplit, oldValueSplit) {
     // Vytvoříme dvojrozměrné pole a inicializujeme ho nulou
     var matrix = new Array(newValueSplit.length + 1);
 
@@ -365,9 +362,8 @@ function ZobrazDatum(datum) {
     return format_datum;
 }
 
-// Připravíme seznam jevů podle území
-function PrepareInfo(orp, vystraha)
-{
+// Připravíme seznam jevů
+function PrepareInfo(vystraha) {
     var infoList = [];
 
     // Připravíme si pole info jevů
