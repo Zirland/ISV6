@@ -446,7 +446,21 @@ function PrepareInfo(vystraha) {
     }
     
     infoList = infoListFilter;
-    
+
+    var krajList = [];
+    for (i = 0; i < infoList.length; i++) {
+        for (j = 0; j < infoList[i].kraj.pocet; j++) {
+            if (infolist[i].kraj[j].UID == hlavniKraj) {
+                krajList.push(infoList[i]);
+            }
+        }
+    }
+
+
+    return krajList;
+}
+
+function PrepareInfoKraj (orp, vystraha) {
     var krajList = [];
     var posledniKraj = {};
     var posledniOkres = {};
