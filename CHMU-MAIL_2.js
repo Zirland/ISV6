@@ -1,4 +1,4 @@
-var hlavniKraj = 132;
+var hlavniKraj = ;
 var zobrazitVyhled = false;
 var zmeny = false;
 
@@ -323,6 +323,128 @@ function Normalize(datum) {
     datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty;
 
     return datum;
+}
+
+function PrepareKraje(orp, vystraha) {
+    var krajList = [];
+    var posledniKraj = {};
+    var posledniOkres = {};
+    var posledniOrp = {};
+    var krajChange = true;
+    var okresChange = true;
+
+    for (var i = 0; i < orp.length; i++)
+    {
+        // Pokud se změnil kraj, tak ho přidáme do kolekce
+        if (posledniKraj.id != orp[i].kraj.id)
+        {
+            // Uložíme si info jevy, které jsou pro celý kraj
+            for (var j = 0; j < infoList.length; j++)
+            {
+                if (posledniKraj.info && infoList[j].krajPom)
+                {
+                    posledniKraj.info.push(infoList[j]);
+                }
+            }
+
+            posledniKraj = {};
+            posledniKraj.id = orp[i].kraj.id;
+            posledniKraj.nazev = orp[i].kraj.nazev;
+            posledniKraj.zkratka = orp[i].kraj.zkratka;
+            posledniKraj.info = [];
+            posledniKraj.okresList = [];
+
+            krajList.push(posledniKraj);
+            krajChange = true;
+        }
+        else
+        {
+            krajChange = false;
+        }
+
+        // Pokud se změnil okres, tak ho přidáme do kolekce
+        if (posledniOkres.id != orp[i].okres.id)
+        {
+            // Uložíme si info jevy, které jsou pro celý okres
+            for (var j = 0; j < infoList.length; j++)
+            {
+                if (posledniOkres.info && infoList[j].okresPom)
+                {
+                    posledniOkres.info.push(infoList[j]);
+                }
+            }
+
+            posledniOkres = {};
+            posledniOkres.id = orp[i].okres.id;
+            posledniOkres.nazev = orp[i].okres.nazev;
+            posledniOkres.zkratka = orp[i].okres.zkratka;
+            posledniOkres.info = [];
+            posledniOkres.orpList = [];
+
+            posledniKraj.okresList.push(posledniOkres);
+            okresChange = true;
+        }
+        else
+        {
+            okresChange = false;
+        }
+
+        // ORP se nám vždycky mění
+        posledniOrp = {};
+        posledniOrp.id = orp[i].id;
+        posledniOrp.nazev = orp[i].nazev;
+        posledniOrp.info = [];
+
+        posledniOkres.orpList.push(posledniOrp);
+
+        for (var j = 0; j < infoList.length; j++)
+        {
+            var maOrp = infoList[j].orp.indexOf(orp[i].id.toString()) != -1;
+
+            if (posledniOrp.info && maOrp)
+            {
+                posledniOrp.info.push(infoList[j]);
+            }
+
+            if (krajChange)
+            {
+                infoList[j].krajPom = maOrp
+            }
+            else
+            {
+                infoList[j].krajPom &= maOrp;
+            }
+
+            if (okresChange)
+            {
+                infoList[j].okresPom = maOrp
+            }
+            else
+            {
+                infoList[j].okresPom &= maOrp;
+            }
+        }
+    }
+
+    // Uložíme si info jevy, které jsou pro celý kraj
+    for (var j = 0; j < infoList.length; j++)
+    {
+        if (infoList[j].krajPom)
+        {
+            posledniKraj.info.push(infoList[j]);
+        }
+    }
+
+    // Uložíme si info jevy, které jsou pro celý okres
+    for (var j = 0; j < infoList.length; j++)
+    {
+        if (infoList[j].okresPom)
+        {
+            posledniOkres.info.push(infoList[j]);
+        }
+    }
+
+    return krajList;
 }
 
 function PrepareKrajList(infoList) {
@@ -1202,13 +1324,13 @@ var vytvoreni = vystraha.dc_odeslano;
 if (vystraha.info && vystraha.info.length > 0)
 {
     infoList = PrepareInfo(vystraha);
-    krajList = PrepareKrajList(infoList);
+    krajList = PrepareKraje(orp, vystraha);
 }
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
     ref_infoList = PrepareInfo(ref_vystraha);
-    ref_krajList = PrepareKrajList(ref_infoList);
+    ref_krajList = PrepareKraje(orp, ref_vystraha);
 }
 
 // Hlavička HTML stránky
@@ -1250,15 +1372,46 @@ resultText += '</HEAD>';
 resultText += '<BODY>';
 
 var found = false;
-
 if (vystraha.ucel == 'Actual') {
     // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
     for (var k = 0; k < krajList.length && found == false; k++)
     {
-        info = krajList[k];
-        if (info.jev_kod && info.jev_kod != "OUTLOOK")
+        for (var i = 0; i < krajList[k].info.length && found == false; i++)
         {
-            found = true;
+            info = krajList[k].info[i];
+
+            if (info.jev_kod && info.jev_kod != "OUTLOOK")
+            {
+                found = true;
+            }
+        }
+
+        // Výstrahy pro okres
+        for (var o = 0; o < krajList[k].okresList.length && found == false; o++)
+        {
+            for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+            {
+                info = krajList[k].okresList[o].info[i];
+
+                if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                {
+                    found = true;
+                }
+            }
+
+            // Výstrahy pro orp
+            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++)
+            {
+                for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+                {
+                    info = krajList[k].okresList[o].orpList[ol].info[i];
+
+                    if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                    {
+                        found = true;
+                    }
+                }
+            }
         }
     }
 }
@@ -1271,21 +1424,72 @@ var svrs = false;
 // Výstrahy pro kraj
 for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs == false); k++)
 {
-    info = krajList[k];
-
-    if (info.HPPS && info.HPPS == "1")
+    for (var i = 0; i < krajList[k].info.length && (hpps == false || sivs == false || svrs == false); i++)
     {
-        hpps = true;
+        info = krajList[k].info[i];
+
+        if (info.HPPS && info.HPPS == "1")
+        {
+            hpps = true;
+        }
+
+        if (info.SIVS && info.SIVS == "1")
+        {
+            sivs = true;
+        }
+
+        if (info.SVRS && info.SVRS == "1")
+        {
+            svrs = true;
+        }
     }
 
-    if (info.SIVS && info.SIVS == "1")
+    // Výstrahy pro okres
+    for (var o = 0; o < krajList[k].okresList.length && (hpps == false || sivs == false || svrs == false); o++)
     {
-        sivs = true;
-    }
+        for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
+        {
+            info = krajList[k].okresList[o].info[i];
 
-    if (info.SVRS && info.SVRS == "1")
-    {
-        svrs = true;
+            if (info.HPPS && info.HPPS == "1")
+            {
+                hpps = true;
+            }
+
+            if (info.SIVS && info.SIVS == "1")
+            {
+                sivs = true;
+            }
+
+            if (info.SVRS && info.SVRS == "1")
+            {
+                svrs = true;
+            }
+        }
+
+        // Výstrahy pro orp
+        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps == false || sivs == false || svrs == false); ol++)
+        {
+            for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
+            {
+                info = krajList[k].okresList[o].orpList[ol].info[i];
+
+                if (info.HPPS && info.HPPS == "1")
+                {
+                    hpps = true;
+                }
+
+                if (info.SIVS && info.SIVS == "1")
+                {
+                    sivs = true;
+                }
+
+                if (info.SVRS && info.SVRS == "1")
+                {
+                    svrs = true;
+                }
+            }
+        }
     }
 }
 
@@ -1388,38 +1592,48 @@ resultText += '<br/>Distribuce: ';
 
 var dist = '';
 
-if (hlavniKraj == -1) {
-    var kraje_sezn = [];
-    // Vytáhneme informaci, kterých krajů se výstraha týká
-    for (var k = 0; k < krajList.length; k++) {
-        for (l = 0; l < krajList[k].kraj.pocet; l++) {
-            kraje_sezn.push(krajList[k].kraj[l].UID);
+// Vytáhneme informaci, kterých krajů se výstraha týká
+for (var k = 0; k < krajList.length; k++)
+{
+    var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+
+    for (var o = 0; o < krajList[k].okresList.length && !found; o++)
+    {
+        found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+
+        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++)
+        {
+            found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
         }
     }
 
-    kraje_sezn = removeDuplicates(kraje_sezn);
-    kraje_sezn = kraje_sezn.sort(function (a, b) {return a-b});
-
-    for (var k = 0; k < kraje_sezn.length; k++) {
-        dist += (dist ? ', ' : '') + KRAJE_KODY[kraje_sezn[k]];
+    if (found)
+    {
+        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
     }
+}
 
-    if (krajList.length == 0) {
-        for (var k = 0; k < ref_krajList.length; k++) {
-            for (l = 0; l < ref_krajList[k].kraj.pocet; l++) {
-                kraje_sezn.push(ref_krajList[k].kraj[l].UID);
+if (krajList.length == 0)
+{
+    for (var k = 0; k < ref_krajList.length; k++)
+    {
+        var found = ref_krajList[k].info.length > 0;
+
+        for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++)
+        {
+            found = ref_krajList[k].okresList[o].info.length > 0;
+
+            for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++)
+            {
+                found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
             }
         }
 
-        kraje_sezn = removeDuplicates(kraje_sezn);
-        kraje_sezn = kraje_sezn.sort(function (a, b) {return a-b});
-
-        for (var k = 0; k < kraje_sezn.length; k++) {
-            dist += (dist ? ', ' : '') + KRAJE_KODY[kraje_sezn[k]];
+        if (found)
+        {
+            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
         }
     }
-} else {
-    dist += KRAJE_KODY[hlavniKraj];
 }
 
 resultText += dist;
