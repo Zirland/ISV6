@@ -2094,17 +2094,19 @@ if (vystraha.info && vystraha.info.length > 0)
         resultText += '<hr/><div>';
     }
 
-    resultText += PrintInfoList(krajList, ref_krajList);
+    var pomoc = PrintInfoList(krajList, ref_krajList);
+    resultText += Object.keys(infoList);
+//     resultText += PrintInfoList(krajList, ref_krajList);
 }
 else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
     // Výstraha ruší všechny předchozí jevy, tak je vypíšeme
 
     // Připravíme jednotlivé info jevy
-    ref_krajList = PrepareInfo(orp, ref_vystraha);
+//    ref_krajList = PrepareInfo(orp, ref_vystraha);
 
     // Provedeme výpis
-    resultText += PrintInfoList(krajList, ref_krajList);
+//    resultText += PrintInfoList(krajList, ref_krajList);
 }
 
 if (empty)
