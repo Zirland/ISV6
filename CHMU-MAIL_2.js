@@ -1,5 +1,4 @@
-var hlavniKraj = -1;
-var zobrazovatVsechnyKraje = false;
+var hlavniKraj = 132;
 var zobrazitVyhled = false;
 var zmeny = false;
 
@@ -314,41 +313,11 @@ function Normalize(datum) {
     return datum;
 }
 
-if (hlavniKraj != -1)
-{
-    var orpTmp = [];
-
-    for (var i = 0; i < orp.length; i++)
-    {
-        // Pokud se jedná o hlavní kraj
-        if (hlavniKraj == orp[i].kraj.id)
-        {
-            // Dáme na začátek seznamu
-            orpTmp.push(orp[i]);
-        }
-    }
-
-    if (zobrazovatVsechnyKraje)
-    {
-        for (var i = 0; i < orp.length; i++)
-        {
-            // Pokud se nejedná o hlavní kraj
-            if (hlavniKraj != orp[i].kraj.id)
-            {
-                // Dáme na konec seznamu
-                orpTmp.push(orp[i]);
-            }
-        }
-    }
-
-    orp = orpTmp;
-}
-
 function PrepareKrajList(infoList) {
     var krajList = [];
     for (i = 0; i < infoList.length; i++) {
         for (j = 0; j < infoList[i].kraj.pocet; j++) {
-            if (infoList[i].kraj[j].UID == hlavniKraj) {
+            if (infoList[i].kraj[j].UID == hlavniKraj || hlavniKraj == -1) {
                 krajList.push(infoList[i]);
             }
         }
@@ -1013,23 +982,10 @@ function JevUzemi(info) {
         for (var i = 0; i < uzemiList.length; i++)
         {
             // Pokud se jedná o hlavní kraj
-            if (hlavniKraj == uzemiList[i].kraj.id)
+            if (hlavniKraj == uzemiList[i].kraj)
             {
                 // Dáme na začátek seznamu
                 uzemiTmp.push(uzemiList[i]);
-            }
-        }
-
-        if (zobrazovatVsechnyKraje)
-        {
-            for (var i = 0; i < uzemiList.length; i++)
-            {
-                // Pokud se nejedná o hlavní kraj
-                if (hlavniKraj != uzemiList[i].kraj.id)
-                {
-                    // Dáme na konec seznamu
-                    uzemiTmp.push(uzemiList[i]);
-                }
             }
         }
 
@@ -1051,8 +1007,7 @@ function JevUzemi(info) {
     return resultText;
 }
 
-function PrintInfo(info, ref_info)
-{
+function PrintInfo(info, ref_info) {
     var resultText = '';
     var vyskaText = '';
 
@@ -1210,6 +1165,23 @@ function PrintInfo(info, ref_info)
     return resultText;
 }
 
+if (hlavniKraj != -1)
+{
+    var orpTmp = [];
+
+    for (var i = 0; i < orp.length; i++)
+    {
+        // Pokud se jedná o hlavní kraj
+        if (hlavniKraj == orp[i].kraj.id)
+        {
+            // Dáme na začátek seznamu
+            orpTmp.push(orp[i]);
+        }
+    }
+
+    orp = orpTmp;
+}
+
 // Samotná zpráva
 var resultText = '';
 var vytvoreni = vystraha.dc_odeslano;
@@ -1266,46 +1238,15 @@ resultText += '</HEAD>';
 resultText += '<BODY>';
 
 var found = false;
+
 if (vystraha.ucel == 'Actual') {
     // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
     for (var k = 0; k < krajList.length && found == false; k++)
     {
-        for (var i = 0; i < krajList[k].info.length && found == false; i++)
+        info = krajList[k];
+        if (info.jev_kod && info.jev_kod != "OUTLOOK")
         {
-            info = krajList[k].info[i];
-
-            if (info.jev_kod && info.jev_kod != "OUTLOOK")
-            {
-                found = true;
-            }
-        }
-
-        // Výstrahy pro okres
-        for (var o = 0; o < krajList[k].okresList.length && found == false; o++)
-        {
-            for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
-            {
-                info = krajList[k].okresList[o].info[i];
-
-                if (info.jev_kod && info.jev_kod != "OUTLOOK")
-                {
-                    found = true;
-                }
-            }
-
-            // Výstrahy pro orp
-            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++)
-            {
-                for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
-                {
-                    info = krajList[k].okresList[o].orpList[ol].info[i];
-
-                    if (info.jev_kod && info.jev_kod != "OUTLOOK")
-                    {
-                        found = true;
-                    }
-                }
-            }
+            found = true;
         }
     }
 }
@@ -1318,72 +1259,21 @@ var svrs = false;
 // Výstrahy pro kraj
 for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs == false); k++)
 {
-    for (var i = 0; i < krajList[k].info.length && (hpps == false || sivs == false || svrs == false); i++)
+    info = krajList[k];
+
+    if (info.HPPS && info.HPPS == "1")
     {
-        info = krajList[k].info[i];
-
-        if (info.HPPS && info.HPPS == "1")
-        {
-            hpps = true;
-        }
-
-        if (info.SIVS && info.SIVS == "1")
-        {
-            sivs = true;
-        }
-
-        if (info.SVRS && info.SVRS == "1")
-        {
-            svrs = true;
-        }
+        hpps = true;
     }
 
-    // Výstrahy pro okres
-    for (var o = 0; o < krajList[k].okresList.length && (hpps == false || sivs == false || svrs == false); o++)
+    if (info.SIVS && info.SIVS == "1")
     {
-        for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
-        {
-            info = krajList[k].okresList[o].info[i];
+        sivs = true;
+    }
 
-            if (info.HPPS && info.HPPS == "1")
-            {
-                hpps = true;
-            }
-
-            if (info.SIVS && info.SIVS == "1")
-            {
-                sivs = true;
-            }
-
-            if (info.SVRS && info.SVRS == "1")
-            {
-                svrs = true;
-            }
-        }
-
-        // Výstrahy pro orp
-        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps == false || sivs == false || svrs == false); ol++)
-        {
-            for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
-            {
-                info = krajList[k].okresList[o].orpList[ol].info[i];
-
-                if (info.HPPS && info.HPPS == "1")
-                {
-                    hpps = true;
-                }
-
-                if (info.SIVS && info.SIVS == "1")
-                {
-                    sivs = true;
-                }
-
-                if (info.SVRS && info.SVRS == "1")
-                {
-                    svrs = true;
-                }
-            }
-        }
+    if (info.SVRS && info.SVRS == "1")
+    {
+        svrs = true;
     }
 }
 
@@ -1435,7 +1325,7 @@ if (vystraha.reference)
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
 
 resultText += '<br/>Územní platnost: ';
-if (hlavniKraj == '-1' || zobrazovatVsechnyKraje) {
+if (hlavniKraj == '-1') {
     resultText += "Česká republika";
 } else {
     resultText += KRAJE_NAZVY[hlavniKraj];
