@@ -1,4 +1,4 @@
-var hlavniKraj = ;
+var hlavniKraj = -1;
 var zobrazitVyhled = false;
 var zmeny = false;
 
@@ -104,8 +104,7 @@ function GetWarningColor(info)
     return color;
 }
 
-function PozadiColor(info)
-{
+function PozadiColor(info) {
     // Barva podle závažnosti
     var pozadi = '#fff';
 
@@ -157,8 +156,7 @@ function removeDuplicates(arr) {
 }
 
 // Připravíme seznam jevů podle území
-function PrepareInfo(vystraha)
-{
+function PrepareInfo(vystraha) {
     var infoList = [];
 
     // Připravíme si pole info jevů
@@ -444,18 +442,6 @@ function PrepareKraje(orp, vystraha) {
         }
     }
 
-    return krajList;
-}
-
-function PrepareKrajList(infoList) {
-    var krajList = [];
-    for (i = 0; i < infoList.length; i++) {
-        for (j = 0; j < infoList[i].kraj.pocet; j++) {
-            if (infoList[i].kraj[j].UID == hlavniKraj || hlavniKraj == -1) {
-                krajList.push(infoList[i]);
-            }
-        }
-    }
     return krajList;
 }
 
