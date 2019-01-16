@@ -1,6 +1,14 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 17 – 2019-01-16
+### [CHMU-MAIL-2]
+#### Přidáno
+- Vytvoření nové tiskové sestavy podle mimořádných jevů
+
+#### Známé chyby
+- Sestava neumožňuje vytvoření rozdílové sestavy oproti minulé výstraze.
+
 ## verze 17 – 2019-01-14
 ### [CHMU-EMAIL]
 #### Přidáno

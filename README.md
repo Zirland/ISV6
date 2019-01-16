@@ -53,6 +53,24 @@ Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesíl�
 print(N.textSMS);
 ```
 
+## [CHMU-MAIL-2]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ. Slouží pro náhled výstrahy v okně Spojaře (levý sloupec) při zpracování CAP protokolu. Tisková sestava je organizována podle nebezpečných jevů s vyznačením územní platnosti daného jevu. Je úsporná na tiskové strany, vhodná pro celostátní přehled nebo krajský přehled. Sestava neumožňuje filtrování na ORP.
+
+Parametr **omezitNaKraj** obsahuje číselný kód území kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v proměnné *KRAJE_NAZVY*
+
+Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
+- Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
+
+Parametr **zmeny** je vždy nastaven na *false*.
+
+Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+```javascript
+//!JS
+print(N.textEMAIL);
+```
+
 ## [AA-CHMU-SMS-ORP]
 Předpis pro vytvoření automatické akce tvorby SMS zprávy pro konkrétní ORP s přehledem nebezpečných jevů ve výstraze ČHMÚ pomocí knihovny JS.
 
