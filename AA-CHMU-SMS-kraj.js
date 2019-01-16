@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha SMS pro kraj" ----- 
 //!JS
-// Verze 17
+// Verze 18
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;
@@ -38,7 +38,8 @@ print(vystupText);
 
 //----- Knihovna JS "CHMU_SMS_KRAJ" -----
 //!JS
-// Verze 17
+// Verze 18
+
 var zacatky = [];
 var konce = [];
 var seznjevu = [];
