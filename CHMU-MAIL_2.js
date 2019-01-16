@@ -1,4 +1,6 @@
-var hlavniKraj = 132;
+// Verze 18
+
+var hlavniKraj = -1;
 var zobrazitVyhled = false;
 var zmeny = false;
 
@@ -323,7 +325,7 @@ function Normalize(datum) {
     return datum;
 }
 
-function PrepareKraje(orp, vystraha) {
+function PrepareKraje(orp, infoList) {
     var krajList = [];
     var posledniKraj = {};
     var posledniOkres = {};
@@ -1337,19 +1339,20 @@ if (hlavniKraj != -1)
 
 // Samotná zpráva
 var resultText = '';
+var krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
 
 // Připravíme jednotlivé info jevy
 if (vystraha.info && vystraha.info.length > 0)
 {
     infoList = PrepareInfo(vystraha);
-    krajList = PrepareKraje(orp, vystraha);
+    krajList = PrepareKraje(orp, infoList);
 }
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
     ref_infoList = PrepareInfo(ref_vystraha);
-    ref_krajList = PrepareKraje(orp, ref_vystraha);
+    ref_krajList = PrepareKraje(orp, ref_infoList);
 }
 
 // Hlavička HTML stránky
