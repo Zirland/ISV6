@@ -1,6 +1,6 @@
 // Verze 18
 
-var hlavniKraj = -1;
+var omezitNaKraj = -1;
 var zobrazitVyhled = false;
 var zmeny = false;
 
@@ -1097,14 +1097,14 @@ function JevUzemi(info) {
         return 0;
     });
 
-    if (hlavniKraj != -1)
+    if (omezitNaKraj != -1)
     {
         var uzemiTmp = [];
 
         for (var i = 0; i < uzemiList.length; i++)
         {
             // Pokud se jedná o hlavní kraj
-            if (hlavniKraj == uzemiList[i].kraj)
+            if (omezitNaKraj == uzemiList[i].kraj)
             {
                 // Dáme na začátek seznamu
                 uzemiTmp.push(uzemiList[i]);
@@ -1320,14 +1320,14 @@ orpSort.sort(function (a, b) {
     return 0;
 });
 
-if (hlavniKraj != -1)
+if (omezitNaKraj != -1)
 {
     var orpTmp = [];
 
     for (var i = 0; i < orp.length; i++)
     {
         // Pokud se jedná o hlavní kraj
-        if (hlavniKraj == orp[i].kraj.id)
+        if (omezitNaKraj == orp[i].kraj.id)
         {
             // Dáme na začátek seznamu
             orpTmp.push(orp[i]);
@@ -1338,6 +1338,7 @@ if (hlavniKraj != -1)
 }
 
 // Samotná zpráva
+zmeny = false;
 var resultText = '';
 var krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
@@ -1563,10 +1564,10 @@ if (vystraha.reference)
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
 
 resultText += '<br/>Územní platnost: ';
-if (hlavniKraj == '-1') {
+if (omezitNaKraj == '-1') {
     resultText += "Česká republika";
 } else {
-    resultText += KRAJE_NAZVY[hlavniKraj];
+    resultText += KRAJE_NAZVY[omezitNaKraj];
 }
 
 resultText += '<hr/>';
