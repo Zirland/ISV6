@@ -1,6 +1,6 @@
-//------ Automatická akce "Výstraha e-mail pro ORP" ----- 
+//------ Automatická akce "Výstraha e-mail pro kraj" ----- 
 //!JS
-// Verze 17
+// Verze 18
 
 // viz dokumentace
 var hlavniKraj = 132;
@@ -33,7 +33,8 @@ var KRAJE_NAZVY = {
 print(resultText);
 
 //----- Knihovna JS "CHMU_EMAIL_KRAJ" -----
-//Verze 17
+//!JS
+//Verze 18
 
 var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
 

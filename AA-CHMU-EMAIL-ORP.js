@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha e-mail pro ORP" ----- 
 //!JS
-// Verze 17
+// Verze 18
 
 //Číselník ORP viz samostatný soubor
 var omezitNaOrp = 337; 
@@ -14,7 +14,8 @@ var zmeny = true;
 print(resultText);
 
 //----- Knihovna JS "CHMU_EMAIL_ORP" -----
-//Verze 17
+//!JS
+//Verze 18
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
