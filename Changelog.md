@@ -1,7 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## verze 17 – 2019-01-16
+## verze 19 – 2019-01-18
+### [CHMU-MAIL-2]
+#### Záplate
+- Ošetření prázdných výstrah
+
+#### Známé chyby
+- Sestava neumožňuje vytvoření rozdílové sestavy oproti minulé výstraze.
+
+### [AA-CHMU_SMS_ORP]
+#### Záplata
+- Ošetření prázdných výstrah.
+
+## verze 18 – 2019-01-16
 ### [CHMU-MAIL-2]
 #### Přidáno
 - Vytvoření nové tiskové sestavy podle mimořádných jevů
