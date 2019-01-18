@@ -179,6 +179,7 @@ function PrepareInfo (vystraha) {
 }
 
 var resultText = vystupText = '';
+var infoList = [];
 
 if (vystraha.info && vystraha.info.length > 0) {
     infoList = PrepareInfo(vystraha);
