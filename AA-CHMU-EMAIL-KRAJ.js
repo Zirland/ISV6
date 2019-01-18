@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha e-mail pro kraj" ----- 
 //!JS
-// Verze 18
+// Verze 19
 
 // viz dokumentace
 var hlavniKraj = 132;
@@ -34,7 +34,7 @@ print(resultText);
 
 //----- Knihovna JS "CHMU_EMAIL_KRAJ" -----
 //!JS
-//Verze 18
+//Verze 19
 
 var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
 
