@@ -1,4 +1,4 @@
-// Verze 18
+// Verze 19
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
