@@ -1,4 +1,4 @@
-// Verze 18
+// Verze 19
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
@@ -1341,6 +1341,7 @@ if (omezitNaKraj != -1)
 zmeny = false;
 var resultText = '';
 var krajList = [];
+var ref_krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
 
 // Připravíme jednotlivé info jevy
