@@ -1,6 +1,6 @@
 //------ Automatická akce "Výstraha SMS pro ORP" ----- 
 //!JS
-// Verze 19
+// Verze 20
 
 // zde např. Mělník. Číselník ORP viz samostatný soubor
 var omezitNaOrp = 141; 
@@ -20,7 +20,7 @@ print(vystupText);
 
 //----- Knihovna JS "CHMU_SMS_ORP" -----
 //!JS
-// Verze 19
+// Verze 20
 
 var zacatky = [];
 var konce = [];
