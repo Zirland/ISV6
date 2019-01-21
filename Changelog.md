@@ -1,6 +1,26 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 20 – 2019-01-21
+### [CHMU-MAIL-2]
+#### Přidáno
+- Příprava porovnávání změny nadmořské výšky platnosti jevu oproti předchozí výstraze. (řeší SU 37811, autor: Stratil Petr, RCS Kladno)
+
+#### Známé chyby
+- Sestava neumožňuje vytvoření rozdílové sestavy oproti minulé výstraze.
+
+### [CHMU_EMAIL]
+#### Přidáno
+- Porovnávání změny nadmořské výšky platnosti jevu oproti předchozí výstraze. (řeší SU 37811, autor: Stratil Petr, RCS Kladno)
+
+### [AA-CHMU_EMAIL_ORP]
+#### Přidáno
+- Porovnávání změny nadmořské výšky platnosti jevu oproti předchozí výstraze. (řeší SU 37811, autor: Stratil Petr, RCS Kladno)
+
+### [AA-CHMU_EMAIL_KRAJ]
+#### Přidáno
+- Porovnávání změny nadmořské výšky platnosti jevu oproti předchozí výstraze. (řeší SU 37811, autor: Stratil Petr, RCS Kladno)
+
 ## verze 19 – 2019-01-18
 ### [CHMU-MAIL-2]
 #### Záplate

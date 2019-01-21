@@ -619,7 +619,7 @@ function PrintInfoList(krajList, ref_krajList)
                         empty = false;
                     }
 
-                    ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
+                    ref_zpracovanyInfoStupen.push(ref_info.stupen_kod);
                     resultText += PrintInfo(null, ref_info);
                 }
             }
@@ -629,7 +629,7 @@ function PrintInfoList(krajList, ref_krajList)
         for (var i = 0; i < krajList[k].info.length; i++)
         {
             info = krajList[k].info[i];
-            zpracovanyInfoStupen.push(info.stupen_kod + info.vyska);
+            zpracovanyInfoStupen.push(info.stupen_kod);
             ref_info = null;
 
             // Pokud máme referenční výstrahu
@@ -641,7 +641,7 @@ function PrintInfoList(krajList, ref_krajList)
                     if (ref_krajList[k].info[ri].stupen_kod == info.stupen_kod)
                     {
                         ref_info = ref_krajList[k].info[ri];
-                        ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
+                        ref_zpracovanyInfoStupen.push(ref_info.stupen_kod);
                         break;
                     }
                 }
@@ -673,9 +673,9 @@ function PrintInfoList(krajList, ref_krajList)
                     found = false;
 
                     // Pokud tato výstraha není již zpracovaná z pokrytí kraje
-                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod) == -1)
                     {
-                        if (zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                        if (zpracovanyInfoStupen.indexOf(ref_info.stupen_kod) == -1)
                         {
                             // Zkusíme najít odpovídající záznam ve výstraze
                             for (var i = 0; i < krajList[k].okresList[o].info.length; i++)
@@ -698,7 +698,7 @@ function PrintInfoList(krajList, ref_krajList)
                                 empty = false;
                             }
 
-                            ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
+                            ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod);
                             resultText += PrintInfo(null, ref_info);
                         }
                     }
@@ -710,23 +710,23 @@ function PrintInfoList(krajList, ref_krajList)
                 info = krajList[k].okresList[o].info[i];
 
                 // Pokud zatím není zpracováno z pokrytí kraje
-                if (zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1)
+                if (zpracovanyInfoStupen.indexOf(info.stupen_kod) == -1)
                 {
-                    zpracovanyInfoStupenOkres.push(info.stupen_kod + info.vyska);
+                    zpracovanyInfoStupenOkres.push(info.stupen_kod);
                     ref_info = null;
 
                     // Pokud máme referenční výstrahu
                     if (ref_krajList.length > 0)
                     {
                         // Pokud zatím není zpracováno z pokrytí kraje
-                        if (ref_zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1)
+                        if (ref_zpracovanyInfoStupen.indexOf(info.stupen_kod) == -1)
                         {
                             for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
                             {
                                 if (ref_krajList[k].okresList[o].info[ri].stupen_kod == info.stupen_kod)
                                 {
                                     ref_info = ref_krajList[k].okresList[o].info[ri];
-                                    ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
+                                    ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod);
                                     break;
                                 }
                             }
@@ -758,11 +758,11 @@ function PrintInfoList(krajList, ref_krajList)
                         found = false;
 
                         // Pokud tato výstraha není již zpracovaná z pokrytí kraje nebo okresu
-                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1
-                            && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod) == -1
+                            && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod) == -1)
                         {
-                            if (zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1
-                                && zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                            if (zpracovanyInfoStupen.indexOf(ref_info.stupen_kod) == -1
+                                && zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod) == -1)
                             {
                                 // Zkusíme najít odpovídající záznam ve výstraze
                                 for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++)
@@ -796,8 +796,8 @@ function PrintInfoList(krajList, ref_krajList)
                     info = krajList[k].okresList[o].orpList[ol].info[i];
 
                     // Pokud zatím není zpracováno z pokrytí kraje nebo okresu
-                    if (zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1
-                        && zpracovanyInfoStupenOkres.indexOf(info.stupen_kod + info.vyska) == -1)
+                    if (zpracovanyInfoStupen.indexOf(info.stupen_kod) == -1
+                        && zpracovanyInfoStupenOkres.indexOf(info.stupen_kod) == -1)
                     {
                         ref_info = null;
 
@@ -805,8 +805,8 @@ function PrintInfoList(krajList, ref_krajList)
                         if (ref_krajList.length > 0)
                         {
                             // Pokud zatím není zpracováno z pokrytí kraje
-                            if (ref_zpracovanyInfoStupen.indexOf(info.stupen_kod + info.vyska) == -1
-                                && ref_zpracovanyInfoStupenOkres.indexOf(info.stupen_kod + info.vyska) == -1)
+                            if (ref_zpracovanyInfoStupen.indexOf(info.stupen_kod) == -1
+                                && ref_zpracovanyInfoStupenOkres.indexOf(info.stupen_kod) == -1)
                             {
                                 for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
                                 {
@@ -852,7 +852,7 @@ function PrintInfoList(krajList, ref_krajList)
                     empty = false;
                 }
 
-                ref_zpracovanyInfoStupen.push(ref_info.stupen_kod + ref_info.vyska);
+                ref_zpracovanyInfoStupen.push(ref_info.stupen_kod);
                 resultText += PrintInfo(null, ref_info);
             }
 
@@ -868,7 +868,7 @@ function PrintInfoList(krajList, ref_krajList)
                     ref_info = ref_krajList[k].okresList[o].info[ri];
 
                     // Pokud tato výstraha není již zpracovaná z pokrytí kraje
-                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod) == -1)
                     {
                         if (first)
                         {
@@ -877,7 +877,7 @@ function PrintInfoList(krajList, ref_krajList)
                             empty = false;
                         }
 
-                        ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod + ref_info.vyska);
+                        ref_zpracovanyInfoStupenOkres.push(ref_info.stupen_kod);
                         resultText += PrintInfo(null, ref_info);
                     }
                 }
@@ -893,8 +893,8 @@ function PrintInfoList(krajList, ref_krajList)
                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
 
                         // Pokud tato výstraha není již zpracovaná z pokrytí kraje nebo okresu
-                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1
-                            && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod + ref_info.vyska) == -1)
+                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.stupen_kod) == -1
+                            && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.stupen_kod) == -1)
                         {
                             if (first)
                             {
@@ -960,9 +960,9 @@ function PozadiColor(info)
     return pozadi;
 }
 
-function PrintInfo(info, ref_info)
+function PrintVyska(info)
 {
-    var resultText = '';
+
     var vyskaText = '';
 
     if (info && info.vyska)
@@ -991,6 +991,13 @@ function PrintInfo(info, ref_info)
         }
     }
 
+    return vyskaText;
+}
+
+function PrintInfo(info, ref_info)
+{
+    var resultText = '';
+
     if (info) {
         if (info.jistota_kod == 'Observed') {
             vyskyt = '<b>Výskyt jevu</b><br>';
@@ -1013,7 +1020,7 @@ function PrintInfo(info, ref_info)
         resultText += '<tr>';
             resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
             resultText += HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
-            resultText += vyskaText + '</td>';
+            resultText += HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
             resultText += '<td><table class="no">';
                 resultText += '<tr><td>';
@@ -1066,7 +1073,7 @@ function PrintInfo(info, ref_info)
         resultText += '<tr>';
             resultText += '<td width="20%">' + (info != null ? vyskyt : '');
             resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
-            resultText += vyskaText + '</td>';
+            resultText += (info != null ? PrintVyska(info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
             resultText += '<td><table class="no">';
                 resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek) : '') + '</td>';
