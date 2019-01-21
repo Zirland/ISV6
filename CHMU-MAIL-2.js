@@ -1,4 +1,4 @@
-// Verze 19
+// Verze 20
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
@@ -1130,8 +1130,7 @@ function JevUzemi(info) {
     return resultText;
 }
 
-function PrintInfo(info, ref_info) {
-    var resultText = '';
+function PrintVyska(info) {
     var vyskaText = '';
 
     if (info && info.vyska)
@@ -1159,6 +1158,12 @@ function PrintInfo(info, ref_info) {
             vyskaText = '<br/>' + Math.round(vyska * 0.3048);
         }
     }
+
+    return vyskaText;
+}
+
+function PrintInfo(info, ref_info) {
+    var resultText = '';
 
     if (info) {
         if (info.jistota_kod == 'Observed') {
@@ -1196,7 +1201,7 @@ function PrintInfo(info, ref_info) {
         resultText += '<tr>';
             resultText += '<td width="20%">' + SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
             resultText += HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
-            resultText += vyskaText + '</td>';
+            resultText += HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '') + '</td>';
             resultText += '<td><table class="no">';
                 resultText += '<tr><td>';
@@ -1254,7 +1259,7 @@ function PrintInfo(info, ref_info) {
         resultText += '<tr>';
             resultText += '<td width="20%">' + (info != null ? vyskyt : '');
             resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
-            resultText += vyskaText + '</td>';
+            resultText += (info != null ? PrintVyska(info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
             resultText += '<td><table class="no">';
                 resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek) : '') + '</td>';
