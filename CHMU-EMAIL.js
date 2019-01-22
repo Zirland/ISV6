@@ -273,38 +273,38 @@ function GetLCSLength(newValueSplit, oldValueSplit)
 function Normalize(datum) {
     var datumString = datum.toString();
     datumDen = datumString.substring(0,2);
-    datumDen_porovn = datumDen.replace(/\.$/, "");
+    datumDen_porovn = datumDen.replace(/\.$/, '');
     if (datumDen == datumDen_porovn) {
         datumMesic = datumString.substring(3,5);
-        datumMesic_porovn = datumMesic.replace(/\.$/, "");
+        datumMesic_porovn = datumMesic.replace(/\.$/, '');
         if (datumMesic == datumMesic_porovn) {
             datumRok = datumString.substring(6,10)
             datumCas = datumString.substring(11,16);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         } else {
             datumMesic = '0' + datumMesic_porovn;
             datumRok = datumString.substring(5,9)
             datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         }
     } else {
         datumDen = '0' + datumDen_porovn;
         datumMesic = datumString.substring(2,4);
-        datumMesic_porovn = datumMesic.replace(/\.$/, "");
+        datumMesic_porovn = datumMesic.replace(/\.$/, '');
         if (datumMesic == datumMesic_porovn) {
             datumRok = datumString.substring(5,9)
             datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         } else {
             datumMesic = '0' + datumMesic_porovn;
             datumRok = datumString.substring(4,8)
             datumCas = datumString.substring(9,14);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         }
     }
 
     datumHodiny = datumCas.substring(0,2);
-    datumHodiny_porovn = datumHodiny.replace(/\:$/, "");
+    datumHodiny_porovn = datumHodiny.replace(/\:$/, '');
     if (datumHodiny == datumHodiny_porovn) {
         datumMinuty = datumCas.substring(3,5);
     } else {
@@ -320,7 +320,7 @@ function Normalize(datum) {
 // Zjišťuje, zda je konecJev nenastane v období 30 minut od casZpravy
 function UkoncenyJev(konecJev, casZprava) {
     if (!konecJev) {
-        konecJev = "1.1.2100 01:00";
+        konecJev = '1.1.2100 01:00';
     }
 
     var konecJev_format = Normalize(konecJev);
@@ -360,7 +360,7 @@ function ZobrazDatum(datum) {
         normDatumHodina = normDatum.substring(8,10);
         normDatumMinuta = normDatum.substring(10,12);
 
-        format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + ". " + normDatumHodina + ":" + normDatumMinuta;
+        format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '. ' + normDatumHodina + ':' + normDatumMinuta;
     }
 
     return format_datum;
@@ -442,7 +442,7 @@ function PrepareInfo(orp, vystraha)
         if (zobrazitVyhled) {
             podminka = (!UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         } else {
-            podminka = (infoList[x].jev_kod != "OUTLOOK" && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
+            podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         }
         
         if (podminka) {
@@ -923,13 +923,13 @@ function GetWarningColor(info)
     {
         switch (info.zavaznost_kod) {
             case 'Moderate' : 
-                color = "Žlutá";
+                color = 'Žlutá';
             break;
             case 'Severe' : 
-                color = "Oranžová";
+                color = 'Oranžová';
             break;
             case 'Extreme' : 
-                color = "Červená";
+                color = 'Červená';
             break;
         }
     }
@@ -946,13 +946,13 @@ function PozadiColor(info)
     {
         switch (info.zavaznost_kod) {
             case 'Moderate' : 
-                pozadi = "#ff0";
+                pozadi = '#ff0';
             break;
             case 'Severe' : 
-                pozadi = "#ffa500";
+                pozadi = '#ffa500';
             break;
             case 'Extreme' : 
-                pozadi = "#f00";
+                pozadi = '#f00';
             break;
         }
     }
@@ -1038,14 +1038,14 @@ function PrintInfo(info, ref_info)
         resultText += '</tr>';
 
         if (info) {
-            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g," ");}
-            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
-            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');}
+            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
+            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
         }
         if (ref_info) {
-            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g," ");}
-            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
-            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');}
+            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
+            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
         }
 
         // Popis
@@ -1083,14 +1083,14 @@ function PrintInfo(info, ref_info)
         resultText += '</tr>';
 
         if (info) {
-            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g," ");}
-            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
-            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');}
+            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
+            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
         }
         if (ref_info) {
-            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g," ");}
-            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g," ");}
-            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g," ");}
+            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');}
+            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
+            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
         }
 
         // Popis
@@ -1231,7 +1231,7 @@ if (vystraha.ucel == 'Actual') {
         {
             info = krajList[k].info[i];
 
-            if (info.jev_kod && info.jev_kod != "OUTLOOK")
+            if (info.jev_kod && info.jev_kod != 'OUTLOOK')
             {
                 found = true;
             }
@@ -1244,7 +1244,7 @@ if (vystraha.ucel == 'Actual') {
             {
                 info = krajList[k].okresList[o].info[i];
 
-                if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                if (info.jev_kod && info.jev_kod != 'OUTLOOK')
                 {
                     found = true;
                 }
@@ -1257,7 +1257,7 @@ if (vystraha.ucel == 'Actual') {
                 {
                     info = krajList[k].okresList[o].orpList[ol].info[i];
 
-                    if (info.jev_kod && info.jev_kod != "OUTLOOK")
+                    if (info.jev_kod && info.jev_kod != 'OUTLOOK')
                     {
                         found = true;
                     }
@@ -1279,17 +1279,17 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
     {
         info = krajList[k].info[i];
 
-        if (info.HPPS && info.HPPS == "1")
+        if (info.HPPS && info.HPPS == '1')
         {
             hpps = true;
         }
 
-        if (info.SIVS && info.SIVS == "1")
+        if (info.SIVS && info.SIVS == '1')
         {
             sivs = true;
         }
 
-        if (info.SVRS && info.SVRS == "1")
+        if (info.SVRS && info.SVRS == '1')
         {
             svrs = true;
         }
@@ -1302,17 +1302,17 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
         {
             info = krajList[k].okresList[o].info[i];
 
-            if (info.HPPS && info.HPPS == "1")
+            if (info.HPPS && info.HPPS == '1')
             {
                 hpps = true;
             }
 
-            if (info.SIVS && info.SIVS == "1")
+            if (info.SIVS && info.SIVS == '1')
             {
                 sivs = true;
             }
 
-            if (info.SVRS && info.SVRS == "1")
+            if (info.SVRS && info.SVRS == '1')
             {
                 svrs = true;
             }
@@ -1325,17 +1325,17 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
             {
                 info = krajList[k].okresList[o].orpList[ol].info[i];
 
-                if (info.HPPS && info.HPPS == "1")
+                if (info.HPPS && info.HPPS == '1')
                 {
                     hpps = true;
                 }
 
-                if (info.SIVS && info.SIVS == "1")
+                if (info.SIVS && info.SIVS == '1')
                 {
                     sivs = true;
                 }
 
-                if (info.SVRS && info.SVRS == "1")
+                if (info.SVRS && info.SVRS == '1')
                 {
                     svrs = true;
                 }
@@ -1349,7 +1349,7 @@ switch (vystraha.ucel) {
     case 'Exercise' :
     case 'System' :
     case 'Test' :
-        header = "ÚČELOVÁ INFORMACE ČHMÚ - TESTOVACÍ ZPRÁVA";
+        header = 'ÚČELOVÁ INFORMACE ČHMÚ - TESTOVACÍ ZPRÁVA';
         if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
@@ -1361,7 +1361,7 @@ switch (vystraha.ucel) {
         }
     break;
     case 'Actual' :
-        header = "VÝSTRAHA ČHMÚ";
+        header = 'VÝSTRAHA ČHMÚ';
         if (svrs && !sivs && !hpps) {
             header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU'
         }
@@ -1372,7 +1372,7 @@ switch (vystraha.ucel) {
             header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
         }
         if (!found) {
-            header = "INFORMAČNÍ ZPRÁVA ČHMÚ";
+            header = 'INFORMAČNÍ ZPRÁVA ČHMÚ';
         }
     break;
 
@@ -1394,7 +1394,7 @@ resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
 
 resultText += '<br/>Územní platnost: ';
 if (hlavniKraj == '-1' || zobrazovatVsechnyKraje) {
-    resultText += "Česká republika";
+    resultText += 'Česká republika';
 } else {
     resultText += KRAJE_NAZVY[hlavniKraj];
 }
@@ -1402,6 +1402,7 @@ if (hlavniKraj == '-1' || zobrazovatVsechnyKraje) {
 resultText += '<hr/>';
 
 var empty = true;
+var zmen = 0;
 
 if (vystraha.info && vystraha.info.length > 0)
 {
@@ -1422,7 +1423,7 @@ if (vystraha.info && vystraha.info.length > 0)
 
    if (situace.length > 0)
     {
-        var upr_situace = situace[0].replace(/&lt;br\/&gt;/g," ");
+        var upr_situace = situace[0].replace(/&lt;br\/&gt;/g,' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/><div>';
     }
