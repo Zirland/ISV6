@@ -20,10 +20,15 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
-Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
+Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
 - Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
+- Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
@@ -63,7 +68,7 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
-Parametr **zmeny** je vždy nastaven na *false*.
+Parametr **zobrazitZmeny** je vždy nastaven na *false*.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
@@ -113,7 +118,7 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
-Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
+Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
 - Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
@@ -144,7 +149,7 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
-Parametr **zmeny** může nabývat logických hodnot *false* nebo *true*.
+Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
 - Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.

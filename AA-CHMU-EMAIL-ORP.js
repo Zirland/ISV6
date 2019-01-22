@@ -5,7 +5,8 @@
 //Číselník ORP viz samostatný soubor
 var omezitNaOrp = 337; 
 var zobrazitVyhled = false; 
-var zmeny = true;
+var zobrazitZmeny = true;
+var pouzeZmeny = false;
 // viz dokumentace
 
 // zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny

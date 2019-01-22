@@ -4,7 +4,8 @@ var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
 var razeniPodleNazvu = false;
 var zobrazitVyhled = false;
-var zmeny = true;
+var zobrazitZmeny = true;
+var pouzeZmeny = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -619,7 +620,7 @@ function PrintInfoList(krajList, ref_krajList)
                 }
 
                 // Pokud jsme výstrahu nenašli
-                if (!found && zmeny)
+                if (!found && zobrazitZmeny)
                 {
                     if (first)
                     {
@@ -702,7 +703,7 @@ function PrintInfoList(krajList, ref_krajList)
                         }
 
                         // Pokud jsme výstrahu nenašli
-                        if (!found && zmeny)
+                        if (!found && zobrazitZmeny)
                         {
                             if (first)
                             {
@@ -793,7 +794,7 @@ function PrintInfoList(krajList, ref_krajList)
                             }
 
                             // Pokud jsme výstrahu nenašli
-                            if (!found && zmeny)
+                            if (!found && zobrazitZmeny)
                             {
                                 if (first)
                                 {
@@ -855,7 +856,7 @@ function PrintInfoList(krajList, ref_krajList)
     }
 
     // Pokud nemáme původní výstrahu, ale máme jen referenční
-    if (krajList.length == 0 && ref_krajList.length > 0 && zmeny)
+    if (krajList.length == 0 && ref_krajList.length > 0 && zobrazitZmeny)
     {
         for (var k = 0; k < ref_krajList.length; k++)
         {
@@ -1043,7 +1044,7 @@ function PrintInfo(info, ref_info)
         }
     } 
 
-    if (zmeny) {
+    if (zobrazitZmeny) {
         resultText += '<table class="tg" width="100%">';
 
         // Hlavička
@@ -1579,7 +1580,7 @@ resultText += dist;
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if (Number(zmen) == 0) {resultText = 'PRÁZDNÁ AKCE'};
+if (Number(zmen) == 0 && pouzeZmeny) {resultText = ''};
 
 // Vrácení výsledku
 return resultText;
