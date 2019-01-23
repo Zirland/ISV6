@@ -356,7 +356,7 @@ function UkoncenyJev(konecJev, casZprava) {
     }
 }
 
-function ZobrazDatum(datum) {
+function ZobrazDatum(datum, format) {
     if (!datum) {
         format_datum = 'do odvolání';
     } else {
@@ -367,8 +367,16 @@ function ZobrazDatum(datum) {
         normDatumDen = normDatum.substring(6,8);
         normDatumHodina = normDatum.substring(8,10);
         normDatumMinuta = normDatum.substring(10,12);
+        normDatumSekunda = normDatum.substring(10,12);
 
-        format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '. ' + normDatumHodina + ':' + normDatumMinuta;
+        switch (format) {
+            case 'short' :
+                format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '. ' + normDatumHodina + ':' + normDatumMinuta;
+            break;
+            case 'long' :
+                format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '.' + normDatumRok + ' ' + normDatumHodina + ':' + normDatumMinuta + ':' + normDatumSekunda;
+        }
+        
     }
 
     return format_datum;
@@ -1074,9 +1082,9 @@ function PrintInfo(info, ref_info)
                 resultText += '<tr><td>';
                 
                 if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
-                    resultText += ZobrazDatum(info.dc_zacatek);
+                    resultText += ZobrazDatum(info.dc_zacatek, 'short');
                 } else {
-                    pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek) : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek) : '');
+                    pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
                     resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
@@ -1085,7 +1093,7 @@ function PrintInfo(info, ref_info)
                 resultText += '<td>&nbsp;–&nbsp;</td>';
 
                 resultText += '<td>';
-                pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec) : '');
+                pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short') : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short') : '');
                 resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 resultText += '</td></tr>';
@@ -1149,9 +1157,9 @@ function PrintInfo(info, ref_info)
             resultText += (info != null ? PrintVyska(info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
             resultText += '<td><table class="no" border="0">';
-                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek) : '') + '</td>';
+                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
                 resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec) : '') + '</td></tr>';
+                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short') : '') + '</td></tr>';
             resultText += '</table></td>';
         resultText += '</tr>';
 
@@ -1455,7 +1463,7 @@ switch (vystraha.ucel) {
 
 resultText += '<div class="header">' + header + '</div>';
 resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
-resultText += '<br/>Odesláno: ' + vystraha.dc_odeslano;
+resultText += '<br/>Odesláno: ' + ZobrazDatum(vystraha.dc_odeslano, 'long');
 
 if (vystraha.reference)
 {
