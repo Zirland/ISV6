@@ -1,6 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## vývoj
+### [CHMU-SMS]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA-CHMU-SMS-KRAJ]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA-CHMU-SMS-ORP]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
 ## verze 21 – 2019-01-23
 ### [CHMU-EMAIL]
 #### Přidáno
@@ -11,18 +24,6 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
 
 ### [AA-CHMU-EMAIL-KRAJ]
-#### Přidáno
-- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
-
-### [CHMU-SMS]
-#### Přidáno
-- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
-
-### [AA-CHMU-SMS-KRAJ]
-#### Přidáno
-- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
-
-### [AA-CHMU-SMS-ORP]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
 
