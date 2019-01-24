@@ -25,7 +25,7 @@ Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
 - Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
 
-Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. Hodnota parametru se uplatňuje pouze v případě, že dochází k porovnávání změn, tj. parametr **zobrazitZmeny** je nastaven na *true*. Pokud k porovnávání změn nedochází, odpovídá chování variantě *false*.
 
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
@@ -108,27 +108,6 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
-## [AA-CHMU-EMAIL-ORP]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP.
-
-Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Skript neumožňuje tvorbu krajské nebo celostátní sestavy. Číselník území je v samostatném souboru "seznam_ORP.csv".
-
-Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true*.
-
-- Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
-- Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
-
-Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
-
-- Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
-- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
-
-
-Parametr **zobrazovatVsechnyKraje** a parametr **razeniPodleNazvu** byly z kódu vypuštěny, protože skript generuje výstup pouze pro jedno ORP.
-
-Oproti krajské sestavě byl z výstupu rovněž vypuštěn výpis "Distribuce", který v kontextu jednoho ORP nedává smysl.
-
-
 ## [AA-CHMU-EMAIL-KRAJ]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
@@ -153,3 +132,32 @@ Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*
 
 - Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
 - Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. Hodnota parametru se uplatňuje pouze v případě, že dochází k porovnávání změn, tj. parametr **zobrazitZmeny** je nastaven na *true*. Pokud k porovnávání změn nedochází, odpovídá chování variantě *false*.
+
+- Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
+- Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
+
+## [AA-CHMU-EMAIL-ORP]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP.
+
+Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Skript neumožňuje tvorbu krajské nebo celostátní sestavy. Číselník území je v samostatném souboru "seznam_ORP.csv".
+
+Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
+- Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
+
+Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
+- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. Hodnota parametru se uplatňuje pouze v případě, že dochází k porovnávání změn, tj. parametr **zobrazitZmeny** je nastaven na *true*. Pokud k porovnávání změn nedochází, odpovídá chování variantě *false*.
+
+- Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
+- Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
+
+Parametr **zobrazovatVsechnyKraje** a parametr **razeniPodleNazvu** byly z kódu vypuštěny, protože skript generuje výstup pouze pro jedno ORP.
+
+Oproti krajské sestavě byl z výstupu rovněž vypuštěn výpis "Distribuce", který v kontextu jednoho ORP nedává smysl.
