@@ -1,40 +1,3 @@
-//------ Automatická akce "Výstraha e-mail pro kraj" ----- 
-//!JS
-// Verze 20
-
-// viz dokumentace
-var hlavniKraj = 132;
-var zobrazovatVsechnyKraje = false;
-var razeniPodleNazvu = false;
-var zobrazitVyhled = false;
-var zobrazitZmeny = true;
-var pouzeZmeny = false;
-
-var KRAJE_NAZVY = {
-    "-1": "Česká republika",
-    "19": "Hlavní město Praha",
-    "27": "Středočeský kraj",
-    "35": "Jihočeský kraj",
-    "43": "Plzeňský kraj",
-    "51": "Karlovarský kraj",
-    "60": "Ústecký kraj",
-    "78": "Liberecký kraj",
-    "86": "Královéhradecký kraj",
-    "94": "Pardubický kraj",
-    "108": "Kraj Vysočina",
-    "116": "Jihomoravský kraj",
-    "124": "Olomoucký kraj",
-    "132": "Moravskoslezský kraj",
-    "141": "Zlínský kraj"
-};
-
-// zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny
-#import "CHMU_EMAIL_KRAJ"; 
-
-print(resultText);
-
-//----- Knihovna JS "CHMU_EMAIL_KRAJ" -----
-//!JS
 //Verze 20
 
 var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
@@ -1254,34 +1217,7 @@ resultText += '<HEAD>';
     resultText += '<META charset="utf-8"/>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
-    resultText += '<style type="text/css">';
-    resultText += '    ins {';
-    resultText += '        color: green;';
-    resultText += '        background: #dfd;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    del {';
-    resultText += '        color: red;';
-    resultText += '        background: #fdd;';
-    resultText += '        text-decoration: line-through;';
-    resultText += '        }';
-    resultText += '    plain {';
-    resultText += '        color: black;';
-    resultText += '        background: white;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
-    resultText += '    .header {font-size:15px;text-align:center;}';
-    resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
-    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-    resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
-    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-    resultText += '    @media print {';
-    resultText += '        div {page-break-inside: avoid;}';
-    resultText += '    }';
-    resultText += '</style>';
+    #import "CHMU-STYL";
 
 resultText += '</HEAD>';
 resultText += '<BODY>';

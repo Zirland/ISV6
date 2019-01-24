@@ -1,21 +1,3 @@
-//------ Automatická akce "Výstraha e-mail pro ORP" ----- 
-//!JS
-// Verze 20
-
-//Číselník ORP viz samostatný soubor
-var omezitNaOrp = 337; 
-var zobrazitVyhled = false; 
-var zobrazitZmeny = true;
-var pouzeZmeny = false;
-// viz dokumentace
-
-// zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny
-#import "CHMU_EMAIL_ORP"; 
-
-print(resultText);
-
-//----- Knihovna JS "CHMU_EMAIL_ORP" -----
-//!JS
 //Verze 20
 
 var JEVY_NAZVY = {
@@ -1233,34 +1215,7 @@ resultText += '<HEAD>';
     resultText += '<META charset="utf-8"/>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
-    resultText += '<style type="text/css">';
-    resultText += '    ins {';
-    resultText += '        color: green;';
-    resultText += '        background: #dfd;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    del {';
-    resultText += '        color: red;';
-    resultText += '        background: #fdd;';
-    resultText += '        text-decoration: line-through;';
-    resultText += '        }';
-    resultText += '    plain {';
-    resultText += '        color: black;';
-    resultText += '        background: white;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
-    resultText += '    .header {font-size:15px;text-align:center;}';
-    resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
-    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-    resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
-    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-    resultText += '    @media print {';
-    resultText += '        div {page-break-inside: avoid;}';
-    resultText += '    }';
-    resultText += '</style>';
+    #import "CHMU-STYL";
 
 resultText += '</HEAD>';
 resultText += '<BODY>';

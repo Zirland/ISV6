@@ -2,30 +2,44 @@
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
 ## vývoj
-### [CHMU-SMS]
+### [UVG/CHMU-SMS]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
 
-### [AA-CHMU-SMS-KRAJ]
+### [Knihovna/CHMU-SMS-KRAJ]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
 
-### [AA-CHMU-SMS-ORP]
+### [Knihovna/CHMU-SMS-ORP]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
 
-## verze 21 – 2019-01-23
-### [CHMU-EMAIL]
+## verze 21 – 2019-01-24
+- Úložiště rozčleněno na kategorie - AA, Knihovna, UVG. Podrobnosti v dokumentaci
+
+### [UVG/CHMU-EMAIL]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
 
-### [AA-CHMU-EMAIL-ORP]
+### [Knihovna/CHMU-EMAIL-ORP]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
 
-### [AA-CHMU-EMAIL-KRAJ]
+### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA/AA-CHMU-EMAIL-ORP]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA/AA-CHMU-EMAIL-KRAJ]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [Knihovna/CHMU-STYL]
+#### Přidáno
+- Vytvoření souboru s definicí jednotného grafického stylu e-mailu.
 
 ## verze 20 – 2019-01-21
 ### [CHMU-MAIL-2]
