@@ -1,6 +1,32 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## vývoj
+### [CHMU-SMS]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA-CHMU-SMS-KRAJ]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA-CHMU-SMS-ORP]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+## verze 21 – 2019-01-23
+### [CHMU-EMAIL]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA-CHMU-EMAIL-ORP]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
+### [AA-CHMU-EMAIL-KRAJ]
+#### Přidáno
+- Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
+
 ## verze 20 – 2019-01-21
 ### [CHMU-MAIL-2]
 #### Přidáno
@@ -9,15 +35,15 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Známé chyby
 - Sestava neumožňuje vytvoření rozdílové sestavy oproti minulé výstraze.
 
-### [CHMU_EMAIL]
+### [CHMU-EMAIL]
 #### Přidáno
 - Porovnávání změny nadmořské výšky platnosti jevu oproti předchozí výstraze. (řeší SU 37811, autor: Stratil Petr, RCS Kladno)
 
-### [AA-CHMU_EMAIL_ORP]
+### [AA-CHMU-EMAIL-ORP]
 #### Přidáno
 - Porovnávání změny nadmořské výšky platnosti jevu oproti předchozí výstraze. (řeší SU 37811, autor: Stratil Petr, RCS Kladno)
 
-### [AA-CHMU_EMAIL_KRAJ]
+### [AA-CHMU-EMAIL-KRAJ]
 #### Přidáno
 - Porovnávání změny nadmořské výšky platnosti jevu oproti předchozí výstraze. (řeší SU 37811, autor: Stratil Petr, RCS Kladno)
 
@@ -29,7 +55,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Známé chyby
 - Sestava neumožňuje vytvoření rozdílové sestavy oproti minulé výstraze.
 
-### [AA-CHMU_SMS_ORP]
+### [AA-CHMU-SMS-ORP]
 #### Záplata
 - Ošetření prázdných výstrah.
 
@@ -52,37 +78,37 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Přidáno
 - Zavedení parametru oddělovače pro formátování zprávy.
 
-### [AA-CHMU_SMS_ORP]
+### [AA-CHMU-SMS-ORP]
 #### Přidáno
 - Zavedení parametru oddělovače pro formátování zprávy.
 
-### [AA-CHMU_SMS_kraj]
+### [AA-CHMU-SMS-kraj]
 #### Přidáno
 - Zavedení parametru oddělovače pro formátování zprávy.
 
-### [AA-CHMU_EMAIL_ORP]
+### [AA-CHMU-EMAIL-ORP]
 #### Přidáno
 - Vytvořen skript pro automatické akce.
 
-### [AA-CHMU_EMAIL_KRAJ]
+### [AA-CHMU-EMAIL-KRAJ]
 #### Přidáno
 - Vytvořen skript pro automatické akce.
 
 ## verze 16 – 2019-01-11
-### [AA-CHMU_SMS_ORP]
+### [AA-CHMU-SMS-ORP]
 #### Záplata
 - Úprava práce se zobrazením data.
 
-### [AA-CHMU_SMS_kraj]
+### [AA-CHMU-SMS-kraj]
 #### Záplata
 - Úprava práce se zobrazením data.
 
 ## verze 15 – 2019-01-10
-### [AA-CHMU_SMS_ORP]
+### [AA-CHMU-SMS-ORP]
 #### Změněno
 - Úprava práce se zobrazením data.
 
-### [AA-CHMU_SMS_kraj]
+### [AA-CHMU-SMS-kraj]
 #### Změněno
 - Úprava práce se zobrazením data.
 
@@ -101,12 +127,12 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Známé chyby
 - Údaj o nadmořské výšce není porovnáván na změny mezi zprávami (SU 37811)
 
-### [AA-CHMU_SMS_ORP]
+### [AA-CHMU-SMS-ORP]
 #### Přidáno
 - Vytvořen skript pro automatické akce (upravená syntaxe).
 - Využití nové funkcionality ISV6 - Knihovna JS.
 
-### [AA-CHMU_SMS_kraj]
+### [AA-CHMU-SMS-kraj]
 #### Přidáno
 - Vytvořen skript pro automatické akce (upravená syntaxe).
 - Využití nové funkcionality ISV6 - Knihovna JS.
