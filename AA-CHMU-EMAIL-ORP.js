@@ -1548,4 +1548,6 @@ resultText += dist;
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if (Number(zmen) == 0 && pouzeZmeny) {resultText = ''};
+if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
+    resultText = '';
+}
