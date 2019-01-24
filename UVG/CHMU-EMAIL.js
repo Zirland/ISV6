@@ -1,9 +1,9 @@
-//Verze 20
+//Verze 21
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
 var razeniPodleNazvu = false;
-var zobrazitVyhled = false;
+var zobrazitVyhled = true;
 var zobrazitZmeny = true;
 var pouzeZmeny = false;
 
