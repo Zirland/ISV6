@@ -1,8 +1,8 @@
-// Verze 20
+// Verze 21
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
-var zmeny = false;
+var zobrazitZmeny = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -1194,7 +1194,7 @@ function PrintInfo(info, ref_info) {
         ref_uzemi_count = ref_pole_uzemi[1];
     }
 
-    if (zmeny && uzemi_count > 0) {
+    if (zobrazitZmeny && uzemi_count > 0) {
         resultText += '<br/><div><table class="tg" width="100%">';
 
         // Hlavička
@@ -1343,7 +1343,7 @@ if (omezitNaKraj != -1)
 }
 
 // Samotná zpráva
-zmeny = false;
+zobrazitZmeny = false;
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];

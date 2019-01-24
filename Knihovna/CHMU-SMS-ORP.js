@@ -1,50 +1,8 @@
-//------ Automatická akce "Výstraha SMS pro kraj" ----- 
-//!JS
-// Verze 20
-
-// zde např. Kraj Vysočina. Číselník krajů viz níže
-var omezitNaKraj = 108;
-var detailni = 0;
-var oddelovac = '\n';
-
-var KRAJE_NAZVY = {
-    "-1": "Česká republika",
-    "19": "Hlavní město Praha",
-    "27": "Středočeský kraj",
-    "35": "Jihočeský kraj",
-    "43": "Plzeňský kraj",
-    "51": "Karlovarský kraj",
-    "60": "Ústecký kraj",
-    "78": "Liberecký kraj",
-    "86": "Královéhradecký kraj",
-    "94": "Pardubický kraj",
-    "108": "Kraj Vysočina",
-    "116": "Jihomoravský kraj",
-    "124": "Olomoucký kraj",
-    "132": "Moravskoslezský kraj",
-    "141": "Zlínský kraj"
-};
-// viz dokumentace k [CHMU-SMS]
-
-// zde vytvoříme tělo SMS dle obsahu CAP pomocí skriptu z knihovny
-#import "CHMU_SMS_KRAJ"; 
-
-// Upozorňuji, že tělo SMS zprávy nekončí zalomením řádku. Já si proto odřádkuji. Ale vy nemusíte, pokud nechcete.
-vystupText += "\n";
-
-// Podpis na konci každé SMS.
-vystupText += "OPIS GŘ HZS ČR";
-print(vystupText);
-
-//----- Knihovna JS "CHMU_SMS_KRAJ" -----
-//!JS
-// Verze 20
+// Verze 21
 
 var zacatky = [];
 var konce = [];
 var seznjevu = [];
-
-var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK" };
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
@@ -150,81 +108,117 @@ function ZobrazDatum(datum) {
     return format_datum;
 }
 
-var resultText = vystupText = '';
+// Připravíme si obsah výstrahy
+function PrepareInfo (vystraha) {
+    var infoList = [];
 
-if (vystraha.info)
-{
-    var poleJevy = [];
-    // Naplníme si seznam kódů jevů z výstrahy
-    for (var i = 0; i < vystraha.info.length; i++) {
-        // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
-        if (vystraha.info[i].stupen_kod != "OUTLOOK") { 
-            poleJevy.push(vystraha.info[i].stupen_kod);
+    // Připravíme si pole info jevů
+    for (var i = 0; i < vystraha.info.length; i++)
+    {
+        var vyskaList = [];
+        vystraha.info[i].orp = [];
+        vystraha.info[i].vyska = '';
+        var orpSplit = vystraha.info[i].orp_list.toString().split(',');
+
+        for (var j = 0; j < orpSplit.length; j++)
+        {
+            // Najdeme, jestli se nejedná o údaj s výškou
+            var index = orpSplit[j].indexOf('[');
+            // nemáme výšku, do seznamu přidáme kód ORP
+            if (index == -1)
+            {
+                vystraha.info[i].orp.push(orpSplit[j]);
+            }
+            // máme výšku, do seznamu přidáme pouze kód ORP bez výšky
+            else 
+            {
+                vystraha.info[i].orp.push(orpSplit[j].substring(0, index));
+            }
+        }
+
+        // Pokud máme jev alespoň v jednom ORP
+        if (vystraha.info[i].orp.length > 0)
+        {
+            infoList.push(vystraha.info[i]);
         }
     }
 
+    var infoListFilter = [];
+    for (var x = 0; x < infoList.length; x++) {
+        // vyloučíme z výpisu SMS všechny Výhledy nebezpečných jevů
+        if (infoList[x].jev_kod != "OUTLOOK") {
+            infoListFilter.push(infoList[x]);
+        }
+    }
+    
+    infoList = infoListFilter;
+
+    return infoList;
+}
+
+var resultText = vystupText = '';
+var infoList = [];
+
+if (vystraha.info && vystraha.info.length > 0) {
+    infoList = PrepareInfo(vystraha);
+}
+
+if (infoList) {
+    var poleJevy = [];
+    // Naplníme si seznam kódů jevů z výstrahy
+    for (var i = 0; i < vystraha.info.length; i++) {
+        poleJevy.push(vystraha.info[i].stupen_kod);  
+    }
+
     // Promažeme duplicity
-    poleJevy = removeDuplicates(poleJevy);
+    poleJevy = removeDuplicates(poleJevy);  
 
-    // Vezmeme kód jevu a najdeme si všechny časové období v tomto kraji.
+    var platne = [];
+
+    // Vyhodnotíme zda jev platí v tomto ORP
     for (var h = 0; h < poleJevy.length; h++) {
-        var jevKrajeList = [];
         for (var i = 0; i < vystraha.info.length; i++) {
-            if (poleJevy[h] == vystraha.info[i].stupen_kod) {
-                var found = omezitNaKraj == -1;
-                for (var j = 0; j < vystraha.info[i].kraj.length && !found; j++) {
-                    found = vystraha.info[i].kraj[j].UID == omezitNaKraj;
+            if (poleJevy[h] == vystraha.info[i].stupen_kod && vystraha.info[i].jev_kod != "OUTLOOK") {
+                var found = omezitNaOrp == -1;
+                var orp_list = '';
+                if (vystraha.info[i].orp) {
+                    orp_list = vystraha.info[i].orp.toString();
                 }
-                for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
-                    if (found) {
-                        // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
-                        jevKrajeList.push(vystraha.info[i].kraj[j].UID);
-                        warn_type = "SVRS";
-                        if (vystraha.info[i].SIVS == "1") {
-                            warn_type = "SIVS";
-                        }
-                        if (vystraha.info[i].HPPS == "1") {
-                            warn_type = "HPPS";
-                        }
-                        seznjevu.push(warn_type);
-                        zacatek = Normalize(vystraha.info[i].dc_zacatek);
-                        zacatky.push(zacatek);
-                        konec = 999999999999;
-                        if (vystraha.info[i].dc_konec) {
-                            konec = Normalize(vystraha.info[i].dc_konec);
-                        }
-                        konce.push(konec);
-
-                        zahajeni = ZobrazDatum(zacatek);
-                        ukonceni = ZobrazDatum(konec);
+                var orp_pole = orp_list.split(",");
+                orp_pole = orp_pole.sort(function (a, b) {return a-b});
+                hledej = omezitNaOrp.toString();
+                found = orp_pole.indexOf(hledej) > -1;
+                if (found) {
+                    platne.push(vystraha.info[i]);
+                    warn_type = "SVRS";
+                    if (vystraha.info[i].SIVS == "1") {
+                        warn_type = "SIVS";
                     }
+                    if (vystraha.info[i].HPPS == "1") {
+                        warn_type = "HPPS";
+                    }
+                    seznjevu.push(warn_type);
+                    zacatek = Normalize(vystraha.info[i].dc_zacatek);
+                    zacatky.push(zacatek);
+                    konec = 999999999999;
+                    if (vystraha.info[i].dc_konec) {
+                        konec = Normalize(vystraha.info[i].dc_konec);
+                    }
+                    konce.push(konec);
+
+                    zahajeni = ZobrazDatum(zacatek);
+                    ukonceni = ZobrazDatum(konec);
                 }
             }
         }
-        // Vymažeme duplicity, kdy je v jednom kraji jev opakovaně a následně kraje seřadíme
-        jevKrajeList = removeDuplicates(jevKrajeList);
-        jevKrajeList = jevKrajeList.sort(function (a, b) {return a-b});
+    }
 
-        // Pokud máme ve zvoleném kraji výstrahu, přípravíme tělo se seznamem jevů, případně seznamem krajů a detailní platností
-        if (jevKrajeList.length > 0) {
-            if (omezitNaKraj == -1) {
-                resultText += JEVY_NAZVY[poleJevy[h]];
-                resultText += ' pro kraje ';
-
-                var seznkraje = '';
-
-                for (var t = 0; t < jevKrajeList.length; t++) {
-                    seznkraje += KRAJE_KODY[jevKrajeList[t]] + ', ';
-                }
-                seznkraje = seznkraje.substring(0, seznkraje.length-2);
-                resultText += seznkraje + oddelovac;
-            } else {
-                if (detailni) {
-                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                } else {
-                    resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
-                }
-            }
+    // Vypíšeme seznam platných jevů na tomto území, případně i včetně detailní platnosti
+    for (j = 0; j < platne.length; j++) { 
+        if (detailni) {
+            resultText += JEVY_NAZVY[platne[j].stupen_kod] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+        } else {
+            resultText += JEVY_NAZVY[platne[j].stupen_kod] + oddelovac;
         }
     }
 
@@ -278,13 +272,12 @@ if (vystraha.info)
 
         // Připojíme připravený výpis jevů
         vystupText += resultText;
-        
 
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
-        if (omezitNaKraj == -1 || !detailni) {
+        if (omezitNaOrp == -1 || !detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
         }
-        if (omezitNaKraj == -1) {
+        if (omezitNaOrp == -1) {
             vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
         }
     }
