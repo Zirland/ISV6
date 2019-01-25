@@ -6,13 +6,13 @@ Skripty pro úlohy v rámci automatických akcí, úloha IKIS2 "Automatické akc
 - Název skriptu v knihovně je text před ".js", je třeba zachovat kvůli návaznosti na AA.
 
 ### [CHMU-EMAL-KRAJ]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. **Vyžaduje** skript *CHMU-STYL*.
 
 ### [CHMU-SMS-KRAJ]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
 ### [CHMU-EMAL-ORP]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP.
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP. **Vyžaduje** skript *CHMU-STYL*.
 
 ### [CHMU-SMS-ORP]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP.
