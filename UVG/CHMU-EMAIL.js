@@ -1588,7 +1588,7 @@ resultText += dist;
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
+if ((Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) || (empty && pouzeZmeny)) {
     resultText = '';
 }
 
