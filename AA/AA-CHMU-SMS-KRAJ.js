@@ -1,5 +1,5 @@
 //!JS
-// Verze 21
+// Verze 22
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;
@@ -28,9 +28,12 @@ var KRAJE_NAZVY = {
 // zde vytvoříme tělo SMS dle obsahu CAP pomocí skriptu z knihovny
 #import "CHMU-SMS-KRAJ"; 
 
-// Upozorňuji, že tělo SMS zprávy nekončí zalomením řádku. Já si proto odřádkuji. Ale vy nemusíte, pokud nechcete.
-vystupText += "\n";
+if (vystupText != '') {
+    // Upozorňuji, že tělo SMS zprávy nekončí zalomením řádku. Já si proto odřádkuji. Ale vy nemusíte, pokud nechcete.
+    vystupText += "\n";
 
-// Podpis na konci každé SMS.
-vystupText += "OPIS GŘ HZS ČR";
+    // Podpis na konci každé SMS.
+    vystupText += "OPIS GŘ HZS ČR";
+}
+
 print(vystupText);

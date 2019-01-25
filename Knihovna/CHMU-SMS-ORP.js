@@ -1,4 +1,4 @@
-// Verze 21
+// Verze 22
 
 var zacatky = [];
 var konce = [];
@@ -90,6 +90,36 @@ function Normalize(datum) {
     return datum;
 }
 
+function UkoncenyJev(konecJev, casZprava) {
+    if (!konecJev) {
+        konecJev = '1.1.2100 01:00';
+    }
+
+    var konecJev_format = Normalize(konecJev);
+    var casZprava_format = Normalize(casZprava);
+
+    var kjYear = konecJev_format.substring(0,4);
+    var kjMonth = konecJev_format.substring(4,6);
+    var kjDay = konecJev_format.substring(6,8);
+    var kjHour = konecJev_format.substring(8,10);
+    var kjMinute = konecJev_format.substring(10,12);
+    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute);
+
+    myEndTime.setMinutes(myEndTime.getMinutes() - 30);
+    konecJev_format = Normalize(myEndTime);
+
+    konecJev_format_num = Number(konecJev_format);
+    casZprava_format_num = Number(casZprava_format);
+
+    output = konecJev_format_num + '<' + casZprava_format_num;
+
+    if (konecJev_format_num < casZprava_format_num) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function ZobrazDatum(datum) {
     if (datum == 999999999999) {
         format_datum = 'odvolání';
@@ -157,17 +187,25 @@ function PrepareInfo (vystraha) {
 }
 
 var resultText = vystupText = '';
+var sms1 = sms2 = '';
 var infoList = [];
 
 if (vystraha.info && vystraha.info.length > 0) {
     infoList = PrepareInfo(vystraha);
 }
 
+if (ref_vystraha.info && ref_vystraha.info.length > 0) {
+    ref_infoList = PrepareInfo(ref_vystraha);
+}
+
 if (infoList) {
     var poleJevy = [];
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < vystraha.info.length; i++) {
-        poleJevy.push(vystraha.info[i].stupen_kod);  
+        // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
+        if (vystraha.info[i].stupen_kod != "OUTLOOK") { 
+            poleJevy.push(vystraha.info[i].stupen_kod);
+        }
     }
 
     // Promažeme duplicity
@@ -178,7 +216,7 @@ if (infoList) {
     // Vyhodnotíme zda jev platí v tomto ORP
     for (var h = 0; h < poleJevy.length; h++) {
         for (var i = 0; i < vystraha.info.length; i++) {
-            if (poleJevy[h] == vystraha.info[i].stupen_kod && vystraha.info[i].jev_kod != "OUTLOOK") {
+            if (poleJevy[h] == vystraha.info[i].stupen_kod) {
                 var found = omezitNaOrp == -1;
                 var orp_list = '';
                 if (vystraha.info[i].orp) {
@@ -217,8 +255,10 @@ if (infoList) {
     for (j = 0; j < platne.length; j++) { 
         if (detailni) {
             resultText += JEVY_NAZVY[platne[j].stupen_kod] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+            sms1 += JEVY_NAZVY[platne[j].stupen_kod] + ' do ' + ukonceni + oddelovac;
         } else {
             resultText += JEVY_NAZVY[platne[j].stupen_kod] + oddelovac;
+            sms1 = JEVY_NAZVY[platne[j].stupen_kod] + oddelovac;
         }
     }
 
@@ -276,11 +316,91 @@ if (infoList) {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (omezitNaOrp == -1 || !detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
+            sms1 += 'Platnost do ' + total_ukonceni + oddelovac;
         }
         if (omezitNaOrp == -1) {
             vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
         }
     }
+    vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
 }
 
-vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
+resultText = '';
+
+if (ref_infoList) {
+    var poleJevy2 = [];
+    // Naplníme si seznam kódů jevů z výstrahy
+    for (var i = 0; i < ref_vystraha.info.length; i++) {
+        // Z výpisu vyloučíme jevy Výhled nebezpečných jevů a vypršelé jevy
+        if (ref_vystraha.info[i].stupen_kod != "OUTLOOK" && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) { 
+            poleJevy2.push(ref_vystraha.info[i].stupen_kod);
+        }
+    }
+
+    // Promažeme duplicity
+    poleJevy2 = removeDuplicates(poleJevy2);  
+
+    var platne2 = [];
+
+    // Vyhodnotíme zda jev platí v tomto ORP
+    for (var h = 0; h < poleJevy2.length; h++) {
+        for (var i = 0; i < ref_vystraha.info.length; i++) {
+            if (poleJevy2[h] == ref_vystraha.info[i].stupen_kod) {
+                var found = omezitNaOrp == -1;
+                var orp_list = '';
+                if (ref_vystraha.info[i].orp) {
+                    orp_list = ref_vystraha.info[i].orp.toString();
+                }
+                var orp_pole = orp_list.split(",");
+                orp_pole = orp_pole.sort(function (a, b) {return a-b});
+                hledej = omezitNaOrp.toString();
+                found = orp_pole.indexOf(hledej) > -1;
+                if (found) {
+                    platne2.push(ref_vystraha.info[i]);
+                    zacatek = Normalize(ref_vystraha.info[i].dc_zacatek);
+                    zacatky.push(zacatek);
+                    konec = 999999999999;
+                    if (ref_vystraha.info[i].dc_konec) {
+                        konec = Normalize(ref_vystraha.info[i].dc_konec);
+                    }
+                    konce.push(konec);
+
+                    zahajeni = ZobrazDatum(zacatek);
+                    ukonceni = ZobrazDatum(konec);
+                }
+            }
+        }
+    }
+
+    // Vypíšeme seznam platných jevů na tomto území, případně i včetně detailní platnosti
+    for (j = 0; j < platne2.length; j++) { 
+        if (detailni) {
+            resultText += JEVY_NAZVY[platne[j].stupen_kod] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+            sms2 += JEVY_NAZVY[platne[j].stupen_kod] + ' do ' + ukonceni + oddelovac;
+        } else {
+            resultText += JEVY_NAZVY[platne[j].stupen_kod] + oddelovac;
+            sms2 = JEVY_NAZVY[platne[j].stupen_kod] + oddelovac;
+        }
+    }
+
+    // Vypočítáme celkovou dobu platnosti výstrahy
+    starty = Math.min.apply(null, zacatky);
+    start = starty.toString();
+
+    endy = Math.max.apply(null, konce);
+    end = endy.toString();
+
+    total_zahajeni = ZobrazDatum(start);
+    total_ukonceni = ZobrazDatum(end);
+
+    if (start != "Infinity") {
+        // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
+        if (omezitNaOrp == -1 || !detailni) {
+            sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
+        }
+    }
+}
+
+if (sms1 == sms2) {
+    vystupText = '';
+}

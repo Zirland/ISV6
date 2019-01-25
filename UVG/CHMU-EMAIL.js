@@ -1,4 +1,4 @@
-//Verze 21
+//Verze 22
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -1588,7 +1588,7 @@ resultText += dist;
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
+if ((Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) || (empty && pouzeZmeny)) {
     resultText = '';
 }
 

@@ -1,4 +1,4 @@
-//Verze 21
+//Verze 22
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
@@ -1503,6 +1503,6 @@ resultText += dist;
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
+if ((Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) || (empty && pouzeZmeny)) {
     resultText = '';
 }
