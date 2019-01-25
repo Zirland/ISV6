@@ -1,7 +1,7 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## vývoj
+## verze 22 – 2019-01-25
 ### [UVG/CHMU-SMS]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.
@@ -25,6 +25,14 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Přidáno
 - Ošetření případu prázdné výstrahy, při použití parametru **pouzeZmeny** je výsledkem prázdná akce.
+
+### [AA/AA-CHMU-SMS-KRAJ]
+#### Přidáno
+- Podpis se vkládá pouze pokud bylo akcí vygenerovano nějaké tělo zprávy.
+
+### [AA/AA-CHMU-SMS-ORP]
+#### Přidáno
+- Podpis se vkládá pouze pokud bylo akcí vygenerovano nějaké tělo zprávy.
 
 ## verze 21 – 2019-01-24
 - Úložiště rozčleněno na kategorie - AA, Knihovna, UVG. Podrobnosti v dokumentaci
