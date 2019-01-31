@@ -1,4 +1,4 @@
-//Verze 22
+//Verze 23
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
