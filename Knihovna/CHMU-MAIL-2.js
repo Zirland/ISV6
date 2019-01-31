@@ -1,27 +1,3 @@
-// Verze 22
-
-var omezitNaKraj = -1;
-var zobrazitVyhled = false;
-var zobrazitZmeny = false;
-
-var KRAJE_NAZVY = {
-    "-1": "Česká republika",
-    "19": "Hlavní město Praha",
-    "27": "Středočeský kraj",
-    "35": "Jihočeský kraj",
-    "43": "Plzeňský kraj",
-    "51": "Karlovarský kraj",
-    "60": "Ústecký kraj",
-    "78": "Liberecký kraj",
-    "86": "Královéhradecký kraj",
-    "94": "Pardubický kraj",
-    "108": "Kraj Vysočina",
-    "116": "Jihomoravský kraj",
-    "124": "Olomoucký kraj",
-    "132": "Moravskoslezský kraj",
-    "141": "Zlínský kraj"
-};
-
 var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
 
 var JEVY_NAZVY = {
@@ -288,47 +264,14 @@ function UkoncenyJev(konecJev, casZprava) {
 // Úprava formátu data
 function Normalize(datum) {
     var datumString = datum.toString();
-    datumDen = datumString.substring(0,2);
-    datumDen_porovn = datumDen.replace(/\.$/, "");
-    if (datumDen == datumDen_porovn) {
-        datumMesic = datumString.substring(3,5);
-        datumMesic_porovn = datumMesic.replace(/\.$/, "");
-        if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(6,10)
-            datumCas = datumString.substring(11,16);
-            datumCas = datumCas.replace(/\:$/, "");
-        } else {
-            datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(5,9)
-            datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, "");
-        }
-    } else {
-        datumDen = '0' + datumDen_porovn;
-        datumMesic = datumString.substring(2,4);
-        datumMesic_porovn = datumMesic.replace(/\.$/, "");
-        if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(5,9)
-            datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, "");
-        } else {
-            datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(4,8)
-            datumCas = datumString.substring(9,14);
-            datumCas = datumCas.replace(/\:$/, "");
-        }
-    }
 
+    datumDen = datumString.substring(8,10);
+    datumMesic = datumString.substring(5,7);
+    datumRok = datumString.substring(0,4)
+    datumCas = datumString.substring(11,19);
     datumHodiny = datumCas.substring(0,2);
-    datumHodiny_porovn = datumHodiny.replace(/\:$/, "");
-    if (datumHodiny == datumHodiny_porovn) {
-        datumMinuty = datumCas.substring(3,5);
-        datumSekundy = datumCas.substring(6,8)
-    } else {
-        datumHodiny = '0' + datumHodiny_porovn;
-        datumMinuty = datumCas.substring(2,4);
-        datumSekundy = datumCas.substring(5,7)
-    }
+    datumMinuty = datumCas.substring(3,5);
+    datumSekundy = datumCas.substring(6,8)
 
     datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty + datumSekundy;
 
@@ -1378,34 +1321,7 @@ resultText += '<HEAD>';
     resultText += '<META charset="utf-8"/>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
-    resultText += '<style type="text/css">';
-    resultText += '    ins {';
-    resultText += '        color: green;';
-    resultText += '        background: #dfd;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    del {';
-    resultText += '        color: red;';
-    resultText += '        background: #fdd;';
-    resultText += '        text-decoration: line-through;';
-    resultText += '        }';
-    resultText += '    plain {';
-    resultText += '        color: black;';
-    resultText += '        background: white;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
-    resultText += '    .header {font-size:15px;text-align:center;}';
-    resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
-    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-    resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
-    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-    resultText += '    @media print {';
-    resultText += '        div {page-break-inside: avoid;}';
-    resultText += '    }';
-    resultText += '</style>';
+    #import "CHMU-STYL";
 
 resultText += '</HEAD>';
 resultText += '<BODY>';
@@ -1680,5 +1596,3 @@ resultText += dist;
 // Ukončení stránky
 resultText += '</BODY>';
 resultText += '</HTML>';
-
-return resultText;
