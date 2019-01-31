@@ -15,4 +15,6 @@ var pouzeZmeny = true;
 // zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny
 #import "CHMU-EMAIL-ORP"; 
 
-print(resultText);
+if (resultText !== 'undefined' && resultText) {
+    print(resultText);
+}

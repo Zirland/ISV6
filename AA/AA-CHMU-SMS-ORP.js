@@ -18,4 +18,6 @@ if (vystupText != '') {
     vystupText += "OPIS GŘ HZS ČR";
 }
 
-print(vystupText);
+if (vystupText !== 'undefined' && vystupText) {
+    print(vystupText);
+}
