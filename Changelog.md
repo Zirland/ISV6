@@ -1,6 +1,31 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 23 – 2019-01-31
+### [UVG/CHMU-SMS]
+#### Změněno
+- Správnou funkčnost neprovedení prázdné akce je nutno zajistit úpravou automatické akce spojené s UVG předpisem, viz *README.md* (autor: Rataj Stanislav, RCS Kladno)
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Správnou funkčnost neprovedení prázdné akce je nutno zajistit úpravou automatické akce spojené s UVG předpisem, viz *README.md* (autor: Rataj Stanislav, RCS Kladno)
+
+### [AA/AA-CHMU-SMS-KRAJ]
+#### Změněno
+- Úprava procesu neprovedení prázdné akce. (autor: Rataj Stanislav, RCS Kladno)
+
+### [AA/AA-CHMU-SMS-ORP]
+#### Změněno
+- Úprava procesu neprovedení prázdné akce. (autor: Rataj Stanislav, RCS Kladno)
+
+### [AA/AA-CHMU-EMAIL-KRAJ]
+#### Změněno
+- Úprava procesu neprovedení prázdné akce. (autor: Rataj Stanislav, RCS Kladno)
+
+### [AA/AA-CHMU-EMAIL-ORP]
+#### Změněno
+- Úprava procesu neprovedení prázdné akce. (autor: Rataj Stanislav, RCS Kladno)
+
 ## verze 22 – 2019-01-25
 ### [UVG/CHMU-SMS]
 #### Přidáno
