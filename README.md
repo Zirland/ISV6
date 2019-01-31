@@ -151,7 +151,9 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. H
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
 //!JS
-print(N.textEMAIL);
+if (N !== 'undefined' && N.textEMAIL) {
+    print(N.textEMAIL);
+}
 ```
 
 ### [CHMU-SMS]
@@ -173,7 +175,9 @@ V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu W
 Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
 //!JS
-print(N.textSMS);
+if (N !== 'undefined' && N.textSMS) {
+    print(N.textSMS);
+}
 ```
 
 ### [CHMU-MAIL-2]
@@ -191,5 +195,7 @@ Parametr **zobrazitZmeny** je vždy nastaven na *false*.
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
 //!JS
-print(N.textEMAIL);
+if (N !== 'undefined' && N.textEMAIL) {
+    print(N.textEMAIL);
+}
 ```

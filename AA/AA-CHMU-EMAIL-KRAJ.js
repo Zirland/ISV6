@@ -34,4 +34,6 @@ var KRAJE_NAZVY = {
 // zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny
 #import "CHMU-EMAIL-KRAJ"; 
 
-print(resultText);
+if (resultText !== 'undefined' && resultText) {
+    print(resultText);
+}
