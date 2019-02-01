@@ -1,4 +1,4 @@
-// Verze 23
+// Verze 24
 
 var zacatky = [];
 var konce = [];

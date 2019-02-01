@@ -1,4 +1,4 @@
-//Verze 23
+//Verze 24
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
