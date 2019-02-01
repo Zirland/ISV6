@@ -103,38 +103,38 @@ function removeDuplicates(arr) {
 function Normalize(datum) {
     var datumString = datum.toString();
     datumDen = datumString.substring(0,2);
-    datumDen_porovn = datumDen.replace(/\.$/, "");
+    datumDen_porovn = datumDen.replace(/\.$/, '');
     if (datumDen == datumDen_porovn) {
         datumMesic = datumString.substring(3,5);
-        datumMesic_porovn = datumMesic.replace(/\.$/, "");
+        datumMesic_porovn = datumMesic.replace(/\.$/, '');
         if (datumMesic == datumMesic_porovn) {
             datumRok = datumString.substring(6,10)
             datumCas = datumString.substring(11,16);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         } else {
             datumMesic = '0' + datumMesic_porovn;
             datumRok = datumString.substring(5,9)
             datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         }
     } else {
         datumDen = '0' + datumDen_porovn;
         datumMesic = datumString.substring(2,4);
-        datumMesic_porovn = datumMesic.replace(/\.$/, "");
+        datumMesic_porovn = datumMesic.replace(/\.$/, '');
         if (datumMesic == datumMesic_porovn) {
             datumRok = datumString.substring(5,9)
             datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         } else {
             datumMesic = '0' + datumMesic_porovn;
             datumRok = datumString.substring(4,8)
             datumCas = datumString.substring(9,14);
-            datumCas = datumCas.replace(/\:$/, "");
+            datumCas = datumCas.replace(/\:$/, '');
         }
     }
 
     datumHodiny = datumCas.substring(0,2);
-    datumHodiny_porovn = datumHodiny.replace(/\:$/, "");
+    datumHodiny_porovn = datumHodiny.replace(/\:$/, '');
     if (datumHodiny == datumHodiny_porovn) {
         datumMinuty = datumCas.substring(3,5);
     } else {
@@ -189,7 +189,7 @@ function ZobrazDatum(datum) {
         normDatumHodina = normDatum.substring(8,10);
         normDatumMinuta = normDatum.substring(10,12);
 
-        format_datum = Number(normDatumDen) + "." + Number(normDatumMesic) + ". " + normDatumHodina + ":" + normDatumMinuta;
+        format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '. ' + normDatumHodina + ':' + normDatumMinuta;
     }
 
     return format_datum;
@@ -204,7 +204,7 @@ if (vystraha.info)
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
-        if (vystraha.info[i].stupen_kod != "OUTLOOK") { 
+        if (vystraha.info[i].stupen_kod != 'OUTLOOK') { 
             poleJevy.push(vystraha.info[i].stupen_kod);
         }
     }
@@ -225,12 +225,12 @@ if (vystraha.info)
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList.push(vystraha.info[i].kraj[j].UID);
-                        warn_type = "SVRS";
-                        if (vystraha.info[i].SIVS == "1") {
-                            warn_type = "SIVS";
+                        warn_type = 'SVRS';
+                        if (vystraha.info[i].SIVS == '1') {
+                            warn_type = 'SIVS';
                         }
-                        if (vystraha.info[i].HPPS == "1") {
-                            warn_type = "HPPS";
+                        if (vystraha.info[i].HPPS == '1') {
+                            warn_type = 'HPPS';
                         }
                         seznjevu.push(warn_type);
                         zacatek = Normalize(vystraha.info[i].dc_zacatek);
@@ -288,15 +288,15 @@ if (vystraha.info)
     total_ukonceni = ZobrazDatum(end);
 
     // Sestavíme hlavičku zprávy
-    rezim = "SVRS";
-    if (seznjevu.includes("SIVS")) {
-        rezim = "SIVS";
+    rezim = 'SVRS';
+    if (seznjevu.indexOf('SIVS') > -1) {
+        rezim = 'SIVS';
     }
-    if (seznjevu.includes("HPPS")) {
-        rezim = "HPPS";
+    if (seznjevu.indexOf('HPPS') > -1) {
+        rezim = 'HPPS';
     }
 
-    if (start == "Infinity") {
+    if (start == 'Infinity') {
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
     } else {
         switch (vystraha.ucel) {
@@ -312,13 +312,13 @@ if (vystraha.info)
         }
 
         switch (rezim) {
-            case "HPPS" :
+            case 'HPPS' :
                 uvod += 'HPPS: ';
             break;
-            case "SIVS" :
+            case 'SIVS' :
                 uvod += 'SIVS: ';
             break;
-            case "SVRS" :
+            case 'SVRS' :
                 uvod += 'SVRS: ';
             break;
         }
@@ -347,7 +347,7 @@ if (ref_vystraha.info)
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů a vypršelé jevy
-        if (ref_vystraha.info[i].stupen_kod != "OUTLOOK" && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) { 
+        if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) { 
             poleJevy2.push(ref_vystraha.info[i].stupen_kod);
         }
     }
@@ -422,7 +422,7 @@ if (ref_vystraha.info)
     total_zahajeni = ZobrazDatum(start);
     total_ukonceni = ZobrazDatum(end);
 
-    if (start != "Infinity") {
+    if (start != 'Infinity') {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (omezitNaKraj == -1 || !detailni) {
             sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
