@@ -328,7 +328,7 @@ function Normalize(datum) {
 // Zjišťuje, zda je konecJev nenastane v období 30 minut od casZpravy
 function UkoncenyJev(konecJev, casZprava) {
     if (!konecJev) {
-        konecJev = '1.1.2100 01:00';
+        konecJev = '1.1.2100 01:00:00';
     }
 
     var konecJev_format = Normalize(konecJev);
@@ -339,7 +339,7 @@ function UkoncenyJev(konecJev, casZprava) {
     var kjDay = konecJev_format.substring(6,8);
     var kjHour = konecJev_format.substring(8,10);
     var kjMinute = konecJev_format.substring(10,12);
-    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute);
+    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute, '00');
 
     myEndTime.setMinutes(myEndTime.getMinutes() - 30);
     konecJev_format = Normalize(myEndTime);
@@ -356,18 +356,27 @@ function UkoncenyJev(konecJev, casZprava) {
     }
 }
 
-function ZobrazDatum(datum, format) {
+function ZobrazDatum(datum, format, end) {
     if (!datum) {
         format_datum = 'do odvolání';
     } else {
         var normDatum = Normalize(datum);
 
-        normDatumRok = normDatum.substring(0,4);
-        normDatumMesic = normDatum.substring(4,6);
-        normDatumDen = normDatum.substring(6,8);
-        normDatumHodina = normDatum.substring(8,10);
-        normDatumMinuta = normDatum.substring(10,12);
-        normDatumSekunda = normDatum.substring(10,12);
+        var normDatumRok = normDatum.substring(0,4);
+        var normDatumMesic = normDatum.substring(4,6);
+        var normDatumDen = normDatum.substring(6,8);
+        var normDatumHodina = normDatum.substring(8,10);
+        var normDatumMinuta = normDatum.substring(10,12);
+        var normDatumSekunda = '00';
+
+    if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
+        var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
+        var newNormDatum = Normalize(myNewDay);
+        normDatumRok = newNormDatum.substring(0,4);
+        normDatumMesic = newNormDatum.substring(4,6);
+        normDatumDen = newNormDatum.substring(6,8);
+        normDatumHodina = '24';
+    }
 
         switch (format) {
             case 'short' :
@@ -1093,7 +1102,7 @@ function PrintInfo(info, ref_info)
                 resultText += '<td>&nbsp;–&nbsp;</td>';
 
                 resultText += '<td>';
-                pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short') : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short') : '');
+                pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
                 resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 resultText += '</td></tr>';
@@ -1159,7 +1168,7 @@ function PrintInfo(info, ref_info)
             resultText += '<td><table class="no" border="0">';
                 resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
                 resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short') : '') + '</td></tr>';
+                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
             resultText += '</table></td>';
         resultText += '</tr>';
 
