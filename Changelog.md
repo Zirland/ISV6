@@ -12,7 +12,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 ### [UVG/CHMU-MAIL-2]
 #### Přidáno
-- Vytvořen skript pro tiskovou sestavu seskupenou po nebezpečných jevech.
+- Synchronizace funkcionalit tiskové sestavy s ostatními předpisy.
 
 #### Známé chyby
 - Sestava neumožňuje porovnávání s předchozí výstrahou.
