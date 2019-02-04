@@ -10,6 +10,13 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Změněno
 - Ukončení jevu o půlnoci se prezentuje jako ukončení ve 24:00 hodin předchozího dne.
 
+### [UVG/CHMU-MAIL-2]
+#### Přidáno
+- Vytvořen skript pro tiskovou sestavu seskupenou po nebezpečných jevech.
+
+#### Známé chyby
+- Sestava neumožňuje porovnávání s předchozí výstrahou.
+
 ### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Změněno
 - Ukončení jevu o půlnoci se prezentuje jako ukončení ve 24:00 hodin předchozího dne.
@@ -25,6 +32,17 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [Knihovna/CHMU-SMS-ORP]
 #### Změněno
 - Ukončení jevu o půlnoci se prezentuje jako ukončení ve 24:00 hodin předchozího dne.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Přidáno
+- Vytvořen skript pro tiskovou sestavu seskupenou po nebezpečných jevech.
+
+#### Známé chyby
+- Sestava neumožňuje porovnávání s předchozí výstrahou.
+
+### [AA/AA-CHMU-MAIL-2]
+#### Přidáno
+- Vytvořena automatická akce pro novou sestavu.
 
 ## verze 24 – 2019-02-01
 ### [UVG/CHMU-EMAIL]
