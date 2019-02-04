@@ -5,17 +5,20 @@ Skripty pro úlohy v rámci automatických akcí, úloha IKIS2 "Automatické akc
 - Skripty neobsahují žádné konfigurovatelné parametry.
 - Název skriptu v knihovně je text před ".js", je třeba zachovat kvůli návaznosti na AA.
 
-### [CHMU-EMAL-KRAJ]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. **Vyžaduje** skript *CHMU-STYL*.
+### [CHMU-EMAIL-KRAJ]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska území. **Vyžaduje** skript *CHMU-STYL*.
 
 ### [CHMU-SMS-KRAJ]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
-### [CHMU-EMAL-ORP]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP. **Vyžaduje** skript *CHMU-STYL*.
+### [CHMU-EMAIL-ORP]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP. Sestava je koncipována z hlediska území. **Vyžaduje** skript *CHMU-STYL*.
 
 ### [CHMU-SMS-ORP]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP.
+
+### [CHMU-MAIL-2]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska nebezpečných jevů a je vhodná pro tisk. **Vyžaduje** skript *CHMU-STYL*.
 
 ### [CHMU-STYL]
 Předpis pro jednotný grafický styl e-mailů.
@@ -113,6 +116,20 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
+## [AA-CHMU-MAIL-2]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se k celé republice nebo vybranému kraji. Sestava je koncipována z hlediska jevů.
+
+Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v parametru *KRAJE_NAZVY*.
+
+Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
+- Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
+
+Parametr **zobrazitZmeny** je vždy nastaven na *false*.
+
+Předpis neumožňuje (zatím) porovnávání aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
+
 ---
 ---
 ## Kategorie UVG
@@ -172,6 +189,7 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
+
 Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
 //!JS
@@ -191,6 +209,8 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
 Parametr **zobrazitZmeny** je vždy nastaven na *false*.
+
+Předpis neumožňuje (zatím) porovnávání aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
