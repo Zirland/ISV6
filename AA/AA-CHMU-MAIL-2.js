@@ -2,16 +2,13 @@
 // Verze 25
 
 // viz dokumentace
-var hlavniKraj = 132;
-var zobrazovatVsechnyKraje = false;
-var razeniPodleNazvu = false;
+var omezitNaKraj = -1;
 var zobrazitVyhled = false;
-var zobrazitZmeny = true;
-var pouzeZmeny = true;
+var zobrazitZmeny = false;
 // Výsledkem této vzorové akce je
-// krajská sestava Moravskoslezského kraje,
+// celostátní sestava,
 // která se vytváří pouze v situaci,
-// kdy na území kraje dojde ke změně.
+// kdy na území ČR je platná výstraha a dojde ke změně.
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -32,7 +29,7 @@ var KRAJE_NAZVY = {
 };
 
 // zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny
-#import "CHMU-EMAIL-KRAJ"; 
+#import "CHMU-MAIL-2"; 
 
 if (resultText !== 'undefined' && resultText) {
     print(resultText);

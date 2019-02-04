@@ -1,4 +1,4 @@
-// Verze 24
+// Verze 25
 
 var zacatky = [];
 var konce = [];
@@ -120,17 +120,26 @@ function UkoncenyJev(konecJev, casZprava) {
     }
 }
 
-function ZobrazDatum(datum) {
+function ZobrazDatum(datum, end) {
     if (datum == 999999999999) {
         format_datum = 'odvolání';
     } else {
         var normDatum = datum.toString();
 
-        normDatumRok = normDatum.substring(0,4);
-        normDatumMesic = normDatum.substring(4,6);
-        normDatumDen = normDatum.substring(6,8);
-        normDatumHodina = normDatum.substring(8,10);
-        normDatumMinuta = normDatum.substring(10,12);
+        var normDatumRok = normDatum.substring(0,4);
+        var normDatumMesic = normDatum.substring(4,6);
+        var normDatumDen = normDatum.substring(6,8);
+        var normDatumHodina = normDatum.substring(8,10);
+        var normDatumMinuta = normDatum.substring(10,12);
+
+        if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
+            var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
+            var newNormDatum = Normalize(myNewDay);
+            normDatumRok = newNormDatum.substring(0,4);
+            normDatumMesic = newNormDatum.substring(4,6);
+            normDatumDen = newNormDatum.substring(6,8);
+            normDatumHodina = '24';
+        }
 
         format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '. ' + normDatumHodina + ':' + normDatumMinuta;
     }
@@ -245,7 +254,7 @@ if (infoList) {
                     konce.push(konec);
 
                     zahajeni = ZobrazDatum(zacatek);
-                    ukonceni = ZobrazDatum(konec);
+                    ukonceni = ZobrazDatum(konec, 1);
                 }
             }
         }
@@ -270,7 +279,7 @@ if (infoList) {
     end = endy.toString();
 
     total_zahajeni = ZobrazDatum(start);
-    total_ukonceni = ZobrazDatum(end);
+    total_ukonceni = ZobrazDatum(end, 1);
 
     // Sestavíme hlavičku zprávy
     rezim = 'SVRS';
@@ -366,7 +375,7 @@ if (ref_infoList) {
                     konce.push(konec);
 
                     zahajeni = ZobrazDatum(zacatek);
-                    ukonceni = ZobrazDatum(konec);
+                    ukonceni = ZobrazDatum(konec, 1);
                 }
             }
         }
@@ -391,7 +400,7 @@ if (ref_infoList) {
     end = endy.toString();
 
     total_zahajeni = ZobrazDatum(start);
-    total_ukonceni = ZobrazDatum(end);
+    total_ukonceni = ZobrazDatum(end, 1);
 
     if (start != 'Infinity') {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
