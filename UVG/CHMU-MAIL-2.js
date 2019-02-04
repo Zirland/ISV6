@@ -128,7 +128,7 @@ function PozadiColor(info) {
     return pozadi;
 }
 
-function ZobrazDatum(datum, format) {
+function ZobrazDatum(datum, format, end) {
     if (!datum) {
         format_datum = 'do odvolání';
     } else {
@@ -141,7 +141,7 @@ function ZobrazDatum(datum, format) {
         var normDatumMinuta = normDatum.substring(10,12);
         var normDatumSekunda = '00';
 
-    if (normDatumHodina == '00' && normDatumMinuta == '00') {
+    if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
         var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
         var newNormDatum = Normalize(myNewDay);
         normDatumRok = newNormDatum.substring(0,4);
@@ -1233,7 +1233,7 @@ function PrintInfo(info, ref_info) {
                 
                 resultText += '</td>';
                 resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short') : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short') : '') + '</td></tr>';
+                resultText += '<td>' + SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '') + '</td></tr>';
             resultText += '</table></td>';
         resultText += '</tr>';
 
@@ -1283,7 +1283,7 @@ function PrintInfo(info, ref_info) {
             resultText += '<td><table class="no">';
                 resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
                 resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short') : '') + '</td></tr>';
+                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
             resultText += '</table></td>';
         resultText += '</tr>';
 
