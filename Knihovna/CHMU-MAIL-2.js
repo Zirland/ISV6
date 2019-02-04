@@ -110,12 +110,21 @@ function ZobrazDatum(datum, format) {
     } else {
         var normDatum = Normalize(datum);
 
-        normDatumRok = normDatum.substring(0,4);
-        normDatumMesic = normDatum.substring(4,6);
-        normDatumDen = normDatum.substring(6,8);
-        normDatumHodina = normDatum.substring(8,10);
-        normDatumMinuta = normDatum.substring(10,12);
-        normDatumSekunda = normDatum.substring(10,12);
+        var normDatumRok = normDatum.substring(0,4);
+        var normDatumMesic = normDatum.substring(4,6);
+        var normDatumDen = normDatum.substring(6,8);
+        var normDatumHodina = normDatum.substring(8,10);
+        var normDatumMinuta = normDatum.substring(10,12);
+        var normDatumSekunda = '00';
+
+    if (normDatumHodina == '00' && normDatumMinuta == '00') {
+        var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
+        var newNormDatum = Normalize(myNewDay);
+        normDatumRok = newNormDatum.substring(0,4);
+        normDatumMesic = newNormDatum.substring(4,6);
+        normDatumDen = newNormDatum.substring(6,8);
+        normDatumHodina = '24';
+    }
 
         switch (format) {
             case 'short' :
