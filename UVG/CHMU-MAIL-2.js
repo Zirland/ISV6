@@ -1,4 +1,4 @@
-// Verze 24
+// Verze 25
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
