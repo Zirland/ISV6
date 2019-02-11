@@ -203,7 +203,7 @@ if (vystraha.info && vystraha.info.length > 0) {
     infoList = PrepareInfo(vystraha);
 }
 
-if (ref_vystraha.info && ref_vystraha.info.length > 0) {
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     ref_infoList = PrepareInfo(ref_vystraha);
 }
 
