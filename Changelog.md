@@ -1,6 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 26 – 2019-02-11
+### [UVG/CHMU-SMS]
+#### Záplata
+- Ošetření situace, kdy není odkaz na předchozí výstrahu.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Záplata
+- Ošetření situace, kdy není odkaz na předchozí výstrahu.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Záplata
+- Ošetření situace, kdy není odkaz na předchozí výstrahu.
+
 ## verze 25 – 2019-02-04
 ### [UVG/CHMU-EMAIL]
 #### Změněno
