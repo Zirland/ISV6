@@ -1,4 +1,4 @@
-// Verze 25
+// Verze 26
 
 // zde např. Moravskoslezský kraj. Číselník krajů viz níže
 var omezitNaKraj = 132;
@@ -350,7 +350,7 @@ if (vystraha.info)
 }
 
 resultText = '';
-if (ref_vystraha.info)
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
     var poleJevy2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
