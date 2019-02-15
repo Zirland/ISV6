@@ -336,7 +336,7 @@ if (infoList) {
 
 resultText = '';
 
-if (ref_infoList) {
+if (typeof(ref_infoList) != 'undefined' && ref_infoList) {
     var poleJevy2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
