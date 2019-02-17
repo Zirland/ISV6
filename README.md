@@ -6,22 +6,39 @@ Skripty pro úlohy v rámci automatických akcí, úloha IKIS2 "Automatické akc
 - Název skriptu v knihovně je text před ".js", je třeba zachovat kvůli návaznosti na AA.
 
 ### [CHMU-EMAIL-KRAJ]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska území. **Vyžaduje** skript *CHMU-STYL*.
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska území.
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
 
 ### [CHMU-SMS-KRAJ]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
 ### [CHMU-EMAIL-ORP]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP. Sestava je koncipována z hlediska území. **Vyžaduje** skript *CHMU-STYL*.
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP. Sestava je koncipována z hlediska území.
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
 
 ### [CHMU-SMS-ORP]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP.
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
 ### [CHMU-MAIL-2]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska nebezpečných jevů a je vhodná pro tisk. **Vyžaduje** skript *CHMU-STYL*.
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska nebezpečných jevů a je vhodná pro tisk.
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*
+
+### [CHMU-CISELNIK]
+Předpis obsahující potřebné číselníky jevů a území.
+
+### [CHMU-DATUMY]
+Předpis pro práci s datumy a časem.
+
+### [CHMU-PREPARE]
+Předpis pro přípravu seznamu platných jevů.
 
 ### [CHMU-STYL]
 Předpis pro jednotný grafický styl e-mailů.
+
+### [CHMU-ZVYR-ZMEN]
+Předpis pro zjištění změn a jejich zvýrazenění.
 
 ---
 ---
