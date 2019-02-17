@@ -1,6 +1,9 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 27 – 2019-02-17
+- Rozčlenění skriptů v Knihovně na funkční bloky bez změny funkčnosti.
+
 ## verze 26 – 2019-02-11
 ### [UVG/CHMU-SMS]
 #### Záplata
