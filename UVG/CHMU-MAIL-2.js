@@ -1,4 +1,4 @@
-// Verze 26
+// Verze 27
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
