@@ -1,18 +1,29 @@
-//Verze 27
+//Verze 28
 
 // Úprava formátu data
 function Normalize(datum) {
-    var datumString = datum.toString();
+    var datumString = new Date(datum);
 
-    datumDen = datumString.substring(8,10);
-    datumMesic = datumString.substring(5,7);
-    datumRok = datumString.substring(0,4)
-    datumCas = datumString.substring(11,19);
-    datumHodiny = datumCas.substring(0,2);
-    datumMinuty = datumCas.substring(3,5);
-    datumSekundy = datumCas.substring(6,8)
+    datumDen = datumString.getDate();
+    if (datumDen < 10) {
+        datumDen = '0' + datumDen;
+    }
+    datumMesic = datumString.getMonth() + 1;
+    if (datumMesic < 10) {
+        datumMesic = '0' + datumMesic;
+    }
+    datumRok = datumString.getFullYear();
+    datumHodiny = datumString.getHours();
+    if (datumHodiny < 10) {
+        datumHodiny = '0' + datumHodiny;
+    }
+    datumMinuty = datumString.getMinutes();
+    if (datumMinuty < 10) {
+        datumMinuty = '0' + datumMinuty;
+    }
+    datumSekundy = '00';
 
-    datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty + datumSekundy;
+    datum = datumRok.toString() +  datumMesic.toString() + datumDen.toString() + datumHodiny.toString() + datumMinuty.toString() + datumSekundy.toString();
 
     return datum;
 }
@@ -110,4 +121,3 @@ function ZobrazDatumSMS(datum, end) {
 
     return format_datum;
 }
-

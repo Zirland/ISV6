@@ -1,6 +1,11 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 28 – 2019-02-19
+### [Knihovna/CHMU-DATUMY]
+#### Záplata
+- Ošetření formátování data při rušení jevu.
+
 ## verze 27 – 2019-02-17
 - Rozčlenění skriptů v Knihovně na funkční bloky bez změny funkčnosti.
 

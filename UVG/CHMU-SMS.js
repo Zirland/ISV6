@@ -1,4 +1,4 @@
-// Verze 27
+// Verze 28
 
 // zde např. Moravskoslezský kraj. Číselník krajů viz níže
 var omezitNaKraj = 132;
