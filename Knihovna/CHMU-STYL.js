@@ -1,4 +1,4 @@
-//Verze 27
+//Verze 28
     resultText += '<style type="text/css">';
     resultText += '    ins {';
     resultText += '        color: green;';
