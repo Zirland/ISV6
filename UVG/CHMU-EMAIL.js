@@ -1,4 +1,4 @@
-//Verze 28
+//Verze 29
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;

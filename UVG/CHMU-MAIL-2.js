@@ -1,4 +1,4 @@
-// Verze 28
+// Verze 29
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
