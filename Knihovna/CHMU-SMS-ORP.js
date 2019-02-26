@@ -1,4 +1,4 @@
-// Verze 28
+// Verze 29
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
@@ -206,6 +206,7 @@ if (infoList) {
 }
 
 resultText = '';
+zacatky = konce = seznjevu = [];
 
 if (typeof(ref_infoList) != 'undefined' && ref_infoList) {
     var poleJevy2 = [];

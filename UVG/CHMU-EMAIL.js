@@ -1,4 +1,4 @@
-//Verze 28
+//Verze 29
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -1087,7 +1087,12 @@ function PrintInfo(info, ref_info)
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
             resultText += '</td>';
-            resultText += '<td><table class="no" border="0">';
+            resultText += '<td>';
+
+            if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
+                resultText += 'do odvolání';
+            } else {
+                resultText += '<table class="no" border="0">';
                 resultText += '<tr><td>';
                 
                 if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
@@ -1106,7 +1111,9 @@ function PrintInfo(info, ref_info)
                 resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 resultText += '</td></tr>';
-            resultText += '</table></td>';
+                resultText += '</table>';
+            }
+            resultText += '</td>';
         resultText += '</tr>';
 
         if (info) {
