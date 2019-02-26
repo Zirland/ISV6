@@ -350,6 +350,8 @@ if (vystraha.info)
 }
 
 resultText = '';
+zacatky = konce = seznjevu = [];
+
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
     var poleJevy2 = [];

@@ -206,6 +206,7 @@ if (infoList) {
 }
 
 resultText = '';
+zacatky = konce = seznjevu = [];
 
 if (typeof(ref_infoList) != 'undefined' && ref_infoList) {
     var poleJevy2 = [];
