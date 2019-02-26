@@ -1,6 +1,27 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 29 – 2019-02-26
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Formát zobrazení doby platnosti jevu SVRS.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Záplata
+- Vymazání obsahu pomocných proměnných potřebných pro porovnání změn.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Záplata
+- Vymazání obsahu pomocných proměnných potřebných pro porovnání změn.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Formát zobrazení doby platnosti jevu SVRS.
+
+### [UVG/CHMU-SMS]
+#### Záplata
+- Vymazání obsahu pomocných proměnných potřebných pro porovnání změn.
+
 ## verze 28 – 2019-02-19
 ### [Knihovna/CHMU-DATUMY]
 #### Záplata
