@@ -705,7 +705,7 @@ function JevUzemi(info) {
         Remove(orp_pole, '914');
     }
     if (orp_pole.indexOf('922') != -1) { // Ústí nad Labem
-        uzemiOkresu.push('3509');
+        uzemiOkresu.push('3510');
         Remove(orp_pole, '922');
     }
     // Ústecký kraj
