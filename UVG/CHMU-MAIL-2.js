@@ -597,11 +597,11 @@ function JevUzemi(info) {
         Remove(orp_pole, '418');
         Remove(orp_pole, '426');
     }
-    if (orp_pole.indexOf('434') != -1 && orp_pole.indexOf('442') != -1 && orp_pole.indexOf('457') != -1) { // Strakonice
+    if (orp_pole.indexOf('434') != -1 && orp_pole.indexOf('442') != -1 && orp_pole.indexOf('451') != -1) { // Strakonice
         uzemiOkresu.push('3307');
         Remove(orp_pole, '434');
         Remove(orp_pole, '442');
-        Remove(orp_pole, '457');
+        Remove(orp_pole, '451');
     }
     if (orp_pole.indexOf('469') != -1 && orp_pole.indexOf('477') != -1) { // Tábor
         uzemiOkresu.push('3308');
@@ -701,7 +701,7 @@ function JevUzemi(info) {
         Remove(orp_pole, '761');
     }
     if (orp_pole.indexOf('825') != -1 && orp_pole.indexOf('833') != -1 && orp_pole.indexOf('841') != -1) { // Litoměřice
-        uzemiOkresu.push('0423');
+        uzemiOkresu.push('3506');
         Remove(orp_pole, '825');
         Remove(orp_pole, '833');
         Remove(orp_pole, '841');
