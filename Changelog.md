@@ -4,11 +4,11 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ## verze 30 – 2019-03-03
 ### [Knihovna/CHMU-MAIL-2]
 #### Záplata
-- Oprava definice území okresu Ústí nad Labem
+- Oprava definice území okresů Strakonice, Litoměřice a Ústí nad Labem
 
 ### [UVG/CHMU-MAIL-2]
 #### Záplata
-- Oprava definice území okresu Ústí nad Labem
+- Oprava definice území okresů Strakonice, Litoměřice a Ústí nad Labem
 
 ## verze 29 – 2019-02-26
 ### [Knihovna/CHMU-PREPARE]
