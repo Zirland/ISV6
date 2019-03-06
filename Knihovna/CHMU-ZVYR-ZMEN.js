@@ -1,4 +1,4 @@
-// Verze 29
+// Verze 30
 
 // Zjednodušené zobrazení rozdílů (porovnává se celý text)
 function SimpleHighlightDiff(newValue, oldValue)
@@ -14,9 +14,9 @@ function SimpleHighlightDiff(newValue, oldValue)
     }
     else
     {
-        resultText += '<del>' + oldText + '</del>';
+        resultText += '<font color="red"><s>' + oldText + '</s></font>';
         resultText += oldText && newText ? '<br/>' : '';
-        resultText += '<ins>' + newText + '</ins>';
+        resultText += '<font color="green">' + newText + '</font>';
         zmena = 1;
     }
 
@@ -114,24 +114,24 @@ function HighlightDiff(newValue, oldValue)
             {
                 if (index != changeList.length)
                 {
-                    resultText += (lastChange == -1 ? '</del>' : '');
+                    resultText += (lastChange == -1 ? '</s></font>' : '');
                 }
 
                 lastChange = changeList[index - 1].change;
 
                 if (lastChange == 1)
                 {
-                    resultText += '<ins>';
+                    resultText += '<font color="green">';
                     zmena = 1;
                 }
                 else if (lastChange == -1)
                 {
-                    resultText += '<del>';
+                    resultText += '<font color="red"><s>';
                     zmena = 1;
                 }
                 else
                 {
-                    resultText += '<plain>';
+                    resultText += '</s><font color="black">';
                 }
             }
 
@@ -141,13 +141,13 @@ function HighlightDiff(newValue, oldValue)
         if (changeList.length > 0)
         {
             if (lastChange == 1) {
-                resultText += '</ins>';
+                resultText += '</font>';
             }
             else if (lastChange == -1) {
-                resultText += '</del>';
+                resultText += '</s></font>';
             }
             else {
-                resultText += '</plain>';
+                resultText += '</font>';
             }
         }
         resultText = resultText + '|' + zmena;

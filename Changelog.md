@@ -1,6 +1,41 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 30 – 2019-03-06
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Formát zobrazení doby platnosti jevu SVRS.
+- Přenesení formátu tabulky do HTML.
+
+#### Záplata
+- Oprava definice území okresů Strakonice, Litoměřice a Ústí nad Labem
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Formát zobrazení doby platnosti jevu SVRS.
+- Přenesení formátu tabulky do HTML.
+
+### [Knihovna/CHMU-STYL]
+#### Změněno
+- Vypuštění nepoužitých tříd následkem přenesení formátu tabulek a zvýraznění změn do HTML.
+
+### [Knihovna/CHMU-ZVYR-ZMEN]
+#### Změněno
+- Přenesení formátu zvýraznění změn do HTML.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Formát zobrazení doby platnosti jevu SVRS.
+- Přenesení formátu tabulek a zvýraznění změn do HTML.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Formát zobrazení doby platnosti jevu SVRS.
+- Přenesení formátu tabulek a zvýraznění změn do HTML.
+
+#### Záplata
+- Oprava definice území okresů Strakonice, Litoměřice a Ústí nad Labem
+
 ## verze 29 – 2019-02-26
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno

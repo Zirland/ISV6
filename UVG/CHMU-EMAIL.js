@@ -1,4 +1,4 @@
-//Verze 29
+//Verze 30
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -100,9 +100,9 @@ function SimpleHighlightDiff(newValue, oldValue)
     }
     else
     {
-        resultText += '<del>' + oldText + '</del>';
+        resultText += '<font color="red"><s>' + oldText + '</s></font>';
         resultText += oldText && newText ? '<br/>' : '';
-        resultText += '<ins>' + newText + '</ins>';
+        resultText += '<font color="green">' + newText + '</font>';
         zmena = 1;
     }
 
@@ -200,24 +200,24 @@ function HighlightDiff(newValue, oldValue)
             {
                 if (index != changeList.length)
                 {
-                    resultText += (lastChange == -1 ? '</del>' : '');
+                    resultText += (lastChange == -1 ? '</s></font>' : '');
                 }
 
                 lastChange = changeList[index - 1].change;
 
                 if (lastChange == 1)
                 {
-                    resultText += '<ins>';
+                    resultText += '<font color="green">';
                     zmena = 1;
                 }
                 else if (lastChange == -1)
                 {
-                    resultText += '<del>';
+                    resultText += '<font color="red"><s>';
                     zmena = 1;
                 }
                 else
                 {
-                    resultText += '<plain>';
+                    resultText += '</s><font color="black">';
                 }
             }
 
@@ -227,13 +227,13 @@ function HighlightDiff(newValue, oldValue)
         if (changeList.length > 0)
         {
             if (lastChange == 1) {
-                resultText += '</ins>';
+                resultText += '</font>';
             }
             else if (lastChange == -1) {
-                resultText += '</del>';
+                resultText += '</s></font>';
             }
             else {
-                resultText += '</plain>';
+                resultText += '</font>';
             }
         }
         resultText = resultText + '|' + zmena;
@@ -1062,7 +1062,7 @@ function PrintInfo(info, ref_info)
     } 
 
     if (zobrazitZmeny) {
-        resultText += '<table class="tg" width="100%">';
+        resultText += '<table class="tg" width="100%" border="1">';
 
         // Hlavička
         resultText += '<tr>';
@@ -1164,7 +1164,7 @@ function PrintInfo(info, ref_info)
         resultText += '</tr>';
         resultText += '</table>';
     } else {
-        resultText += '<table class="tg" width="100%">';
+        resultText += '<table class="tg" width="100%" border="1 ">';
 
         // Hlavička
         resultText += '<tr>';
@@ -1172,11 +1172,16 @@ function PrintInfo(info, ref_info)
             resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
             resultText += (info != null ? PrintVyska(info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
-            resultText += '<td><table class="no" border="0">';
-                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
-                resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
-            resultText += '</table></td>';
+
+            if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
+                resultText += '<td>do odvolání</td>';
+            } else {
+                resultText += '<td><table class="no" border="0">';
+                    resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
+                    resultText += '<td>&nbsp;–&nbsp;</td>';
+                    resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
+                resultText += '</table></td>';
+            }
         resultText += '</tr>';
 
         if (info) {
@@ -1290,28 +1295,11 @@ resultText += '<HEAD>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
     resultText += '<style type="text/css">';
-    resultText += '    ins {';
-    resultText += '        color: green;';
-    resultText += '        background: #dfd;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    del {';
-    resultText += '        color: red;';
-    resultText += '        background: #fdd;';
-    resultText += '        text-decoration: line-through;';
-    resultText += '        }';
-    resultText += '    plain {';
-    resultText += '        color: black;';
-    resultText += '        background: white;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
     resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
     resultText += '    .header {font-size:15px;text-align:center;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
     resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
     resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    @media print {';
     resultText += '        div {page-break-inside: avoid;}';
