@@ -15,6 +15,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Formát zobrazení doby platnosti jevu SVRS.
 - Přenesení formátu tabulky do HTML.
 
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Přepracování logiky nalezení výstrahy na zvoleném ORP a sloučení jevů.
+
 ### [Knihovna/CHMU-STYL]
 #### Změněno
 - Vypuštění nepoužitých tříd následkem přenesení formátu tabulek a zvýraznění změn do HTML.
