@@ -1,4 +1,4 @@
-//Verze 30-TEST
+//Verze 30
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -1062,7 +1062,7 @@ function PrintInfo(info, ref_info)
     } 
 
     if (zobrazitZmeny) {
-        resultText += '<table class="tg" width="100%">';
+        resultText += '<table class="tg" width="100%" border="1">';
 
         // Hlavička
         resultText += '<tr>';
@@ -1164,7 +1164,7 @@ function PrintInfo(info, ref_info)
         resultText += '</tr>';
         resultText += '</table>';
     } else {
-        resultText += '<table class="tg" width="100%">';
+        resultText += '<table class="tg" width="100%" border="1 ">';
 
         // Hlavička
         resultText += '<tr>';
@@ -1172,11 +1172,16 @@ function PrintInfo(info, ref_info)
             resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
             resultText += (info != null ? PrintVyska(info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
-            resultText += '<td><table class="no" border="0">';
-                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
-                resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
-            resultText += '</table></td>';
+
+            if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
+                resultText += '<td>do odvolání</td>';
+            } else {
+                resultText += '<td><table class="no" border="0">';
+                    resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
+                    resultText += '<td>&nbsp;–&nbsp;</td>';
+                    resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
+                resultText += '</table></td>';
+            }
         resultText += '</tr>';
 
         if (info) {
@@ -1290,28 +1295,11 @@ resultText += '<HEAD>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
     resultText += '<style type="text/css">';
-    resultText += '    ins {';
-    resultText += '        color: green;';
-    resultText += '        background: #dfd;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
-    resultText += '    del {';
-    resultText += '        color: red;';
-    resultText += '        background: #fdd;';
-    resultText += '        text-decoration: line-through;';
-    resultText += '        }';
-    resultText += '    plain {';
-    resultText += '        color: black;';
-    resultText += '        background: white;';
-    resultText += '        text-decoration: none;';
-    resultText += '        }';
     resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
     resultText += '    .header {font-size:15px;text-align:center;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .tg th{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
     resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .no th{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;font-variant:bold;}';
     resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    @media print {';
     resultText += '        div {page-break-inside: avoid;}';

@@ -671,7 +671,7 @@ function PrintInfo(info, ref_info)
     } 
 
     if (zobrazitZmeny) {
-        resultText += '<table class="tg" width="100%">';
+        resultText += '<table class="tg" width="100%" border="1">';
 
         // Hlavička
         resultText += '<tr>';
@@ -773,7 +773,7 @@ function PrintInfo(info, ref_info)
         resultText += '</tr>';
         resultText += '</table>';
     } else {
-        resultText += '<table class="tg" width="100%">';
+        resultText += '<table class="tg" width="100%" border="1 ">';
 
         // Hlavička
         resultText += '<tr>';
@@ -781,11 +781,16 @@ function PrintInfo(info, ref_info)
             resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
             resultText += (info != null ? PrintVyska(info) : '') + '</td>';
             resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
-            resultText += '<td><table class="no" border="0">';
-                resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
-                resultText += '<td>&nbsp;–&nbsp;</td>';
-                resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
-            resultText += '</table></td>';
+
+            if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
+                resultText += '<td>do odvolání</td>';
+            } else {
+                resultText += '<td><table class="no" border="0">';
+                    resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
+                    resultText += '<td>&nbsp;–&nbsp;</td>';
+                    resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
+                resultText += '</table></td>';
+            }
         resultText += '</tr>';
 
         if (info) {
