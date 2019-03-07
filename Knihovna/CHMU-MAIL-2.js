@@ -2,7 +2,6 @@
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
-#import "CHMU-STYL";
 
 // Připravíme seznam jevů podle území
 function PrepareInfo(vystraha) {
