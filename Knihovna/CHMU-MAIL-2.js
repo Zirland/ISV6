@@ -1175,7 +1175,7 @@ function JevUzemi(info) {
     }
 
     // Česká republika
-    if (uzemiKraje.indexOf('19') != -1 && uzemiKraje.indexOf('27') != -1 && uzemiKraje.indexOf('35') != -1 && uzemiKraje.indexOf('43') != -1 && uzemiKraje.indexOf('51') != -1 && uzemiKraje.indexOf('60') != -1 && uzemiKraje.indexOf('78') != -1 && uzemiKraje.indexOf('86') != -1 && uzemiKraje.indexOf('94') != -1 && uzemiKraje.indexOf('108') != -1 && uzemiKraje.indexOf('116') != -1 && uzemiKraje.indexOf('124') != -1 && uzemiKraje.indexOf('141') != -1 && uzemiKraje.indexOf('132') != -1) {
+    if (resultText == '<b><u>Hlavní město Praha</u></b>, <b><u>Středočeský kraj</u></b>, <b><u>Jihočeský kraj</u></b>, <b><u>Plzeňský kraj</u></b>, <b><u>Karlovarský kraj</u></b>, <b><u>Ústecký kraj</u></b>, <b><u>Liberecký kraj</u></b>, <b><u>Královéhradecký kraj</u></b>, <b><u>Pardubický kraj</u></b>, <b><u>Kraj Vysočina</u></b>, <b><u>Jihomoravský kraj</u></b>, <b><u>Olomoucký kraj</u></b>, <b><u>Moravskoslezský kraj</u></b>, <b><u>Zlínský kraj</u></b>\n') {
         resultText = '<b><u>ČESKÁ REPUBLIKA</u></b>';
     }
 
