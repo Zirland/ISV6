@@ -89,6 +89,15 @@ function PrepareInfo(vystraha) {
     
     infoList = infoListFilter;
 
+    infoList = infoList.sort(function (a, b) {
+        var start1 = parseFloat(a.dc_zacatek);
+        var start2 = parseFloat(b.dc_zacatek);
+
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
+        return 0;
+    });
+
     return infoList;
 }
 
@@ -490,18 +499,6 @@ function PrintInfo(info, ref_info) {
 
     return resultText;
 }
-
-// Odstranění duplicitních výskytů kódů krajů
-function removeDuplicates(arr) {
-    var unique_array = []
-    for(var i = 0;i < arr.length; i++){
-        if(unique_array.indexOf(arr[i]) == -1){
-            unique_array.push(arr[i])
-        }
-    }
-    return unique_array
-}
-
 
 function Remove(arr, item) {
     for (var i = arr.length; i--;) {
@@ -1178,8 +1175,8 @@ function JevUzemi(info) {
     }
 
     // Česká republika
-    if (uzemiKraje.indexOf('19') != -1 && uzemiKraje.indexOf('27') != -1 && uzemiKraje.indexOf('35') != -1 && uzemiKraje.indexOf('43') != -1 && uzemiKraje.indexOf('51') != -1 && uzemiKraje.indexOf('60') != -1 && uzemiKraje.indexOf('78') != -1 && uzemiKraje.indexOf('86') != -1 && uzemiKraje.indexOf('94') != -1 && uzemiKraje.indexOf('108') != -1 && uzemiKraje.indexOf('116') != -1 && uzemiKraje.indexOf('124') != -1 && uzemiKraje.indexOf('141') != -1 && uzemiKraje.indexOf('132') != -1) {
-        resultText = 'Česká republika';
+    if (resultText == '<b><u>Hlavní město Praha</u></b>, <b><u>Středočeský kraj</u></b>, <b><u>Jihočeský kraj</u></b>, <b><u>Plzeňský kraj</u></b>, <b><u>Karlovarský kraj</u></b>, <b><u>Ústecký kraj</u></b>, <b><u>Liberecký kraj</u></b>, <b><u>Královéhradecký kraj</u></b>, <b><u>Pardubický kraj</u></b>, <b><u>Kraj Vysočina</u></b>, <b><u>Jihomoravský kraj</u></b>, <b><u>Olomoucký kraj</u></b>, <b><u>Moravskoslezský kraj</u></b>, <b><u>Zlínský kraj</u></b>\n') {
+        resultText = '<b><u>ČESKÁ REPUBLIKA</u></b>';
     }
 
     resultText += '|' + uzemiList.length;
