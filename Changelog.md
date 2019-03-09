@@ -3,6 +3,14 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 ## verze 30 – 2019-03-06
 ### [Knihovna/CHMU-MAIL-2]
+#### Přidáno
+- Řazení jevů podle času začátku platnosti.
+
+#### Změněno
+- Formátování názvu území.
+
+## verze 30 – 2019-03-06
+### [Knihovna/CHMU-MAIL-2]
 #### Změněno
 - Formát zobrazení doby platnosti jevu SVRS.
 - Přenesení formátu tabulky do HTML.
