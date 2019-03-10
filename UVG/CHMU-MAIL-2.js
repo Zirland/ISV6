@@ -1444,9 +1444,9 @@ resultText += '<HEAD>';
     resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
     resultText += '    .header {font-size:15px;text-align:center;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
+    resultText += '    .tg td{padding:5px 5px;border-style:solid;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-    resultText += '    .no td{padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
+    resultText += '    .no td{padding:0px 0px;border-style:solid;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
     resultText += '    @media print {';
     resultText += '        div {page-break-inside: avoid;}';
     resultText += '    }';
@@ -1582,7 +1582,7 @@ switch (vystraha.ucel) {
     case 'Exercise' :
     case 'System' :
     case 'Test' :
-        header = 'ÚČELOVÁ INFORMACE ČHMÚ - TESTOVACÍ ZPRÁVA';
+        header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
         if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
@@ -1590,7 +1590,7 @@ switch (vystraha.ucel) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
-            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
+            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
         }
     break;
     case 'Actual' :
@@ -1602,12 +1602,13 @@ switch (vystraha.ucel) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
-            header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
+            header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
         }
         if (!found) {
             header = 'INFORMAČNÍ ZPRÁVA ČHMÚ';
         }
     break;
+
 }
 
 resultText += '<div class="header">' + header + '</div>';
