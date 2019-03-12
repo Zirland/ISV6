@@ -1,7 +1,7 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## verze 31 – 2019-03-10
+## verze 31 – 2019-03-12
 ### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Změněno
 - Vytržení hlavičky stránky do samostatného skriptu.
