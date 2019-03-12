@@ -1,3 +1,5 @@
+//Verze 31
+
 // Hlavička HTML stránky
 resultText += '<HTML>';
 resultText += '<HEAD>';
