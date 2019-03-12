@@ -1,4 +1,4 @@
-//Verze 30
+//Verze 31
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -1436,7 +1436,7 @@ switch (vystraha.ucel) {
     case 'Exercise' :
     case 'System' :
     case 'Test' :
-        header = 'ÚČELOVÁ INFORMACE ČHMÚ - TESTOVACÍ ZPRÁVA';
+        header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
         if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
         }
@@ -1444,7 +1444,7 @@ switch (vystraha.ucel) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
-            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
+            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
         }
     break;
     case 'Actual' :
@@ -1456,7 +1456,7 @@ switch (vystraha.ucel) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
         }
         if (hpps) {
-            header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
+            header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
         }
         if (!found) {
             header = 'INFORMAČNÍ ZPRÁVA ČHMÚ';

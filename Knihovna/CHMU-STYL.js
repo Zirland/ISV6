@@ -1,4 +1,4 @@
-//Verze 30
+//Verze 31
     resultText += '<style type="text/css">';
     resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
     resultText += '    .header {font-size:15px;text-align:center;}';

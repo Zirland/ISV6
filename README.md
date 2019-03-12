@@ -7,7 +7,7 @@ Skripty pro úlohy v rámci automatických akcí, úloha IKIS2 "Automatické akc
 
 ### [CHMU-EMAIL-KRAJ]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska území.
-**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
 
 ### [CHMU-SMS-KRAJ]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
@@ -15,7 +15,7 @@ Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahují
 
 ### [CHMU-EMAIL-ORP]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP. Sestava je koncipována z hlediska území.
-**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
 
 ### [CHMU-SMS-ORP]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu ORP.
@@ -23,13 +23,16 @@ Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahují
 
 ### [CHMU-MAIL-2]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska nebezpečných jevů a je vhodná pro tisk.
-**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-HLAVICKA*
 
 ### [CHMU-CISELNIK]
 Předpis obsahující potřebné číselníky jevů a území.
 
 ### [CHMU-DATUMY]
 Předpis pro práci s datumy a časem.
+
+### [CHMU-HLAVICKA]
+Předpis pro jednotný úvod tiskové sestavy.
 
 ### [CHMU-PREPARE]
 Předpis pro přípravu seznamu platných jevů.

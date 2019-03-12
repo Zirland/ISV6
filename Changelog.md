@@ -1,6 +1,41 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 31 – 2019-03-10
+### [Knihovna/CHMU-EMAIL-KRAJ]
+#### Změněno
+- Vytržení hlavičky stránky do samostatného skriptu.
+
+### [Knihovna/CHMU-EMAIL-ORP]
+#### Změněno
+- Vytržení hlavičky stránky do samostatného skriptu.
+
+### [Knihovna/CHMU-HLAVICKA]
+#### Přidáno
+- Vyčlenění kódu do samostatného skriptu.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Přidáno
+- Řazení jevů podle času začátku platnosti.
+
+#### Změněno
+- Formátování názvu území.
+- Vytržení hlavičky stránky do samostatného skriptu.
+
+### [UVG/CHMU-EMAIL]
+#### Záplata
+- Oprava chybného kódování znaků.
+
+### [UVG/CHMU-MAIL-2]
+#### Přidáno
+- Řazení jevů podle času začátku platnosti.
+
+#### Změněno
+- Formátování názvu území.
+
+#### Záplata
+- Oprava chybného kódování znaků.
+
 ## verze 30 – 2019-03-06
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
