@@ -477,6 +477,15 @@ function PrepareInfo(orp, vystraha)
     
     infoList = infoListFilter;
     
+    infoList = infoList.sort(function (a, b) {
+        var start1 = parseFloat(Normalize(a.dc_zacatek));
+        var start2 = parseFloat(Normalize(b.dc_zacatek));
+
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
+        return 0;
+    });
+
     var krajList = [];
     var posledniKraj = {};
     var posledniOkres = {};
