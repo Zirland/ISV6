@@ -1,6 +1,23 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 32 – 2019-03-18
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Řazení jevů podle času
+
+### [Knihovna/CHMU-STYL]
+#### Změněno
+- Úprava stylu tabulky
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava stylu tabulky
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava stylu tabulky
+
 ## verze 31 – 2019-03-12
 ### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Změněno
