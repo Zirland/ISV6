@@ -250,8 +250,8 @@ function PrepareInfo(vystraha) {
     infoList = infoListFilter;
 
     infoList = infoList.sort(function (a, b) {
-        var start1 = parseFloat(a.dc_zacatek);
-        var start2 = parseFloat(b.dc_zacatek);
+        var start1 = parseFloat(Normalize(a.dc_zacatek));
+        var start2 = parseFloat(Normalize(b.dc_zacatek));
 
         if (start1 < start2) return -1;
         if (start1 > start2) return 1;
