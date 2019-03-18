@@ -1,7 +1,7 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## verze 32 – 2019-03-17
+## verze 32 – 2019-03-18
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
 - Řazení jevů podle času

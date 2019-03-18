@@ -1,4 +1,4 @@
-// Verze 31
+// Verze 32
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = true;
