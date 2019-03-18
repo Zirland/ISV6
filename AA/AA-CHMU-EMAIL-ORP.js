@@ -1,5 +1,5 @@
 //!JS
-// Verze 31
+// Verze 32
 
 //Číselník ORP viz samostatný soubor
 // viz dokumentace
