@@ -1,4 +1,4 @@
-//Verze 32
+//Verze 33
 
 // Připravíme seznam jevů podle území
 function PrepareInfo(orp, vystraha)
