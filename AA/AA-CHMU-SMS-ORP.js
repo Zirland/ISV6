@@ -1,5 +1,5 @@
 //!JS
-// Verze 32
+// Verze 33
 
 // zde např. Mělník. Číselník ORP viz samostatný soubor
 var omezitNaOrp = 141; 

@@ -1,5 +1,5 @@
 //!JS
-// Verze 32
+// Verze 33
 
 // zde např. Kraj Vysočina. Číselník krajů viz níže
 var omezitNaKraj = 108;

@@ -1,4 +1,4 @@
-//Verze 32
+//Verze 33
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -369,14 +369,14 @@ function ZobrazDatum(datum, format, end) {
         var normDatumMinuta = normDatum.substring(10,12);
         var normDatumSekunda = '00';
 
-    if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
-        var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
-        var newNormDatum = Normalize(myNewDay);
-        normDatumRok = newNormDatum.substring(0,4);
-        normDatumMesic = newNormDatum.substring(4,6);
-        normDatumDen = newNormDatum.substring(6,8);
-        normDatumHodina = '24';
-    }
+        if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
+            var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
+            var newNormDatum = Normalize(myNewDay);
+            normDatumRok = newNormDatum.substring(0,4);
+            normDatumMesic = newNormDatum.substring(4,6);
+            normDatumDen = newNormDatum.substring(6,8);
+            normDatumHodina = '24';
+        }
 
         switch (format) {
             case 'short' :
@@ -629,6 +629,30 @@ function PrintInfoList(krajList, ref_krajList)
 
         if (ref_krajList.length > 0)
         {
+            for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
+            {
+                ref_krajList[k].info[ri].pouzit = false;
+            }
+
+            for (var o = 0; o < ref_krajList[k].okresList.length; o++)
+            {
+                for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
+                {
+                    ref_krajList[k].okresList[o].info[ri].pouzit = false;
+                }
+
+                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length; ol++)
+                {
+                    for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
+                    {
+                        ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit = false;
+                    }
+                }
+            }
+        }
+
+        if (ref_krajList.length > 0)
+        {
             // Všechny, které jsme v daném kraji zrušili
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
             {
@@ -676,8 +700,9 @@ function PrintInfoList(krajList, ref_krajList)
                 // Zkusíme najít odpovídající záznam v referenční / předchozí výstraze
                 for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
                 {
-                    if (ref_krajList[k].info[ri].jev_kod == info.jev_kod)
+                    if (ref_krajList[k].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].info[ri].pouzit)
                     {
+                        ref_krajList[k].info[ri].pouzit = true;
                         ref_info = ref_krajList[k].info[ri];
                         ref_zpracovanyInfoStupen.push(ref_info.jev_kod);
                         break;
@@ -765,8 +790,9 @@ function PrintInfoList(krajList, ref_krajList)
                         {
                             for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
                             {
-                                if (ref_krajList[k].okresList[o].info[ri].jev_kod == info.jev_kod)
+                                if (ref_krajList[k].okresList[o].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].okresList[o].info[ri].pouzit)
                                 {
+                                    ref_krajList[k].okresList[o].info[ri].pouzit = true;
                                     ref_info = ref_krajList[k].okresList[o].info[ri];
                                     ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod);
                                     break;
@@ -856,8 +882,9 @@ function PrintInfoList(krajList, ref_krajList)
                             {
                                 for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
                                 {
-                                    if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod)
+                                    if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit)
                                     {
+                                        ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit = true;
                                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
                                         break;
                                     }
@@ -1298,13 +1325,14 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
 }
 
 // Hlavička HTML stránky
+resultText += '<!DOCTYPE html>';
 resultText += '<HTML>';
 resultText += '<HEAD>';
     resultText += '<META charset="utf-8"/>';
     resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
     resultText += '<style type="text/css">';
-    resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
+    resultText += '    body {font-family:serif;font-size:13px;}';
     resultText += '    .header {font-size:15px;text-align:center;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
     resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
@@ -1517,7 +1545,7 @@ if (vystraha.info && vystraha.info.length > 0)
         }
     }
 
-   if (situace.length > 0)
+    if (situace.length > 0)
     {
         var upr_situace = situace[0].replace(/&lt;br\/&gt;/g,' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;

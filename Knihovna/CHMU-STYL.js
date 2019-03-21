@@ -1,6 +1,6 @@
-//Verze 32
+//Verze 33
     resultText += '<style type="text/css">';
-    resultText += '    body {font-family:serif;font-size:13px;height:100%;}';
+    resultText += '    body {font-family:serif;font-size:13px;}';
     resultText += '    .header {font-size:15px;text-align:center;}';
     resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
     resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
