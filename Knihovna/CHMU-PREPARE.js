@@ -238,6 +238,30 @@ function PrintInfoList(krajList, ref_krajList, headers)
 
         if (ref_krajList.length > 0)
         {
+            for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
+            {
+                ref_krajList[k].info[ri].pouzit = false;
+            }
+
+            for (var o = 0; o < ref_krajList[k].okresList.length; o++)
+            {
+                for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
+                {
+                    ref_krajList[k].okresList[o].info[ri].pouzit = false;
+                }
+
+                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length; ol++)
+                {
+                    for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
+                    {
+                        ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit = false;
+                    }
+                }
+            }
+        }
+
+        if (ref_krajList.length > 0)
+        {
             // Všechny, které jsme v daném kraji zrušili
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
             {
@@ -467,9 +491,9 @@ function PrintInfoList(krajList, ref_krajList, headers)
                             {
                                 for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
                                 {
-                                    if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].okresList[o].info[ri].pouzit)
+                                    if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit)
                                     {
-                                        ref_krajList[k].okresList[o].info[ri].pouzit = true;
+                                        ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit = true;
                                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
                                         break;
                                     }
