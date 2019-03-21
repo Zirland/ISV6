@@ -1,12 +1,18 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## verze 33 – 2019-03-18
+## verze 33 – 2019-03-21
 ### [Knihovna/CHMU-PREPARE]
+#### Přidáno
+- Oprava tvorby vazeb jevů, vztah 1:1 (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
+
 #### Změněno
 - Řazení jevů podle času
 
 ### [UVG/CHMU-EMAIL]
+#### Přidáno
+- Oprava tvorby vazeb jevů, vztah 1:1 (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
+
 #### Změněno
 - Řazení jevů podle času
 
