@@ -676,8 +676,9 @@ function PrintInfoList(krajList, ref_krajList)
                 // Zkusíme najít odpovídající záznam v referenční / předchozí výstraze
                 for (var ri = 0; ri < ref_krajList[k].info.length; ri++)
                 {
-                    if (ref_krajList[k].info[ri].jev_kod == info.jev_kod)
+                    if (ref_krajList[k].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].info[ri].pouzit)
                     {
+                        ref_krajList[k].info[ri].pouzit = true;
                         ref_info = ref_krajList[k].info[ri];
                         ref_zpracovanyInfoStupen.push(ref_info.jev_kod);
                         break;
@@ -765,8 +766,9 @@ function PrintInfoList(krajList, ref_krajList)
                         {
                             for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++)
                             {
-                                if (ref_krajList[k].okresList[o].info[ri].jev_kod == info.jev_kod)
+                                if (ref_krajList[k].okresList[o].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].okresList[o].info[ri].pouzit)
                                 {
+                                    ref_krajList[k].okresList[o].info[ri].pouzit = true;
                                     ref_info = ref_krajList[k].okresList[o].info[ri];
                                     ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod);
                                     break;
@@ -856,8 +858,9 @@ function PrintInfoList(krajList, ref_krajList)
                             {
                                 for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++)
                                 {
-                                    if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod)
+                                    if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod && !ref_krajList[k].okresList[o].info[ri].pouzit)
                                     {
+                                        ref_krajList[k].okresList[o].info[ri].pouzit = true;
                                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
                                         break;
                                     }
