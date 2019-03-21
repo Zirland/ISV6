@@ -1,6 +1,7 @@
 //Verze 32
 
 // Hlavička HTML stránky
+resultText += '<!DOCTYPE html>';
 resultText += '<HTML>';
 resultText += '<HEAD>';
     resultText += '<META charset="utf-8"/>';
