@@ -1,6 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 34 – 2019-04-02
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Přidáno
+- Číslování zpráv dle pořadového čísla CAP.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Přidáno
+- Číslování zpráv dle pořadového čísla CAP.
+
+### [UVG/CHMU-SMS]
+#### Přidáno
+- Číslování zpráv dle pořadového čísla CAP.
+
 ## verze 33 – 2019-03-21
 ### [Knihovna/CHMU-PREPARE]
 #### Přidáno

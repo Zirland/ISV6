@@ -136,16 +136,18 @@ if (vystraha.info)
 
         switch (rezim) {
             case 'HPPS' :
-                uvod += 'HPPS: ';
+                uvod += 'HPPS ';
             break;
             case 'SIVS' :
-                uvod += 'SIVS: ';
+                uvod += 'SIVS ';
             break;
             case 'SVRS' :
-                uvod += 'SVRS: ';
+                uvod += 'SVRS ';
             break;
         }
 
+        var poradi_zpravy = vystraha.id.substring(vystraha.id.length - 6);
+        uvod += 'č. ' + Number(poradi_zpravy) + ': ';
         vystupText += uvod;
 
         // Připojíme připravený výpis jevů
