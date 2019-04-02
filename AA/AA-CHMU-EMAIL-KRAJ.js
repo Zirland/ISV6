@@ -1,17 +1,13 @@
 //!JS
-// Verze 33
+// Verze 34
 
 // viz dokumentace
-var hlavniKraj = 132;
-var zobrazovatVsechnyKraje = false;
+var hlavniKraj = -1;
+var zobrazovatVsechnyKraje = true;
 var razeniPodleNazvu = false;
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
 var pouzeZmeny = true;
-// Výsledkem této vzorové akce je
-// krajská sestava Moravskoslezského kraje,
-// která se vytváří pouze v situaci,
-// kdy na území kraje dojde ke změně.
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",

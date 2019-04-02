@@ -1,7 +1,6 @@
-// Verze 33
+// Verze 34
 
-// zde např. Moravskoslezský kraj. Číselník krajů viz níže
-var omezitNaKraj = 132;
+var omezitNaKraj = -1;
 var detailni = 0;
 var oddelovac = '\n';
 
@@ -322,16 +321,18 @@ if (vystraha.info)
 
         switch (rezim) {
             case 'HPPS' :
-                uvod += 'HPPS: ';
+                uvod += 'HPPS ';
             break;
             case 'SIVS' :
-                uvod += 'SIVS: ';
+                uvod += 'SIVS ';
             break;
             case 'SVRS' :
-                uvod += 'SVRS: ';
+                uvod += 'SVRS ';
             break;
         }
 
+        var poradi_zpravy = vystraha.id.substring(vystraha.id.length - 6);
+        uvod += 'č. ' + Number(poradi_zpravy) + ': ';
         vystupText += uvod;
 
         // Připojíme připravený výpis jevů

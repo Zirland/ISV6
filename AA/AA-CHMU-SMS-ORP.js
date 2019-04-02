@@ -1,8 +1,8 @@
 //!JS
-// Verze 33
+// Verze 34
 
-// zde např. Mělník. Číselník ORP viz samostatný soubor
-var omezitNaOrp = 141; 
+// zde např. Opava. Číselník ORP viz samostatný soubor
+var omezitNaOrp = 1945; 
 var detailni = 1;
 var oddelovac = '\n'; 
 // viz dokumentace k [CHMU-SMS]
