@@ -1,10 +1,10 @@
 //!JS
-// Verze 35
+// Verze 36
 
 // viz dokumentace
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
-var zobrazitZmeny = false;
+var pouzeZmeny = true;
 // Výsledkem této vzorové akce je
 // celostátní sestava,
 // která se vytváří pouze v situaci,

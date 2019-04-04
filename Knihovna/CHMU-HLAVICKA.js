@@ -1,13 +1,13 @@
-//Verze 35
+//Verze 36
 
 // Hlavička HTML stránky
 resultText += '<!DOCTYPE html>';
 resultText += '<HTML>';
 resultText += '<HEAD>';
-    resultText += '<META charset="utf-8"/>';
-    resultText += '<TITLE>' + vystraha.id + '</TITLE>';
+resultText += '<META charset="utf-8"/>';
+resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
-    #import "CHMU-STYL";
+#import "CHMU-STYL";
 
 resultText += '</HEAD>';
 resultText += '<BODY>';
