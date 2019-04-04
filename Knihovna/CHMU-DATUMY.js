@@ -87,6 +87,7 @@ function ZobrazDatum(datum, format, end) {
             break;
             case 'long' :
                 format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '.' + normDatumRok + ' ' + normDatumHodina + ':' + normDatumMinuta + ':' + normDatumSekunda;
+            break;
         }
         
     }
