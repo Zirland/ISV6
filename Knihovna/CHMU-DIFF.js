@@ -1,4 +1,4 @@
-//Verze 35
+//Verze 36
 
 zobrazitZmeny = true;
 

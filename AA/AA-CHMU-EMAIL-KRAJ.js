@@ -1,5 +1,5 @@
 //!JS
-// Verze 35
+// Verze 36
 
 // viz dokumentace
 var hlavniKraj = -1;
