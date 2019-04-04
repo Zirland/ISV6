@@ -1,6 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 36 – 2019-04-04
+### [AA/AA-CHMU-MAIL-2]
+#### Změněno
+- Zrušení parametru *zobrazitZmeny* a zavedení nového parametru *pouzeZmeny*.
+
+### [Knihovna/CHMU-DIFF]
+#### Přidáno
+- Vytvoření procedury pro zjištění, zda došlo ke změně oproti předchozí výstraze.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Přidáno
+- Ošetření případu prázdné výstrahy, při použití parametru **pouzeZmeny** je výsledkem prázdná akce.
+
 ## verze 35 – 2019-04-04
 ### [Knihovna/CHMU-DATUMY]
 #### Záplata
