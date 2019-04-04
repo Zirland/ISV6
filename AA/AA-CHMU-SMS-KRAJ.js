@@ -1,5 +1,5 @@
 //!JS
-// Verze 34
+// Verze 35
 
 var omezitNaKraj = -1;
 var detailni = 0;

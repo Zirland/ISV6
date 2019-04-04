@@ -1,6 +1,26 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 35 – 2019-04-04
+### [Knihovna/CHMU-DATUMY]
+#### Záplata
+- Oprava syntaxe zápisu.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Oprava porovnávání jevů. (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Oprava porovnávání jevů. (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
+
+#### Záplata
+- Oprava syntaxe zápisu.
+
+### [UVG/CHMU-MAIL-2]
+#### Záplata
+- Oprava syntaxe zápisu.
+
 ## verze 34 – 2019-04-02
 ### [Knihovna/CHMU-SMS-KRAJ]
 #### Přidáno
@@ -17,34 +37,34 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ## verze 33 – 2019-03-21
 ### [Knihovna/CHMU-PREPARE]
 #### Přidáno
-- Oprava tvorby vazeb jevů, vztah 1:1 (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
+- Oprava tvorby vazeb jevů, vztah 1:1. (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
 
 #### Změněno
-- Řazení jevů podle času
+- Řazení jevů podle času.
 
 ### [UVG/CHMU-EMAIL]
 #### Přidáno
-- Oprava tvorby vazeb jevů, vztah 1:1 (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
+- Oprava tvorby vazeb jevů, vztah 1:1. (řeší SU 38123; autor: Stratil Petr, RCS Kladno)
 
 #### Změněno
-- Řazení jevů podle času
+- Řazení jevů podle času.
 
 ## verze 32 – 2019-03-18
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
-- Řazení jevů podle času
+- Řazení jevů podle času.
 
 ### [Knihovna/CHMU-STYL]
 #### Změněno
-- Úprava stylu tabulky
+- Úprava stylu tabulky.
 
 ### [UVG/CHMU-EMAIL]
 #### Změněno
-- Úprava stylu tabulky
+- Úprava stylu tabulky.
 
 ### [UVG/CHMU-MAIL-2]
 #### Změněno
-- Úprava stylu tabulky
+- Úprava stylu tabulky.
 
 ## verze 31 – 2019-03-12
 ### [Knihovna/CHMU-EMAIL-KRAJ]

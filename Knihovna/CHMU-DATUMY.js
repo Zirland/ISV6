@@ -1,4 +1,4 @@
-//Verze 34
+//Verze 35
 
 // Úprava formátu data
 function Normalize(datum) {
@@ -87,6 +87,7 @@ function ZobrazDatum(datum, format, end) {
             break;
             case 'long' :
                 format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '.' + normDatumRok + ' ' + normDatumHodina + ':' + normDatumMinuta + ':' + normDatumSekunda;
+            break;
         }
         
     }
