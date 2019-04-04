@@ -216,7 +216,7 @@ function PrepareInfo(orp, vystraha)
     return krajList;
 }
 
-function PrintInfoList(krajList, ref_krajList)
+function PrintInfoList(krajList, ref_krajList, headers)
 {
     var resultText = '';
     var zpracovanyInfoStupen = [];
