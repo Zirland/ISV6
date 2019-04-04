@@ -1,5 +1,5 @@
 //!JS
-// Verze 34
+// Verze 35
 
 // zde např. Opava. Číselník ORP viz samostatný soubor
 var omezitNaOrp = 1945; 

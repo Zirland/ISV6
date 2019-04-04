@@ -1,5 +1,5 @@
 //!JS
-// Verze 34
+// Verze 35
 
 // viz dokumentace
 var omezitNaKraj = -1;
