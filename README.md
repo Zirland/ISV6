@@ -23,13 +23,16 @@ Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahují
 
 ### [CHMU-MAIL-2]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska nebezpečných jevů a je vhodná pro tisk.
-**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-HLAVICKA*
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-HLAVICKA*, *CHMU-ZVYR-ZMEN*, *CHMU-PREPARE*, *CHMU-DIFF*
 
 ### [CHMU-CISELNIK]
 Předpis obsahující potřebné číselníky jevů a území.
 
 ### [CHMU-DATUMY]
 Předpis pro práci s datumy a časem.
+
+### [CHMU-DIFF]
+Procedura pro zjištění zda došlo ke změně oproti předchozí výstraze.
 
 ### [CHMU-HLAVICKA]
 Předpis pro jednotný úvod tiskové sestavy.
@@ -146,9 +149,12 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
-Parametr **zobrazitZmeny** je vždy nastaven na *false*.
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 
-Předpis neumožňuje (zatím) porovnávání aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
+- Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
+- Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
+
+Předpis neumožňuje barevné zvýrazenění rozdílu aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
 ---
 ---

@@ -2,9 +2,11 @@
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
+#import "CHMU-ZVYR-ZMEN";
+#import "CHMU-PREPARE";
 
 // Připravíme seznam jevů podle území
-function PrepareInfo(vystraha) {
+function PrepareInfo2(vystraha) {
     var infoList = [];
 
     // Připravíme si pole info jevů
@@ -223,83 +225,7 @@ function PrepareKraje(orp, infoList) {
     return krajList;
 }
 
-function GetWarningColor(info) {
-    // Barva podle závažnosti
-    var color = '';
-
-    if (info)
-    {
-        switch (info.zavaznost_kod) {
-            case 'Moderate' : 
-                color = 'Žlutá';
-            break;
-            case 'Severe' : 
-                color = 'Oranžová';
-            break;
-            case 'Extreme' : 
-                color = 'Červená';
-            break;
-        }
-    }
-
-    return color;
-}
-
-function PozadiColor(info) {
-    // Barva podle závažnosti
-    var pozadi = '#fff';
-
-    if (info)
-    {
-        switch (info.zavaznost_kod) {
-            case 'Moderate' : 
-                pozadi = '#ff0';
-            break;
-            case 'Severe' : 
-                pozadi = '#ffa500';
-            break;
-            case 'Extreme' : 
-                pozadi = '#f00';
-            break;
-        }
-    }
-
-    return pozadi;
-}
-
-function PrintVyska(info) {
-    var vyskaText = '';
-
-    if (info && info.vyska)
-    {
-        var vyska = info.vyska.substring(1, info.vyska.length - 1);
-        var vyskaSplit = vyska.split('-');
-
-        if (vyskaSplit.length == 2)
-        {
-            if (vyskaSplit[0] && vyskaSplit[1])
-            {
-                vyskaText = '<br/>mezi ' + Math.round(vyskaSplit[0] * 0.3048) + ' a ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
-            }
-            else if (vyskaSplit[0])
-            {
-                vyskaText = '<br/>nad ' + Math.round(vyskaSplit[0] * 0.3048) + ' m n.m.';
-            }
-            else if (vyskaSplit[1])
-            {
-                vyskaText = '<br/>pod ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
-            }
-        }
-        else
-        {
-            vyskaText = '<br/>' + Math.round(vyska * 0.3048);
-        }
-    }
-
-    return vyskaText;
-}
-
-function PrintInfo(info, ref_info) {
+function PrintInfo2(info, ref_info) {
     var resultText = '';
 
     if (info) {
@@ -331,115 +257,7 @@ function PrintInfo(info, ref_info) {
         ref_uzemi_count = ref_pole_uzemi[1];
     }
 
-    if (zobrazitZmeny && uzemi_count > 0) {
-        resultText += '<br/><div><table class="tg" width="100%" border="1">';
-
-        // Hlavička
-        resultText += '<tr>';
-            resultText += '<td width="20%">';
-            pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            pomoc = HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            pomoc = HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            resultText += '</td>';
-            resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">';
-
-            pomoc = SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            resultText += '</td>';
-            resultText += '<td>';
-
-            if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
-                resultText += 'do odvolání';
-            } else {
-                resultText += '<table class="no" border="0">';
-                resultText += '<tr><td>';
-                
-                if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
-                    resultText += ZobrazDatum(info.dc_zacatek, 'short');
-                } else {
-                    pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
-                    resultText += pomoc.split('|')[0];
-                    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-                }
-                
-                resultText += '</td>';
-                resultText += '<td>&nbsp;–&nbsp;</td>';
-
-                resultText += '<td>';
-                pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
-                resultText += pomoc.split('|')[0];
-                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-                resultText += '</td></tr>';
-                resultText += '</table>';
-            }
-            resultText += '</td>';
-        resultText += '</tr>';
-
-        if (info) {
-            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');}
-            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
-            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
-        }
-        if (ref_info) {
-            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');}
-            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
-            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
-        }
-
-        // Popis
-        resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Popis:</b> '
-
-            pomoc = HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            resultText += '</td>';
-        resultText += '</tr>';
-
-        // Hydrologická zpráva
-        if (info && (info.hydroPredpoved)) {
-            resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ';
-
-            pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-
-            resultText += '</td>';
-            resultText += '</tr>';
-        }
-
-        // Doporučení
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Doporučení:</b> ';
-
-        pomoc = HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '</tr>';
-
-        // Územní platnost
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Územní platnost:</b> ' + HighlightDiff(info != null ? uzemi_seznam : '', ref_info != null ? ref_uzemi_seznam : '') + '</td>';
-        resultText += '</tr>';
-
-        resultText += '</table></div>';
-    } else if (uzemi_count > 0) {
+    if (uzemi_count > 0) {
         resultText += '<br/><div><table class="tg" width="100%" border="1 ">';
 
         // Hlavička
@@ -1182,6 +1000,8 @@ function JevUzemi(info) {
     return resultText;
 }
 
+#import "CHMU-DIFF";
+
 var orpSort = orp;
 orpSort.sort(function (a, b) {
     var kraj1 = parseFloat(a.kraj.id);
@@ -1218,7 +1038,6 @@ if (omezitNaKraj != -1)
 }
 
 // Samotná zpráva
-zobrazitZmeny = false;
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];
@@ -1227,13 +1046,13 @@ var vytvoreni = vystraha.dc_odeslano;
 // Připravíme jednotlivé info jevy
 if (vystraha.info && vystraha.info.length > 0)
 {
-    infoList = PrepareInfo(vystraha);
+    infoList = PrepareInfo2(vystraha);
     krajList = PrepareKraje(orp, infoList);
 }
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
 {
-    ref_infoList = PrepareInfo(ref_vystraha);
+    ref_infoList = PrepareInfo2(ref_vystraha);
     ref_krajList = PrepareKraje(orp, ref_infoList);
 }
 
@@ -1276,7 +1095,7 @@ if (vystraha.info && vystraha.info.length > 0)
 
     for (x = 0; x < infoList.length; x++) {
         var info = infoList[x];
-        resultText += PrintInfo(info);
+        resultText += PrintInfo2(info);
         empty = false;
     }
 }
@@ -1340,3 +1159,7 @@ resultText += dist;
 // Ukončení stránky
 resultText += '</BODY>';
 resultText += '</HTML>';
+
+if ((Number(zmen) == 0 && pouzeZmeny) || empty) {
+    resultText = '';
+}
