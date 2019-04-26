@@ -1,7 +1,7 @@
 // Verze 36
 
 var omezitNaKraj = -1;
-var detailni = 0;
+var detailni = 1;
 var oddelovac = '\n';
 
 var KRAJE_NAZVY = {
@@ -271,8 +271,15 @@ if (vystraha.info)
                     seznkraje += KRAJE_KODY[jevKrajeList[t]] + ', ';
                 }
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
-                resultText += seznkraje + oddelovac;
+                resultText += seznkraje;
                 sms1 = resultText;
+                if (detailni) {
+                    resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms1 += ' do ' + ukonceni + oddelovac;
+                } else {
+                    resultText += oddelovac;
+                    sms1 += oddelovac;
+                }
             } else {
                 if (detailni) {
                     resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
@@ -339,7 +346,7 @@ if (vystraha.info)
         vystupText += resultText;
 
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
-        if (omezitNaKraj == -1 || !detailni) {
+        if (!detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
             sms1 += 'Platnost do ' + total_ukonceni + oddelovac;
         }
@@ -411,18 +418,26 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
                     seznkraje += KRAJE_KODY[jevKrajeList2[t]] + ', ';
                 }
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
-                resultText += seznkraje + oddelovac;
+                resultText += seznkraje;
+                sms2 = resultText;
+                if (detailni) {
+                    resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += ' do ' + ukonceni + oddelovac;
+                } else {
+                    resultText += oddelovac;
+                    sms2 += oddelovac;
+                }
             } else {
                 if (detailni) {
-                    resultText += JEVY_NAZVY[poleJevy2[h]] + ' do ' + ukonceni + oddelovac;
+                    resultText += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
                 }
             }
         }
     }
-
-    sms2 += resultText;
 
     // Vypočítáme celkovou dobu platnosti výstrahy
     starty = Math.min.apply(null, zacatky);
@@ -436,7 +451,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
 
     if (start != 'Infinity') {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
-        if (omezitNaKraj == -1 || !detailni) {
+        if (!detailni) {
             sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
         }
     }
