@@ -1330,6 +1330,56 @@ resultText += '</style>';
 resultText += '</HEAD>';
 resultText += '<BODY>';
 
+resultText += 'Distribuce: ';
+
+var dist = '';
+
+// Vytáhneme informaci, kterých krajů se výstraha týká
+for (var k = 0; k < krajList.length; k++)
+{
+    var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+
+    for (var o = 0; o < krajList[k].okresList.length && !found; o++)
+    {
+        found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+
+        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++)
+        {
+            found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
+        }
+    }
+
+    if (found)
+    {
+        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
+    }
+}
+
+if (krajList.length == 0)
+{
+    for (var k = 0; k < ref_krajList.length; k++)
+    {
+        var found = ref_krajList[k].info.length > 0;
+
+        for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++)
+        {
+            found = ref_krajList[k].okresList[o].info.length > 0;
+
+            for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++)
+            {
+                found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+            }
+        }
+
+        if (found)
+        {
+            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
+        }
+    }
+}
+
+resultText += dist + '<br/>';
+
 var found = false;
 if (vystraha.ucel == 'Actual') {
     // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
@@ -1558,56 +1608,10 @@ if (empty)
     resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-resultText += '</div><hr/>';
-resultText += '<br/>Distribuce: ';
+resultText += '</div>';
 
-var dist = '';
-
-// Vytáhneme informaci, kterých krajů se výstraha týká
-for (var k = 0; k < krajList.length; k++)
-{
-    var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
-
-    for (var o = 0; o < krajList[k].okresList.length && !found; o++)
-    {
-        found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
-
-        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++)
-        {
-            found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
-        }
-    }
-
-    if (found)
-    {
-        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-    }
-}
-
-if (krajList.length == 0)
-{
-    for (var k = 0; k < ref_krajList.length; k++)
-    {
-        var found = ref_krajList[k].info.length > 0;
-
-        for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++)
-        {
-            found = ref_krajList[k].okresList[o].info.length > 0;
-
-            for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++)
-            {
-                found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
-            }
-        }
-
-        if (found)
-        {
-            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
-        }
-    }
-}
-
-resultText += dist;
+resultText += '<br/>';
+resultText += '<br/>';
 
 // Ukončení stránky
 resultText += '</BODY>';
