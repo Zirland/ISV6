@@ -6,6 +6,7 @@ var razeniPodleNazvu = false;
 var zobrazitVyhled = true;
 var zobrazitZmeny = true;
 var pouzeZmeny = false;
+var distrSeznamNahore = true;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -1204,45 +1205,48 @@ resultText += '</style>';
 resultText += '</HEAD>';
 resultText += '<BODY>';
 
-resultText += 'Distribuce: ';
-var dist = '';
+if (distrSeznamNahore == true) {
 
-// Vytáhneme informaci, kterých krajů se výstraha týká
-for (var k = 0; k < krajList.length; k++) {
-    var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+    resultText += 'Distribuce: ';
+    var dist = '';
 
-    for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
-        found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+    // Vytáhneme informaci, kterých krajů se výstraha týká
+    for (var k = 0; k < krajList.length; k++) {
+        var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
 
-        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++) {
-            found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
-        }
-    }
+        for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
+            found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
 
-    if (found) {
-        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-    }
-}
-
-if (krajList.length == 0) {
-    for (var k = 0; k < ref_krajList.length; k++) {
-        var found = ref_krajList[k].info.length > 0;
-
-        for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
-            found = ref_krajList[k].okresList[o].info.length > 0;
-
-            for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++) {
-                found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++) {
+                found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
             }
         }
 
         if (found) {
-            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
+            dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
         }
     }
-}
 
-resultText += dist + '<br/><hr/>';
+    if (krajList.length == 0) {
+        for (var k = 0; k < ref_krajList.length; k++) {
+            var found = ref_krajList[k].info.length > 0;
+
+            for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+                found = ref_krajList[k].okresList[o].info.length > 0;
+
+                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++) {
+                    found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+                }
+            }
+
+            if (found) {
+                dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
+            }
+        }
+    }
+
+    resultText += dist + '<hr/>';
+}
 
 var found = false;
 if (vystraha.ucel == 'Actual') {
@@ -1441,7 +1445,49 @@ if (empty) {
 
 resultText += '</div>';
 
-resultText += '<br/>';
+if (distrSeznamNahore == true) {
+
+    resultText += '<hr/>Distribuce: ';
+    var dist = '';
+
+    // Vytáhneme informaci, kterých krajů se výstraha týká
+    for (var k = 0; k < krajList.length; k++) {
+        var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+
+        for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
+            found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+
+            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++) {
+                found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
+            }
+        }
+
+        if (found) {
+            dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
+        }
+    }
+
+    if (krajList.length == 0) {
+        for (var k = 0; k < ref_krajList.length; k++) {
+            var found = ref_krajList[k].info.length > 0;
+
+            for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+                found = ref_krajList[k].okresList[o].info.length > 0;
+
+                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++) {
+                    found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+                }
+            }
+
+            if (found) {
+                dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
+            }
+        }
+    }
+
+    resultText += dist;
+}
+
 resultText += '<br/>';
 
 // Ukončení stránky
