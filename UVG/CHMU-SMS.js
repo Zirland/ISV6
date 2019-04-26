@@ -30,61 +30,117 @@ var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": 
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
+    "PI.1" : "VÝSKYT Vysoké teploty",
     "I.2" : "Velmi vysoké teploty",
+    "PI.2" : "VÝSKYT Velmi vysoké teploty",
     "I.3" : "Extrémně vysoké teploty",
+    "PI.3" : "VÝSKYT Extrémně vysoké teploty",
     "I.4" : "Silný mráz",
+    "PI.4" : "VÝSKYT Silný mráz",
     "I.5" : "Velmi silný mráz",
+    "PI.5" : "VÝSKYT Velmi silný mráz",
     "I.6" : "Extrémní mráz",
+    "PI.6" : "VÝSKYT Extrémní mráz",
     "II.1" : "Mráz ve vegetačním období",
+    "PII.1" : "VÝSKYT Mráz ve vegetačním období",
     "II.2" : "Prudký pokles teploty",
+    "PII.2" : "VÝSKYT Prudký pokles teploty",
     "III.1" : "Silný vítr",
+    "PIII.1" : "VÝSKYT Silný vítr",
     "III.2" : "Velmi silný vítr",
+    "PIII.2" : "VÝSKYT Velmi silný vítr",
     "III.3" : "Extrémně silný vítr",
+    "PIII.3" : "VÝSKYT Extrémně silný vítr",
     "IV.1" : "Nová sněhová pokrývka",
+    "PIV.1" : "VÝSKYT Nová sněhová pokrývka",
     "IV.2" : "Vysoká nová sněhová pokrývka",
+    "PIV.2" : "VÝSKYT Vysoká nová sněhová pokrývka",
     "IV.3" : "Extrémní sněhová pokrývka",
+    "PIV.3" : "VÝSKYT Extrémní sněhová pokrývka",
     "IV.4" : "Vysoká celková sněhová pokrývka",
+    "PIV.4" : "VÝSKYT Vysoká celková sněhová pokrývka",
     "V.1" : "Silné sněžení",
+    "PV.1" : "VÝSKYT Silné sněžení",
     "V.2" : "Extrémně silné sněžení",
+    "PV.2" : "VÝSKYT Extrémně silné sněžení",
     "VI.1" : "Sněhové jazyky",
+    "PVI.1" : "VÝSKYT Sněhové jazyky",
     "VI.2" : "Závěje",
+    "PVI.2" : "VÝSKYT Závěje",
     "VI.3" : "Sněhová bouře",
+    "PVI.3" : "VÝSKYT Sněhová bouře",
     "VII.1" : "Náledí",
+    "PVII.1" : "VÝSKYT Náledí",
     "VIII.1" : "Ledovka",
+    "PVIII.1" : "VÝSKYT Ledovka",
     "VIII.2" : "Silná ledovka",
+    "PVIII.2" : "VÝSKYT Silná ledovka",
     "VIII.3" : "Velmi silná ledovka",
+    "PVIII.3" : "VÝSKYT Velmi silná ledovka",
     "IX.1" : "Mrznoucí mlhy",
+    "PIX.1" : "VÝSKYT Mrznoucí mlhy",
     "IX.2" : "Silná námraza ",
+    "PIX.2" : "VÝSKYT Silná námraza ",
     "X.1" : "Silné bouřky",
+    "PX.1" : "VÝSKYT Silné bouřky",
     "X.2" : "Velmi silné bouřky",
+    "PX.2" : "VÝSKYT Velmi silné bouřky",
     "X.2a" : "Velmi silné bouřky s přívalovými srážkami",
+    "PX.2a" : "VÝSKYT Velmi silné bouřky s přívalovými srážkami",
     "X.3" : "Extrémně silné bouřky",
+    "PX.3" : "VÝSKYT Extrémně silné bouřky",
     "X.3a" : "Extrémně silné bouřky s přívalovými srážkami",
+    "PX.3a" : "VÝSKYT Extrémně silné bouřky s přívalovými srážkami",
     "XI.1" : "Vydatný déšť",
+    "PXI.1" : "VÝSKYT Vydatný déšť",
     "XI.2" : "Velmi vydatný déšť",
+    "PXI.2" : "VÝSKYT Velmi vydatný déšť",
     "XI.3" : "Extrémní srážky",
+    "PXI.3" : "VÝSKYT Extrémní srážky",
     "XII.1" : "Povodňová bdělost",
+    "PXII.1" : "VÝSKYT Povodňová bdělost",
     "XII.2" : "Povodňová pohotovost",
+    "PXII.2" : "VÝSKYT Povodňová pohotovost",
     "XII.3" : "Povodňové ohrožení",
+    "PXII.3" : "VÝSKYT Povodňové ohrožení",
     "XII.4" : "Extrémní povodňové ohrožení",
+    "PXII.4" : "VÝSKYT Extrémní povodňové ohrožení",
     "XIII.1" : "Povodňová bdělost – dotok",
+    "PXIII.1" : "VÝSKYT Povodňová bdělost – dotok",
     "XIII.2" : "Povodňová pohotovost – dotok",
+    "PXIII.2" : "VÝSKYT Povodňová pohotovost – dotok",
     "XIII.3" : "Povodňové ohrožení – dotok",
+    "PXIII.3" : "VÝSKYT Povodňové ohrožení – dotok",
     "XIII.4" : "Extrémní povodňové ohrožení – dotok",
+    "PXIII.4" : "VÝSKYT Extrémní povodňové ohrožení – dotok",
     "XIV.1" : "Nebezpečí požárů",
+    "PXIV.1" : "VÝSKYT Nebezpečí požárů",
     "XIV.2" : "Vysoké nebezpečí požárů",
+    "PXIV.2" : "VÝSKYT Vysoké nebezpečí požárů",
     "XV.1" : "Jiný jev",
+    "PXV.1" : "VÝSKYT Jiný jev",
     "XV.2" : "Jiný jev",
+    "PXV.2" : "VÝSKYT Jiný jev",
     "XV.3" : "Jiný jev",
+    "PXV.3" : "VÝSKYT Jiný jev",
     "OUTLOOK" : "Výhled nebezpečných jevů",
+    "POUTLOOK" : "Výhled nebezpečných jevů",
     "SMOGSIT.O3" : "Smogová situace O3",
+    "PSMOGSIT.O3" : "Smogová situace O3",
     "WARN.O3" : "Varování O3",
+    "PWARN.O3" : "Varování O3",
     "SMOGSIT.PM10" : "Smogová situace PM10",
+    "PSMOGSIT.PM10" : "Smogová situace PM10",
     "REG.PM10" : "Regulace PM10",
+    "PREG.PM10" : "Regulace PM10",
     "SMOGSIT.SO2" : "Smogová situace SO2",
+    "PSMOGSIT.SO2" : "Smogová situace SO2",
     "REG.SO2" : "Regulace SO2",
+    "PREG.SO2" : "Regulace SO2",
     "SMOGSIT.NO2" : "Smogová situace NO2",
+    "PSMOGSIT.NO2" : "Smogová situace NO2",
     "REG.NO2" : "Regulace NO2",
+    "PREG.NO2" : "Regulace NO2",
 };
 
 // Odstranění duplicitních výskytů kódů jevů
@@ -213,7 +269,12 @@ if (vystraha.info)
     for (var i = 0; i < vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
         if (vystraha.info[i].stupen_kod != 'OUTLOOK') { 
-            poleJevy.push(vystraha.info[i].stupen_kod);
+            var pomKod = '';
+            if (vystraha.info[i].jistota_kod == 'Observed') {
+                pomKod += 'P';
+            }
+            pomKod += vystraha.info[i].stupen_kod;
+            poleJevy.push(pomKod);
         }
     }
 
@@ -224,7 +285,11 @@ if (vystraha.info)
     for (var h = 0; h < poleJevy.length; h++) {
         var jevKrajeList = [];
         for (var i = 0; i < vystraha.info.length; i++) {
-            if (poleJevy[h] == vystraha.info[i].stupen_kod) {
+            var pomKodIvnj = '';
+            if (vystraha.info[i].jistota_kod == 'Observed') {
+                pomKodIvnj = 'P';
+            }
+            if (poleJevy[h] == pomKodIvnj + vystraha.info[i].stupen_kod) {
                 var found = omezitNaKraj == -1;
                 for (var j = 0; j < vystraha.info[i].kraj.length && !found; j++) {
                     found = vystraha.info[i].kraj[j].UID == omezitNaKraj;
@@ -367,7 +432,12 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     for (var i = 0; i < ref_vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů a vypršelé jevy
         if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) { 
-            poleJevy2.push(ref_vystraha.info[i].stupen_kod);
+            var pomKod2 = '';
+            if (ref_vystraha.info[i].jistota_kod == 'Observed') {
+                pomKod2 += 'P';
+            }
+            pomKod2 += ref_vystraha.info[i].stupen_kod;
+            poleJevy2.push(pomKod2);
         }
     }
 
@@ -378,7 +448,11 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     for (var h = 0; h < poleJevy2.length; h++) {
         var jevKrajeList2 = [];
         for (var i = 0; i < ref_vystraha.info.length; i++) {
-            if (poleJevy2[h] == ref_vystraha.info[i].stupen_kod) {
+           var pomKodIvnj2 = '';
+            if (ref_vystraha.info[i].jistota_kod == 'Observed') {
+                pomKodIvnj2 = 'P';
+            }
+            if (poleJevy2[h] == pomKodIvnj + ref_vystraha.info[i].stupen_kod) {
                 var found = omezitNaKraj == -1;
                 for (var j = 0; j < ref_vystraha.info[i].kraj.length && !found; j++) {
                     found = ref_vystraha.info[i].kraj[j].UID == omezitNaKraj;
