@@ -6,7 +6,7 @@ var razeniPodleNazvu = false;
 var zobrazitVyhled = true;
 var zobrazitZmeny = true;
 var pouzeZmeny = false;
-var distrSeznamNahore = true;
+var distrSeznamNahore = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
