@@ -146,8 +146,8 @@ var JEVY_NAZVY = {
 // Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
     var unique_array = []
-    for(var i = 0;i < arr.length; i++){
-        if(unique_array.indexOf(arr[i]) == -1){
+    for (var i = 0;i < arr.length; i++) {
+        if (unique_array.indexOf(arr[i]) == -1) {
             unique_array.push(arr[i])
         }
     }
@@ -262,8 +262,7 @@ function ZobrazDatum(datum, end) {
 var resultText = vystupText = '';
 var sms1 = sms2 = '';
 
-if (vystraha.info)
-{
+if (vystraha.info) {
     var poleJevy = [];
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < vystraha.info.length; i++) {
@@ -322,7 +321,9 @@ if (vystraha.info)
         }
         // Vymažeme duplicity, kdy je v jednom kraji jev opakovaně a následně kraje seřadíme
         jevKrajeList = removeDuplicates(jevKrajeList);
-        jevKrajeList = jevKrajeList.sort(function (a, b) {return a-b});
+        jevKrajeList = jevKrajeList.sort(function (a, b) {
+            return a-b;
+        });
 
         // Pokud máme ve zvoleném kraji výstrahu, přípravíme tělo se seznamem jevů, případně seznamem krajů a detailní platností
         if (jevKrajeList.length > 0) {
@@ -381,13 +382,16 @@ if (vystraha.info)
     } else {
         switch (vystraha.ucel) {
             case 'Exercise' :
-                uvod = 'Cvičná zpráva '; break;
+                uvod = 'Cvičná zpráva ';
+            break;
             case 'System' :
-                uvod = 'Systémová zpráva '; break;
+                uvod = 'Systémová zpráva ';
+            break;
             case 'Test' :
-                uvod = 'Testovací zpráva '; break;
+                uvod = 'Testovací zpráva ';
+            break;
             default : 
-                uvod = 'Výstraha '; break;
+                uvod = 'Výstraha ';
             break;
         }
 
@@ -425,8 +429,7 @@ if (vystraha.info)
 resultText = '';
 zacatky = konce = seznjevu = [];
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
-{
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     var poleJevy2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
@@ -478,7 +481,9 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
         }
         // Vymažeme duplicity, kdy je v jednom kraji jev opakovaně a následně kraje seřadíme
         jevKrajeList2 = removeDuplicates(jevKrajeList2);
-        jevKrajeList2 = jevKrajeList2.sort(function (a, b) {return a-b});
+        jevKrajeList2 = jevKrajeList2.sort(function (a, b) {
+            return a-b;
+        });
 
         // Pokud máme ve zvoleném kraji výstrahu, přípravíme tělo se seznamem jevů, případně seznamem krajů a detailní platností
         if (jevKrajeList2.length > 0) {
