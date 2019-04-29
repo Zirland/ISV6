@@ -81,7 +81,12 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. H
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
 
-### [AA-CHMU-SMS-kraj]
+Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je seznam distribuce (krajů) zobrazen pod přehledem nebezpečných jevů na posledním řádku sestavy.
+- Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
+
+### [AA-CHMU-SMS-KRAJ]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
@@ -154,6 +159,11 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
 
+Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je seznam distribuce (krajů) zobrazen pod přehledem nebezpečných jevů na posledním řádku sestavy.
+- Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
+
 Předpis neumožňuje barevné zvýrazenění rozdílu aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
 ---
@@ -190,6 +200,11 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. H
 
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
+
+Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je seznam distribuce (krajů) zobrazen pod přehledem nebezpečných jevů na posledním řádku sestavy.
+- Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
@@ -234,9 +249,12 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
-Parametr **zobrazitZmeny** je vždy nastaven na *false*.
+Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *true*.
 
-Předpis neumožňuje (zatím) porovnávání aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
+- Při hodnotě *false* je seznam distribuce (krajů) zobrazen pod přehledem nebezpečných jevů na posledním řádku sestavy.
+- Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
+
+Předpis neumožňuje porovnávání aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript

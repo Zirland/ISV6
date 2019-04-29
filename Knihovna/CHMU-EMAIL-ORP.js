@@ -27,16 +27,15 @@ var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
 // Připravíme jednotlivé info jevy
-if (vystraha.info && vystraha.info.length > 0)
-{
+if (vystraha.info && vystraha.info.length > 0) {
     krajList = PrepareInfo(orp, vystraha);
 }
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
-{
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
+var distrSeznamNahore = false;
 #import "CHMU-HLAVICKA";
 
 resultText += '<br/>Územní platnost: ';
@@ -52,25 +51,20 @@ resultText += '<hr/>';
 var empty = true;
 var zmen = 0;
 
-if (vystraha.info && vystraha.info.length > 0)
-{
+if (vystraha.info && vystraha.info.length > 0) {
     // Najdeme všechny situace
     var situace = [];
 
-    for (var i = 0; i < vystraha.info.length; i++)
-    {
-        if (vystraha.info[i].situace)
-        {
-            if (situace.indexOf(vystraha.info[i].situace) == -1)
-            {
+    for (var i = 0; i < vystraha.info.length; i++) {
+        if (vystraha.info[i].situace) {
+            if (situace.indexOf(vystraha.info[i].situace) == -1) {
                 // Vložíme situaci, kterou ještě nemáme
                 situace.push(vystraha.info[i].situace);
             }
         }
     }
 
-   if (situace.length > 0)
-    {
+   if (situace.length > 0) {
         var upr_situace = situace[0].replace(/&lt;br\/&gt;/g,' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/><div>';
@@ -79,9 +73,7 @@ if (vystraha.info && vystraha.info.length > 0)
     pomoc = PrintInfoList(krajList, ref_krajList, 0);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-}
-else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
-{
+} else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     // Výstraha ruší všechny předchozí jevy, tak je vypíšeme
 
     // Připravíme jednotlivé info jevy
@@ -93,8 +85,7 @@ else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystrah
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }
 
-if (empty)
-{
+if (empty) {
     resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
