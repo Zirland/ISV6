@@ -10,8 +10,7 @@ function PrepareInfo2(vystraha) {
     var infoList = [];
 
     // Připravíme si pole info jevů
-    for (var i = 0; i < vystraha.info.length; i++)
-    {
+    for (var i = 0; i < vystraha.info.length; i++) {
         var vyskaList = [];
         vystraha.info[i].orp = [];
         vystraha.info[i].vyska = '';
@@ -19,33 +18,26 @@ function PrepareInfo2(vystraha) {
         vystraha.info[i].okresPom = false;
         var orpSplit = vystraha.info[i].orp_list.toString().split(',');
 
-        for (var j = 0; j < orpSplit.length; j++)
-        {
+        for (var j = 0; j < orpSplit.length; j++) {
             // Najdeme, jestli se nejedná o údaj s výškou
             var index = orpSplit[j].indexOf('[');
-            if (index == -1)
-            {
+            if (index == -1) {
                 vystraha.info[i].orp.push(orpSplit[j]);
-            }
-            else
-            {
+            } else {
                 var vyska = orpSplit[j].substring(index);
-                if (vyskaList.indexOf(vyska) == -1)
-                {
+                if (vyskaList.indexOf(vyska) == -1) {
                     vyskaList.push(vyska);
                 }
             }
         }
 
         // Pokud máme alespoň jedno ORP bez určení výšky
-        if (vystraha.info[i].orp.length > 0)
-        {
+        if (vystraha.info[i].orp.length > 0) {
             infoList.push(vystraha.info[i]);
         }
 
         // Přes všechny dohledané výšky
-        for (var v = 0; v < vyskaList.length; v++)
-        {
+        for (var v = 0; v < vyskaList.length; v++) {
             // Vytvoříme kopii pro danou výšku
             var info = JSON.parse(JSON.stringify(vystraha.info[i]));
             info.orp = [];
@@ -56,14 +48,11 @@ function PrepareInfo2(vystraha) {
             info.dc_konec = new Date(info.dc_konec);
             info.dc_zacatek = new Date(info.dc_zacatek);
 
-            for (var j = 0; j < orpSplit.length; j++)
-            {
+            for (var j = 0; j < orpSplit.length; j++) {
                 // Záznam pro tuto výšku
-                if (orpSplit[j].indexOf(vyskaList[v]) != -1)
-                {
+                if (orpSplit[j].indexOf(vyskaList[v]) != -1) {
                     // Najdeme, kde výška začíná
-                    var index = orpSplit[j].indexOf('[');
-                    {
+                    var index = orpSplit[j].indexOf('['); {
                         info.orp.push(orpSplit[j].substring(0, index));
                     }
                 }
@@ -111,16 +100,12 @@ function PrepareKraje(orp, infoList) {
     var krajChange = true;
     var okresChange = true;
 
-    for (var i = 0; i < orp.length; i++)
-    {
+    for (var i = 0; i < orp.length; i++) {
         // Pokud se změnil kraj, tak ho přidáme do kolekce
-        if (posledniKraj.id != orp[i].kraj.id)
-        {
+        if (posledniKraj.id != orp[i].kraj.id) {
             // Uložíme si info jevy, které jsou pro celý kraj
-            for (var j = 0; j < infoList.length; j++)
-            {
-                if (posledniKraj.info && infoList[j].krajPom)
-                {
+            for (var j = 0; j < infoList.length; j++) {
+                if (posledniKraj.info && infoList[j].krajPom) {
                     posledniKraj.info.push(infoList[j]);
                 }
             }
@@ -134,20 +119,15 @@ function PrepareKraje(orp, infoList) {
 
             krajList.push(posledniKraj);
             krajChange = true;
-        }
-        else
-        {
+        } else {
             krajChange = false;
         }
 
         // Pokud se změnil okres, tak ho přidáme do kolekce
-        if (posledniOkres.id != orp[i].okres.id)
-        {
+        if (posledniOkres.id != orp[i].okres.id) {
             // Uložíme si info jevy, které jsou pro celý okres
-            for (var j = 0; j < infoList.length; j++)
-            {
-                if (posledniOkres.info && infoList[j].okresPom)
-                {
+            for (var j = 0; j < infoList.length; j++) {
+                if (posledniOkres.info && infoList[j].okresPom) {
                     posledniOkres.info.push(infoList[j]);
                 }
             }
@@ -161,9 +141,7 @@ function PrepareKraje(orp, infoList) {
 
             posledniKraj.okresList.push(posledniOkres);
             okresChange = true;
-        }
-        else
-        {
+        } else {
             okresChange = false;
         }
 
@@ -175,49 +153,37 @@ function PrepareKraje(orp, infoList) {
 
         posledniOkres.orpList.push(posledniOrp);
 
-        for (var j = 0; j < infoList.length; j++)
-        {
+        for (var j = 0; j < infoList.length; j++) {
             var maOrp = infoList[j].orp.indexOf(orp[i].id.toString()) != -1;
 
-            if (posledniOrp.info && maOrp)
-            {
+            if (posledniOrp.info && maOrp) {
                 posledniOrp.info.push(infoList[j]);
             }
 
-            if (krajChange)
-            {
+            if (krajChange) {
                 infoList[j].krajPom = maOrp
-            }
-            else
-            {
+            } else {
                 infoList[j].krajPom &= maOrp;
             }
 
-            if (okresChange)
-            {
+            if (okresChange) {
                 infoList[j].okresPom = maOrp
-            }
-            else
-            {
+            } else {
                 infoList[j].okresPom &= maOrp;
             }
         }
     }
 
     // Uložíme si info jevy, které jsou pro celý kraj
-    for (var j = 0; j < infoList.length; j++)
-    {
-        if (infoList[j].krajPom)
-        {
+    for (var j = 0; j < infoList.length; j++) {
+        if (infoList[j].krajPom) {
             posledniKraj.info.push(infoList[j]);
         }
     }
 
     // Uložíme si info jevy, které jsou pro celý okres
-    for (var j = 0; j < infoList.length; j++)
-    {
-        if (infoList[j].okresPom)
-        {
+    for (var j = 0; j < infoList.length; j++) {
+        if (infoList[j].okresPom) {
             posledniOkres.info.push(infoList[j]);
         }
     }
@@ -279,14 +245,26 @@ function PrintInfo2(info, ref_info) {
         resultText += '</tr>';
 
         if (info) {
-            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');}
-            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
-            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
+            if (info.popis) {
+                var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');
+            }
+            if (info.hydroPredpoved) {
+                var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+            }
+            if (info.doporuceni) {
+                var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+            }
         }
         if (ref_info) {
-            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');}
-            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
-            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
+            if (ref_info.popis) {
+                var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');
+            }
+            if (ref_info.hydroPredpoved) {
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+            }
+            if (ref_info.doporuceni) {
+                var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+            }
         }
 
         // Popis
@@ -330,7 +308,9 @@ function JevUzemi(info) {
     var orp_seznam = info.orp.toString();
 
     var orp_pole = orp_seznam.split(',');
-    orp_pole = orp_pole.sort(function (a, b) {return a-b});
+    orp_pole = orp_pole.sort(function (a, b) {
+        return a-b;
+    });
 
     uzemiKraje = [];
     uzemiOkresu = [];
@@ -967,15 +947,12 @@ function JevUzemi(info) {
         return 0;
     });
 
-    if (omezitNaKraj != -1)
-    {
+    if (omezitNaKraj != -1) {
         var uzemiTmp = [];
 
-        for (var i = 0; i < uzemiList.length; i++)
-        {
+        for (var i = 0; i < uzemiList.length; i++) {
             // Pokud se jedná o hlavní kraj
-            if (omezitNaKraj == uzemiList[i].kraj)
-            {
+            if (omezitNaKraj == uzemiList[i].kraj) {
                 // Dáme na začátek seznamu
                 uzemiTmp.push(uzemiList[i]);
             }
@@ -1020,15 +997,12 @@ orpSort.sort(function (a, b) {
     return 0;
 });
 
-if (omezitNaKraj != -1)
-{
+if (omezitNaKraj != -1) {
     var orpTmp = [];
 
-    for (var i = 0; i < orp.length; i++)
-    {
+    for (var i = 0; i < orp.length; i++) {
         // Pokud se jedná o hlavní kraj
-        if (omezitNaKraj == orp[i].kraj.id)
-        {
+        if (omezitNaKraj == orp[i].kraj.id) {
             // Dáme na začátek seznamu
             orpTmp.push(orp[i]);
         }
@@ -1044,14 +1018,12 @@ var ref_krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
 
 // Připravíme jednotlivé info jevy
-if (vystraha.info && vystraha.info.length > 0)
-{
+if (vystraha.info && vystraha.info.length > 0) {
     infoList = PrepareInfo2(vystraha);
     krajList = PrepareKraje(orp, infoList);
 }
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
-{
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     ref_infoList = PrepareInfo2(ref_vystraha);
     ref_krajList = PrepareKraje(orp, ref_infoList);
 }
@@ -1069,25 +1041,20 @@ resultText += '<hr/>';
 
 var empty = true;
 
-if (vystraha.info && vystraha.info.length > 0)
-{
+if (vystraha.info && vystraha.info.length > 0) {
     // Najdeme všechny situace
     var situace = [];
 
-    for (var i = 0; i < vystraha.info.length; i++)
-    {
-        if (vystraha.info[i].situace)
-        {
-            if (situace.indexOf(vystraha.info[i].situace) == -1)
-            {
+    for (var i = 0; i < vystraha.info.length; i++) {
+        if (vystraha.info[i].situace) {
+            if (situace.indexOf(vystraha.info[i].situace) == -1) {
                 // Vložíme situaci, kterou ještě nemáme
                 situace.push(vystraha.info[i].situace);
             }
         }
     }
 
-    if (situace.length > 0)
-    {
+    if (situace.length > 0) {
         var upr_situace = situace[0].replace(/&lt;br\/&gt;/g,' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/>';
@@ -1100,61 +1067,53 @@ if (vystraha.info && vystraha.info.length > 0)
     }
 }
 
-if (empty)
-{
+if (empty) {
     resultText += '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-resultText += '<hr/>';
-resultText += '<br/>Distribuce: ';
+if (distrSeznamNahore == false) {
+    resultText += '<hr/>';
+    resultText += '<br/>Distribuce: ';
 
-var dist = '';
+    var dist = '';
 
-// Vytáhneme informaci, kterých krajů se výstraha týká
-for (var k = 0; k < krajList.length; k++)
-{
-    var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+    // Vytáhneme informaci, kterých krajů se výstraha týká
+    for (var k = 0; k < krajList.length; k++) {
+        var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
 
-    for (var o = 0; o < krajList[k].okresList.length && !found; o++)
-    {
-        found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+        for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
+            found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
 
-        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++)
-        {
-            found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
-        }
-    }
-
-    if (found)
-    {
-        dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-    }
-}
-
-if (krajList.length == 0)
-{
-    for (var k = 0; k < ref_krajList.length; k++)
-    {
-        var found = ref_krajList[k].info.length > 0;
-
-        for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++)
-        {
-            found = ref_krajList[k].okresList[o].info.length > 0;
-
-            for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++)
-            {
-                found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++) {
+                found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
             }
         }
 
-        if (found)
-        {
-            dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
+        if (found) {
+            dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
         }
     }
-}
 
-resultText += dist;
+    if (krajList.length == 0) {
+        for (var k = 0; k < ref_krajList.length; k++) {
+            var found = ref_krajList[k].info.length > 0;
+
+            for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+                found = ref_krajList[k].okresList[o].info.length > 0;
+
+                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++) {
+                    found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+                }
+            }
+
+            if (found) {
+                dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
+            }
+        }
+    }
+
+    resultText += dist;
+}
 
 // Ukončení stránky
 resultText += '</BODY>';
