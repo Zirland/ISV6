@@ -119,7 +119,7 @@ if (empty) {
 }
 
 if (distrSeznamNahore == false) {
-    resultText += '<hr/>';
+    resultText += '</div><hr/>';
     resultText += '<br/>Distribuce: ';
 
     var dist = '';

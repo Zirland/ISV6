@@ -6,7 +6,6 @@ var omezitNaOrp = 337;
 var zobrazitVyhled = false; 
 var zobrazitZmeny = true;
 var pouzeZmeny = true;
-var distrSeznamNahore = false;
 
 #import "CHMU-EMAIL-ORP"; 
 

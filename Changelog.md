@@ -1,6 +1,59 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 37 – 2019-04-29
+### [AA/AA-CHMU-EMAIL-KRAJ]
+#### Přidáno
+- Zavedení nového parametru *distrSeznamNahore*.
+
+### [AA/AA-CHMU-MAIL-2]
+#### Přidáno
+- Zavedení nového parametru *distrSeznamNahore*.
+
+### [Knihovna/CHMU-CISELNIK]
+#### Přidáno
+- Zavedení nových číselníkových položek pro názvy jevů – varianta IVNJ.
+
+### [Knihovna/CHMU-EMAIL-KRAJ]
+#### Přidáno
+- Implementace zobrazení seznamu distribuce (kraje) dole.
+
+### [Knihovna/CHMU-EMAIL-ORP]
+#### Přidáno
+- Potlačení zobrazení seznamu distribuce (kraje).
+
+### [Knihovna/CHMU-HLAVICKA]
+#### Přidáno
+- Implementace zobrazení seznamu distribuce (kraje) nahoře.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Přidáno
+- Implementace zobrazení seznamu distribuce (kraje) dole.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Přidáno
+- Možnost vytvoření detailní SMS také pro celou republiku (GŘ).
+- Rozlišení případu IVNJ od předpovídaného jevu.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Přidáno
+- Rozlišení případu IVNJ od předpovídaného jevu.
+
+###[UVG/CHMU-EMAIL]
+#### Přidáno
+- Zavedení nového parametru *distrSeznamNahore*.
+- Možnost zobrazení seznamu distribuce (kraje) nahoře nebo dole.
+
+###[UVG/CHMU-MAIL-2]
+#### Přidáno
+- Zavedení nového parametru *distrSeznamNahore*.
+- Možnost zobrazení seznamu distribuce (kraje) nahoře nebo dole.
+
+### [UVG/CHMU-SMS]
+#### Přidáno
+- Možnost vytvoření detailní SMS také pro celou republiku (GŘ).
+- Rozlišení případu IVNJ od předpovídaného jevu.
+
 ## verze 36 – 2019-04-04
 ### [AA/AA-CHMU-MAIL-2]
 #### Změněno
