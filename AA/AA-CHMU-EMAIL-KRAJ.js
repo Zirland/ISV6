@@ -1,13 +1,13 @@
 //!JS
-// Verze 36
+// Verze 37
 
-// viz dokumentace
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
 var razeniPodleNazvu = false;
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
 var pouzeZmeny = true;
+var distrSeznamNahore = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -27,7 +27,6 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-// zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny
 #import "CHMU-EMAIL-KRAJ"; 
 
 if (resultText !== 'undefined' && resultText) {

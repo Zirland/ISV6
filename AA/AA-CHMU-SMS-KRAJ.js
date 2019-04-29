@@ -1,8 +1,8 @@
 //!JS
-// Verze 36
+// Verze 37
 
 var omezitNaKraj = -1;
-var detailni = 0;
+var detailni = 1;
 var oddelovac = '\n';
 
 var KRAJE_NAZVY = {
@@ -22,16 +22,11 @@ var KRAJE_NAZVY = {
     "132": "Moravskoslezský kraj",
     "141": "Zlínský kraj"
 };
-// viz dokumentace k [CHMU-SMS]
 
-// zde vytvoříme tělo SMS dle obsahu CAP pomocí skriptu z knihovny
 #import "CHMU-SMS-KRAJ"; 
 
 if (vystupText != '') {
-    // Upozorňuji, že tělo SMS zprávy nekončí zalomením řádku. Já si proto odřádkuji. Ale vy nemusíte, pokud nechcete.
     vystupText += "\n";
-
-    // Podpis na konci každé SMS.
     vystupText += "OPIS GŘ HZS ČR";
 }
 

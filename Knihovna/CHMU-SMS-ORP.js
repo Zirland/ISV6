@@ -1,4 +1,4 @@
-// Verze 36
+// Verze 37
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
@@ -10,8 +10,8 @@ var seznjevu = [];
 // Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
     var unique_array = []
-    for(var i = 0;i < arr.length; i++){
-        if(unique_array.indexOf(arr[i]) == -1){
+    for (var i = 0;i < arr.length; i++) {
+        if (unique_array.indexOf(arr[i]) == -1) {
             unique_array.push(arr[i])
         }
     }
@@ -28,7 +28,12 @@ if (vystraha.info) {
     for (var i = 0; i < vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
         if (vystraha.info[i].stupen_kod != 'OUTLOOK' && (vystraha.info[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) { 
-            poleJevy.push(vystraha.info[i].stupen_kod);
+            var pomKod = '';
+            if (vystraha.info[i].jistota_kod == 'Observed') {
+                pomKod += 'P';
+            }
+            pomKod += vystraha.info[i].stupen_kod;
+            poleJevy.push(pomKod);
             platne.push(vystraha.info[i]);
         }
     }
@@ -40,7 +45,11 @@ if (vystraha.info) {
     for (var h = 0; h < poleJevy.length; h++) {
         var jevStart = jevEnd = [];
         for (var i = 0; i < platne.length; i++) {
-            if (poleJevy[h] == platne[i].stupen_kod) {
+            var pomKodIvnj = '';
+            if (vystraha.info[i].jistota_kod == 'Observed') {
+                pomKodIvnj = 'P';
+            }
+            if (poleJevy[h] == pomKodIvnj + platne[i].stupen_kod) {
                 warn_type = 'SVRS';
                 if (platne[i].SIVS == '1') {
                     warn_type = 'SIVS';
@@ -103,13 +112,16 @@ if (vystraha.info) {
     } else {
         switch (vystraha.ucel) {
             case 'Exercise' :
-                uvod = 'Cvičná zpráva '; break;
+                uvod = 'Cvičná zpráva ';
+            break;
             case 'System' :
-                uvod = 'Systémová zpráva '; break;
+                uvod = 'Systémová zpráva ';
+            break;
             case 'Test' :
-                uvod = 'Testovací zpráva '; break;
+                uvod = 'Testovací zpráva ';
+            break;
             default : 
-                uvod = 'Výstraha '; break;
+                uvod = 'Výstraha ';
             break;
         }
 
@@ -145,15 +157,19 @@ if (vystraha.info) {
 resultText = '';
 zacatky = konce = seznjevu = [];
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0)
-{
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     var poleJevy2 = [];
     var platne2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
         if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && (ref_vystraha.info[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) { 
-            poleJevy2.push(ref_vystraha.info[i].stupen_kod);
+            var pomKod2 = '';
+            if (ref_vystraha.info[i].jistota_kod == 'Observed') {
+                pomKod2 += 'P';
+            }
+            pomKod2 += ref_vystraha.info[i].stupen_kod;
+            poleJevy2.push(pomKod2);
             platne2.push(ref_vystraha.info[i]);
         }
     }
@@ -165,7 +181,11 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     for (var h = 0; h < poleJevy2.length; h++) {
         var jevStart = jevEnd = [];
         for (var i = 0; i < platne2.length; i++) {
-            if (poleJevy2[h] == platne2[i].stupen_kod) {
+           var pomKodIvnj2 = '';
+            if (ref_vystraha.info[i].jistota_kod == 'Observed') {
+                pomKodIvnj2 = 'P';
+            }
+            if (poleJevy2[h] == pomKodIvnj + platne2[i].stupen_kod) {
                 warn_type = 'SVRS';
                 if (platne2[i].SIVS == '1') {
                     warn_type = 'SIVS';

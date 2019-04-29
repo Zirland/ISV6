@@ -1,14 +1,10 @@
 //!JS
-// Verze 36
+// Verze 37
 
-// viz dokumentace
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
 var pouzeZmeny = true;
-// Výsledkem této vzorové akce je
-// celostátní sestava,
-// která se vytváří pouze v situaci,
-// kdy na území ČR je platná výstraha a dojde ke změně.
+var distrSeznamNahore = false;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -28,7 +24,6 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-// zde vytvoříme tělo mailu dle obsahu CAP pomocí skriptu z knihovny
 #import "CHMU-MAIL-2"; 
 
 if (resultText !== 'undefined' && resultText) {
