@@ -1,4 +1,4 @@
-//Verze 36
+//Verze 37
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
