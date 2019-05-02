@@ -437,7 +437,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů a vypršelé jevy
-        if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) {
+        if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) { 
             var pomKod2 = '';
             if (ref_vystraha.info[i].jistota_kod == 'Observed') {
                 pomKod2 += 'P';
