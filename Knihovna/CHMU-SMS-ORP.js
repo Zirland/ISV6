@@ -156,7 +156,7 @@ if (vystraha.info) {
 }
 
 resultText = '';
-zacatky = konce = seznjevu = [];
+zacatky = konce = [];
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     var poleJevy2 = [];
@@ -228,7 +228,9 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     total_zahajeni = ZobrazDatumSMS(start);
     total_ukonceni = ZobrazDatumSMS(end, 1);
 
-    if (start != 'Infinity') {
+    if (start == 'Infinity') {
+        sms2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+    } else {
         if (!detailni) {
             sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
         }

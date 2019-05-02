@@ -430,7 +430,7 @@ if (vystraha.info) {
 }
 
 resultText = '';
-zacatky = konce = seznjevu = [];
+zacatky = konce = [];
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     var poleJevy2 = [];
@@ -467,14 +467,6 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList2.push(ref_vystraha.info[i].kraj[j].UID);
-                        warn_type = 'SVRS';
-                        if (ref_vystraha.info[i].SIVS == '1') {
-                            warn_type = 'SIVS';
-                        }
-                        if (ref_vystraha.info[i].HPPS == '1') {
-                            warn_type = 'HPPS';
-                        }
-                        seznjevu.push(warn_type);
                         zacatek = Normalize(ref_vystraha.info[i].dc_zacatek);
                         zacatky.push(zacatek);
                         konec = 999999999999;
