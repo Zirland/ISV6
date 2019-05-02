@@ -437,7 +437,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů a vypršelé jevy
-        if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) { 
+        if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) {
             var pomKod2 = '';
             if (ref_vystraha.info[i].jistota_kod == 'Observed') {
                 pomKod2 += 'P';
@@ -467,7 +467,14 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList2.push(ref_vystraha.info[i].kraj[j].UID);
-
+                        warn_type = 'SVRS';
+                        if (ref_vystraha.info[i].SIVS == '1') {
+                            warn_type = 'SIVS';
+                        }
+                        if (ref_vystraha.info[i].HPPS == '1') {
+                            warn_type = 'HPPS';
+                        }
+                        seznjevu.push(warn_type);
                         zacatek = Normalize(ref_vystraha.info[i].dc_zacatek);
                         zacatky.push(zacatek);
                         konec = 999999999999;
