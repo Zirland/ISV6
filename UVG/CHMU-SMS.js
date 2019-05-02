@@ -432,7 +432,7 @@ if (vystraha.info) {
 resultText = '';
 zacatky = konce = seznjevu = [];
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     var poleJevy2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
@@ -492,7 +492,9 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
         if (jevKrajeList2.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy2[h]];
+                sms2 += JEVY_NAZVY[poleJevy2[h]];
                 resultText += ' pro kraje ';
+                sms2 += ' pro kraje ';
 
                 var seznkraje = '';
 
@@ -501,7 +503,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
                 }
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
                 resultText += seznkraje;
-                sms2 = resultText;
+                sms2 += seznkraje;
                 if (detailni) {
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms2 += ' do ' + ukonceni + oddelovac;
