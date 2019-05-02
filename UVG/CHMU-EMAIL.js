@@ -1489,12 +1489,13 @@ if (distrSeznamNahore == true) {
 }
 
 resultText += '<br/>';
+resultText += '<br/>';
 
 // Ukončení stránky
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if ((Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) || (empty && pouzeZmeny)) {
+if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
     resultText = '';
 }
 
