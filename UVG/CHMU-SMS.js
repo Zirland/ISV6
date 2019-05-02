@@ -329,7 +329,9 @@ if (vystraha.info) {
         if (jevKrajeList.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy[h]];
+                sms1 += JEVY_NAZVY[poleJevy[h]];
                 resultText += ' pro kraje ';
+                sms1 += ' pro kraje ';
 
                 var seznkraje = '';
 
@@ -338,7 +340,7 @@ if (vystraha.info) {
                 }
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
                 resultText += seznkraje;
-                sms1 = resultText;
+                sms1 += seznkraje;
                 if (detailni) {
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += ' do ' + ukonceni + oddelovac;
@@ -529,7 +531,9 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     total_zahajeni = ZobrazDatum(start);
     total_ukonceni = ZobrazDatum(end, 1);
 
-    if (start != 'Infinity') {
+    if (start == 'Infinity') {
+        sms2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+    } else {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (!detailni) {
             sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
