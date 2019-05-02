@@ -379,6 +379,7 @@ if (vystraha.info) {
 
     if (start == 'Infinity') {
         vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+        sms1 += vystupText;
     } else {
         switch (vystraha.ucel) {
             case 'Exercise' :
