@@ -454,11 +454,11 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     for (var h = 0; h < poleJevy2.length; h++) {
         var jevKrajeList2 = [];
         for (var i = 0; i < ref_vystraha.info.length; i++) {
-           var pomKodIvnj2 = '';
+            var pomKod2Ivnj = '';
             if (ref_vystraha.info[i].jistota_kod == 'Observed') {
-                pomKodIvnj2 = 'P';
+                pomKod2Ivnj = 'P';
             }
-            if (poleJevy2[h] == pomKodIvnj + ref_vystraha.info[i].stupen_kod) {
+            if (poleJevy2[h] == pomKod2Ivnj + ref_vystraha.info[i].stupen_kod) {
                 var found = omezitNaKraj == -1;
                 for (var j = 0; j < ref_vystraha.info[i].kraj.length && !found; j++) {
                     found = ref_vystraha.info[i].kraj[j].UID == omezitNaKraj;
