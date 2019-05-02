@@ -88,7 +88,9 @@ if (vystraha.info) {
         if (jevKrajeList.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy[h]];
+                sms1 += JEVY_NAZVY[poleJevy[h]];
                 resultText += ' pro kraje ';
+                sms1 += ' pro kraje ';
 
                 var seznkraje = '';
 
@@ -97,7 +99,7 @@ if (vystraha.info) {
                 }
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
                 resultText += seznkraje;
-                sms1 = resultText;
+                sms1 += seznkraje;
                 if (detailni) {
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += ' do ' + ukonceni + oddelovac;
@@ -188,9 +190,9 @@ if (vystraha.info) {
 }
 
 resultText = '';
-zacatky = konce = seznjevu = [];
+zacatky = konce = [];
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     var poleJevy2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_vystraha.info.length; i++) {
@@ -212,11 +214,11 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     for (var h = 0; h < poleJevy2.length; h++) {
         var jevKrajeList2 = [];
         for (var i = 0; i < ref_vystraha.info.length; i++) {
-           var pomKodIvnj2 = '';
+            var pomKod2Ivnj = '';
             if (ref_vystraha.info[i].jistota_kod == 'Observed') {
-                pomKodIvnj2 = 'P';
+                pomKod2Ivnj = 'P';
             }
-            if (poleJevy2[h] == pomKodIvnj + ref_vystraha.info[i].stupen_kod) {
+            if (poleJevy2[h] == pomKod2Ivnj + ref_vystraha.info[i].stupen_kod) {
                 var found = omezitNaKraj == -1;
                 for (var j = 0; j < ref_vystraha.info[i].kraj.length && !found; j++) {
                     found = ref_vystraha.info[i].kraj[j].UID == omezitNaKraj;
@@ -250,7 +252,9 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
         if (jevKrajeList2.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy2[h]];
+                sms2 += JEVY_NAZVY[poleJevy2[h]];
                 resultText += ' pro kraje ';
+                sms2 += ' pro kraje ';
 
                 var seznkraje = '';
 
@@ -259,7 +263,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
                 }
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
                 resultText += seznkraje;
-                sms2 = resultText;
+                sms2 += seznkraje;
                 if (detailni) {
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms2 += ' do ' + ukonceni + oddelovac;
@@ -289,7 +293,9 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     total_zahajeni = ZobrazDatumSMS(start);
     total_ukonceni = ZobrazDatumSMS(end, 1);
 
-    if (start != 'Infinity') {
+    if (start == 'Infinity') {
+        sms2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+    } else {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (!detailni) {
             sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
