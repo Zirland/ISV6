@@ -24,6 +24,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 #### Změněno
 - Úprava v souvislosti s rušením platné výstrahy.
+- Úprava procesu slučování jevů se stejným kódem. (řeší SU 38401)
 
 ### [Knihovna/CHMU-SMS-ORP]
 #### Změněno
@@ -40,6 +41,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 
 #### Změněno
 - Úprava v souvislosti s rušením platné výstrahy.
+- Úprava procesu slučování jevů se stejným kódem. (řeší SU 38401)
 
 ## verze 37 – 2019-04-29
 ### [AA/AA-CHMU-EMAIL-KRAJ]
