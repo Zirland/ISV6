@@ -1,6 +1,46 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 38 – 2019-05-09
+### [Knihovna/CHMU-EMAIL-KRAJ]
+#### Změněno
+- Úprava v souvislosti s rušením platné výstrahy.
+
+### [Knihovna/CHMU-EMAIL-ORP]
+#### Změněno
+- Úprava v souvislosti s rušením platné výstrahy.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Úprava v souvislosti s rušením platné výstrahy.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava práce s jevy omezenými nadmořskou výškou. (řeší SU 38400; autor: Stratil Petr, RCS Kladno)
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Přidáno
+- Možnost vytvoření detailní zprávy pro GŘ.
+
+#### Změněno
+- Úprava v souvislosti s rušením platné výstrahy.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Úprava v souvislosti s rušením platné výstrahy.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava práce s jevy omezenými nadmořskou výškou. (řeší SU 38400; autor: Stratil Petr, RCS Kladno)
+- Úprava v souvislosti s rušením platné výstrahy.
+
+### [UVG/CHMU-SMS]
+#### Přidáno
+- Možnost vytvoření detailní zprávy pro GŘ.
+
+#### Změněno
+- Úprava v souvislosti s rušením platné výstrahy.
+
 ## verze 37 – 2019-04-29
 ### [AA/AA-CHMU-EMAIL-KRAJ]
 #### Přidáno
