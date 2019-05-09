@@ -1,4 +1,4 @@
-//Verze 37
+//Verze 38
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
@@ -1119,6 +1119,6 @@ if (distrSeznamNahore == false) {
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if ((Number(zmen) == 0 && pouzeZmeny) || empty) {
+if (Number(zmen) == 0 && pouzeZmeny) {
     resultText = '';
 }
