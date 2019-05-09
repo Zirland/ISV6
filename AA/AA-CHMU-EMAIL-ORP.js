@@ -1,5 +1,5 @@
 //!JS
-// Verze 37
+// Verze 38
 
 //Číselník ORP viz samostatný soubor
 var omezitNaOrp = 337; 
