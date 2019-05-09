@@ -1,4 +1,4 @@
-// Verze 37
+// Verze 38
 
 // Zjednodušené zobrazení rozdílů (porovnává se celý text)
 function SimpleHighlightDiff(newValue, oldValue) {
