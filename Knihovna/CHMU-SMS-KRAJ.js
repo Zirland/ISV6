@@ -41,6 +41,7 @@ if (vystraha.info) {
 
     // Vezmeme kód jevu a najdeme si všechny časové období v tomto kraji.
     for (var h = 0; h < poleJevy.length; h++) {
+        var jevStart = jevEnd = [];
         var jevKrajeList = [];
         for (var i = 0; i < vystraha.info.length; i++) {
             var pomKodIvnj = '';
@@ -52,7 +53,7 @@ if (vystraha.info) {
                 for (var j = 0; j < vystraha.info[i].kraj.length && !found; j++) {
                     found = vystraha.info[i].kraj[j].UID == omezitNaKraj;
                 }
-                for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
+                for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList.push(vystraha.info[i].kraj[j].UID);
@@ -72,8 +73,8 @@ if (vystraha.info) {
                         }
                         konce.push(konec);
 
-                        zahajeni = ZobrazDatumSMS(zacatek);
-                        ukonceni = ZobrazDatumSMS(konec, 1);
+                        jevStart.push(zacatek);
+                        jevEnd.push(konec);
                     }
                 }
             }
@@ -85,7 +86,7 @@ if (vystraha.info) {
         });
 
         // Pokud máme ve zvoleném kraji výstrahu, přípravíme tělo se seznamem jevů, případně seznamem krajů a detailní platností
-        if (jevKrajeList.length > 0) {
+        if (jevKrajeList.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy[h]];
                 sms1 += JEVY_NAZVY[poleJevy[h]];
@@ -100,7 +101,17 @@ if (vystraha.info) {
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
                 resultText += seznkraje;
                 sms1 += seznkraje;
+
                 if (detailni) {
+                    jevStarty = Math.min.apply(null, jevStart);
+                    jevZacatek = jevStarty.toString();
+
+                    jevEndy = Math.max.apply(null, jevEnd);
+                    jevKonec = jevEndy.toString();
+
+                    zahajeni = ZobrazDatumSMS(jevZacatek);
+                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += ' do ' + ukonceni + oddelovac;
                 } else {
@@ -109,11 +120,20 @@ if (vystraha.info) {
                 }
             } else {
                 if (detailni) {
+                    jevStarty = Math.min.apply(null, jevStart);
+                    jevZacatek = jevStarty.toString();
+
+                    jevEndy = Math.max.apply(null, jevEnd);
+                    jevKonec = jevEndy.toString();
+
+                    zahajeni = ZobrazDatumSMS(jevZacatek);
+                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+
                     resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += JEVY_NAZVY[poleJevy[h]] + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
-                    sms1 += JEVY_NAZVY[poleJevy[h]] + oddelovac;
+                    sms1 = JEVY_NAZVY[poleJevy[h]] + oddelovac;
                 }
             }
         }
@@ -192,6 +212,7 @@ if (vystraha.info) {
 resultText = '';
 zacatky = konce = [];
 
+
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     var poleJevy2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
@@ -212,6 +233,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
 
     // Vezmeme kód jevu a najdeme si všechny časové období v tomto kraji.
     for (var h = 0; h < poleJevy2.length; h++) {
+        var jevStart = jevEnd = [];
         var jevKrajeList2 = [];
         for (var i = 0; i < ref_vystraha.info.length; i++) {
             var pomKod2Ivnj = '';
@@ -223,7 +245,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                 for (var j = 0; j < ref_vystraha.info[i].kraj.length && !found; j++) {
                     found = ref_vystraha.info[i].kraj[j].UID == omezitNaKraj;
                 }
-                for (var j = 0; j < ref_vystraha.info[i].kraj.length; j++) {
+                for (var j = 0; j < ref_vystraha.info[i].kraj.length; j++) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList2.push(ref_vystraha.info[i].kraj[j].UID);
@@ -236,8 +258,8 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                         }
                         konce.push(konec);
 
-                        zahajeni = ZobrazDatumSMS(zacatek);
-                        ukonceni = ZobrazDatumSMS(konec, 1);
+                        jevStart.push(zacatek);
+                        jevEnd.push(konec);
                     }
                 }
             }
@@ -265,19 +287,37 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                 resultText += seznkraje;
                 sms2 += seznkraje;
                 if (detailni) {
+                    jevStarty = Math.min.apply(null, jevStart);
+                    jevZacatek = jevStarty.toString();
+
+                    jevEndy = Math.max.apply(null, jevEnd);
+                    jevKonec = jevEndy.toString();
+
+                    zahajeni = ZobrazDatumSMS(jevZacatek);
+                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms2 += ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += oddelovac;
-                    sms2 += oddelovac;
+                    sms2 = oddelovac;
                 }
             } else {
                 if (detailni) {
-                    resultText += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' do ' + ukonceni + oddelovac;
+                    jevStarty = Math.min.apply(null, jevStart);
+                    jevZacatek = jevStarty.toString();
+
+                    jevEndy = Math.max.apply(null, jevEnd);
+                    jevKonec = jevEndy.toString();
+
+                    zahajeni = ZobrazDatumSMS(jevZacatek);
+                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+
+                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy[h]] + ' do ' + ukonceni + oddelovac;
                 } else {
-                    resultText += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
-                    sms2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
+                    sms2 = JEVY_NAZVY[poleJevy[h]] + oddelovac;
                 }
             }
         }
