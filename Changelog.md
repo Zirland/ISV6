@@ -19,9 +19,6 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Úprava práce s jevy omezenými nadmořskou výškou. (řeší SU 38400; autor: Stratil Petr, RCS Kladno)
 
 ### [Knihovna/CHMU-SMS-KRAJ]
-#### Přidáno
-- Možnost vytvoření detailní zprávy pro GŘ.
-
 #### Změněno
 - Úprava v souvislosti s rušením platné výstrahy.
 - Úprava procesu slučování jevů se stejným kódem. (řeší SU 38401)
@@ -36,9 +33,6 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Úprava v souvislosti s rušením platné výstrahy.
 
 ### [UVG/CHMU-SMS]
-#### Přidáno
-- Možnost vytvoření detailní zprávy pro GŘ.
-
 #### Změněno
 - Úprava v souvislosti s rušením platné výstrahy.
 - Úprava procesu slučování jevů se stejným kódem. (řeší SU 38401)
