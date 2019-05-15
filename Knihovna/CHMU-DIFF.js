@@ -13,16 +13,6 @@ if (omezitNaKraj != -1) {
         }
     }
 
-    if (zobrazovatVsechnyKraje) {
-        for (var i = 0; i < orp.length; i++) {
-            // Pokud se nejedná o hlavní kraj
-            if (omezitNaKraj != orp[i].kraj.id) {
-                // Dáme na konec seznamu
-                orpTmp.push(orp[i]);
-            }
-        }
-    }
-
     orp = orpTmp;
 }
 
