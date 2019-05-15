@@ -1,6 +1,11 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 39 – 2019-05-15
+### [Knihovna/CHMU-DIFF]
+#### Záplata
+- Úprava omezení na kraj.
+
 ## verze 38 – 2019-05-09
 ### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Změněno
