@@ -1,4 +1,4 @@
-//Verze 38
+//Verze 39
 
 zobrazitZmeny = true;
 
@@ -10,16 +10,6 @@ if (omezitNaKraj != -1) {
         if (omezitNaKraj == orp[i].kraj.id) {
             // Dáme na začátek seznamu
             orpTmp.push(orp[i]);
-        }
-    }
-
-    if (zobrazovatVsechnyKraje) {
-        for (var i = 0; i < orp.length; i++) {
-            // Pokud se nejedná o hlavní kraj
-            if (omezitNaKraj != orp[i].kraj.id) {
-                // Dáme na konec seznamu
-                orpTmp.push(orp[i]);
-            }
         }
     }
 
