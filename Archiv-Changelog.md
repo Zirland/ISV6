@@ -98,7 +98,7 @@
 #### Změněno
 - Porovnání výstrah je prováděno na úrovni kategorie jevů, změna závažnosti jevů. (autor: Stratil Petr, RCS Kladno; řeší SU 37900)
 
-## verze 23 – 2019-01-31
+## verze 23 – 2019-01-31
 ### [UVG/CHMU-SMS]
 #### Změněno
 - Správnou funkčnost neprovedení prázdné akce je nutno zajistit úpravou automatické akce spojené s UVG předpisem, viz *README.md* (autor: Rataj Stanislav, RCS Kladno)
@@ -123,7 +123,7 @@
 #### Změněno
 - Úprava procesu neprovedení prázdné akce. (autor: Rataj Stanislav, RCS Kladno)
 
-## verze 22 – 2019-01-25
+## verze 22 – 2019-01-25
 ### [UVG/CHMU-SMS]
 #### Přidáno
 - Parametr umožňuje nastavit vytvoření výstupu pouze při změně oproti minulé výstraze.

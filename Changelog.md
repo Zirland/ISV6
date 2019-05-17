@@ -80,12 +80,12 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Přidáno
 - Rozlišení případu IVNJ od předpovídaného jevu.
 
-###[UVG/CHMU-EMAIL]
+### [UVG/CHMU-EMAIL]
 #### Přidáno
 - Zavedení nového parametru *distrSeznamNahore*.
 - Možnost zobrazení seznamu distribuce (kraje) nahoře nebo dole.
 
-###[UVG/CHMU-MAIL-2]
+### [UVG/CHMU-MAIL-2]
 #### Přidáno
 - Zavedení nového parametru *distrSeznamNahore*.
 - Možnost zobrazení seznamu distribuce (kraje) nahoře nebo dole.

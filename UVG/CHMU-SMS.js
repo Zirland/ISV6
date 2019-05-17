@@ -294,7 +294,7 @@ if (vystraha.info) {
                 for (var j = 0; j < vystraha.info[i].kraj.length && !found; j++) {
                     found = vystraha.info[i].kraj[j].UID == omezitNaKraj;
                 }
-                for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
+                for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList.push(vystraha.info[i].kraj[j].UID);
@@ -508,7 +508,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
         });
 
         // Pokud máme ve zvoleném kraji výstrahu, přípravíme tělo se seznamem jevů, případně seznamem krajů a detailní platností
-        if (jevKrajeList2.length > 0) {
+        if (jevKrajeList2.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy2[h]];
                 sms2 += JEVY_NAZVY[poleJevy2[h]];
