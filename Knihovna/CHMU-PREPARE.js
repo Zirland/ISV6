@@ -318,7 +318,8 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         if (ref_zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1) {
                             for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++) {
                                 if (ref_krajList[k].okresList[o].info[ri].jev_kod == info.jev_kod
-                                && opakovanyOkres.indexOf(k.toString() + '-' + o.toString() + '-' + ri.toString()) == -1) {
+                                && opakovanyOkres.indexOf(k.toString() + '-' + o.toString() + '-' + ri.toString()) == -1
+                                && ref_zpracovanyInfoStupen.indexOf(ref_krajList[k].okresList[o].info[ri].jev_kod + (ref_krajList[k].okresList[o].info[ri].vyska ? ref_krajList[k].okresList[o].info[ri].vyska : '[]')) == -1) {
                                     opakovanyOkres.push(k.toString() + '-' + o.toString() + '-' + ri.toString());
                                     ref_info = ref_krajList[k].okresList[o].info[ri];
                                     ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]'));
@@ -395,9 +396,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             && ref_zpracovanyInfoStupenOkres.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1) {
                                 for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++) {
                                     if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod
-                                    && opakovanyOrp.indexOf(k.toString() + '-' + o.toString() + '-' + ol.toString() + '-' + ri.toString()) == -1) {
+                                    && opakovanyOrp.indexOf(k.toString() + '-' + o.toString() + '-' + ol.toString() + '-' + ri.toString()) == -1
+                                    && ref_zpracovanyInfoStupen.indexOf(ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod + (ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska ? ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska : '[]')) == -1
+                                    && ref_zpracovanyInfoStupenOkres.indexOf(ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod + (ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska ? ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska : '[]')) == -1) {
                                         opakovanyOrp.push(k.toString() + '-' + o.toString() + '-' + ol.toString() + '-' + ri.toString());
-                                        ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit = true;
                                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
                                         break;
                                     }
@@ -639,24 +641,24 @@ function PrintInfo(info, ref_info) {
 
         if (info) {
             if (info.popis) {
-                var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var upr_info = info.popis.replace(/<br\/>/g,' ');
             }
             if (info.hydroPredpoved) {
-                var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var upr_hydro = info.hydroPredpoved.replace(/<br\/>/g,' ');
             }
             if (info.doporuceni) {
-                var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
         if (ref_info) {
             if (ref_info.popis) {
-                var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
             }
             if (ref_info.hydroPredpoved) {
-                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/<br\/>/g,' ');
             }
             if (ref_info.doporuceni) {
-                var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
 
@@ -719,24 +721,24 @@ function PrintInfo(info, ref_info) {
 
         if (info) {
             if (info.popis) {
-                var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var upr_info = info.popis.replace(/<br\/>/g,' ');
             }
             if (info.hydroPredpoved) {
-                var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var upr_hydro = info.hydroPredpoved.replace(/<br\/>/g,' ');
             }
             if (info.doporuceni) {
-                var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
         if (ref_info) {
             if (ref_info.popis) {
-                var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
             }
             if (ref_info.hydroPredpoved) {
-                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/<br\/>/g,' ');
             }
             if (ref_info.doporuceni) {
-                var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
 
