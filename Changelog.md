@@ -1,6 +1,23 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 41 – 2019-05-22
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Formátování hydrologické informační zprávy.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Formátování hydrologické informační zprávy.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Formátování hydrologické informační zprávy.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Formátování hydrologické informační zprávy.
+
 ## verze 40 – 2019-05-22
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
