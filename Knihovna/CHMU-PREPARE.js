@@ -1,4 +1,4 @@
-//Verze 40
+//Verze 41
 
 // Připravíme seznam jevů podle území
 function PrepareInfo(orp, vystraha) {
@@ -645,6 +645,7 @@ function PrintInfo(info, ref_info) {
             }
             if (info.hydroPredpoved) {
                 var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
+                upr_hydro = upr_hydro.replace(/\n/g,'<br>');
             }
             if (info.doporuceni) {
                 var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
@@ -656,6 +657,7 @@ function PrintInfo(info, ref_info) {
             }
             if (ref_info.hydroPredpoved) {
                 var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
+                ref_upr_hydro = ref_upr_hydro.replace(/\n/g,'<br>');
             }
             if (ref_info.doporuceni) {
                 var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
@@ -676,12 +678,11 @@ function PrintInfo(info, ref_info) {
         // Hydrologická zpráva
         if (info && (info.hydroPredpoved)) {
             resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ';
+            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
 
             pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
             resultText += pomoc.split('|')[0];
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
 
             resultText += '</td>';
             resultText += '</tr>';
@@ -724,7 +725,8 @@ function PrintInfo(info, ref_info) {
                 var upr_info = info.popis.replace(/<br\/>/g,' ');
             }
             if (info.hydroPredpoved) {
-                var upr_hydro = info.hydroPredpoved.replace(/<br\/>/g,' ');
+                var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
+                upr_hydro = upr_hydro.replace(/\n/g,'<br>');
             }
             if (info.doporuceni) {
                 var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
@@ -735,7 +737,8 @@ function PrintInfo(info, ref_info) {
                 var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
             }
             if (ref_info.hydroPredpoved) {
-                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/<br\/>/g,' ');
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
+                ref_upr_hydro = ref_upr_hydro.replace(/\n/g,'<br>');
             }
             if (ref_info.doporuceni) {
                 var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
@@ -750,7 +753,7 @@ function PrintInfo(info, ref_info) {
         // Hydrologická zpráva
         if (info && (info.hydroPredpoved)) {
             resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
+            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
             resultText += '</tr>';
         }
 

@@ -1,4 +1,4 @@
-//Verze 40
+//Verze 41
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
@@ -250,6 +250,7 @@ function PrintInfo2(info, ref_info) {
             }
             if (info.hydroPredpoved) {
                 var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
+                upr_hydro = upr_hydro.replace(/\n/g,'<br>');
             }
             if (info.doporuceni) {
                 var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
@@ -261,6 +262,7 @@ function PrintInfo2(info, ref_info) {
             }
             if (ref_info.hydroPredpoved) {
                 var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
+                ref_upr_hydro = ref_upr_hydro.replace(/\n/g,'<br>');
             }
             if (ref_info.doporuceni) {
                 var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
@@ -275,7 +277,7 @@ function PrintInfo2(info, ref_info) {
         // Hydrologická zpráva
         if (info && (info.hydroPredpoved)) {
             resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
+            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
             resultText += '</tr>';
         }
 

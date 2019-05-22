@@ -1,4 +1,4 @@
-//Verze 40
+//Verze 41
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -1034,7 +1034,7 @@ function PrintInfo(info, ref_info) {
         // Hydrologická zpráva
         if (info && (info.hydroPredpoved)) {
             resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ';
+            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
 
             pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
             resultText += pomoc.split('|')[0];
@@ -1108,7 +1108,7 @@ function PrintInfo(info, ref_info) {
         // Hydrologická zpráva
         if (info && (info.hydroPredpoved)) {
             resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
+            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
             resultText += '</tr>';
         }
 
