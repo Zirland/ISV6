@@ -5,20 +5,24 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
 - Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
 
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno
 - Oprava porovnávání změn. (řeší SU 38470; autor: Stratil Petr, RCS Kladno)
 - Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
 
 ### [UVG/CHMU-EMAIL]
 #### Změněno
 - Oprava porovnávání změn. (řeší SU 38470; autor: Stratil Petr, RCS Kladno)
 - Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
 
 ### [UVG/CHMU-MAIL-2]
 #### Změněno
 - Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
 
 ## verze 39 – 2019-05-15
 ### [Knihovna/CHMU-DIFF]
