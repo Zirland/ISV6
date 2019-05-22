@@ -1,4 +1,4 @@
-// Verze 39
+// Verze 40
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = true;
@@ -1187,14 +1187,25 @@ function PrintInfo(info, ref_info) {
         resultText += '</tr>';
 
         if (info) {
-            if (info.popis) {var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');}
-            if (info.hydroPredpoved) {var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
-            if (info.doporuceni) {var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
+            if (info.popis) {
+                var upr_info = info.popis.replace(/<br\/>/g,' ');
+            }
+            if (info.hydroPredpoved) {
+                var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            }
+            if (info.doporuceni) {
+                var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
+            }
         }
         if (ref_info) {
-            if (ref_info.popis) {var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');}
-            if (ref_info.hydroPredpoved) {var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');}
-            if (ref_info.doporuceni) {var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');}
+            if (ref_info.popis) {
+                var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');}
+            if (ref_info.hydroPredpoved) {
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            }
+            if (ref_info.doporuceni) {
+                var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
+            }
         }
 
         // Popis
@@ -1509,7 +1520,7 @@ if (vystraha.info && vystraha.info.length > 0) {
     }
 
     if (situace.length > 0) {
-        var upr_situace = situace[0].replace(/&lt;br\/&gt;/g,' ');
+        var upr_situace = situace[0].replace(/<br\/>/g,' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/>';
     }

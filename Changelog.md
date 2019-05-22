@@ -1,6 +1,29 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 40 – 2019-05-22
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Oprava porovnávání změn. (řeší SU 38470; autor: Stratil Petr, RCS Kladno)
+- Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Oprava porovnávání změn. (řeší SU 38470; autor: Stratil Petr, RCS Kladno)
+- Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Změna formátování HTML tagů pro nový řádek.
+- Formátování hydrologické informační zprávy.
+
 ## verze 39 – 2019-05-15
 ### [Knihovna/CHMU-DIFF]
 #### Záplata
@@ -80,12 +103,12 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Přidáno
 - Rozlišení případu IVNJ od předpovídaného jevu.
 
-###[UVG/CHMU-EMAIL]
+### [UVG/CHMU-EMAIL]
 #### Přidáno
 - Zavedení nového parametru *distrSeznamNahore*.
 - Možnost zobrazení seznamu distribuce (kraje) nahoře nebo dole.
 
-###[UVG/CHMU-MAIL-2]
+### [UVG/CHMU-MAIL-2]
 #### Přidáno
 - Zavedení nového parametru *distrSeznamNahore*.
 - Možnost zobrazení seznamu distribuce (kraje) nahoře nebo dole.

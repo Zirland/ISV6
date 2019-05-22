@@ -1,4 +1,4 @@
-// Verze 39
+// Verze 40
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
@@ -271,7 +271,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
         });
 
         // Pokud máme ve zvoleném kraji výstrahu, přípravíme tělo se seznamem jevů, případně seznamem krajů a detailní platností
-        if (jevKrajeList2.length > 0) {
+        if (jevKrajeList2.length > 0) {
             if (omezitNaKraj == -1) {
                 resultText += JEVY_NAZVY[poleJevy2[h]];
                 sms2 += JEVY_NAZVY[poleJevy2[h]];
