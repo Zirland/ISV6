@@ -1191,7 +1191,7 @@ function PrintInfo(info, ref_info) {
                 var upr_info = info.popis.replace(/<br\/>/g,' ');
             }
             if (info.hydroPredpoved) {
-                var upr_hydro = info.hydroPredpoved.replace(/<br\/>/g,' ');
+                var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
             }
             if (info.doporuceni) {
                 var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
@@ -1201,7 +1201,7 @@ function PrintInfo(info, ref_info) {
             if (ref_info.popis) {
                 var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');}
             if (ref_info.hydroPredpoved) {
-                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/<br\/>/g,' ');
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
             }
             if (ref_info.doporuceni) {
                 var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
