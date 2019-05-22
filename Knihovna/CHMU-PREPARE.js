@@ -224,7 +224,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         empty = false;
                     }
 
-                    ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]'));
+                    ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                     pomoc = PrintInfo(null, ref_info);
                     resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -235,7 +235,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
         // Výstrahy pro celý kraj
         for (var i = 0; i < krajList[k].info.length; i++) {
             info = krajList[k].info[i];
-            zpracovanyInfoStupen.push(info.jev_kod + (info.vyska ? info.vyska : '[]'));
+            zpracovanyInfoStupen.push(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec);
             ref_info = null;
 
             // Pokud máme referenční výstrahu
@@ -246,7 +246,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     && opakovanyKraj.indexOf(k.toString() + '-' + ri.toString()) == -1) {
                         opakovanyKraj.push(k.toString() + '-' + ri.toString());
                         ref_info = ref_krajList[k].info[ri];
-                        ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]'));
+                        ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                         break;
                     }
                 }
@@ -276,8 +276,8 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     found = false;
 
                     // Pokud tato výstraha není již zpracovaná z pokrytí kraje
-                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1) {
-                        if (zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1) {
+                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
+                        if (zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                             // Zkusíme najít odpovídající záznam ve výstraze
                             for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
                                 if (krajList[k].okresList[o].info[i].jev_kod == ref_info.jev_kod) {
@@ -295,7 +295,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                 empty = false;
                             }
 
-                            ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]'));
+                            ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                             pomoc = PrintInfo(null, ref_info);
                             resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -308,20 +308,21 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                 info = krajList[k].okresList[o].info[i];
 
                 // Pokud zatím není zpracováno z pokrytí kraje
-                if (zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1) {
-                    zpracovanyInfoStupenOkres.push(info.jev_kod + (info.vyska ? info.vyska : '[]'));
+                if (zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec) == -1) {
+                    zpracovanyInfoStupenOkres.push(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec);
                     ref_info = null;
 
                     // Pokud máme referenční výstrahu
                     if (ref_krajList.length > 0) {
                         // Pokud zatím není zpracováno z pokrytí kraje
-                        if (ref_zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1) {
+                        if (ref_zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec) == -1) {
                             for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++) {
                                 if (ref_krajList[k].okresList[o].info[ri].jev_kod == info.jev_kod
-                                && opakovanyOkres.indexOf(k.toString() + '-' + o.toString() + '-' + ri.toString()) == -1) {
+                                && opakovanyOkres.indexOf(k.toString() + '-' + o.toString() + '-' + ri.toString()) == -1
+                                && ref_zpracovanyInfoStupen.indexOf(ref_krajList[k].okresList[o].info[ri].jev_kod + (ref_krajList[k].okresList[o].info[ri].vyska ? ref_krajList[k].okresList[o].info[ri].vyska : '[]') + ref_krajList[k].okresList[o].info[ri].dc_zacatek + '-' + ref_krajList[k].okresList[o].info[ri].dc_konec) == -1) {
                                     opakovanyOkres.push(k.toString() + '-' + o.toString() + '-' + ri.toString());
                                     ref_info = ref_krajList[k].okresList[o].info[ri];
-                                    ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]'));
+                                    ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                                     break;
                                 }
                             }
@@ -351,10 +352,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         found = false;
 
                         // Pokud tato výstraha není již zpracovaná z pokrytí kraje nebo okresu
-                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1
-                        && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1) {
-                            if (zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1
-                            && zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1) {
+                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1
+                        && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
+                            if (zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1
+                            && zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                                 // Zkusíme najít odpovídající záznam ve výstraze
                                 for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++) {
                                     if (krajList[k].okresList[o].orpList[ol].info[i].jev_kod == ref_info.jev_kod) {
@@ -384,20 +385,21 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     info = krajList[k].okresList[o].orpList[ol].info[i];
 
                     // Pokud zatím není zpracováno z pokrytí kraje nebo okresu
-                    if (zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1
-                    && zpracovanyInfoStupenOkres.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1) {
+                    if (zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec) == -1
+                    && zpracovanyInfoStupenOkres.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec) == -1) {
                         ref_info = null;
 
                         // Pokud máme referenční výstrahu
                         if (ref_krajList.length > 0) {
                             // Pokud zatím není zpracováno z pokrytí kraje
-                            if (ref_zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1
-                            && ref_zpracovanyInfoStupenOkres.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]')) == -1) {
+                            if (ref_zpracovanyInfoStupen.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec) == -1
+                            && ref_zpracovanyInfoStupenOkres.indexOf(info.jev_kod + (info.vyska ? info.vyska : '[]') + info.dc_zacatek + '-' + info.dc_konec) == -1) {
                                 for (var ri = 0; ri < ref_krajList[k].okresList[o].orpList[ol].info.length; ri++) {
                                     if (ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod == info.jev_kod
-                                    && opakovanyOrp.indexOf(k.toString() + '-' + o.toString() + '-' + ol.toString() + '-' + ri.toString()) == -1) {
+                                    && opakovanyOrp.indexOf(k.toString() + '-' + o.toString() + '-' + ol.toString() + '-' + ri.toString()) == -1
+                                    && ref_zpracovanyInfoStupen.indexOf(ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod + (ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska ? ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska : '[]') + ref_krajList[k].okresList[o].orpList[ol].info[ri].dc_zacatek + '-' + ref_krajList[k].okresList[o].orpList[ol].info[ri].dc_konec) == -1
+                                    && ref_zpracovanyInfoStupenOkres.indexOf(ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod + (ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska ? ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska : '[]') + ref_krajList[k].okresList[o].orpList[ol].info[ri].dc_zacatek + '-' + ref_krajList[k].okresList[o].orpList[ol].info[ri].dc_konec) == -1) {
                                         opakovanyOrp.push(k.toString() + '-' + o.toString() + '-' + ol.toString() + '-' + ri.toString());
-                                        ref_krajList[k].okresList[o].orpList[ol].info[ri].pouzit = true;
                                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
                                         break;
                                     }
@@ -435,7 +437,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     empty = false;
                 }
 
-                ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]'));
+                ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                 pomoc = PrintInfo(null, ref_info);
                 resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -451,14 +453,14 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     ref_info = ref_krajList[k].okresList[o].info[ri];
 
                     // Pokud tato výstraha není již zpracovaná z pokrytí kraje
-                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1) {
+                    if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                         if (first) {
                             first = false;
                             (headers == 0 ? '' : resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>');
                             empty = false;
                         }
 
-                        ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]'));
+                        ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                         pomoc = PrintInfo(null, ref_info);
                         resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -474,8 +476,8 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
 
                         // Pokud tato výstraha není již zpracovaná z pokrytí kraje nebo okresu
-                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1
-                        && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]')) == -1) {
+                        if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1
+                        && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                             if (first) {
                                 first = false;
                                 (headers == 0 ? '' : resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>');
@@ -639,24 +641,24 @@ function PrintInfo(info, ref_info) {
 
         if (info) {
             if (info.popis) {
-                var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var upr_info = info.popis.replace(/<br\/>/g,' ');
             }
             if (info.hydroPredpoved) {
-                var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
             }
             if (info.doporuceni) {
-                var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
         if (ref_info) {
             if (ref_info.popis) {
-                var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
             }
             if (ref_info.hydroPredpoved) {
-                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
             }
             if (ref_info.doporuceni) {
-                var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
 
@@ -719,24 +721,24 @@ function PrintInfo(info, ref_info) {
 
         if (info) {
             if (info.popis) {
-                var upr_info = info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var upr_info = info.popis.replace(/<br\/>/g,' ');
             }
             if (info.hydroPredpoved) {
-                var upr_hydro = info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var upr_hydro = info.hydroPredpoved.replace(/<br\/>/g,' ');
             }
             if (info.doporuceni) {
-                var upr_doporuceni = info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
         if (ref_info) {
             if (ref_info.popis) {
-                var ref_upr_info = ref_info.popis.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
             }
             if (ref_info.hydroPredpoved) {
-                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/<br\/>/g,' ');
             }
             if (ref_info.doporuceni) {
-                var ref_upr_doporuceni = ref_info.doporuceni.replace(/&lt;br\/&gt;/g,' ');
+                var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
             }
         }
 
