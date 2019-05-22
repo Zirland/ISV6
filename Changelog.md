@@ -1,7 +1,7 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## verze 40 – 2019-05-20
+## verze 40 – 2019-05-22
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
 - Změna formátování HTML tagů pro nový řádek.
