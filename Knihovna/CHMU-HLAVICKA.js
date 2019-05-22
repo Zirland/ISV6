@@ -1,4 +1,4 @@
-//Verze 40
+//Verze 41
 
 // Hlavička HTML stránky
 resultText += '<!DOCTYPE html>';
