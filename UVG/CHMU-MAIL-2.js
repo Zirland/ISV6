@@ -1,4 +1,4 @@
-// Verze 41
+// Verze 42
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = true;
@@ -1142,14 +1142,37 @@ function PrintInfo(info, ref_info) {
         } else {
             vyskyt = '';
         }
-    } 
+        if (info.popis) {
+            var upr_info = info.popis.replace(/<br\/>/g,' ');
+        }
+        if (info.hydroPredpoved) {
+            var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            upr_hydro = upr_hydro.replace(/\n/g,'<br>');
+        }
+        if (info.doporuceni) {
+            var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
+            upr_doporuceni = upr_doporuceni.replace(/hasičské záchranné služby/g,'hasičského záchranného sboru');
+        }
+    }
+
     if (ref_info) {
         if (ref_info.jistota_kod == 'Observed') {
             ref_vyskyt = '<b>Výskyt jevu</b><br>';
         } else {
             ref_vyskyt = '';
         }
-    } 
+        if (ref_info.popis) {
+            var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
+        }
+        if (ref_info.hydroPredpoved) {
+            var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            ref_upr_hydro = ref_upr_hydro.replace(/\n/g,'<br>');
+        }
+        if (ref_info.doporuceni) {
+            var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
+            ref_upr_doporuceni = ref_upr_doporuceni.replace(/hasičské záchranné služby/g,'hasičského záchranného sboru');
+        }
+    }
 
     if (info) {
         nactiUzemi = JevUzemi(info);
@@ -1185,28 +1208,6 @@ function PrintInfo(info, ref_info) {
             resultText += '</table></td>';
         }
         resultText += '</tr>';
-
-        if (info) {
-            if (info.popis) {
-                var upr_info = info.popis.replace(/<br\/>/g,' ');
-            }
-            if (info.hydroPredpoved) {
-                var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
-            }
-            if (info.doporuceni) {
-                var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
-            }
-        }
-        if (ref_info) {
-            if (ref_info.popis) {
-                var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');}
-            if (ref_info.hydroPredpoved) {
-                var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
-            }
-            if (ref_info.doporuceni) {
-                var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
-            }
-        }
 
         // Popis
         resultText += '<tr>';
