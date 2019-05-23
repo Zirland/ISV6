@@ -1,6 +1,31 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 42 – 2019-05-23
+### [Knihovna/CHMU-EMAIL-KRAJ]
+#### Změněno
+- Formátování situace.
+
+### [Knihovna/CHMU-EMAIL-ORP]
+#### Změněno
+- Formátování situace.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Přidáno
+- Nahrazení nesprávného pojmu "hasičská záchranná služba".
+
+### [Knihovna/CHMU-PREPARE]
+#### Přidáno
+- Nahrazení nesprávného pojmu "hasičská záchranná služba".
+
+### [UVG/CHMU-EMAIL]
+#### Přidáno
+- Nahrazení nesprávného pojmu "hasičská záchranná služba".
+
+### [UVG/CHMU-MAIL-2]
+#### Přidáno
+- Nahrazení nesprávného pojmu "hasičská záchranná služba".
+
 ## verze 41 – 2019-05-22
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
