@@ -94,7 +94,7 @@ if (vystraha.info && vystraha.info.length > 0) {
     }
 
    if (situace.length > 0) {
-        var upr_situace = situace[0].replace(/&lt;br\/&gt;/g,' ');
+        var upr_situace = situace[0].replace(/<br\/>/g,' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/><div>';
     }
