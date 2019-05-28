@@ -114,5 +114,5 @@ var JEVY_NAZVY = {
     "SMOGSIT.NO2" : "Smogová situace NO2",
     "PSMOGSIT.NO2" : "Smogová situace NO2",
     "REG.NO2" : "Regulace NO2",
-    "PREG.NO2" : "Regulace NO2",
+    "PREG.NO2" : "Regulace NO2"
 };

@@ -1071,7 +1071,7 @@ if (empty) {
     resultText += '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-if (distrSeznamNahore == false) {
+if (distrSeznamNahore === false) {
     resultText += '<hr/>';
     resultText += '<br/>Distribuce: ';
 
