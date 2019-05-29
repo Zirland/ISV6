@@ -414,6 +414,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
     // Pokud nemáme původní výstrahu, ale máme jen referenční
     if (krajList.length === 0 && ref_krajList.length > 0 && zobrazitZmeny) {
         for (var k = 0; k < ref_krajList.length; k++) {
+            ref_zpracovanyInfoStupen = [];
             first = true;
 
             // Všechny, které jsme v daném kraji zrušili
