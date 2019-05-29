@@ -1,4 +1,4 @@
-// Verze 42
+// Verze 43
 
 var omezitNaKraj = -1;
 var detailni = 1;
@@ -140,18 +140,18 @@ var JEVY_NAZVY = {
     "SMOGSIT.NO2" : "Smogová situace NO2",
     "PSMOGSIT.NO2" : "Smogová situace NO2",
     "REG.NO2" : "Regulace NO2",
-    "PREG.NO2" : "Regulace NO2",
+    "PREG.NO2" : "Regulace NO2"
 };
 
 // Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
-    var unique_array = []
-    for (var i = 0;i < arr.length; i++) {
+    var unique_array = [];
+    for (var i = 0; i < arr.length; i++) {
         if (unique_array.indexOf(arr[i]) == -1) {
-            unique_array.push(arr[i])
+            unique_array.push(arr[i]);
         }
     }
-    return unique_array
+    return unique_array;
 }
 
 // Úprava formátu data
@@ -163,12 +163,12 @@ function Normalize(datum) {
         datumMesic = datumString.substring(3,5);
         datumMesic_porovn = datumMesic.replace(/\.$/, '');
         if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(6,10)
+            datumRok = datumString.substring(6,10);
             datumCas = datumString.substring(11,16);
             datumCas = datumCas.replace(/\:$/, '');
         } else {
             datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(5,9)
+            datumRok = datumString.substring(5,9);
             datumCas = datumString.substring(10,15);
             datumCas = datumCas.replace(/\:$/, '');
         }
@@ -177,12 +177,12 @@ function Normalize(datum) {
         datumMesic = datumString.substring(2,4);
         datumMesic_porovn = datumMesic.replace(/\.$/, '');
         if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(5,9)
+            datumRok = datumString.substring(5,9);
             datumCas = datumString.substring(10,15);
             datumCas = datumCas.replace(/\:$/, '');
         } else {
             datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(4,8)
+            datumRok = datumString.substring(4,8);
             datumCas = datumString.substring(9,14);
             datumCas = datumCas.replace(/\:$/, '');
         }
@@ -426,6 +426,9 @@ if (vystraha.info) {
             break;
             case 'SVRS' :
                 uvod += 'SVRS ';
+            break;
+            default :
+                uvod += 'ČHMÚ';
             break;
         }
 

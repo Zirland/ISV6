@@ -1,6 +1,17 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 43 – 2019-05-29
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava načítání zrušených výstrah. (řeší SU 38519; autor: Stratil Petr, RCS Kladno)
+- Při zrušení všech jevů se zobrazí textová informace "Na zvoleném území není v platnosti žádný nebezpečný jev".
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava načítání zrušených výstrah. (řeší SU 38519; autor: Stratil Petr, RCS Kladno)
+- Při zrušení všech jevů se zobrazí textová informace "Na zvoleném území není v platnosti žádný nebezpečný jev".
+
 ## verze 42 – 2019-05-23
 ### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Změněno
