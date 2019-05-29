@@ -32,7 +32,6 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
-var empty = true;
 var zmen = 0;
 
 if (vystraha.info && vystraha.info.length > 0) {
