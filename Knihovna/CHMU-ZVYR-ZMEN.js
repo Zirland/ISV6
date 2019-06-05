@@ -29,7 +29,7 @@ function HighlightDiff(newValue, oldValue) {
     var newValueSplit = newValue != undefined ? newValue.split(' ') : [];
     var oldValueSplit = oldValue != undefined ? oldValue.split(' ') : [];
 
-    if (newValueSplit.length === 0 || oldValueSplit.length === 0) {
+    if (newValueSplit.length == 0 || oldValueSplit.length == 0) {
         resultText = SimpleHighlightDiff(newValue, oldValue);
     } else {
         // Spočteme si matici vzdáleností

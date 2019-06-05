@@ -12,7 +12,7 @@ resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 resultText += '</HEAD>';
 resultText += '<BODY>';
 
-if (distrSeznamNahore === true) {
+if (distrSeznamNahore == true) {
     resultText += 'Distribuce: ';
 
     var dist = '';
@@ -58,8 +58,8 @@ if (distrSeznamNahore === true) {
 var found = false;
 if (vystraha.ucel == 'Actual') {
     // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
-    for (var k = 0; k < krajList.length && found === false; k++) {
-        for (var i = 0; i < krajList[k].info.length && found === false; i++) {
+    for (var k = 0; k < krajList.length && found == false; k++) {
+        for (var i = 0; i < krajList[k].info.length && found == false; i++) {
             info = krajList[k].info[i];
 
             if (info.jev_kod && info.jev_kod != 'OUTLOOK') {
@@ -68,7 +68,7 @@ if (vystraha.ucel == 'Actual') {
         }
 
         // Výstrahy pro okres
-        for (var o = 0; o < krajList[k].okresList.length && found === false; o++) {
+        for (var o = 0; o < krajList[k].okresList.length && found == false; o++) {
             for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
                 info = krajList[k].okresList[o].info[i];
 
@@ -78,7 +78,7 @@ if (vystraha.ucel == 'Actual') {
             }
 
             // Výstrahy pro orp
-            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found === false; ol++) {
+            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++) {
                 for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++) {
                     info = krajList[k].okresList[o].orpList[ol].info[i];
 
@@ -97,8 +97,8 @@ var sivs = false;
 var svrs = false;
 
 // Výstrahy pro kraj
-for (var k = 0; k < krajList.length && (hpps === false || sivs === false || svrs === false); k++) {
-    for (var i = 0; i < krajList[k].info.length && (hpps === false || sivs === false || svrs === false); i++) {
+for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs == false); k++) {
+    for (var i = 0; i < krajList[k].info.length && (hpps == false || sivs == false || svrs == false); i++) {
         info = krajList[k].info[i];
 
         if (info.HPPS && info.HPPS == '1') {
@@ -115,7 +115,7 @@ for (var k = 0; k < krajList.length && (hpps === false || sivs === false || svrs
     }
 
     // Výstrahy pro okres
-    for (var o = 0; o < krajList[k].okresList.length && (hpps === false || sivs === false || svrs === false); o++) {
+    for (var o = 0; o < krajList[k].okresList.length && (hpps == false || sivs == false || svrs == false); o++) {
         for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
             info = krajList[k].okresList[o].info[i];
 
@@ -133,7 +133,7 @@ for (var k = 0; k < krajList.length && (hpps === false || sivs === false || svrs
         }
 
         // Výstrahy pro orp
-        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps === false || sivs === false || svrs === false); ol++) {
+        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps == false || sivs == false || svrs == false); ol++) {
             for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++) {
                 info = krajList[k].okresList[o].orpList[ol].info[i];
 
