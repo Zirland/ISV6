@@ -1063,7 +1063,7 @@ function JevUzemi(info) {
             uzemi.kraj = findOrp[0].kraj.id;
             uzemi.okres = findOrp[0].okres.id;
             uzemi.orp = orp_pole[c];
-            uzemi.nazev = findOrp[0].nazev;
+            uzemi.nazev = 'ORP ' + findOrp[0].nazev;
             uzemiList.push(uzemi);
         }
     }
