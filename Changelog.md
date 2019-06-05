@@ -1,6 +1,15 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 44 – 2019-06-05
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Úprava výpisu územních prvků.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava výpisu územních prvků.
+
 ## verze 43 – 2019-05-29
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno
