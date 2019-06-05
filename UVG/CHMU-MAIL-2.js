@@ -1099,8 +1099,29 @@ function JevUzemi(info) {
     }
 
     for (var d = 0; d < uzemiList.length; d++) {
+
+        if (d == 0) {
+            if (uzemiList[d].okres != 0) {
+                resultText += '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
+            }
+        }
+        if (d > 0 && uzemiList[d].kraj != uzemiList[d-1].kraj && uzemiList[d-1].okres != 0) {
+            resultText = resultText.substring(0, resultText.length-2);
+            resultText += ") – ";
+        }
+        
+        if (d > 0 && uzemiList[d].kraj != uzemiList[d-1].kraj && uzemiList[d].okres != 0) {
+            resultText += '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
+        }
+
         resultText += uzemiList[d].nazev + ', ';
+        
+        if (d == (uzemiList.length-1) && uzemiList[d].okres != 0) {
+            resultText = resultText.substring(0, resultText.length-2);
+            resultText += "), ";
+        }
     }
+
     if (uzemiList.length > 0) {
         resultText = resultText.substring(0, resultText.length-2) + '\n';
     }
