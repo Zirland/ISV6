@@ -1029,10 +1029,9 @@ function JevUzemi(info) {
     }
 
     var uzemiList = [];
-    var uzemiSeznam = '';
 
     for (var a = 0; a < uzemiKraje.length; a++) {
-        uzemi = {};
+        var uzemi = {};
         uzemi.kraj = uzemiKraje[a];
         uzemi.nazev = '<b><u>' + KRAJE_NAZVY[uzemiKraje[a]] + '</u></b>';
         uzemi.okres = 0;
@@ -1041,7 +1040,7 @@ function JevUzemi(info) {
     }
 
     for (var b = 0; b < uzemiOkresu.length; b++) {
-        uzemi = {};
+        var uzemi = {};
         var findOrp = orp.filter(function(e) {
             return e.okres.id == uzemiOkresu[b];
         });
@@ -1055,7 +1054,7 @@ function JevUzemi(info) {
     }
 
     for (var c = 0; c < orp_pole.length; c++) {
-        uzemi = {};
+        var uzemi = {};
         var findOrp = orp.filter(function(e) {
             return e.id == orp_pole[c];
         });
@@ -1112,6 +1111,7 @@ function JevUzemi(info) {
     }
 
     resultText += '|' + uzemiList.length;
+
     return resultText;
 }
 
