@@ -891,10 +891,9 @@ function JevUzemi(info) {
     }
 
     var uzemiList = [];
-    var uzemiSeznam = '';
 
     for (var a = 0; a < uzemiKraje.length; a++) {
-        uzemi = {};
+        var uzemi = {};
         uzemi.kraj = uzemiKraje[a];
         uzemi.nazev = '<b><u>' + KRAJE_NAZVY[uzemiKraje[a]] + '</u></b>';
         uzemi.okres = 0;
@@ -903,7 +902,7 @@ function JevUzemi(info) {
     }
 
     for (var b = 0; b < uzemiOkresu.length; b++) {
-        uzemi = {};
+        var uzemi = {};
         var findOrp = orp.filter(function(e) {
             return e.okres.id == uzemiOkresu[b];
         });
@@ -917,7 +916,7 @@ function JevUzemi(info) {
     }
 
     for (var c = 0; c < orp_pole.length; c++) {
-        uzemi = {};
+        var uzemi = {};
         var findOrp = orp.filter(function(e) {
             return e.id == orp_pole[c];
         });
@@ -925,7 +924,7 @@ function JevUzemi(info) {
             uzemi.kraj = findOrp[0].kraj.id;
             uzemi.okres = findOrp[0].okres.id;
             uzemi.orp = orp_pole[c];
-            uzemi.nazev = findOrp[0].nazev;
+            uzemi.nazev = 'ORP ' + findOrp[0].nazev;
             uzemiList.push(uzemi);
         }
     }
@@ -962,8 +961,29 @@ function JevUzemi(info) {
     }
 
     for (var d = 0; d < uzemiList.length; d++) {
+
+        if (d == 0) {
+            if (uzemiList[d].okres != 0) {
+                resultText += '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
+            }
+        }
+        if (d > 0 && uzemiList[d].kraj != uzemiList[d-1].kraj && uzemiList[d-1].okres != 0) {
+            resultText = resultText.substring(0, resultText.length-2);
+            resultText += ") – ";
+        }
+        
+        if (d > 0 && uzemiList[d].kraj != uzemiList[d-1].kraj && uzemiList[d].okres != 0) {
+            resultText += '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
+        }
+
         resultText += uzemiList[d].nazev + ', ';
+        
+        if (d == (uzemiList.length-1) && uzemiList[d].okres != 0) {
+            resultText = resultText.substring(0, resultText.length-2);
+            resultText += "), ";
+        }
     }
+
     if (uzemiList.length > 0) {
         resultText = resultText.substring(0, resultText.length-2) + '\n';
     }
@@ -974,6 +994,7 @@ function JevUzemi(info) {
     }
 
     resultText += '|' + uzemiList.length;
+
     return resultText;
 }
 
