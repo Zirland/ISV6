@@ -1,4 +1,4 @@
-// Verze 43
+// Verze 44
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -118,7 +118,7 @@ if (empty) {
     resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-if (distrSeznamNahore === false) {
+if (distrSeznamNahore == false) {
     resultText += '</div><hr/>';
     resultText += '<br/>Distribuce: ';
 
