@@ -81,7 +81,7 @@ if (vystraha.info) {
             ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
             resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-            sms1 += JEVY_NAZVY[poleJevy[h]] + ' do ' + ukonceni + oddelovac;
+            sms1 += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
         } else {
             resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
             sms1 = JEVY_NAZVY[poleJevy[h]] + oddelovac;
@@ -152,7 +152,7 @@ if (vystraha.info) {
         // Doplníme o celkovou platnost (souhrnná sestava) 
         if (!detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
-            sms1 += 'Platnost do ' + total_ukonceni + oddelovac;
+            sms1 += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
         }
     }
     vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
@@ -215,7 +215,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
 
             ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
-            sms2 += JEVY_NAZVY[poleJevy2[h]] + ' do ' + ukonceni + oddelovac;
+            sms2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
         } else {
             sms2 = JEVY_NAZVY[poleJevy2[h]] + oddelovac;
         }
@@ -235,7 +235,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
         sms2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
     } else {
         if (!detailni) {
-            sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
+            sms2 += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
         }
     }
 }
