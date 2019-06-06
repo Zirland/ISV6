@@ -4,11 +4,11 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ## verze 44 – 2019-06-05
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
-- Úprava výpisu územních prvků.
+- Úprava výpisu územních prvků pro celostátní sestavu.
 
 ### [UVG/CHMU-MAIL-2]
 #### Změněno
-- Úprava výpisu územních prvků.
+- Úprava výpisu územních prvků pro celostátní sestavu.
 
 ## verze 43 – 2019-05-29
 ### [Knihovna/CHMU-PREPARE]
