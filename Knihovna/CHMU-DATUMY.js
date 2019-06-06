@@ -1,4 +1,4 @@
-// Verze 44
+// Verze 45
 
 // Úprava formátu data
 function Normalize(datum) {
@@ -49,8 +49,6 @@ function UkoncenyJev(konecJev, casZprava) {
 
     konecJev_format_num = Number(konecJev_format);
     casZprava_format_num = Number(casZprava_format);
-
-    output = konecJev_format_num + '<' + casZprava_format_num;
 
     if (konecJev_format_num < casZprava_format_num) {
         return true;
@@ -122,4 +120,28 @@ function ZobrazDatumSMS(datum, end) {
     }
 
     return format_datum;
+}
+
+function Zaokrouhli(datum) {
+    var datum_format = Normalize(datum);
+
+    var kjYear = datum_format.substring(0,4);
+    var kjMonth = datum_format.substring(4,6);
+    var kjDay = datum_format.substring(6,8);
+    var kjHour = datum_format.substring(8,10);
+    var kjMinute = datum_format.substring(10,12);
+
+    var myTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute);
+
+    if (kjMinute < 30) {
+        myTime.setMinutes(30);
+    }
+    if (kjMinute > 30) {
+        myTime.setMinutes(0);
+        myTime.setHours(myTime.getHours() + 1);
+    }
+
+    datum_format = Normalize(myTime);
+
+    return datum_format;
 }

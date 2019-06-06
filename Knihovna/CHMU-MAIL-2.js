@@ -1,4 +1,4 @@
-// Verze 44
+// Verze 45
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
@@ -52,9 +52,8 @@ function PrepareInfo2(vystraha) {
                 // Záznam pro tuto výšku
                 if (orpSplit[j].indexOf(vyskaList[v]) != -1) {
                     // Najdeme, kde výška začíná
-                    var index = orpSplit[j].indexOf('['); {
-                        info.orp.push(orpSplit[j].substring(0, index));
-                    }
+                    var index = orpSplit[j].indexOf('[');
+                    info.orp.push(orpSplit[j].substring(0, index));
                 }
             }
 
@@ -161,13 +160,13 @@ function PrepareKraje(orp, infoList) {
             }
 
             if (krajChange) {
-                infoList[j].krajPom = maOrp
+                infoList[j].krajPom = maOrp;
             } else {
                 infoList[j].krajPom &= maOrp;
             }
 
             if (okresChange) {
-                infoList[j].okresPom = maOrp
+                infoList[j].okresPom = maOrp;
             } else {
                 infoList[j].okresPom &= maOrp;
             }
