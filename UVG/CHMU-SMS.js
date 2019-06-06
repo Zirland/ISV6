@@ -223,8 +223,6 @@ function UkoncenyJev(konecJev, casZprava) {
     konecJev_format_num = Number(konecJev_format);
     casZprava_format_num = Number(casZprava_format);
 
-    output = konecJev_format_num + '<' + casZprava_format_num;
-
     if (konecJev_format_num < casZprava_format_num) {
         return true;
     } else {
@@ -257,6 +255,30 @@ function ZobrazDatum(datum, end) {
     }
 
     return format_datum;
+}
+
+function Zaokrouhli(datum) {
+    var datum_format = Normalize(datum);
+
+    var kjYear = datum_format.substring(0,4);
+    var kjMonth = datum_format.substring(4,6);
+    var kjDay = datum_format.substring(6,8);
+    var kjHour = datum_format.substring(8,10);
+    var kjMinute = datum_format.substring(10,12);
+
+    var myTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute);
+
+    if (kjMinute < 30) {
+        myTime.setMinutes(30);
+    }
+    if (kjMinute > 30) {
+        myTime.setMinutes(0);
+        myTime.setHours(myTime.getHours() + 1);
+    }
+
+    datum_format = Normalize(myTime);
+
+    return datum_format;
 }
 
 var resultText = vystupText = '';
@@ -354,7 +376,7 @@ if (vystraha.info) {
                     ukonceni = ZobrazDatum(jevKonec, 1);
 
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms1 += ' do ' + ukonceni + oddelovac;
+                    sms1 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += oddelovac;
                     sms1 += oddelovac;
@@ -371,7 +393,7 @@ if (vystraha.info) {
                     ukonceni = ZobrazDatum(jevKonec, 1);
 
                     resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms1 += JEVY_NAZVY[poleJevy[h]] + ' do ' + ukonceni + oddelovac;
+                    sms1 += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
                     sms1 = JEVY_NAZVY[poleJevy[h]] + oddelovac;
@@ -443,7 +465,7 @@ if (vystraha.info) {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (!detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
-            sms1 += 'Platnost do ' + total_ukonceni + oddelovac;
+            sms1 += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
         }
         if (omezitNaKraj == -1) {
             vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
@@ -492,15 +514,21 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList2.push(ref_vystraha.info[i].kraj[j].UID);
 
-                        zacatek = Normalize(ref_vystraha.info[i].dc_zacatek);
-                        zacatky.push(zacatek);
+                        var nyni = Zaokrouhli(vystraha.dc_odeslano);
+                        var zacatek = Normalize(ref_vystraha.info[i].dc_zacatek);
+                        resultText += zacatek + ' < ' + nyni + '\n';
+                        if (zacatek < nyni) {
+                            zacatky.push(nyni);
+                            jevStart.push(nyni);
+                        } else {
+                            zacatky.push(zacatek);
+                            jevStart.push(zacatek);
+                        }
                         konec = 999999999999;
                         if (ref_vystraha.info[i].dc_konec) {
                             konec = Normalize(ref_vystraha.info[i].dc_konec);
                         }
                         konce.push(konec);
-
-                        jevStart.push(zacatek);
                         jevEnd.push(konec);
                     }
                 }
@@ -539,7 +567,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                     ukonceni = ZobrazDatum(jevKonec, 1);
 
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms2 += ' do ' + ukonceni + oddelovac;
+                    sms2 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += oddelovac;
                     sms2 = oddelovac;
@@ -555,11 +583,11 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                     zahajeni = ZobrazDatum(jevZacatek);
                     ukonceni = ZobrazDatum(jevKonec, 1);
 
-                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms2 += JEVY_NAZVY[poleJevy[h]] + ' do ' + ukonceni + oddelovac;
+                    resultText += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
-                    resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
-                    sms2 = JEVY_NAZVY[poleJevy[h]] + oddelovac;
+                    resultText += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    sms2 = JEVY_NAZVY[poleJevy2[h]] + oddelovac;
                 }
             }
         }
@@ -580,7 +608,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     } else {
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (!detailni) {
-            sms2 += 'Platnost do ' + total_ukonceni + oddelovac;
+            sms2 += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
         }
     }
 }

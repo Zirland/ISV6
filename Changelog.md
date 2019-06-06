@@ -1,6 +1,32 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 46 – 2019-06-06
+### [Knihovna/CHMU-DATUMY]
+#### Přidáno
+- Vytvoření nové funkce pro zaokrouhlení na nejbližší budoucí půlhodinu.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Změna způsobu porovnání změn, zohlednění posunutí začátku platnosti.
+
+#### Záplata
+- Oprava generování SMS pro kraje.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Změna způsobu porovnání změn, zohlednění posunutí začátku platnosti.
+
+### [UVG/CHMU-SMS]
+#### Přidáno
+- Vytvoření nové funkce pro zaokrouhlení na nejbližší budoucí půlhodinu.
+
+#### Změněno
+- Změna způsobu porovnání změn, zohlednění posunutí začátku platnosti.
+
+#### Záplata
+- Oprava generování SMS pro kraje.
+
 ## verze 45 – 2019-06-06
 ### [UVG/CHMU-SMS]
 #### Záplata
