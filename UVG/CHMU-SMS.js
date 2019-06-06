@@ -555,11 +555,11 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                     zahajeni = ZobrazDatum(jevZacatek);
                     ukonceni = ZobrazDatum(jevKonec, 1);
 
-                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms2 += JEVY_NAZVY[poleJevy[h]] + ' do ' + ukonceni + oddelovac;
+                    resultText += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' do ' + ukonceni + oddelovac;
                 } else {
-                    resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
-                    sms2 = JEVY_NAZVY[poleJevy[h]] + oddelovac;
+                    resultText += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    sms2 = JEVY_NAZVY[poleJevy2[h]] + oddelovac;
                 }
             }
         }
