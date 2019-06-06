@@ -1327,7 +1327,7 @@ switch (vystraha.ucel) {
     case 'Test' :
         header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
         if (svrs && !sivs && !hpps) {
-            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM'
+            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM';
         }
         if (sivs && !hpps) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
@@ -1337,9 +1337,10 @@ switch (vystraha.ucel) {
         }
     break;
     case 'Actual' :
+    default:
         header = 'VÝSTRAHA ČHMÚ';
         if (svrs && !sivs && !hpps) {
-            header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU'
+            header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU';
         }
         if (sivs && !hpps) {
             header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
@@ -1360,9 +1361,7 @@ resultText += '<br/>Odesláno: ' + ZobrazDatum(vystraha.dc_odeslano, 'long');
 
 if (vystraha.reference) {
     var referenceSplit = vystraha.reference.split(',');
-    resultText += '<br/>Zpráva aktualizuje předchozí zprávu č. ' + referenceSplit[1].substring(referenceSplit[1].length - 6)
-        + ' vydanou ' + referenceSplit[2].substring(8, 10) + '.' + referenceSplit[2].substring(5, 7) + '.' + referenceSplit[2].substring(0, 4)
-        + ' v ' + referenceSplit[2].substring(11, 19) + ' hodin';
+    resultText += '<br/>Zpráva aktualizuje předchozí zprávu č. ' + referenceSplit[1].substring(referenceSplit[1].length - 6) + ' vydanou ' + referenceSplit[2].substring(8, 10) + '.' + referenceSplit[2].substring(5, 7) + '.' + referenceSplit[2].substring(0, 4) + ' v ' + referenceSplit[2].substring(11, 19) + ' hodin';
 }
 
 resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';

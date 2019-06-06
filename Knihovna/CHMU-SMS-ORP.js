@@ -9,13 +9,13 @@ var seznjevu = [];
 
 // Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
-    var unique_array = []
+    var unique_array = [];
     for (var i = 0;i < arr.length; i++) {
         if (unique_array.indexOf(arr[i]) == -1) {
-            unique_array.push(arr[i])
+            unique_array.push(arr[i]);
         }
     }
-    return unique_array
+    return unique_array;
 }
 
 var resultText = vystupText = '';
@@ -135,6 +135,9 @@ if (vystraha.info) {
             break;
             case 'SVRS' :
                 uvod += 'SVRS ';
+            break;
+            default :
+                uvod += 'ČHMÚ';
             break;
         }
 

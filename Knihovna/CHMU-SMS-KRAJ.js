@@ -9,13 +9,13 @@ var seznjevu = [];
 
 // Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
-    var unique_array = []
+    var unique_array = [];
     for (var i = 0;i < arr.length; i++) {
         if (unique_array.indexOf(arr[i]) == -1) {
             unique_array.push(arr[i]);
         }
     }
-    return unique_array
+    return unique_array;
 }
 
 var resultText = vystupText = '';
@@ -187,6 +187,9 @@ if (vystraha.info) {
             case 'SVRS' :
                 uvod += 'SVRS ';
             break;
+            default :
+                uvod += 'ČHMÚ';
+            break;
         }
 
         var poradi_zpravy = vystraha.id.substring(vystraha.id.length - 6);
@@ -195,7 +198,6 @@ if (vystraha.info) {
 
         // Připojíme připravený výpis jevů
         vystupText += resultText;
-        
 
         // Doplníme o celkovou platnost (celostátní a souhrnná sestava) a na GŘ také odkaz na OPIN WOCZ59
         if (!detailni) {
@@ -211,7 +213,6 @@ if (vystraha.info) {
 
 resultText = '';
 zacatky = konce = [];
-
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     var poleJevy2 = [];
