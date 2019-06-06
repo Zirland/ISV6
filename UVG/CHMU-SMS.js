@@ -342,6 +342,7 @@ if (vystraha.info) {
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
                 resultText += seznkraje;
                 sms1 += seznkraje;
+
                 if (detailni) {
                     jevStarty = Math.min.apply(null, jevStart);
                     jevZacatek = jevStarty.toString();
@@ -490,6 +491,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
                         jevKrajeList2.push(ref_vystraha.info[i].kraj[j].UID);
+
                         zacatek = Normalize(ref_vystraha.info[i].dc_zacatek);
                         zacatky.push(zacatek);
                         konec = 999999999999;
@@ -526,6 +528,23 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                 seznkraje = seznkraje.substring(0, seznkraje.length-2);
                 resultText += seznkraje;
                 sms2 += seznkraje;
+                if (detailni) {
+                    jevStarty = Math.min.apply(null, jevStart);
+                    jevZacatek = jevStarty.toString();
+
+                    jevEndy = Math.max.apply(null, jevEnd);
+                    jevKonec = jevEndy.toString();
+
+                    zahajeni = ZobrazDatum(jevZacatek);
+                    ukonceni = ZobrazDatum(jevKonec, 1);
+
+                    resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += ' do ' + ukonceni + oddelovac;
+                } else {
+                    resultText += oddelovac;
+                    sms2 = oddelovac;
+                }
+            } else {
                 if (detailni) {
                     jevStarty = Math.min.apply(null, jevStart);
                     jevZacatek = jevStarty.toString();
