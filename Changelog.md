@@ -2,6 +2,15 @@
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
 ## verze 45 – 2019-06-06
+### [Knihovna/CHMU-PREPARE]
+#### Záplata
+- Při zrušení všech jevů se v ORP sestavě zobrazí textová informace "Na zvoleném území není v platnosti žádný nebezpečný jev".
+
+### [UVG/CHMU-EMAIL]
+#### Záplata
+- Při zrušení všech jevů se v ORP sestavě zobrazí textová informace "Na zvoleném území není v platnosti žádný nebezpečný jev".
+
+## verze 45 – 2019-06-06
 ### [Knihovna/CHMU-DATUMY]
 #### Přidáno
 - Vytvoření nové funkce pro zaokrouhlení na nejbližší budoucí půlhodinu.
