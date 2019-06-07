@@ -579,7 +579,6 @@ function PrintInfoList(krajList, ref_krajList) {
                     if (first) {
                         first = false;
                         resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
-                        empty = false;
                     }
 
                     ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
@@ -783,7 +782,6 @@ function PrintInfoList(krajList, ref_krajList) {
                 if (first) {
                     first = false;
                     resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
-//                    empty = false;
                 }
 
                 ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
@@ -806,7 +804,6 @@ function PrintInfoList(krajList, ref_krajList) {
                         if (first) {
                             first = false;
                             resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
-//                            empty = false;
                         }
 
                         ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
@@ -829,7 +826,6 @@ function PrintInfoList(krajList, ref_krajList) {
                             if (first) {
                                 first = false;
                                 resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
-//                                empty = false;
                             }
 
                             pomoc = PrintInfo(null, ref_info);
