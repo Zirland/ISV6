@@ -1,4 +1,4 @@
-// Verze 45
+// Verze 46
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = true;
