@@ -289,7 +289,6 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             if (first) {
                                 first = false;
                                 (headers == 0 ? '' : resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>');
-                                empty = false;
                             }
 
                             ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
@@ -363,7 +362,6 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                 if (first) {
                                     first = false;
                                     (headers == 0 ? '' : resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>');
-                                    empty = false;
                                 }
 
                                 pomoc = PrintInfo(null, ref_info);
