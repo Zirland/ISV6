@@ -90,13 +90,13 @@ function GetWarningColor(info) {
     if (info) {
         switch (info.zavaznost_kod) {
             case 'Moderate' : 
-                color = 'Žlutá';
+                color = 'Nízký st. nebezpečí';
             break;
             case 'Severe' : 
-                color = 'Oranžová';
+                color = 'Vysoký st. nebezpečí';
             break;
             case 'Extreme' : 
-                color = 'Červená';
+                color = 'Extrémní st. nebezpečí';
             break;
             default :
                 color = '';

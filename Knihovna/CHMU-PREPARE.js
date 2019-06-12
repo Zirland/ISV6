@@ -488,13 +488,13 @@ function GetWarningColor(info) {
     if (info) {
         switch (info.zavaznost_kod) {
             case 'Moderate' : 
-                color = 'Žlutá';
+                color = 'Nízký st. nebezpečí';
             break;
             case 'Severe' : 
-                color = 'Oranžová';
+                color = 'Vysoký st. nebezpečí';
             break;
             case 'Extreme' : 
-                color = 'Červená';
+                color = 'Extrémní st. nebezpečí';
             break;
             default :
                 color = '';
@@ -617,7 +617,7 @@ function PrintInfo(info, ref_info) {
         resultText += '</td>';
         resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">';
 
-        pomoc = SimpleHighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
+        pomoc = HighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
         resultText += pomoc.split('|')[0];
         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 

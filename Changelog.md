@@ -1,6 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 47 – 2019-06-12
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Vyjádření stupně nebezpečí v souladu se směrnicí ČHMÚ.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Vyjádření stupně nebezpečí v souladu se směrnicí ČHMÚ.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Vyjádření stupně nebezpečí v souladu se směrnicí ČHMÚ.
+
 ## verze 46 – 2019-06-10
 ### [Knihovna/CHMU-PREPARE]
 #### Záplata
