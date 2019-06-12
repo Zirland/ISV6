@@ -1,4 +1,4 @@
-// Verze 46
+// Verze 47
 
 zobrazitZmeny = true;
 

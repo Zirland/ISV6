@@ -1,4 +1,4 @@
-// Verze 46
+// Verze 47
 
 // Úprava formátu data
 function Normalize(datum) {

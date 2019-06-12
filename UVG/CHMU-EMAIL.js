@@ -1,4 +1,4 @@
-// Verze 46
+// Verze 47
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
