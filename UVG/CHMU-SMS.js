@@ -1,4 +1,4 @@
-// Verze 46
+// Verze 47
 
 var omezitNaKraj = -1;
 var detailni = 1;
