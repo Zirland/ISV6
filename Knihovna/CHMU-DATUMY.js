@@ -1,4 +1,4 @@
-// Verze 47
+// Verze 48
 
 // Úprava formátu data
 function Normalize(datum) {
@@ -88,7 +88,6 @@ function ZobrazDatum(datum, format, end) {
                 format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '.' + normDatumRok + ' ' + normDatumHodina + ':' + normDatumMinuta + ':' + normDatumSekunda;
             break;
         }
-        
     }
 
     return format_datum;

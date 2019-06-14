@@ -249,6 +249,11 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 - Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
 - Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
 
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
+- Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
+
 Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* je seznam distribuce (krajů) zobrazen pod přehledem nebezpečných jevů na posledním řádku sestavy.

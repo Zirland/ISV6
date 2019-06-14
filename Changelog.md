@@ -1,6 +1,11 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 48 – 2019-06-14
+### [UVG/CHMU-MAIL-2]
+#### Přidáno
+- Vytvořen nový parametr umožňující vrácení prázdné sestavy v případě, kdy na sledovaném území nedojde ke změně.
+
 ## verze 47 – 2019-06-12
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno
