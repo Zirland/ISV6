@@ -10,6 +10,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Záplata
 - Oprava zaokrouhlování platnosti jevů vydaných přesně v celou.
 
+### [Knihovna/MAIL-2]
+#### Přidáno
+- Řazení jevů podle začátku platnosti a následně podle kódu jevu.
+
 ### [Knihovna/CHMU-PREPARE]
 #### Přidáno
 - Řazení jevů podle začátku platnosti a následně podle kódu jevu.
