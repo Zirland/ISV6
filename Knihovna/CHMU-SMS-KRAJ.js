@@ -300,7 +300,7 @@ if (ref_infoList) {
 
     // Vezmeme kód jevu a najdeme si všechny časové období v tomto kraji.
     for (var h = 0; h < poleJevy2.length; h++) {
-        var jevStart [];
+        var jevStart = [];
         var jevEnd = [];
         var jevKrajeList2 = [];
         for (var i = 0; i < ref_infoList.length; i++) {
