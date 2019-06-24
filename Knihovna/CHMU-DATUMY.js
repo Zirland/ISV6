@@ -132,7 +132,7 @@ function Zaokrouhli(datum) {
 
     var myTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute);
 
-    if (kjMinute < 30) {
+    if (kjMinute > 0 && kjMinute < 30) {
         myTime.setMinutes(30);
     }
     if (kjMinute > 30) {

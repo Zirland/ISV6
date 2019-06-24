@@ -1,6 +1,58 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 49 – 2019-06-24
+### [Knihovna/CHMU-CISELNIK]
+#### Změněno
+- Změna kódů výskytů nebezpečných jevů z důvodu řazení na začátek.
+
+### [Knihovna/CHMU-DATUMY]
+#### Záplata
+- Oprava zaokrouhlování platnosti jevů vydaných přesně v celou.
+
+### [Knihovna/CHMU-PREPARE]
+#### Přidáno
+- Řazení jevů podle začátku platnosti a následně podle kódu jevu.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Přidáno
+- Řazení jevů podle začátku platnosti a následně podle kódu jevu.
+
+#### Záplata
+- Syntaktická úprava kódu.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Přidáno
+- Řazení jevů podle začátku platnosti a následně podle kódu jevu.
+
+#### Záplata
+- Syntaktická úprava kódu.
+
+### [UVG/CHMU-EMAIL]
+#### Přidáno
+- Řazení jevů podle začátku platnosti a následně podle kódu jevu.
+
+#### Změněno
+- Změna kódů výskytů nebezpečných jevů z důvodu řazení na začátek.
+
+### [UVG/MAIL-2]
+#### Přidáno
+- Řazení jevů podle začátku platnosti a následně podle kódu jevu.
+
+#### Změněno
+- Změna kódů výskytů nebezpečných jevů z důvodu řazení na začátek.
+
+### [UVG/CHMU-SMS]
+#### Přidáno
+- Řazení jevů podle začátku platnosti a následně podle kódu jevu.
+
+#### Změněno
+- Změna kódů výskytů nebezpečných jevů z důvodu řazení na začátek.
+
+#### Záplata
+- Oprava zaokrouhlování platnosti jevů vydaných přesně v celou.
+- Syntaktická úprava kódu.
+
 ## verze 48 – 2019-06-14
 ### [UVG/CHMU-MAIL-2]
 #### Přidáno

@@ -82,6 +82,15 @@ function PrepareInfo(orp, vystraha) {
         return 0;
     });
 
+    infoList = infoList.sort(function (a, b) {
+        var jev1 = a.stupen_kod;
+        var jev2 = b.stupen_kod;
+
+        if (jev1 < jev2) return -1;
+        if (jev1 > jev2) return 1;
+        return 0;
+    });
+
     var krajList = [];
     var posledniKraj = {};
     var posledniOkres = {};
