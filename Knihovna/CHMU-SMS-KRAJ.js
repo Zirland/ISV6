@@ -18,20 +18,47 @@ function removeDuplicates(arr) {
     return unique_array;
 }
 
-var resultText = vystupText = '';
-var sms1 = sms2 = '';
+var resultText = '';
+var vystupText = '';
+var sms1 = '';
+var sms2 = '';
 
 if (vystraha.info) {
+    var infoList = [];
+    for (var l = 0; l < vystraha.info.length; l++) {
+        infoList.push(vystraha.info[l]);
+    }
+
+    infoList = infoList.sort(function (a, b) {
+        var start1 = parseFloat(Normalize(a.dc_zacatek));
+        var start2 = parseFloat(Normalize(b.dc_zacatek));
+
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
+        return 0;
+    });
+
+    infoList = infoList.sort(function (a, b) {
+        var jev1 = a.stupen_kod;
+        var jev2 = b.stupen_kod;
+
+        if (jev1 < jev2) return -1;
+        if (jev1 > jev2) return 1;
+        return 0;
+    });
+}
+
+if (infoList) {
     var poleJevy = [];
     // Naplníme si seznam kódů jevů z výstrahy
-    for (var i = 0; i < vystraha.info.length; i++) {
+    for (var i = 0; i < infoList.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
-        if (vystraha.info[i].stupen_kod != 'OUTLOOK') { 
+        if (infoList[i].stupen_kod != 'OUTLOOK') { 
             var pomKod = '';
-            if (vystraha.info[i].jistota_kod == 'Observed') {
-                pomKod += 'P';
+            if (infoList[i].jistota_kod == 'Observed') {
+                pomKod += '0';
             }
-            pomKod += vystraha.info[i].stupen_kod;
+            pomKod += infoList[i].stupen_kod;
             poleJevy.push(pomKod);
         }
     }
@@ -39,37 +66,44 @@ if (vystraha.info) {
     // Promažeme duplicity
     poleJevy = removeDuplicates(poleJevy);
 
+    poleJevy = poleJevy.sort(function (a, b) {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+    });
+
     // Vezmeme kód jevu a najdeme si všechny časové období v tomto kraji.
     for (var h = 0; h < poleJevy.length; h++) {
-        var jevStart = jevEnd = [];
+        var jevStart = [];
+        var jevEnd = [];
         var jevKrajeList = [];
-        for (var i = 0; i < vystraha.info.length; i++) {
+        for (var i = 0; i < infoList.length; i++) {
             var pomKodIvnj = '';
-            if (vystraha.info[i].jistota_kod == 'Observed') {
-                pomKodIvnj = 'P';
+            if (infoList[i].jistota_kod == 'Observed') {
+                pomKodIvnj = '0';
             }
-            if (poleJevy[h] == pomKodIvnj + vystraha.info[i].stupen_kod) {
+            if (poleJevy[h] == pomKodIvnj + infoList[i].stupen_kod) {
                 var found = omezitNaKraj == -1;
-                for (var j = 0; j < vystraha.info[i].kraj.length && !found; j++) {
-                    found = vystraha.info[i].kraj[j].UID == omezitNaKraj;
+                for (var j = 0; j < infoList[i].kraj.length && !found; j++) {
+                    found = infoList[i].kraj[j].UID == omezitNaKraj;
                 }
-                for (var j = 0; j < vystraha.info[i].kraj.length; j++) {
+                for (var j = 0; j < infoList[i].kraj.length; j++) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
-                        jevKrajeList.push(vystraha.info[i].kraj[j].UID);
+                        jevKrajeList.push(infoList[i].kraj[j].UID);
                         warn_type = 'SVRS';
-                        if (vystraha.info[i].SIVS == '1') {
+                        if (infoList[i].SIVS == '1') {
                             warn_type = 'SIVS';
                         }
-                        if (vystraha.info[i].HPPS == '1') {
+                        if (infoList[i].HPPS == '1') {
                             warn_type = 'HPPS';
                         }
                         seznjevu.push(warn_type);
-                        zacatek = Normalize(vystraha.info[i].dc_zacatek);
+                        zacatek = Normalize(infoList[i].dc_zacatek);
                         zacatky.push(zacatek);
                         konec = 99999999999999;
-                        if (vystraha.info[i].dc_konec) {
-                            konec = Normalize(vystraha.info[i].dc_konec);
+                        if (infoList[i].dc_konec) {
+                            konec = Normalize(infoList[i].dc_konec);
                         }
                         konce.push(konec);
 
@@ -212,19 +246,45 @@ if (vystraha.info) {
 }
 
 resultText = '';
-zacatky = konce = [];
+zacatky = [];
+konce = [];
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
+    var ref_infoList = [];
+    for (var l = 0; l < ref_vystraha.info.length; l++) {
+        ref_infoList.push(ref_vystraha.info[l]);
+    }
+
+    ref_infoList = ref_infoList.sort(function (a, b) {
+        var start1 = parseFloat(Normalize(a.dc_zacatek));
+        var start2 = parseFloat(Normalize(b.dc_zacatek));
+
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
+        return 0;
+    });
+
+    ref_infoList = ref_infoList.sort(function (a, b) {
+        var jev1 = a.stupen_kod;
+        var jev2 = b.stupen_kod;
+
+        if (jev1 < jev2) return -1;
+        if (jev1 > jev2) return 1;
+        return 0;
+    });
+}
+
+if (ref_infoList) {
     var poleJevy2 = [];
     // Naplníme si seznam kódů jevů z výstrahy
-    for (var i = 0; i < ref_vystraha.info.length; i++) {
+    for (var i = 0; i < ref_infoList.length; i++) {
         // Z výpisu vyloučíme jevy Výhled nebezpečných jevů a vypršelé jevy
-        if (ref_vystraha.info[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_vystraha.info[i].dc_konec, vystraha.dc_odeslano)) { 
+        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)) { 
             var pomKod2 = '';
-            if (ref_vystraha.info[i].jistota_kod == 'Observed') {
-                pomKod2 += 'P';
+            if (ref_infoList[i].jistota_kod == 'Observed') {
+                pomKod2 += '0';
             }
-            pomKod2 += ref_vystraha.info[i].stupen_kod;
+            pomKod2 += ref_infoList[i].stupen_kod;
             poleJevy2.push(pomKod2);
         }
     }
@@ -232,28 +292,34 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     // Promažeme duplicity
     poleJevy2 = removeDuplicates(poleJevy2);
 
+    poleJevy2 = poleJevy2.sort(function (a, b) {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+    });
+
     // Vezmeme kód jevu a najdeme si všechny časové období v tomto kraji.
     for (var h = 0; h < poleJevy2.length; h++) {
-        var jevStart = jevEnd = [];
+        var jevStart [];
+        var jevEnd = [];
         var jevKrajeList2 = [];
-        for (var i = 0; i < ref_vystraha.info.length; i++) {
+        for (var i = 0; i < ref_infoList.length; i++) {
             var pomKod2Ivnj = '';
-            if (ref_vystraha.info[i].jistota_kod == 'Observed') {
-                pomKod2Ivnj = 'P';
+            if (ref_infoList[i].jistota_kod == 'Observed') {
+                pomKod2Ivnj = '0';
             }
-            if (poleJevy2[h] == pomKod2Ivnj + ref_vystraha.info[i].stupen_kod) {
+            if (poleJevy2[h] == pomKod2Ivnj + ref_infoList[i].stupen_kod) {
                 var found = omezitNaKraj == -1;
-                for (var j = 0; j < ref_vystraha.info[i].kraj.length && !found; j++) {
-                    found = ref_vystraha.info[i].kraj[j].UID == omezitNaKraj;
+                for (var j = 0; j < ref_infoList[i].kraj.length && !found; j++) {
+                    found = ref_infoList[i].kraj[j].UID == omezitNaKraj;
                 }
-                for (var j = 0; j < ref_vystraha.info[i].kraj.length; j++) {
+                for (var j = 0; j < ref_infoList[i].kraj.length; j++) {
                     if (found) {
                         // Pokud jsme našli výskyt jevu v kraji, připíšeme kraj do seznamu
-                        jevKrajeList2.push(ref_vystraha.info[i].kraj[j].UID);
+                        jevKrajeList2.push(ref_infoList[i].kraj[j].UID);
 
                         var nyni = Zaokrouhli(vystraha.dc_odeslano);
-                        var zacatek = Normalize(ref_vystraha.info[i].dc_zacatek);
-                        resultText += zacatek + ' < ' + nyni + '\n';
+                        var zacatek = Normalize(ref_infoList[i].dc_zacatek);
                         if (zacatek < nyni) {
                             zacatky.push(nyni);
                             jevStart.push(nyni);
@@ -262,7 +328,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
                             jevStart.push(zacatek);
                         }
                         konec = 99999999999999;
-                        if (ref_vystraha.info[i].dc_konec) {
+                        if (ref_infoList[i].dc_konec) {
                             konec = Normalize(ref_vystraha.info[i].dc_konec);
                         }
                         konce.push(konec);
