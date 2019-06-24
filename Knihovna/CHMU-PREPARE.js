@@ -1,4 +1,4 @@
-// Verze 48
+// Verze 49
 
 // Připravíme seznam jevů podle území
 function PrepareInfo(orp, vystraha) {
@@ -79,6 +79,15 @@ function PrepareInfo(orp, vystraha) {
 
         if (start1 < start2) return -1;
         if (start1 > start2) return 1;
+        return 0;
+    });
+
+    infoList = infoList.sort(function (a, b) {
+        var jev1 = a.stupen_kod;
+        var jev2 = b.stupen_kod;
+
+        if (jev1 < jev2) return -1;
+        if (jev1 > jev2) return 1;
         return 0;
     });
 
