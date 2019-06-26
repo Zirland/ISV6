@@ -1,12 +1,6 @@
 // Verze 49
 
-var hlavniKraj = -1;
-var zobrazovatVsechnyKraje = true;
-var razeniPodleNazvu = false;
-var zobrazitVyhled = true;
-var zobrazitZmeny = true;
-var pouzeZmeny = false;
-var distrSeznamNahore = false;
+var hlavniKraj = 132;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -25,8 +19,6 @@ var KRAJE_NAZVY = {
     "132": "Moravskoslezský kraj",
     "141": "Zlínský kraj"
 };
-
-var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
@@ -475,19 +467,15 @@ function PrepareInfo(orp, vystraha) {
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
         var podminka = true;
-        if (zobrazitVyhled) {
-            podminka = (!UkoncenyJev(infoList[x].dc_konec, vytvoreni));
-        } else {
-            podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
-        }
-        
+        podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
+
         if (podminka) {
             infoListFilter.push(infoList[x]);
         }
     }
     
     infoList = infoListFilter;
-    
+
     infoList = infoList.sort(function (a, b) {
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
@@ -640,15 +628,13 @@ function PrintInfoList(krajList, ref_krajList) {
                 }
 
                 // Pokud jsme výstrahu nenašli
-                if (!found && zobrazitZmeny) {
+                if (!found) {
                     if (first) {
                         first = false;
-                        resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                     }
 
                     ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                     pomoc = PrintInfo(null, ref_info);
-                    resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
             }
@@ -675,12 +661,10 @@ function PrintInfoList(krajList, ref_krajList) {
 
             if (first) {
                 first = false;
-                resultText += '</div><br/><div><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>';
                 empty = false;
             }
 
             pomoc = PrintInfo(info, ref_info);
-            resultText += pomoc.split('|')[0];
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
         }
 
@@ -709,15 +693,13 @@ function PrintInfoList(krajList, ref_krajList) {
                         }
 
                         // Pokud jsme výstrahu nenašli
-                        if (!found && zobrazitZmeny) {
+                        if (!found) {
                             if (first) {
                                 first = false;
-                                resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                             }
 
                             ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                             pomoc = PrintInfo(null, ref_info);
-                            resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                         }
                     }
@@ -749,12 +731,10 @@ function PrintInfoList(krajList, ref_krajList) {
 
                     if (first) {
                         first = false;
-                        resultText += '</div><br/><div><b>Okres ' + krajList[k].okresList[o].nazev + '</b>';
                         empty = false;
                     }
 
                     pomoc = PrintInfo(info, ref_info);
-                    resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
             }
@@ -782,14 +762,12 @@ function PrintInfoList(krajList, ref_krajList) {
                             }
 
                             // Pokud jsme výstrahu nenašli
-                            if (!found && zobrazitZmeny) {
+                            if (!found) {
                                 if (first) {
                                     first = false;
-                                    resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                                 }
 
                                 pomoc = PrintInfo(null, ref_info);
-                                resultText += pomoc.split('|')[0];
                                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                             }
                         }
@@ -819,12 +797,10 @@ function PrintInfoList(krajList, ref_krajList) {
 
                         if (first) {
                             first = false;
-                            resultText += '</div><br/><div><b>ORP ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                             empty = false;
                         }
 
                         pomoc = PrintInfo(info, ref_info);
-                        resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
                 }
@@ -833,7 +809,7 @@ function PrintInfoList(krajList, ref_krajList) {
     }
 
     // Pokud nemáme původní výstrahu, ale máme jen referenční
-    if (krajList.length == 0 && ref_krajList.length > 0 && zobrazitZmeny) {
+    if (krajList.length == 0 && ref_krajList.length > 0) {
         for (var k = 0; k < ref_krajList.length; k++) {
             ref_zpracovanyInfoStupen = [];
             first = true;
@@ -844,12 +820,10 @@ function PrintInfoList(krajList, ref_krajList) {
                 
                 if (first) {
                     first = false;
-                    resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
                 }
 
                 ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                 pomoc = PrintInfo(null, ref_info);
-                resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
             }
 
@@ -866,12 +840,10 @@ function PrintInfoList(krajList, ref_krajList) {
                     if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                         if (first) {
                             first = false;
-                            resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
                         }
 
                         ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                         pomoc = PrintInfo(null, ref_info);
-                        resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
                 }
@@ -888,11 +860,9 @@ function PrintInfoList(krajList, ref_krajList) {
                         if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1 && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                             if (first) {
                                 first = false;
-                                resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
                             }
 
                             pomoc = PrintInfo(null, ref_info);
-                            resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                         }
                     }
@@ -1019,183 +989,61 @@ function PrintInfo(info, ref_info) {
         }
     }
 
-    if (zobrazitZmeny) {
-        resultText += '<table class="tg" width="100%" border="1">';
 
-        // Hlavička
-        resultText += '<tr>';
-        resultText += '<td width="20%">';
-        pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        pomoc = HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    pomoc = HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        pomoc = HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    pomoc = HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        resultText += '</td>';
-        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">';
+    pomoc = HighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        pomoc = HighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '<td>';
-
-        if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
-            resultText += 'do odvolání';
-        } else {
-            resultText += '<table class="no" border="0">';
-            resultText += '<tr><td>';
-                
-            if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
-                resultText += ZobrazDatum(info.dc_zacatek, 'short');
-            } else {
-                pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
-                resultText += pomoc.split('|')[0];
-                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-            }
-                
-            resultText += '</td>';
-            resultText += '<td>&nbsp;–&nbsp;</td>';
-
-            resultText += '<td>';
-            pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-            resultText += '</td></tr>';
-            resultText += '</table>';
-        }
-        resultText += '</td>';
-        resultText += '</tr>';
-
-        // Popis
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ';
-
-        pomoc = HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '</tr>';
-
-        // Hydrologická zpráva
-        if (info && (info.hydroPredpoved)) {
-            resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
-
-            pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            resultText += '</td>';
-            resultText += '</tr>';
-        }
-
-        // Doporučení
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Doporučení:</b> ';
-
-        pomoc = HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '</tr>';
-        resultText += '</table>';
+    if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
+        resultText += 'do odvolání';
     } else {
-        resultText += '<table class="tg" width="100%" border="1 ">';
-
-        // Hlavička
-        resultText += '<tr>';
-        resultText += '<td width="20%">' + (info != null ? vyskyt : '');
-        resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
-        resultText += (info != null ? PrintVyska(info) : '') + '</td>';
-        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
-
-        if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
-            resultText += '<td>do odvolání</td>';
+        if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
+            resultText += ZobrazDatum(info.dc_zacatek, 'short');
         } else {
-            resultText += '<td><table class="no" border="0">';
-            resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
-            resultText += '<td>&nbsp;–&nbsp;</td>';
-            resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
-            resultText += '</table></td>';
-        }
-        resultText += '</tr>';
-
-        // Popis
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ' + (info != null ? upr_info : '') + '</td>';
-        resultText += '</tr>';
-
-        // Hydrologická zpráva
-        if (info && (info.hydroPredpoved)) {
-            resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
-            resultText += '</tr>';
+            pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
+            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
         }
 
-        // Doporučení
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Doporučení:</b> ' + (info != null ? upr_doporuceni : '') + '</td>';
-        resultText += '</tr>';
-
-        resultText += '</table>';
+        pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
     }
+
+    pomoc = HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+    if (info && (info.hydroPredpoved)) {
+        pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    }
+
+    pomoc = HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
     resultText = resultText + '|' + zmen;
     return resultText;
-}
-
-if (!razeniPodleNazvu) {
-    var orpSort = orp;
-    orpSort.sort(function (a, b) {
-        var kraj1 = parseFloat(a.kraj.id);
-        var kraj2 = parseFloat(b.kraj.id);
-        var okres1 = parseFloat(a.okres.id);
-        var okres2 = parseFloat(b.okres.id);
-        var orp1 = parseFloat(a.id);
-        var orp2 = parseFloat(b.id);
-
-        if (kraj1 < kraj2) return -1;
-        if (kraj1 > kraj2) return 1;
-        if (okres1 < okres2) return -1;
-        if (okres1 > okres2) return 1;
-        if (orp1 < orp2) return -1;
-        if (orp1 > orp2) return 1;
-        return 0;
-    });
 }
 
 if (hlavniKraj != -1) {
     var orpTmp = [];
 
     for (var i = 0; i < orp.length; i++) {
-        // Pokud se jedná o hlavní kraj
         if (hlavniKraj == orp[i].kraj.id) {
-            // Dáme na začátek seznamu
             orpTmp.push(orp[i]);
-        }
-    }
-
-    if (zobrazovatVsechnyKraje) {
-        for (var i = 0; i < orp.length; i++) {
-            if (hlavniKraj != orp[i].kraj.id) {
-                orpTmp.push(orp[i]);
-            }
         }
     }
 
     orp = orpTmp;
 }
 
+// Samotná zpráva
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];
@@ -1203,6 +1051,7 @@ var info;
 var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
+// Připravíme jednotlivé info jevy
 if (vystraha.info && vystraha.info.length > 0) {
     krajList = PrepareInfo(orp, vystraha);
 }
@@ -1211,296 +1060,20 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
-resultText += '<!DOCTYPE html>';
-resultText += '<HTML>';
-resultText += '<HEAD>';
-resultText += '<META charset="utf-8"/>';
-resultText += '<TITLE>' + vystraha.id + '</TITLE>';
-
-resultText += '<style type="text/css">';
-resultText += '    body {font-family:serif;font-size:13px;}';
-resultText += '    .header {font-size:15px;text-align:center;}';
-resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
-resultText += '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
-resultText += '    .no td{padding:0px 0px;border-style:none;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-resultText += '    @media print {';
-resultText += '        div {page-break-inside: avoid;}';
-resultText += '    }';
-resultText += '</style>';
-
-resultText += '</HEAD>';
-resultText += '<BODY>';
-
-if (distrSeznamNahore == true) {
-
-    resultText += 'Distribuce: ';
-    var dist = '';
-
-    for (var k = 0; k < krajList.length; k++) {
-        var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
-
-        for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
-            found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
-
-            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++) {
-                found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
-            }
-        }
-
-        if (found) {
-            dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-        }
-    }
-
-    if (krajList.length == 0) {
-        for (var k = 0; k < ref_krajList.length; k++) {
-            var found = ref_krajList[k].info.length > 0;
-
-            for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
-                found = ref_krajList[k].okresList[o].info.length > 0;
-
-                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++) {
-                    found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
-                }
-            }
-
-            if (found) {
-                dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
-            }
-        }
-    }
-
-    resultText += dist + '<hr/>';
-}
-
-var found = false;
-if (vystraha.ucel == 'Actual') {
-    for (var k = 0; k < krajList.length && found == false; k++) {
-        for (var i = 0; i < krajList[k].info.length && found == false; i++) {
-            info = krajList[k].info[i];
-
-            if (info.jev_kod && info.jev_kod != 'OUTLOOK') {
-                found = true;
-            }
-        }
-
-        for (var o = 0; o < krajList[k].okresList.length && found == false; o++) {
-            for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
-                info = krajList[k].okresList[o].info[i];
-
-                if (info.jev_kod && info.jev_kod != 'OUTLOOK') {
-                    found = true;
-                }
-            }
-
-            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++) {
-                for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++) {
-                    info = krajList[k].okresList[o].orpList[ol].info[i];
-
-                    if (info.jev_kod && info.jev_kod != 'OUTLOOK') {
-                        found = true;
-                    }
-                }
-            }
-        }
-    }
-}
-
-var hpps = false;
-var sivs = false;
-var svrs = false;
-
-for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs == false); k++) {
-    for (var i = 0; i < krajList[k].info.length && (hpps == false || sivs == false || svrs == false); i++) {
-        info = krajList[k].info[i];
-
-        if (info.HPPS && info.HPPS == '1') {
-            hpps = true;
-        }
-
-        if (info.SIVS && info.SIVS == '1') {
-            sivs = true;
-        }
-
-        if (info.SVRS && info.SVRS == '1') {
-            svrs = true;
-        }
-    }
-
-    for (var o = 0; o < krajList[k].okresList.length && (hpps == false || sivs == false || svrs == false); o++) {
-        for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
-            info = krajList[k].okresList[o].info[i];
-
-            if (info.HPPS && info.HPPS == '1') {
-                hpps = true;
-            }
-
-            if (info.SIVS && info.SIVS == '1') {
-                sivs = true;
-            }
-
-            if (info.SVRS && info.SVRS == '1') {
-                svrs = true;
-            }
-        }
-
-        for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps == false || sivs == false || svrs == false); ol++) {
-            for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++) {
-                info = krajList[k].okresList[o].orpList[ol].info[i];
-
-                if (info.HPPS && info.HPPS == '1') {
-                    hpps = true;
-                }
-
-                if (info.SIVS && info.SIVS == '1') {
-                    sivs = true;
-                }
-
-                if (info.SVRS && info.SVRS == '1') {
-                    svrs = true;
-                }
-            }
-        }
-    }
-}
-
-switch (vystraha.ucel) {
-    case 'Exercise' :
-    case 'System' :
-    case 'Test' :
-        header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
-        if (svrs && !sivs && !hpps) {
-            header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM';
-        }
-        if (sivs && !hpps) {
-            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
-        }
-        if (hpps) {
-            header += '<br/>PŘEDPOVĚDNÍ POVODŇOVÁ SLUŽBA ČHMÚ';
-        }
-    break;
-    case 'Actual' :
-    default:
-        header = 'VÝSTRAHA ČHMÚ';
-        if (svrs && !sivs && !hpps) {
-            header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU';
-        }
-        if (sivs && !hpps) {
-            header += '<br/>SYSTÉM INTEGROVANÉ VÝSTRAŽNÉ SLUŽBY';
-        }
-        if (hpps) {
-            header += '<br/>VÝSTRAHA PŘEDPOVĚDNÍ POVODŇOVÉ SLUŽBY ČHMÚ';
-        }
-        if (!found) {
-            header = 'INFORMAČNÍ ZPRÁVA ČHMÚ';
-        }
-    break;
-
-}
-
-resultText += '<div class="header">' + header + '</div>';
-resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
-resultText += '<br/>Odesláno: ' + ZobrazDatum(vystraha.dc_odeslano, 'long');
-
-if (vystraha.reference) {
-    var referenceSplit = vystraha.reference.split(',');
-    resultText += '<br/>Zpráva aktualizuje předchozí zprávu č. ' + referenceSplit[1].substring(referenceSplit[1].length - 6) + ' vydanou ' + referenceSplit[2].substring(8, 10) + '.' + referenceSplit[2].substring(5, 7) + '.' + referenceSplit[2].substring(0, 4) + ' v ' + referenceSplit[2].substring(11, 19) + ' hodin';
-}
-
-resultText += vystraha.poznamka ? '<br/>Poznámka: ' + vystraha.poznamka : '';
-
-resultText += '<br/>Územní platnost: ';
-if (hlavniKraj == '-1' || zobrazovatVsechnyKraje) {
-    resultText += 'Česká republika';
-} else {
-    resultText += KRAJE_NAZVY[hlavniKraj];
-}
-
-resultText += '<hr/>';
-
 var empty = true;
 var zmen = 0;
 
 if (vystraha.info && vystraha.info.length > 0) {
-    var situace = [];
-
-    for (var i = 0; i < vystraha.info.length; i++) {
-        if (vystraha.info[i].situace) {
-            if (situace.indexOf(vystraha.info[i].situace) == -1) {
-                situace.push(vystraha.info[i].situace);
-            }
-        }
-    }
-
-    if (situace.length > 0) {
-        var upr_situace = situace[0].replace(/<br\/>/g,' ');
-        resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
-        resultText += '<hr/><div>';
-    }
-
     pomoc = PrintInfoList(krajList, ref_krajList);
-    resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 } else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     pomoc = PrintInfoList(krajList, ref_krajList);
-    resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }
 
-if (empty) {
-    resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
+if (Number(zmen) != 0) {
+    resultText = 'Na Váš e-mail byla odeslána zpráva.';
 }
 
-resultText += '</div>';
-
-if (distrSeznamNahore == false) {
-
-    resultText += '<hr/>Distribuce: ';
-    var dist = '';
-
-    for (var k = 0; k < krajList.length; k++) {
-        var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
-
-        for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
-            found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
-
-            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++) {
-                found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
-            }
-        }
-
-        if (found) {
-            dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-        }
-    }
-
-    if (krajList.length == 0) {
-        for (var k = 0; k < ref_krajList.length; k++) {
-            var found = ref_krajList[k].info.length > 0;
-
-            for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
-                found = ref_krajList[k].okresList[o].info.length > 0;
-
-                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++) {
-                    found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
-                }
-            }
-
-            if (found) {
-                dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
-            }
-        }
-    }
-
-    resultText += dist;
-}
-
-resultText += '</BODY>';
-resultText += '</HTML>';
-
-if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
-    resultText = '';
-}
-
+// Vrácení výsledku
 return resultText;
