@@ -1,6 +1,5 @@
 // Verze 49
 
-// Hlavička HTML stránky
 resultText += '<!DOCTYPE html>';
 resultText += '<HTML>';
 resultText += '<HEAD>';
@@ -17,7 +16,6 @@ if (distrSeznamNahore == true) {
 
     var dist = '';
 
-    // Vytáhneme informaci, kterých krajů se výstraha týká
     for (var k = 0; k < krajList.length; k++) {
         var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
 
@@ -57,7 +55,6 @@ if (distrSeznamNahore == true) {
 
 var found = false;
 if (vystraha.ucel == 'Actual') {
-    // Dohledáme, zda máme alespoň jeden jev, který není OUTLOOK
     for (var k = 0; k < krajList.length && found == false; k++) {
         for (var i = 0; i < krajList[k].info.length && found == false; i++) {
             info = krajList[k].info[i];
@@ -67,7 +64,6 @@ if (vystraha.ucel == 'Actual') {
             }
         }
 
-        // Výstrahy pro okres
         for (var o = 0; o < krajList[k].okresList.length && found == false; o++) {
             for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
                 info = krajList[k].okresList[o].info[i];
@@ -77,7 +73,6 @@ if (vystraha.ucel == 'Actual') {
                 }
             }
 
-            // Výstrahy pro orp
             for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && found == false; ol++) {
                 for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++) {
                     info = krajList[k].okresList[o].orpList[ol].info[i];
@@ -91,12 +86,10 @@ if (vystraha.ucel == 'Actual') {
     }
 }
 
-// Zjistíme zda je někde příznak HPPS, SIVS nebo SVRS
 var hpps = false;
 var sivs = false;
 var svrs = false;
 
-// Výstrahy pro kraj
 for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs == false); k++) {
     for (var i = 0; i < krajList[k].info.length && (hpps == false || sivs == false || svrs == false); i++) {
         info = krajList[k].info[i];
@@ -114,7 +107,6 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
         }
     }
 
-    // Výstrahy pro okres
     for (var o = 0; o < krajList[k].okresList.length && (hpps == false || sivs == false || svrs == false); o++) {
         for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
             info = krajList[k].okresList[o].info[i];
@@ -132,7 +124,6 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
             }
         }
 
-        // Výstrahy pro orp
         for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && (hpps == false || sivs == false || svrs == false); ol++) {
             for (var i = 0; i < krajList[k].okresList[o].orpList[ol].info.length; i++) {
                 info = krajList[k].okresList[o].orpList[ol].info[i];
@@ -153,7 +144,6 @@ for (var k = 0; k < krajList.length && (hpps == false || sivs == false || svrs =
     }
 }
 
-// Text v těle
 switch (vystraha.ucel) {
     case 'Exercise' :
     case 'System' :

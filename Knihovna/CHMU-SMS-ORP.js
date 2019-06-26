@@ -7,7 +7,6 @@ var zacatky = [];
 var konce = [];
 var seznjevu = [];
 
-// Odstranění duplicitních výskytů kódů jevů
 function removeDuplicates(arr) {
     var unique_array = [];
     for (var i = 0;i < arr.length; i++) {
@@ -51,9 +50,7 @@ if (vystraha.info) {
 if (infoList) {
     var poleJevy = [];
     var platne = [];
-    // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < infoList.length; i++) {
-        // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
         if (infoList[i].stupen_kod != 'OUTLOOK' && (infoList[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) { 
             var pomKod = '';
             if (infoList[i].jistota_kod == 'Observed') {
@@ -65,7 +62,6 @@ if (infoList) {
         }
     }
 
-    // Promažeme duplicity
     poleJevy = removeDuplicates(poleJevy);
 
     poleJevy = poleJevy.sort(function (a, b) {
@@ -74,7 +70,6 @@ if (infoList) {
         return 0;
     });
 
-    // Vyhodnotíme zda jev platí v tomto ORP
     for (var h = 0; h < poleJevy.length; h++) {
         var jevStart = [];
         var jevEnd = [];
@@ -122,7 +117,6 @@ if (infoList) {
         }
     }
 
-    // Vypočítáme celkovou dobu platnosti výstrahy
     starty = Math.min.apply(null, zacatky);
     start = starty.toString();
 
@@ -132,7 +126,6 @@ if (infoList) {
     total_zahajeni = ZobrazDatumSMS(start);
     total_ukonceni = ZobrazDatumSMS(end, 1);
 
-    // Sestavíme hlavičku zprávy
     rezim = 'SVRS';
     if (seznjevu.indexOf('SIVS') > -1) {
         rezim = 'SIVS';
@@ -179,11 +172,8 @@ if (infoList) {
         uvod += 'č. ' + Number(poradi_zpravy) + ': ';
         vystupText += uvod;
 
-        // Připojíme připravený výpis jevů
         vystupText += resultText;
-        
 
-        // Doplníme o celkovou platnost (souhrnná sestava) 
         if (!detailni) {
             vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
             sms1 += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
@@ -224,9 +214,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
 if (ref_infoList) {
     var poleJevy2 = [];
     var platne2 = [];
-    // Naplníme si seznam kódů jevů z výstrahy
     for (var i = 0; i < ref_infoList.length; i++) {
-        // Z výpisu vyloučíme jevy Výhled nebezpečných jevů
         if (ref_infoList[i].stupen_kod != 'OUTLOOK' && (ref_infoList[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) { 
             var pomKod2 = '';
             if (ref_infoList[i].jistota_kod == 'Observed') {
@@ -238,7 +226,6 @@ if (ref_infoList) {
         }
     }
 
-    // Promažeme duplicity
     poleJevy2 = removeDuplicates(poleJevy2);
 
     poleJevy2 = poleJevy2.sort(function (a, b) {
@@ -247,7 +234,6 @@ if (ref_infoList) {
         return 0;
     });
 
-    // Vyhodnotíme zda jev platí v tomto ORP
     for (var h = 0; h < poleJevy2.length; h++) {
         var jevStart = jevEnd = [];
         for (var i = 0; i < platne2.length; i++) {
@@ -287,7 +273,6 @@ if (ref_infoList) {
         }
     }
 
-    // Vypočítáme celkovou dobu platnosti výstrahy
     starty = Math.min.apply(null, zacatky);
     start = starty.toString();
 

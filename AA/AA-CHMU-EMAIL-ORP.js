@@ -1,7 +1,6 @@
 //!JS
 // Verze 49
 
-//Číselník ORP viz samostatný soubor
 var omezitNaOrp = 337; 
 var zobrazitVyhled = false; 
 var zobrazitZmeny = true;
