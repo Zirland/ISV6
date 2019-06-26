@@ -359,8 +359,6 @@ function UkoncenyJev(konecJev, casZprava) {
     konecJev_format_num = Number(konecJev_format);
     casZprava_format_num = Number(casZprava_format);
 
-    output = konecJev_format_num + '<' + casZprava_format_num;
-
     if (konecJev_format_num < casZprava_format_num) {
         return true;
     } else {
