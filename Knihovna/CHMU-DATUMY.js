@@ -1,6 +1,5 @@
-// Verze 49
+// Verze 50
 
-// Úprava formátu data
 function Normalize(datum) {
     var datumString = new Date(datum);
 
@@ -28,7 +27,6 @@ function Normalize(datum) {
     return datum;
 }
 
-// Zjišťuje, zda je konecJev nenastane v období 30 minut od casZpravy
 function UkoncenyJev(konecJev, casZprava) {
     if (!konecJev) {
         konecJev = '1.1.2100 01:00:00';

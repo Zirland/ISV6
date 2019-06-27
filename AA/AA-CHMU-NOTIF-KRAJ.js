@@ -1,13 +1,7 @@
 //!JS
 // Verze 50
 
-var hlavniKraj = -1;
-var zobrazovatVsechnyKraje = true;
-var razeniPodleNazvu = false;
-var zobrazitVyhled = false;
-var zobrazitZmeny = true;
-var pouzeZmeny = true;
-var distrSeznamNahore = false;
+var omezitNaKraj = -1;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -27,7 +21,12 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-#import "CHMU-EMAIL-KRAJ"; 
+#import "CHMU-NOTIF-KRAJ"; 
+
+if (vystupText != '') {
+    vystupText += "\n";
+    vystupText += "OPIS GŘ HZS ČR";
+}
 
 if (resultText !== 'undefined' && resultText) {
     print(resultText);

@@ -1,7 +1,6 @@
 //!JS
-// Verze 49
+// Verze 50
 
-//Číselník ORP viz samostatný soubor
 var omezitNaOrp = 1945; 
 var detailni = 1;
 var oddelovac = '\n'; 

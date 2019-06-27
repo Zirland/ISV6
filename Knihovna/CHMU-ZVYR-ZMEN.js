@@ -1,6 +1,5 @@
-// Verze 49
+// Verze 50
 
-// Zjednodušené zobrazení rozdílů (porovnává se celý text)
 function SimpleHighlightDiff(newValue, oldValue) {
     var resultText = '';
     var zmena = 0;
@@ -20,19 +19,16 @@ function SimpleHighlightDiff(newValue, oldValue) {
     return resultText;
 }
 
-// Zvýraznění rozdílů dvou textů
 function HighlightDiff(newValue, oldValue) {
     var resultText = '';
     var zmena = 0;
 
-    // Převedeme na pole podle mezer
     var newValueSplit = newValue != undefined ? newValue.split(' ') : [];
     var oldValueSplit = oldValue != undefined ? oldValue.split(' ') : [];
 
     if (newValueSplit.length == 0 || oldValueSplit.length == 0) {
         resultText = SimpleHighlightDiff(newValue, oldValue);
     } else {
-        // Spočteme si matici vzdáleností
         var matrix = GetLCSLength(newValueSplit, oldValueSplit);
 
         var i = newValueSplit.length;
@@ -91,7 +87,6 @@ function HighlightDiff(newValue, oldValue) {
 
         var lastChange = 0;
 
-        // Slova máme v seznamu v opačném pořadí
         for (var index = changeList.length; index > 0; index--) {
             if (lastChange != changeList[index - 1].change) {
                 if (index != changeList.length) {
@@ -129,9 +124,7 @@ function HighlightDiff(newValue, oldValue) {
     return resultText;
 }
 
-// Metoda pro spočtení vzdálenosti slov (dvou polí)
 function GetLCSLength(newValueSplit, oldValueSplit) {
-    // Vytvoříme dvojrozměrné pole a inicializujeme ho nulou
     var matrix = new Array(newValueSplit.length + 1);
 
     for (var i = 0; i < newValueSplit.length + 1; i++) {
@@ -142,7 +135,6 @@ function GetLCSLength(newValueSplit, oldValueSplit) {
         }
     }
 
-    // Spočteme vzdálenosti
     for (var i = 1; i < (newValueSplit.length + 1); i++) {
         for (var j = 1; j < (oldValueSplit.length + 1); j++) {
             if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {

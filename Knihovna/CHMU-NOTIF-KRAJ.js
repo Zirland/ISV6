@@ -1,6 +1,11 @@
 // Verze 50
 
-zobrazitZmeny = true;
+#import "CHMU-ZVYR-ZMEN";
+#import "CHMU-DATUMY";
+#import "CHMU-PREPARE";
+
+var zobrazitVyhled = false;
+var zobrazitZmeny = true;
 
 if (omezitNaKraj != -1) {
     var orpTmp = [];
@@ -14,6 +19,7 @@ if (omezitNaKraj != -1) {
     orp = orpTmp;
 }
 
+var resultText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
@@ -28,6 +34,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
+var empty = true;
 var zmen = 0;
 
 if (vystraha.info && vystraha.info.length > 0) {
@@ -36,4 +43,8 @@ if (vystraha.info && vystraha.info.length > 0) {
 } else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     pomoc = PrintInfoList(krajList, ref_krajList);
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+}
+
+if (Number(zmen) != 0) {
+    resultText = 'Na Váš e-mail byla odeslána zpráva.';
 }

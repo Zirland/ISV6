@@ -2,11 +2,13 @@
 // Verze 50
 
 var omezitNaOrp = 337; 
-var zobrazitVyhled = false; 
-var zobrazitZmeny = true;
-var pouzeZmeny = true;
 
-#import "CHMU-EMAIL-ORP"; 
+#import "CHMU-NOTIF-ORP"; 
+
+if (vystupText != '') {
+    vystupText += "\n";
+    vystupText += "OPIS GŘ HZS ČR";
+}
 
 if (resultText !== 'undefined' && resultText) {
     print(resultText);

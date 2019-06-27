@@ -1,19 +1,23 @@
 // Verze 50
 
-zobrazitZmeny = true;
+#import "CHMU-ZVYR-ZMEN";
+#import "CHMU-DATUMY";
+#import "CHMU-PREPARE";
 
-if (omezitNaKraj != -1) {
-    var orpTmp = [];
+var zobrazitVyhled = false;
+var zobrazitZmeny = true;
+var orpTmp = [];
 
-    for (var i = 0; i < orp.length; i++) {
-        if (omezitNaKraj == orp[i].kraj.id) {
-            orpTmp.push(orp[i]);
-        }
+for (var i = 0; i < orp.length; i++) {
+    if (omezitNaOrp == orp[i].id)
+    {
+       orpTmp.push(orp[i]);
     }
-
-    orp = orpTmp;
 }
 
+orp = orpTmp;
+
+var resultText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
@@ -28,6 +32,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
+var empty = true;
 var zmen = 0;
 
 if (vystraha.info && vystraha.info.length > 0) {
@@ -36,4 +41,8 @@ if (vystraha.info && vystraha.info.length > 0) {
 } else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
     pomoc = PrintInfoList(krajList, ref_krajList);
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+}
+
+if (Number(zmen) != 0) {
+    resultText = 'Na Váš e-mail byla odeslána zpráva.';
 }

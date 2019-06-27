@@ -1,4 +1,4 @@
-// Verze 49
+// Verze 50
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -29,18 +29,14 @@ if (hlavniKraj != -1) {
     var orpTmp = [];
 
     for (var i = 0; i < orp.length; i++) {
-        // Pokud se jedná o hlavní kraj
         if (hlavniKraj == orp[i].kraj.id) {
-            // Dáme na začátek seznamu
             orpTmp.push(orp[i]);
         }
     }
 
     if (zobrazovatVsechnyKraje) {
         for (var i = 0; i < orp.length; i++) {
-            // Pokud se nejedná o hlavní kraj
             if (hlavniKraj != orp[i].kraj.id) {
-                // Dáme na konec seznamu
                 orpTmp.push(orp[i]);
             }
         }
@@ -49,7 +45,6 @@ if (hlavniKraj != -1) {
     orp = orpTmp;
 }
 
-// Samotná zpráva
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];
@@ -57,7 +52,6 @@ var info;
 var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
-// Připravíme jednotlivé info jevy
 if (vystraha.info && vystraha.info.length > 0) {
     krajList = PrepareInfo(orp, vystraha);
 }
@@ -81,13 +75,11 @@ var empty = true;
 var zmen = 0;
 
 if (vystraha.info && vystraha.info.length > 0) {
-    // Najdeme všechny situace
     var situace = [];
 
     for (var i = 0; i < vystraha.info.length; i++) {
         if (vystraha.info[i].situace) {
             if (situace.indexOf(vystraha.info[i].situace) == -1) {
-                // Vložíme situaci, kterou ještě nemáme
                 situace.push(vystraha.info[i].situace);
             }
         }
@@ -103,12 +95,6 @@ if (vystraha.info && vystraha.info.length > 0) {
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 } else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
-    // Výstraha ruší všechny předchozí jevy, tak je vypíšeme
-
-    // Připravíme jednotlivé info jevy
-    ref_krajList = PrepareInfo(orp, ref_vystraha);
-
-    // Provedeme výpis
     pomoc = PrintInfoList(krajList, ref_krajList);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -124,7 +110,6 @@ if (distrSeznamNahore == false) {
 
     var dist = '';
 
-    // Vytáhneme informaci, kterých krajů se výstraha týká
     for (var k = 0; k < krajList.length; k++) {
         var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
 
@@ -162,7 +147,6 @@ if (distrSeznamNahore == false) {
     resultText += dist;
 }
 
-// Ukončení stránky
 resultText += '</BODY>';
 resultText += '</HTML>';
 
