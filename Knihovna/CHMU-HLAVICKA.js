@@ -1,4 +1,4 @@
-// Verze 49
+// Verze 50
 
 resultText += '<!DOCTYPE html>';
 resultText += '<HTML>';

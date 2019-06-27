@@ -1,5 +1,5 @@
 //!JS
-// Verze 49
+// Verze 50
 
 var omezitNaOrp = 1945; 
 var detailni = 1;
