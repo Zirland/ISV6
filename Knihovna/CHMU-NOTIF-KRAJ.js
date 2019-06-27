@@ -7,11 +7,11 @@
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
 
-if (hlavniKraj != -1) {
+if (omezitNaKraj != -1) {
     var orpTmp = [];
 
     for (var i = 0; i < orp.length; i++) {
-        if (hlavniKraj == orp[i].kraj.id) {
+        if (omezitNaKraj == orp[i].kraj.id) {
             orpTmp.push(orp[i]);
         }
     }

@@ -25,6 +25,18 @@ Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahují
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska nebezpečných jevů a je vhodná pro tisk.
 **Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-HLAVICKA*, *CHMU-ZVYR-ZMEN*, *CHMU-PREPARE*, *CHMU-DIFF*
 
+### [CHMU-EMAIL-KRAJ]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska území.
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
+
+### [CHMU-NOTIF-KRAJ]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail.
+**Vyžaduje** skripty: *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+
+### [CHMU-NOTIF-ORP]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail na ORP.
+**Vyžaduje** skripty: *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+
 ### [CHMU-CISELNIK]
 Předpis obsahující potřebné číselníky jevů a území.
 
@@ -73,10 +85,10 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 
 Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
 
-- Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
-- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+- Při hodnotě *false* není zobrazeno porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
+- Při hodnotě *true* je zobrazeno porovnávání aktuální výstrahy s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
 
-Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. Hodnota parametru se uplatňuje pouze v případě, že dochází k porovnávání změn, tj. parametr **zobrazitZmeny** je nastaven na *true*. Pokud k porovnávání změn nedochází, odpovídá chování variantě *false*.
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
@@ -102,6 +114,11 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
+### [AA-CHMU-NOTIF-KRAJ]
+Předpis pro vytvoření SMS zprávy notifikující odeslání e-mailu s výstrahou vztahující se ke konkrétnímu kraji nebo celé republice.
+
+Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se generují maily. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v parametru *KRAJE_NAZVY*.
+
 ---
 
 ## [AA-CHMU-EMAIL-ORP]
@@ -116,10 +133,10 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 
 Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
 
-- Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
-- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+- Při hodnotě *false* není zobrazeno porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
+- Při hodnotě *true* je zobrazeno porovnávání aktuální výstrahy s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
 
-Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. Hodnota parametru se uplatňuje pouze v případě, že dochází k porovnávání změn, tj. parametr **zobrazitZmeny** je nastaven na *true*. Pokud k porovnávání změn nedochází, odpovídá chování variantě *false*.
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
@@ -143,6 +160,13 @@ Parametr **detailni** může nabývat hodnot *false* nebo *true*. Hodnota parame
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
+
+### [AA-CHMU-NOTIF-ORP]
+Předpis pro vytvoření SMS zprávy notifikující odeslání e-mailu s výstrahou vztahujícího se ke konkrétnímu ORP.
+
+Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP, případně celou Českou republiku. Číselník území je v samostatném souboru "seznam_ORP.csv".
+
+---
 
 ## [AA-CHMU-MAIL-2]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se k celé republice nebo vybranému kraji. Sestava je koncipována z hlediska jevů.
@@ -193,10 +217,10 @@ Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true
 
 Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
 
-- Při hodnotě *false* nedochází k porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
-- Při hodnotě *true* je obsah výstrahy porovnáván s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+- Při hodnotě *false* není zobrazeno porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
+- Při hodnotě *true* je zobrazeno porovnávání aktuální výstrahy s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
 
-Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*. Hodnota parametru se uplatňuje pouze v případě, že dochází k porovnávání změn, tj. parametr **zobrazitZmeny** je nastaven na *true*. Pokud k porovnávání změn nedochází, odpovídá chování variantě *false*.
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.

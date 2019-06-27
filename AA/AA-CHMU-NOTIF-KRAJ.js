@@ -1,7 +1,7 @@
 //!JS
 // Verze 49
 
-var hlavniKraj = -1;
+var omezitNaKraj = -1;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
@@ -22,6 +22,11 @@ var KRAJE_NAZVY = {
 };
 
 #import "CHMU-NOTIF-KRAJ"; 
+
+if (vystupText != '') {
+    vystupText += "\n";
+    vystupText += "OPIS GŘ HZS ČR";
+}
 
 if (resultText !== 'undefined' && resultText) {
     print(resultText);

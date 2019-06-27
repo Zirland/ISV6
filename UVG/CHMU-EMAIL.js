@@ -607,7 +607,7 @@ function PrintInfoList(krajList, ref_krajList) {
                     }
                 }
 
-                if (!found && zobrazitZmeny) {
+                if (!found) {
                     if (first) {
                         first = false;
                         resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>';
@@ -668,7 +668,7 @@ function PrintInfoList(krajList, ref_krajList) {
                             }
                         }
 
-                        if (!found && zobrazitZmeny) {
+                        if (!found) {
                             if (first) {
                                 first = false;
                                 resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>';
@@ -733,7 +733,7 @@ function PrintInfoList(krajList, ref_krajList) {
                                 }
                             }
 
-                            if (!found && zobrazitZmeny) {
+                            if (!found) {
                                 if (first) {
                                     first = false;
                                     resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>';
@@ -780,7 +780,7 @@ function PrintInfoList(krajList, ref_krajList) {
         }
     }
 
-    if (krajList.length == 0 && ref_krajList.length > 0 && zobrazitZmeny) {
+    if (krajList.length == 0 && ref_krajList.length > 0) {
         for (var k = 0; k < ref_krajList.length; k++) {
             ref_zpracovanyInfoStupen = [];
             first = true;
@@ -1047,36 +1047,86 @@ function PrintInfo(info, ref_info) {
         resultText += '<table class="tg" width="100%" border="1 ">';
 
         resultText += '<tr>';
-        resultText += '<td width="20%">' + (info != null ? vyskyt : '');
+        resultText += '<td width="20%">';
+        pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
+        resultText += (info != null ? vyskyt : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        pomoc = HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
         resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        pomoc = HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '');
         resultText += (info != null ? PrintVyska(info) : '') + '</td>';
-        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">' + (info != null ? GetWarningColor(info) : '') + '</td>';
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">';
+
+        pomoc = HighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
+        resultText += (info != null ? GetWarningColor(info) : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '<td>';
 
         if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
-            resultText += '<td>do odvolání</td>';
+            resultText += 'do odvolání';
         } else {
-            resultText += '<td><table class="no" border="0">';
-            resultText += '<tr><td>' + (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '') + '</td>';
+            resultText += '<table class="no" border="0">';
+            resultText += '<tr><td>';
+
+            if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
+                resultText += (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '');
+            } else {
+                pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
+                resultText += (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '');
+                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+            }
+                
+            resultText += '</td>';
             resultText += '<td>&nbsp;–&nbsp;</td>';
-            resultText += '<td>' + (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '') + '</td></tr>';
-            resultText += '</table></td>';
+            resultText += '<td>';
+            pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
+            resultText += (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '');
+            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+            resultText += '</td></tr>';
+            resultText += '</table>';
         }
+        resultText += '</td>';
         resultText += '</tr>';
 
         resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ' + (info != null ? upr_info : '') + '</td>';
+        resultText += '<td colspan="3"><b>Popis:</b> ';
+
+        pomoc = HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '');
+        resultText += (info != null ? upr_info : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
         resultText += '</tr>';
 
         if (info && (info.hydroPredpoved)) {
             resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ' + (info != null ? upr_hydro : '') + '</td>';
+            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
+
+            pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
+            resultText += (info != null ? upr_hydro : '');
+            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+            resultText += '</td>';
             resultText += '</tr>';
         }
 
         resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Doporučení:</b> ' + (info != null ? upr_doporuceni : '') + '</td>';
-        resultText += '</tr>';
+        resultText += '<td colspan="3"><b>Doporučení:</b> ';
 
+        pomoc = HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '');
+        resultText += (info != null ? upr_doporuceni : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '</tr>';
         resultText += '</table>';
     }
 
