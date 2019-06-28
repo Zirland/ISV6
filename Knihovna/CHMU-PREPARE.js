@@ -204,7 +204,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     }
                 }
 
-                if (!found) {
+                if (!found && zobrazitZmeny) {
                     if (first) {
                         first = false;
                         (headers == 0 ? '' : resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>');
@@ -265,7 +265,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             }
                         }
 
-                        if (!found) {
+                        if (!found && zobrazitZmeny) {
                             if (first) {
                                 first = false;
                                 (headers == 0 ? '' : resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>');
@@ -330,7 +330,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                 }
                             }
 
-                            if (!found) {
+                            if (!found && zobrazitZmeny) {
                                 if (first) {
                                     first = false;
                                     (headers == 0 ? '' : resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>');
