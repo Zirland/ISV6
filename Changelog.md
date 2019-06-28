@@ -1,7 +1,16 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## verze 50 – 2019-06-28
+## verze 51 – 2019-06-28
+### [Knihovna/CHMU-PREPARE]
+#### Záplata
+- Oprava výpisu, skrytí tabulky pro zrušené jevy v případě, kdy je vypnuto zobrazování změn.
+
+### [UVG/CHMU-EMAIL]
+#### Záplata
+- Oprava výpisu, skrytí tabulky pro zrušené jevy v případě, kdy je vypnuto zobrazování změn.
+
+## verze 50 – 2019-06-27
 ### [AA/CHMU-NOTIF-KRAJ]
 #### Přidáno
 - Vytvořena automatická akce na notifikační SMS při odeslání mailu.
