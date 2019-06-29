@@ -1,6 +1,35 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 52 – 2019-06-29
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Úprava způsobu řazení jevů, který způsoboval nesprávné porovnání změn.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava způsobu řazení jevů, který způsoboval nesprávné porovnání změn.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Úprava způsobu řazení jevů, který způsoboval nesprávné porovnání změn.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Úprava způsobu řazení jevů, který způsoboval nesprávné porovnání změn.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava způsobu řazení jevů, který způsoboval nesprávné porovnání změn.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava způsobu řazení jevů, který způsoboval nesprávné porovnání změn.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Úprava způsobu řazení jevů, který způsoboval nesprávné porovnání změn.
+
 ## verze 51 – 2019-06-28
 ### [Knihovna/CHMU-PREPARE]
 #### Záplata
