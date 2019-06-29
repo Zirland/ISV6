@@ -1,7 +1,7 @@
 // Verze 51
 
 var omezitNaKraj = -1;
-var zobrazitVyhled = true;
+var zobrazitVyhled = false;
 var pouzeZmeny = false;
 var distrSeznamNahore = false;
 
@@ -466,16 +466,11 @@ function PrepareInfo(orp, vystraha) {
     infoList = infoList.sort(function (a, b) {
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
-
-        if (start1 < start2) return -1;
-        if (start1 > start2) return 1;
-        return 0;
-    });
-
-    infoList = infoList.sort(function (a, b) {
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
 
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
         return 0;
@@ -1044,9 +1039,13 @@ function PrepareInfo2(vystraha) {
     infoList = infoList.sort(function (a, b) {
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
+        var jev1 = a.stupen_kod;
+        var jev2 = b.stupen_kod;
 
         if (start1 < start2) return -1;
         if (start1 > start2) return 1;
+        if (jev1 < jev2) return -1;
+        if (jev1 > jev2) return 1;
         return 0;
     });
 

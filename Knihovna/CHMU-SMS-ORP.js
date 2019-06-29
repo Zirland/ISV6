@@ -31,16 +31,11 @@ if (vystraha.info) {
     infoList = infoList.sort(function (a, b) {
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
-
-        if (start1 < start2) return -1;
-        if (start1 > start2) return 1;
-        return 0;
-    });
-
-    infoList = infoList.sort(function (a, b) {
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
 
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
         return 0;
@@ -195,16 +190,11 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.inf
     ref_infoList = ref_infoList.sort(function (a, b) {
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
-
-        if (start1 < start2) return -1;
-        if (start1 > start2) return 1;
-        return 0;
-    });
-
-    ref_infoList = ref_infoList.sort(function (a, b) {
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
 
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
         return 0;
