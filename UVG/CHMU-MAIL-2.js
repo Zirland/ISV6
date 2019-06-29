@@ -1,7 +1,7 @@
 // Verze 51
 
 var omezitNaKraj = -1;
-var zobrazitVyhled = true;
+var zobrazitVyhled = false;
 var pouzeZmeny = false;
 var distrSeznamNahore = false;
 
