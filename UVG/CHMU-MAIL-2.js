@@ -1,4 +1,4 @@
-// Verze 52
+// Verze 53
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
