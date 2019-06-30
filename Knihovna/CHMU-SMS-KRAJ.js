@@ -90,10 +90,7 @@ if (infoList) {
                         seznjevu.push(warn_type);
                         zacatek = Normalize(infoList[i].dc_zacatek);
                         zacatky.push(zacatek);
-                        konec = 99999999999999;
-                        if (infoList[i].dc_konec) {
-                            konec = Normalize(infoList[i].dc_konec);
-                        }
+                        konec = Normalize(infoList[i].dc_konec);
                         konce.push(konec);
 
                         jevStart.push(zacatek);
@@ -300,10 +297,7 @@ if (ref_infoList) {
                             zacatky.push(zacatek);
                             jevStart.push(zacatek);
                         }
-                        konec = 99999999999999;
-                        if (ref_infoList[i].dc_konec) {
-                            konec = Normalize(ref_vystraha.info[i].dc_konec);
-                        }
+                        konec = Normalize(ref_vystraha.info[i].dc_konec);
                         konce.push(konec);
                         jevEnd.push(konec);
                     }

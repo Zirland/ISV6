@@ -1,6 +1,9 @@
 // Verze 52
 
 function Normalize(datum) {
+    if (!datum) {
+        datum = '1.1.2100 01:00:00';
+    }
     var datumString = new Date(datum);
 
     datumDen = datumString.getDate();
@@ -20,7 +23,10 @@ function Normalize(datum) {
     if (datumMinuty < 10) {
         datumMinuty = '0' + datumMinuty;
     }
-    datumSekundy = '00';
+    datumSekundy = datumString.getSeconds();
+    if (datumSekundy < 10) {
+        datumSekundy = '0' + datumSekundy;
+    }
 
     datum = datumRok.toString() +  datumMesic.toString() + datumDen.toString() + datumHodiny.toString() + datumMinuty.toString() + datumSekundy.toString();
 
@@ -40,7 +46,8 @@ function UkoncenyJev(konecJev, casZprava) {
     var kjDay = konecJev_format.substring(6,8);
     var kjHour = konecJev_format.substring(8,10);
     var kjMinute = konecJev_format.substring(10,12);
-    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute, '00');
+    var kjSecond = konecJev_format.substring(12,14);
+    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute, kjSecond);
 
     myEndTime.setMinutes(myEndTime.getMinutes() - 30);
     konecJev_format = Normalize(myEndTime);
@@ -56,17 +63,16 @@ function UkoncenyJev(konecJev, casZprava) {
 }
 
 function ZobrazDatum(datum, format, end) {
-    if (!datum) {
+    normDatum = Normalize(datum);
+    if (normDatum == 21000101010000) {
         format_datum = 'do odvolání';
     } else {
-        var normDatum = Normalize(datum);
-
         var normDatumRok = normDatum.substring(0,4);
         var normDatumMesic = normDatum.substring(4,6);
         var normDatumDen = normDatum.substring(6,8);
         var normDatumHodina = normDatum.substring(8,10);
         var normDatumMinuta = normDatum.substring(10,12);
-        var normDatumSekunda = '00';
+        var normDatumSekunda = normDatum.substring(12,14);
 
         if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
             var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
@@ -92,7 +98,7 @@ function ZobrazDatum(datum, format, end) {
 }
 
 function ZobrazDatumSMS(datum, end) {
-    if (datum == 99999999999999) {
+    if (datum == 21000101010000) {
         format_datum = 'odvolání';
     } else {
         var normDatum = datum.toString();
@@ -102,7 +108,7 @@ function ZobrazDatumSMS(datum, end) {
         var normDatumDen = normDatum.substring(6,8);
         var normDatumHodina = normDatum.substring(8,10);
         var normDatumMinuta = normDatum.substring(10,12);
-        var normDatumSekunda = '00'; 
+        var normDatumSekunda = normDatum.substring(12,14);
 
         if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
             var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);

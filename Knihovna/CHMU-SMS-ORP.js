@@ -84,10 +84,7 @@ if (infoList) {
                 seznjevu.push(warn_type);
                 zacatek = Normalize(platne[i].dc_zacatek);
                 zacatky.push(zacatek);
-                konec = 99999999999999;
-                if (platne[i].dc_konec) {
-                    konec = Normalize(platne[i].dc_konec);
-                }
+                konec = Normalize(platne[i].dc_konec);
                 konce.push(konec);
 
                 jevStart.push(zacatek);
@@ -242,10 +239,7 @@ if (ref_infoList) {
                 seznjevu.push(warn_type);
                 zacatek = Normalize(platne2[i].dc_zacatek);
                 zacatky.push(zacatek);
-                konec = 99999999999999;
-                if (platne2[i].dc_konec) {
-                    konec = Normalize(platne2[i].dc_konec);
-                }
+                konec = Normalize(platne2[i].dc_konec);
                 konce.push(konec);
 
                 jevEnd.push(konec);
