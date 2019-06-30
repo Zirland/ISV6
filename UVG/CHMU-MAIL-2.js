@@ -144,46 +144,31 @@ function Normalize(datum) {
     if (!datum) {
         datum = '1.1.2100 01:00:00';
     }
-    var datumString = datum.toString();
-    datumDen = datumString.substring(0,2);
-    datumDen_porovn = datumDen.replace(/\.$/, '');
-    if (datumDen == datumDen_porovn) {
-        datumMesic = datumString.substring(3,5);
-        datumMesic_porovn = datumMesic.replace(/\.$/, '');
-        if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(6,10);
-            datumCas = datumString.substring(11,19);
-        } else {
-            datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(5,9);
-            datumCas = datumString.substring(10,18);
-        }
-    } else {
-        datumDen = '0' + datumDen_porovn;
-        datumMesic = datumString.substring(2,4);
-        datumMesic_porovn = datumMesic.replace(/\.$/, '');
-        if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(5,9);
-            datumCas = datumString.substring(10,18);
-        } else {
-            datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(4,8);
-            datumCas = datumString.substring(9,17);
-        }
+    var datumString = new Date(datum);
+
+    datumDen = datumString.getDate();
+    if (datumDen < 10) {
+        datumDen = '0' + datumDen;
+    }
+    datumMesic = datumString.getMonth() + 1;
+    if (datumMesic < 10) {
+        datumMesic = '0' + datumMesic;
+    }
+    datumRok = datumString.getFullYear();
+    datumHodiny = datumString.getHours();
+    if (datumHodiny < 10) {
+        datumHodiny = '0' + datumHodiny;
+    }
+    datumMinuty = datumString.getMinutes();
+    if (datumMinuty < 10) {
+        datumMinuty = '0' + datumMinuty;
+    }
+    datumSekundy = datumString.getSeconds();
+    if (datumSekundy < 10) {
+        datumSekundy = '0' + datumSekundy;
     }
 
-    datumHodiny = datumCas.substring(0,2);
-    datumHodiny_porovn = datumHodiny.replace(/\:$/, '');
-    if (datumHodiny == datumHodiny_porovn) {
-        datumMinuty = datumCas.substring(3,5);
-        datumSekundy = datumCas.substring(6,8);
-    } else {
-        datumHodiny = '0' + datumHodiny_porovn;
-        datumMinuty = datumCas.substring(2,4);
-        datumSekundy = datumCas.substring(5,7);
-    }
-
-    datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty + datumSekundy;
+    datum = datumRok.toString() +  datumMesic.toString() + datumDen.toString() + datumHodiny.toString() + datumMinuty.toString() + datumSekundy.toString();
 
     return datum;
 }
