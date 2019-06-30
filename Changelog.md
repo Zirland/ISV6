@@ -1,6 +1,37 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 53 – 2019-06-30
+### [Knihovna/CHMU-DATUMY]
+#### Změněno
+- Úprava způsobu formátování data.
+- Ošetření pádu skriptu při jevu do odvolání.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Úprava způsobu formátování data.
+- Ošetření pádu skriptu při jevu do odvolání.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Úprava způsobu formátování data.
+- Ošetření pádu skriptu při jevu do odvolání.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava způsobu formátování data.
+- Ošetření pádu skriptu při jevu do odvolání.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava způsobu formátování data.
+- Ošetření pádu skriptu při jevu do odvolání.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Úprava způsobu formátování data.
+- Ošetření pádu skriptu při jevu do odvolání.
+
 ## verze 52 – 2019-06-29
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
