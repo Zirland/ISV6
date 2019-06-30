@@ -1,4 +1,4 @@
-// Verze 52
+// Verze 53
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
@@ -141,50 +141,34 @@ var JEVY_NAZVY = {
 };
 
 function Normalize(datum) {
-    var datumString = datum.toString();
-    datumDen = datumString.substring(0,2);
-    datumDen_porovn = datumDen.replace(/\.$/, '');
-    if (datumDen == datumDen_porovn) {
-        datumMesic = datumString.substring(3,5);
-        datumMesic_porovn = datumMesic.replace(/\.$/, '');
-        if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(6,10);
-            datumCas = datumString.substring(11,16);
-            datumCas = datumCas.replace(/\:$/, '');
-        } else {
-            datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(5,9);
-            datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, '');
-        }
-    } else {
-        datumDen = '0' + datumDen_porovn;
-        datumMesic = datumString.substring(2,4);
-        datumMesic_porovn = datumMesic.replace(/\.$/, '');
-        if (datumMesic == datumMesic_porovn) {
-            datumRok = datumString.substring(5,9);
-            datumCas = datumString.substring(10,15);
-            datumCas = datumCas.replace(/\:$/, '');
-        } else {
-            datumMesic = '0' + datumMesic_porovn;
-            datumRok = datumString.substring(4,8);
-            datumCas = datumString.substring(9,14);
-            datumCas = datumCas.replace(/\:$/, '');
-        }
+    if (!datum) {
+        datum = '1.1.2100 01:00:00';
+    }
+    var datumString = new Date(datum);
+
+    datumDen = datumString.getDate();
+    if (datumDen < 10) {
+        datumDen = '0' + datumDen;
+    }
+    datumMesic = datumString.getMonth() + 1;
+    if (datumMesic < 10) {
+        datumMesic = '0' + datumMesic;
+    }
+    datumRok = datumString.getFullYear();
+    datumHodiny = datumString.getHours();
+    if (datumHodiny < 10) {
+        datumHodiny = '0' + datumHodiny;
+    }
+    datumMinuty = datumString.getMinutes();
+    if (datumMinuty < 10) {
+        datumMinuty = '0' + datumMinuty;
+    }
+    datumSekundy = datumString.getSeconds();
+    if (datumSekundy < 10) {
+        datumSekundy = '0' + datumSekundy;
     }
 
-    datumHodiny = datumCas.substring(0,2);
-    datumHodiny_porovn = datumHodiny.replace(/\:$/, '');
-    if (datumHodiny == datumHodiny_porovn) {
-        datumMinuty = datumCas.substring(3,5);
-        datumSekundy = datumCas.substring(6,8);
-    } else {
-        datumHodiny = '0' + datumHodiny_porovn;
-        datumMinuty = datumCas.substring(2,4);
-        datumSekundy = datumCas.substring(5,7);
-    }
-
-    datum = datumRok + datumMesic + datumDen + datumHodiny + datumMinuty + datumSekundy;
+    datum = datumRok.toString() +  datumMesic.toString() + datumDen.toString() + datumHodiny.toString() + datumMinuty.toString() + datumSekundy.toString();
 
     return datum;
 }
@@ -202,7 +186,8 @@ function UkoncenyJev(konecJev, casZprava) {
     var kjDay = konecJev_format.substring(6,8);
     var kjHour = konecJev_format.substring(8,10);
     var kjMinute = konecJev_format.substring(10,12);
-    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute, '00');
+    var kjSecond = konecJev_format.substring(12,14);
+    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute, kjSecond);
 
     myEndTime.setMinutes(myEndTime.getMinutes() - 30);
     konecJev_format = Normalize(myEndTime);
@@ -218,26 +203,25 @@ function UkoncenyJev(konecJev, casZprava) {
 }
 
 function ZobrazDatum(datum, format, end) {
-    if (!datum) {
+    normDatum = Normalize(datum);
+    if (normDatum == 21000101010000) {
         format_datum = 'do odvolání';
     } else {
-        var normDatum = Normalize(datum);
-
         var normDatumRok = normDatum.substring(0,4);
         var normDatumMesic = normDatum.substring(4,6);
         var normDatumDen = normDatum.substring(6,8);
         var normDatumHodina = normDatum.substring(8,10);
         var normDatumMinuta = normDatum.substring(10,12);
-        var normDatumSekunda = '00';
+        var normDatumSekunda = normDatum.substring(12,14);
 
-    if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
-        var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
-        var newNormDatum = Normalize(myNewDay);
-        normDatumRok = newNormDatum.substring(0,4);
-        normDatumMesic = newNormDatum.substring(4,6);
-        normDatumDen = newNormDatum.substring(6,8);
-        normDatumHodina = '24';
-    }
+        if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
+            var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
+            var newNormDatum = Normalize(myNewDay);
+            normDatumRok = newNormDatum.substring(0,4);
+            normDatumMesic = newNormDatum.substring(4,6);
+            normDatumDen = newNormDatum.substring(6,8);
+            normDatumHodina = '24';
+        }
 
         switch (format) {
             case 'short' :
@@ -2013,7 +1997,6 @@ if (omezitNaKraj != -1) {
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];
-var vytvoreni = vystraha.dc_odeslano;
 
 if (vystraha.info && vystraha.info.length > 0) {
     infoList = PrepareInfo2(vystraha);
@@ -2214,7 +2197,7 @@ switch (vystraha.ucel) {
 
 resultText += '<div class="header">' + header + '</div>';
 resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
-resultText += '<br/>Odesláno: ' + ZobrazDatum(vystraha.dc_odeslano, 'long');
+resultText += '<br/>Odesláno: ' + ZobrazDatum(vytvoreni, 'long');
 
 if (vystraha.reference) {
     var referenceSplit = vystraha.reference.split(',');
