@@ -1,6 +1,35 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 54 – 2019-07-01
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Úprava způsobu řazení jevů, výskyt jevu přednostně.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava způsobu řazení jevů, výskyt jevu přednostně.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Úprava způsobu řazení jevů, výskyt jevu přednostně.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Úprava způsobu řazení jevů, výskyt jevu přednostně.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava způsobu řazení jevů, výskyt jevu přednostně.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava způsobu řazení jevů, výskyt jevu přednostně.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Úprava způsobu řazení jevů, výskyt jevu přednostně.
+
 ## verze 53 – 2019-06-30
 ### [Knihovna/CHMU-DATUMY]
 #### Změněno
