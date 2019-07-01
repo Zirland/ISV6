@@ -57,12 +57,6 @@ if (infoList) {
 
     poleJevy = removeDuplicates(poleJevy);
 
-    poleJevy = poleJevy.sort(function (a, b) {
-        if (a < b) return -1;
-        if (a > b) return 1;
-        return 0;
-    });
-
     for (var h = 0; h < poleJevy.length; h++) {
         var jevStart = [];
         var jevEnd = [];
@@ -263,12 +257,6 @@ if (ref_infoList) {
     }
 
     poleJevy2 = removeDuplicates(poleJevy2);
-
-    poleJevy2 = poleJevy2.sort(function (a, b) {
-        if (a < b) return -1;
-        if (a > b) return 1;
-        return 0;
-    });
 
     for (var h = 0; h < poleJevy2.length; h++) {
         var jevStart = [];
