@@ -1,5 +1,5 @@
 //!JS
-// Verze 55
+// Verze 56
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
