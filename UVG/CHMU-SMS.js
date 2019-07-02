@@ -1,4 +1,4 @@
-// Verze 54
+// Verze 55
 
 var omezitNaKraj = -1;
 var detailni = 1;
