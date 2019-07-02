@@ -3,10 +3,6 @@
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
 
-var zacatky = [];
-var konce = [];
-var seznjevu = [];
-
 function removeDuplicates(arr) {
     var unique_array = [];
     for (var i = 0;i < arr.length; i++) {
@@ -17,6 +13,9 @@ function removeDuplicates(arr) {
     return unique_array;
 }
 
+var zacatky = [];
+var konce = [];
+var seznjevu = [];
 var resultText = '';
 var vystupText = '';
 var sms1 = '';
@@ -178,7 +177,7 @@ resultText = '';
 zacatky = [];
 konce = [];
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     var ref_infoList = [];
     for (var l = 0; l < ref_vystraha.info.length; l++) {
         ref_infoList.push(ref_vystraha.info[l]);
@@ -222,7 +221,8 @@ if (ref_infoList) {
     poleJevy2 = removeDuplicates(poleJevy2);
 
     for (var h = 0; h < poleJevy2.length; h++) {
-        var jevStart = jevEnd = [];
+        var jevStart = [];
+        var jevEnd = [];
         for (var i = 0; i < platne2.length; i++) {
            var pomKodIvnj2 = '';
             if (platne2[i].jistota_kod == 'Observed') {

@@ -3,10 +3,6 @@
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
 
-var zacatky = [];
-var konce = [];
-var seznjevu = [];
-
 function removeDuplicates(arr) {
     var unique_array = [];
     for (var i = 0;i < arr.length; i++) {
@@ -17,6 +13,9 @@ function removeDuplicates(arr) {
     return unique_array;
 }
 
+var zacatky = [];
+var konce = [];
+var seznjevu = [];
 var resultText = '';
 var vystupText = '';
 var sms1 = '';
