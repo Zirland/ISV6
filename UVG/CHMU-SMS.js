@@ -22,10 +22,6 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-var zacatky = [];
-var konce = [];
-var seznjevu = [];
-
 var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK" };
 
 var JEVY_NAZVY = {
@@ -143,16 +139,6 @@ var JEVY_NAZVY = {
     "0REG.NO2" : "Regulace NO2"
 };
 
-function removeDuplicates(arr) {
-    var unique_array = [];
-    for (var i = 0; i < arr.length; i++) {
-        if (unique_array.indexOf(arr[i]) == -1) {
-            unique_array.push(arr[i]);
-        }
-    }
-    return unique_array;
-}
-
 function Normalize(datum) {
     if (!datum) {
         datum = '1.1.2100 01:00:00';
@@ -267,6 +253,19 @@ function Zaokrouhli(datum) {
     return datum_format;
 }
 
+function removeDuplicates(arr) {
+    var unique_array = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (unique_array.indexOf(arr[i]) == -1) {
+            unique_array.push(arr[i]);
+        }
+    }
+    return unique_array;
+}
+
+var zacatky = [];
+var konce = [];
+var seznjevu = [];
 var resultText = '';
 var vystupText = '';
 var sms1 = '';
