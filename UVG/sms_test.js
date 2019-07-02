@@ -423,8 +423,213 @@ if (infoList) {
 var zacatky2 = [];
 var konce2 = [];
 var sms2 = '';
+var seznjevu2 = [];
+var resultText2 = '';
+var vystupText2 = '';
 
+if (ref_vystraha.info) {
+    var infoList2 = [];
+    for (var l = 0; l < ref_vystraha.info.length; l++) {
+        infoList2.push(ref_vystraha.info[l]);
+    }
 
-vystupText += '\n\n1: ' + sms1 + '\n2: ' + sms2; 
+    infoList2 = infoList2.sort(function (a, b) {
+        var vyskyt1 = 0;
+        var vyskyt2 = 0;
+        var jev1 = a.stupen_kod;
+        var jev2 = b.stupen_kod;
+
+        if (a.jistota_kod == 'Observed') {
+            vyskyt1 = 1;
+        }
+        if (b.jistota_kod == 'Observed') {
+            vyskyt2 = 1;
+        }
+        if (vyskyt1 > vyskyt2) return -1;
+        if (vyskyt1 < vyskyt2) return 1;
+        if (jev1 < jev2) return -1;
+        if (jev1 > jev2) return 1;
+        return 0;
+    });
+}
+
+if (infoList2) {
+    var poleJevy2 = [];
+    for (var i = 0; i < infoList2.length; i++) {
+        if (infoList2[i].stupen_kod != 'OUTLOOK') { 
+            var pomKod2 = '';
+            if (infoList2[i].jistota_kod == 'Observed') {
+                pomKod2 += '0';
+            }
+            pomKod2 += infoList2[i].stupen_kod;
+            poleJevy2.push(pomKod2);
+        }
+    }
+
+    poleJevy2 = removeDuplicates(poleJevy2);
+
+    for (var h = 0; h < poleJevy2.length; h++) {
+        var jevStart2 = [];
+        var jevEnd2 = [];
+        var jevKrajeList2 = [];
+        for (var i = 0; i < infoList2.length; i++) {
+            var pomKod2Ivnj = '';
+            if (infoList2[i].jistota_kod == 'Observed') {
+                pomKod2Ivnj = '0';
+            }
+            if (poleJevy2[h] == pomKod2Ivnj + infoList2[i].stupen_kod) {
+                var found = omezitNaKraj == -1;
+                for (var j = 0; j < infoList2[i].kraj.length && !found; j++) {
+                    found = infoList2[i].kraj[j].UID == omezitNaKraj;
+                }
+                for (var j = 0; j < infoList2[i].kraj.length; j++) {
+                    if (found) {
+                        jevKrajeList2.push(infoList2[i].kraj[j].UID);
+                        var warn_type2 = 'SVRS';
+                        if (infoList2[i].SIVS == '1') {
+                            warn_type2 = 'SIVS';
+                        }
+                        if (infoList2[i].HPPS == '1') {
+                            warn_type2 = 'HPPS';
+                        }
+                        seznjevu2.push(warn_type2);
+                        var zacatek2 = Normalize(infoList2[i].dc_zacatek);
+                        zacatky2.push(zacatek2);
+                        var konec2 = Normalize(infoList2[i].dc_konec);
+                        konce2.push(konec2);
+
+                        jevStart2.push(zacatek2);
+                        jevEnd2.push(konec2);
+                    }
+                }
+            }
+        }
+        jevKrajeList2 = removeDuplicates(jevKrajeList2);
+        jevKrajeList2 = jevKrajeList2.sort(function (a, b) {
+            return a-b;
+        });
+
+        if (jevKrajeList2.length > 0) {
+            if (omezitNaKraj == -1) {
+                resultText2 += JEVY_NAZVY[poleJevy2[h]];
+                sms2 += JEVY_NAZVY[poleJevy2[h]];
+                resultText2 += ' pro kraje ';
+                sms2 += ' pro kraje ';
+
+                var seznkraje2 = '';
+
+                for (var t = 0; t < jevKrajeList2.length; t++) {
+                    seznkraje2 += KRAJE_KODY[jevKrajeList2[t]] + ', ';
+                }
+                seznkraje2 = seznkraje2.substring(0, seznkraje2.length-2);
+                resultText2 += seznkraje2;
+                sms2 += seznkraje2;
+
+                if (detailni) {
+                    var jevStarty2 = Math.min.apply(null, jevStart2);
+                    var jevZacatek2 = jevStarty2.toString();
+
+                    var jevEndy2 = Math.max.apply(null, jevEnd2);
+                    var jevKonec2 = jevEndy2.toString();
+
+                    var zahajeni2 = ZobrazDatum(jevZacatek2);
+                    var ukonceni2 = ZobrazDatum(jevKonec2, 1);
+
+                    resultText2 += ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
+                    sms2 += ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
+                } else {
+                    resultText2 += oddelovac;
+                    sms2 += oddelovac;
+                }
+            } else {
+                if (detailni) {
+                    var jevStarty2 = Math.min.apply(null, jevStart2);
+                    var jevZacatek2 = jevStarty2.toString();
+
+                    var jevEndy2 = Math.max.apply(null, jevEnd2);
+                    var jevKonec2 = jevEndy2.toString();
+
+                    var zahajeni2 = ZobrazDatum(jevZacatek2);
+                    var ukonceni2 = ZobrazDatum(jevKonec2, 1);
+
+                    resultText2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
+                } else {
+                    resultText2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                }
+            }
+        }
+    }
+
+    var starty2 = Math.min.apply(null, zacatky2);
+    var start2 = starty2.toString();
+
+    var endy2 = Math.max.apply(null, konce2);
+    var end2 = endy.toString();
+
+    var total_zahajeni2 = ZobrazDatum(start2);
+    var total_ukonceni2 = ZobrazDatum(end2, 1);
+
+    var rezim2 = 'SVRS';
+    if (seznjevu2.indexOf('SIVS') > -1) {
+        rezim2 = 'SIVS';
+    }
+    if (seznjevu2.indexOf('HPPS') > -1) {
+        rezim2 = 'HPPS';
+    }
+
+    if (start2 == 'Infinity') {
+        vystupText2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+        sms2 += vystupText2;
+    } else {
+        switch (ref_vystraha.ucel) {
+            case 'Exercise' :
+                var uvod2 = 'Cvičná zpráva ';
+            break;
+            case 'System' :
+                var uvod2 = 'Systémová zpráva ';
+            break;
+            case 'Test' :
+                var uvod2 = 'Testovací zpráva ';
+            break;
+            default : 
+                var uvod2 = 'Výstraha ';
+            break;
+        }
+
+        switch (rezim2) {
+            case 'HPPS' :
+                uvod2 += 'HPPS ';
+            break;
+            case 'SIVS' :
+                uvod2 += 'SIVS ';
+            break;
+            case 'SVRS' :
+                uvod2 += 'SVRS ';
+            break;
+            default :
+                uvod2 += 'ČHMÚ';
+            break;
+        }
+
+        var poradi_zpravy2 = ref_vystraha.id.substring(ref_vystraha.id.length - 6);
+        uvod2 += 'č. ' + Number(poradi_zpravy2) + ': ';
+        vystupText2 += uvod2;
+
+        vystupText2 += resultText2;
+
+        if (!detailni) {
+            vystupText2 += 'Platnost od ' + total_zahajeni2 + ' do ' + total_ukonceni2 + oddelovac;
+            sms2 += 'Platnost od ' + total_zahajeni2 + ' do ' + total_ukonceni2 + oddelovac;
+        }
+        if (omezitNaKraj == -1) {
+            vystupText2 += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
+        }
+    }
+    vystupText2 = vystupText2.substring(0, vystupText2.length - oddelovac.length);
+}
+
+vystupText = '\n\n1: ' + sms1 + '\n2: ' + sms2; 
 
 return vystupText;
