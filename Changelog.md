@@ -1,6 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 56 – 2019-07-02
+### [AA/AA-CHMU-MAIL-2]
+#### Přidáno
+- Na základě pořadavku KÚ Stč. kraje vytvořen parametr umožňující vypnout slučování území.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Přidáno
+- Možnost vypnout slučování území.
+
+### [UVG/CHMU-MAIL-2]
+#### Přidáno
+- Možnost vypnout slučování území.
+
 ## verze 55 – 2019-07-02
 ### [Knihovna/CHMU-SMS-KRAJ]
 #### Změněno

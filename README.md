@@ -194,6 +194,11 @@ Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *t
 - Při hodnotě *false* je seznam distribuce (krajů) zobrazen pod přehledem nebezpečných jevů na posledním řádku sestavy.
 - Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
 
+Parametr **slucovat** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* se územní platnost jevu vyjadřuje plným výpisem všech ORP, pro které jev platí.
+- Při hodnotě *true* dochází ke slučování území na vyšší prvky (okresy, kraje) pro zkrácení výstupu.
+
 Předpis neumožňuje barevné zvýrazenění rozdílu aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
 ---
@@ -288,6 +293,11 @@ Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *t
 
 - Při hodnotě *false* je seznam distribuce (krajů) zobrazen pod přehledem nebezpečných jevů na posledním řádku sestavy.
 - Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
+
+Parametr **slucovat** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* se územní platnost jevu vyjadřuje plným výpisem všech ORP, pro které jev platí.
+- Při hodnotě *true* dochází ke slučování území na vyšší prvky (okresy, kraje) pro zkrácení výstupu.
 
 Předpis neumožňuje porovnávání aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
