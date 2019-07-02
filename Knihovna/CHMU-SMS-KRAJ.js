@@ -1,11 +1,7 @@
-// Verze 54
+// Verze 55
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
-
-var zacatky = [];
-var konce = [];
-var seznjevu = [];
 
 function removeDuplicates(arr) {
     var unique_array = [];
@@ -17,10 +13,12 @@ function removeDuplicates(arr) {
     return unique_array;
 }
 
+var zacatky = [];
+var konce = [];
+var sms1 = '';
+var seznjevu = [];
 var resultText = '';
 var vystupText = '';
-var sms1 = '';
-var sms2 = '';
 
 if (vystraha.info) {
     var infoList = [];
@@ -80,7 +78,7 @@ if (infoList) {
                 for (var j = 0; j < infoList[i].kraj.length; j++) {
                     if (found) {
                         jevKrajeList.push(infoList[i].kraj[j].UID);
-                        warn_type = 'SVRS';
+                        var warn_type = 'SVRS';
                         if (infoList[i].SIVS == '1') {
                             warn_type = 'SIVS';
                         }
@@ -88,9 +86,9 @@ if (infoList) {
                             warn_type = 'HPPS';
                         }
                         seznjevu.push(warn_type);
-                        zacatek = Normalize(infoList[i].dc_zacatek);
+                        var zacatek = Normalize(infoList[i].dc_zacatek);
                         zacatky.push(zacatek);
-                        konec = Normalize(infoList[i].dc_konec);
+                        var konec = Normalize(infoList[i].dc_konec);
                         konce.push(konec);
 
                         jevStart.push(zacatek);
@@ -121,14 +119,14 @@ if (infoList) {
                 sms1 += seznkraje;
 
                 if (detailni) {
-                    jevStarty = Math.min.apply(null, jevStart);
-                    jevZacatek = jevStarty.toString();
+                    var jevStarty = Math.min.apply(null, jevStart);
+                    var jevZacatek = jevStarty.toString();
 
-                    jevEndy = Math.max.apply(null, jevEnd);
-                    jevKonec = jevEndy.toString();
+                    var jevEndy = Math.max.apply(null, jevEnd);
+                    var jevKonec = jevEndy.toString();
 
-                    zahajeni = ZobrazDatumSMS(jevZacatek);
-                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+                    var zahajeni = ZobrazDatumSMS(jevZacatek);
+                    var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
                     resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
@@ -138,35 +136,35 @@ if (infoList) {
                 }
             } else {
                 if (detailni) {
-                    jevStarty = Math.min.apply(null, jevStart);
-                    jevZacatek = jevStarty.toString();
+                    var jevStarty = Math.min.apply(null, jevStart);
+                    var jevZacatek = jevStarty.toString();
 
-                    jevEndy = Math.max.apply(null, jevEnd);
-                    jevKonec = jevEndy.toString();
+                    var jevEndy = Math.max.apply(null, jevEnd);
+                    var jevKonec = jevEndy.toString();
 
-                    zahajeni = ZobrazDatumSMS(jevZacatek);
-                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+                    var zahajeni = ZobrazDatumSMS(jevZacatek);
+                    var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
                     resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
-                    sms1 = JEVY_NAZVY[poleJevy[h]] + oddelovac;
+                    sms1 += JEVY_NAZVY[poleJevy[h]] + oddelovac;
                 }
             }
         }
     }
 
-    starty = Math.min.apply(null, zacatky);
-    start = starty.toString();
+    var starty = Math.min.apply(null, zacatky);
+    var start = starty.toString();
 
-    endy = Math.max.apply(null, konce);
-    end = endy.toString();
+    var endy = Math.max.apply(null, konce);
+    var end = endy.toString();
 
-    total_zahajeni = ZobrazDatumSMS(start);
-    total_ukonceni = ZobrazDatumSMS(end, 1);
+    var total_zahajeni = ZobrazDatumSMS(start);
+    var total_ukonceni = ZobrazDatumSMS(end, 1);
 
-    rezim = 'SVRS';
+    var rezim = 'SVRS';
     if (seznjevu.indexOf('SIVS') > -1) {
         rezim = 'SIVS';
     }
@@ -180,16 +178,16 @@ if (infoList) {
     } else {
         switch (vystraha.ucel) {
             case 'Exercise' :
-                uvod = 'Cvičná zpráva ';
+                var uvod = 'Cvičná zpráva ';
             break;
             case 'System' :
-                uvod = 'Systémová zpráva ';
+                var uvod = 'Systémová zpráva ';
             break;
             case 'Test' :
-                uvod = 'Testovací zpráva ';
+                var uvod = 'Testovací zpráva ';
             break;
             default : 
-                uvod = 'Výstraha ';
+                var uvod = 'Výstraha ';
             break;
         }
 
@@ -225,9 +223,9 @@ if (infoList) {
     vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
 }
 
-resultText = '';
-zacatky = [];
-konce = [];
+var zacatky2 = [];
+var konce2 = [];
+var sms2 = '';
 
 if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
     var ref_infoList = [];
@@ -271,8 +269,8 @@ if (ref_infoList) {
     poleJevy2 = removeDuplicates(poleJevy2);
 
     for (var h = 0; h < poleJevy2.length; h++) {
-        var jevStart = [];
-        var jevEnd = [];
+        var jevStart2 = [];
+        var jevEnd2 = [];
         var jevKrajeList2 = [];
         for (var i = 0; i < ref_infoList.length; i++) {
             var pomKod2Ivnj = '';
@@ -289,17 +287,17 @@ if (ref_infoList) {
                         jevKrajeList2.push(ref_infoList[i].kraj[j].UID);
 
                         var nyni = Zaokrouhli(vystraha.dc_odeslano);
-                        var zacatek = Normalize(ref_infoList[i].dc_zacatek);
-                        if (zacatek < nyni) {
-                            zacatky.push(nyni);
-                            jevStart.push(nyni);
+                        var zacatek2 = Normalize(ref_infoList[i].dc_zacatek);
+                        if (zacatek2 < nyni) {
+                            zacatky2.push(nyni);
+                            jevStart2.push(nyni);
                         } else {
-                            zacatky.push(zacatek);
-                            jevStart.push(zacatek);
+                            zacatky2.push(zacatek2);
+                            jevStart2.push(zacatek2);
                         }
-                        konec = Normalize(ref_vystraha.info[i].dc_konec);
-                        konce.push(konec);
-                        jevEnd.push(konec);
+                        var konec2 = Normalize(ref_infoList[i].dc_konec);
+                        konce2.push(konec2);
+                        jevEnd2.push(konec2);
                     }
                 }
             }
@@ -311,70 +309,64 @@ if (ref_infoList) {
 
         if (jevKrajeList2.length > 0) {
             if (omezitNaKraj == -1) {
-                resultText += JEVY_NAZVY[poleJevy2[h]];
                 sms2 += JEVY_NAZVY[poleJevy2[h]];
-                resultText += ' pro kraje ';
                 sms2 += ' pro kraje ';
 
-                var seznkraje = '';
+                var seznkraje2 = '';
 
                 for (var t = 0; t < jevKrajeList2.length; t++) {
-                    seznkraje += KRAJE_KODY[jevKrajeList2[t]] + ', ';
+                    seznkraje2 += KRAJE_KODY[jevKrajeList2[t]] + ', ';
                 }
-                seznkraje = seznkraje.substring(0, seznkraje.length-2);
-                resultText += seznkraje;
-                sms2 += seznkraje;
+                seznkraje2 = seznkraje2.substring(0, seznkraje2.length-2);
+                sms2 += seznkraje2;
+
                 if (detailni) {
-                    jevStarty = Math.min.apply(null, jevStart);
-                    jevZacatek = jevStarty.toString();
+                    var jevStarty2 = Math.min.apply(null, jevStart2);
+                    var jevZacatek2 = jevStarty2.toString();
 
-                    jevEndy = Math.max.apply(null, jevEnd);
-                    jevKonec = jevEndy.toString();
+                    var jevEndy2 = Math.max.apply(null, jevEnd2);
+                    var jevKonec2 = jevEndy2.toString();
 
-                    zahajeni = ZobrazDatumSMS(jevZacatek);
-                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+                    var zahajeni2 = ZobrazDatumSMS(jevZacatek2);
+                    var ukonceni2 = ZobrazDatumSMS(jevKonec2, 1);
 
-                    resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms2 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
                 } else {
-                    resultText += oddelovac;
-                    sms2 = oddelovac;
+                    sms2 += oddelovac;
                 }
             } else {
                 if (detailni) {
-                    jevStarty = Math.min.apply(null, jevStart);
-                    jevZacatek = jevStarty.toString();
+                    var jevStarty2 = Math.min.apply(null, jevStart2);
+                    var jevZacatek2 = jevStarty2.toString();
 
-                    jevEndy = Math.max.apply(null, jevEnd);
-                    jevKonec = jevEndy.toString();
+                    var jevEndy2 = Math.max.apply(null, jevEnd2);
+                    var jevKonec2 = jevEndy2.toString();
 
-                    zahajeni = ZobrazDatumSMS(jevZacatek);
-                    ukonceni = ZobrazDatumSMS(jevKonec, 1);
+                    var zahajeni2 = ZobrazDatumSMS(jevZacatek2);
+                    var ukonceni2 = ZobrazDatumSMS(jevKonec2, 1);
 
-                    resultText += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
                 } else {
-                    resultText += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
-                    sms2 = JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
                 }
             }
         }
     }
 
-    starty = Math.min.apply(null, zacatky);
-    start = starty.toString();
+    var starty2 = Math.min.apply(null, zacatky2);
+    var start2 = starty2.toString();
 
-    endy = Math.max.apply(null, konce);
-    end = endy.toString();
+    var endy2 = Math.max.apply(null, konce2);
+    var end2 = endy2.toString();
 
-    total_zahajeni = ZobrazDatumSMS(start);
-    total_ukonceni = ZobrazDatumSMS(end, 1);
+    var total_zahajeni2 = ZobrazDatumSMS(start2);
+    var total_ukonceni2 = ZobrazDatumSMS(end2, 1);
 
-    if (start == 'Infinity') {
+    if (start2 == 'Infinity') {
         sms2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
     } else {
         if (!detailni) {
-            sms2 += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
+            sms2 += 'Platnost od ' + total_zahajeni2 + ' do ' + total_ukonceni2 + oddelovac;
         }
     }
 }
