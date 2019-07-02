@@ -1,4 +1,4 @@
-// Verze 54
+// Verze 55
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";

@@ -1,6 +1,19 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 55 – 2019-07-02
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Oprava kontroly duplicity zpráv.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Oprava kontroly duplicity zpráv.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Oprava kontroly duplicity zpráv.
+
 ## verze 54 – 2019-07-01
 ### [Knihovna/CHMU-MAIL-2]
 #### Změněno
