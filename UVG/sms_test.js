@@ -1,6 +1,6 @@
 // Verze 54
 
-var omezitNaKraj = 141;
+var omezitNaKraj = -1;
 var detailni = 1;
 var oddelovac = '\n';
 
@@ -227,6 +227,30 @@ function ZobrazDatum(datum, end) {
     }
 
     return format_datum;
+}
+
+function Zaokrouhli(datum) {
+    var datum_format = Normalize(datum);
+
+    var kjYear = datum_format.substring(0,4);
+    var kjMonth = datum_format.substring(4,6);
+    var kjDay = datum_format.substring(6,8);
+    var kjHour = datum_format.substring(8,10);
+    var kjMinute = datum_format.substring(10,12);
+
+    var myTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute);
+
+    if (kjMinute > 0 && kjMinute < 30) {
+        myTime.setMinutes(30);
+    }
+    if (kjMinute > 30) {
+        myTime.setMinutes(0);
+        myTime.setHours(myTime.getHours() + 1);
+    }
+
+    datum_format = Normalize(myTime);
+
+    return datum_format;
 }
 
 function removeDuplicates(arr) {
@@ -511,12 +535,18 @@ if (ref_infoList) {
                 for (var j = 0; j < ref_infoList[i].kraj.length; j++) {
                     if (found) {
                         jevKrajeList2.push(ref_infoList[i].kraj[j].UID);
-                        var zacatek2 = Normalize(ref_infoList[i].dc_zacatek);
-                        zacatky2.push(zacatek2);
-                        var konec2 = Normalize(ref_infoList[i].dc_konec);
-                        konce2.push(konec2);
 
-                        jevStart2.push(zacatek2);
+                        var nyni = Zaokrouhli(vystraha.dc_odeslano);
+                        var zacatek2 = Normalize(ref_infoList[i].dc_zacatek);
+                        if (zacatek2 < nyni) {
+                            zacatky2.push(nyni);
+                            jevStart2.push(nyni);
+                        } else {
+                            zacatky2.push(zacatek2);
+                            jevStart2.push(zacatek2);
+                        }
+                        var konec2 = Normalize(ref_vystraha.info[i].dc_konec);
+                        konce2.push(konec2);
                         jevEnd2.push(konec2);
                     }
                 }
@@ -590,6 +620,10 @@ if (ref_infoList) {
     }
 }
 
-vystupText = '\n\n1: ' + sms1 + '\n2: ' + sms2; 
+if (sms1 == sms2) {
+    vystupText = '';
+}
+
+vystupText += '\n\n1: ' + sms1 + '\n2: ' + sms2; 
 
 return vystupText;
