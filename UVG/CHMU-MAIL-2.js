@@ -4,7 +4,7 @@ var omezitNaKraj = -1;
 var zobrazitVyhled = false;
 var pouzeZmeny = false;
 var distrSeznamNahore = false;
-var slucovat = false;
+var slucovat = true;
 
 var KRAJE_NAZVY = {
     "-1": "Česká republika",
