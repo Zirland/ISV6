@@ -506,7 +506,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
 if (ref_infoList) {
     var poleJevy2 = [];
     for (var i = 0; i < ref_infoList.length; i++) {
-        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)) { 
+        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)) {
             var pomKod2 = '';
             if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKod2 += '0';
@@ -538,14 +538,14 @@ if (ref_infoList) {
 
                         var nyni = Zaokrouhli(vystraha.dc_odeslano);
                         var zacatek2 = Normalize(ref_infoList[i].dc_zacatek);
-                        if (zacatek < nyni) {
+                        if (zacatek2 < nyni) {
                             zacatky2.push(nyni);
                             jevStart2.push(nyni);
                         } else {
                             zacatky2.push(zacatek2);
                             jevStart2.push(zacatek2);
                         }
-                        var konec2 = Normalize(ref_vystraha.info[i].dc_konec);
+                        var konec2 = Normalize(ref_infoList[i].dc_konec);
                         konce2.push(konec2);
                         jevEnd2.push(konec2);
                     }
@@ -563,12 +563,12 @@ if (ref_infoList) {
                 sms2 += ' pro kraje ';
 
                 var seznkraje2 = '';
-
                 for (var t = 0; t < jevKrajeList2.length; t++) {
                     seznkraje2 += KRAJE_KODY[jevKrajeList2[t]] + ', ';
                 }
                 seznkraje2 = seznkraje2.substring(0, seznkraje2.length-2);
                 sms2 += seznkraje2;
+
                 if (detailni) {
                     var jevStarty2 = Math.min.apply(null, jevStart2);
                     var jevZacatek2 = jevStarty2.toString();
@@ -596,19 +596,19 @@ if (ref_infoList) {
 
                     sms2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
                 } else {
-                    sms2 = JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    sms2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
                 }
             }
         }
     }
 
-    var starty2= Math.min.apply(null, zacatky2);
+    var starty2 = Math.min.apply(null, zacatky2);
     var start2 = starty2.toString();
 
     var endy2 = Math.max.apply(null, konce2);
     var end2 = endy2.toString();
 
-    var total_zahajen2 = ZobrazDatum(start2);
+    var total_zahajeni2 = ZobrazDatum(start2);
     var total_ukonceni2 = ZobrazDatum(end2, 1);
 
     if (start2 == 'Infinity') {
