@@ -65,6 +65,7 @@ if (infoList) {
         var jevStart = [];
         var jevEnd = [];
         var jevKrajeList = [];
+        var jevOrpList = [];
         for (var i = 0; i < infoList.length; i++) {
             var pomKodIvnj = '';
             if (infoList[i].jistota_kod == 'Observed') {
@@ -78,6 +79,17 @@ if (infoList) {
                 for (var j = 0; j < infoList[i].kraj.length; j++) {
                     if (found) {
                         jevKrajeList.push(infoList[i].kraj[j].UID);
+
+                        var OrpList = infoList[i].orp_list;
+                        var OrpListArr = OrpList.split(',');
+                        for (var k = 0; k < OrpListArr.length; k++) {
+                            for (var l = 0; l < orp.length; l++) {
+                                if (OrpListArr[k] == orp[l].id && orp[l].kraj.id == omezitNaKraj) {
+                                    jevOrpList.push(orp[l].nazev);
+                                }
+                            }
+                        }
+
                         var warn_type = 'SVRS';
                         if (infoList[i].SIVS == '1') {
                             warn_type = 'SIVS';
@@ -100,6 +112,14 @@ if (infoList) {
         jevKrajeList = removeDuplicates(jevKrajeList);
         jevKrajeList = jevKrajeList.sort(function (a, b) {
             return a-b;
+        });
+        jevOrpList = removeDuplicates(jevOrpList);
+        jevOrpList = jevOrpList.sort(function (a, b) {
+            if (a < b)
+                return -1;
+            if (a > b)
+                return 1;
+            return 0;
         });
 
         if (jevKrajeList.length > 0) {
@@ -135,6 +155,21 @@ if (infoList) {
                     sms1 += oddelovac;
                 }
             } else {
+                resultText += JEVY_NAZVY[poleJevy[h]];
+                sms1 += JEVY_NAZVY[poleJevy[h]];
+                if (vypisOrp) {
+                    resultText += ' pro ORP ';
+                    sms1 += ' pro ORP ';
+
+                    var seznOrp = '';
+
+                    for (var t = 0; t < jevOrpList.length; t++) {
+                        seznOrp += jevOrpList[t] + ', ';
+                    }
+                    seznOrp = seznOrp.substring(0, seznOrp.length-2);
+                    resultText += seznOrp;
+                    sms1 += seznOrp;
+                }
                 if (detailni) {
                     var jevStarty = Math.min.apply(null, jevStart);
                     var jevZacatek = jevStarty.toString();
@@ -145,11 +180,11 @@ if (infoList) {
                     var zahajeni = ZobrazDatumSMS(jevZacatek);
                     var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
-                    resultText += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
-                    sms1 += JEVY_NAZVY[poleJevy[h]] + ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    sms1 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
-                    resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
-                    sms1 += JEVY_NAZVY[poleJevy[h]] + oddelovac;
+                    resultText += oddelovac;
+                    sms1 += oddelovac;
                 }
             }
         }
@@ -272,6 +307,7 @@ if (ref_infoList) {
         var jevStart2 = [];
         var jevEnd2 = [];
         var jevKrajeList2 = [];
+        var jevOrpList2 = [];
         for (var i = 0; i < ref_infoList.length; i++) {
             var pomKod2Ivnj = '';
             if (ref_infoList[i].jistota_kod == 'Observed') {
@@ -285,6 +321,16 @@ if (ref_infoList) {
                 for (var j = 0; j < ref_infoList[i].kraj.length; j++) {
                     if (found) {
                         jevKrajeList2.push(ref_infoList[i].kraj[j].UID);
+
+                        var OrpList2 = ref_infoList[i].orp_list;
+                        var OrpListArr2 = OrpList2.split(',');
+                        for (var k = 0; k < OrpListArr2.length; k++) {
+                            for (var l = 0; l < orp.length; l++) {
+                                if (OrpListArr2[k] == orp[l].id && orp[l].kraj.id == omezitNaKraj) {
+                                    jevOrpList2.push(orp[l].nazev);
+                                }
+                            }
+                        }
 
                         var nyni = Zaokrouhli(vystraha.dc_odeslano);
                         var zacatek2 = Normalize(ref_infoList[i].dc_zacatek);
@@ -305,6 +351,14 @@ if (ref_infoList) {
         jevKrajeList2 = removeDuplicates(jevKrajeList2);
         jevKrajeList2 = jevKrajeList2.sort(function (a, b) {
             return a-b;
+        });
+        jevOrpList2 = removeDuplicates(jevOrpList2);
+        jevOrpList2 = jevOrpList2.sort(function (a, b) {
+            if (a < b)
+                return -1;
+            if (a > b)
+                return 1;
+            return 0;
         });
 
         if (jevKrajeList2.length > 0) {
@@ -335,6 +389,18 @@ if (ref_infoList) {
                     sms2 += oddelovac;
                 }
             } else {
+                sms2 += JEVY_NAZVY[poleJevy2[h]];
+                if (vypisOrp) {
+                    sms2 += ' pro ORP ';
+
+                    var seznOrp2 = '';
+
+                    for (var t = 0; t < jevOrpList2.length; t++) {
+                        seznOrp2 += jevOrpList2[t] + ', ';
+                    }
+                    seznOrp2 = seznOrp2.substring(0, seznOrp2.length-2);
+                    sms2 += seznOrp2;
+                }
                 if (detailni) {
                     var jevStarty2 = Math.min.apply(null, jevStart2);
                     var jevZacatek2 = jevStarty2.toString();
@@ -345,9 +411,9 @@ if (ref_infoList) {
                     var zahajeni2 = ZobrazDatumSMS(jevZacatek2);
                     var ukonceni2 = ZobrazDatumSMS(jevKonec2, 1);
 
-                    sms2 += JEVY_NAZVY[poleJevy2[h]] + ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
+                    sms2 += ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
                 } else {
-                    sms2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+                    sms2 += oddelovac;
                 }
             }
         }
