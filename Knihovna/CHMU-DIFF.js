@@ -1,4 +1,4 @@
-// Verze 56
+// Verze 57
 
 zobrazitZmeny = true;
 
