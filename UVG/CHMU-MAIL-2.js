@@ -1,4 +1,4 @@
-// Verze 56
+// Verze 57
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
@@ -890,42 +890,48 @@ function PrintInfo(info, ref_info) {
     var pomoc = '';
 
     if (info) {
+        var vyskyt = '';
+        var upr_info = '';
+        var upr_hydro = '';
+        var upr_doporuceni = '';
+
         if (info.jistota_kod == 'Observed') {
             vyskyt = '<b>Výskyt jevu</b><br>';
-        } else {
-            vyskyt = '';
         }
         if (info.popis) {
-            var upr_info = info.popis.replace(/<br\/>/g,' ');
+            upr_info = info.popis.replace(/<br\/>/g,' ');
         }
         if (info.hydroPredpoved) {
-            var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
             upr_hydro = upr_hydro.replace(/\n/g,'<br>');
         }
         if (info.doporuceni) {
-            var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
+            upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
             upr_doporuceni = upr_doporuceni.replace(/hasičské záchranné služby/g,'hasičského záchranného sboru');
         }
-    } 
+    }
 
     if (ref_info) {
+        var ref_vyskyt = '';
+        var ref_upr_info = '';
+        var ref_upr_hydro = '';
+        var ref_upr_doporuceni = '';
+
         if (ref_info.jistota_kod == 'Observed') {
             ref_vyskyt = '<b>Výskyt jevu</b><br>';
-        } else {
-            ref_vyskyt = '';
         }
         if (ref_info.popis) {
-            var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
+            ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
         }
         if (ref_info.hydroPredpoved) {
-            var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
             ref_upr_hydro = ref_upr_hydro.replace(/\n/g,'<br>');
         }
         if (ref_info.doporuceni) {
-            var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
+            ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
             ref_upr_doporuceni = ref_upr_doporuceni.replace(/hasičské záchranné služby/g,'hasičského záchranného sboru');
         }
-    } 
+    }
 
     pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -1153,39 +1159,45 @@ function PrintInfo2(info, ref_info) {
     var resultText = '';
 
     if (info) {
+        var vyskyt = '';
+        var upr_info = '';
+        var upr_hydro = '';
+        var upr_doporuceni = '';
+
         if (info.jistota_kod == 'Observed') {
             vyskyt = '<b>Výskyt jevu</b><br>';
-        } else {
-            vyskyt = '';
         }
         if (info.popis) {
-            var upr_info = info.popis.replace(/<br\/>/g,' ');
+            upr_info = info.popis.replace(/<br\/>/g,' ');
         }
         if (info.hydroPredpoved) {
-            var upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            upr_hydro = info.hydroPredpoved.replace(/\t/g,'&emsp;');
             upr_hydro = upr_hydro.replace(/\n/g,'<br>');
         }
         if (info.doporuceni) {
-            var upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
+            upr_doporuceni = info.doporuceni.replace(/<br\/>/g,' ');
             upr_doporuceni = upr_doporuceni.replace(/hasičské záchranné služby/g,'hasičského záchranného sboru');
         }
     }
 
     if (ref_info) {
+        var ref_vyskyt = '';
+        var ref_upr_info = '';
+        var ref_upr_hydro = '';
+        var ref_upr_doporuceni = '';
+
         if (ref_info.jistota_kod == 'Observed') {
             ref_vyskyt = '<b>Výskyt jevu</b><br>';
-        } else {
-            ref_vyskyt = '';
         }
         if (ref_info.popis) {
-            var ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
+            ref_upr_info = ref_info.popis.replace(/<br\/>/g,' ');
         }
         if (ref_info.hydroPredpoved) {
-            var ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
+            ref_upr_hydro = ref_info.hydroPredpoved.replace(/\t/g,'&emsp;');
             ref_upr_hydro = ref_upr_hydro.replace(/\n/g,'<br>');
         }
         if (ref_info.doporuceni) {
-            var ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
+            ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g,' ');
             ref_upr_doporuceni = ref_upr_doporuceni.replace(/hasičské záchranné služby/g,'hasičského záchranného sboru');
         }
     }

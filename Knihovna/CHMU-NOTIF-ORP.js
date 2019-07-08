@@ -1,4 +1,4 @@
-// Verze 56
+// Verze 57
 
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-DATUMY";

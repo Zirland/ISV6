@@ -1,6 +1,35 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 57 – 2019-07-08
+### [AA/AA-CHMU-SMS-KRAJ]
+#### Přidáno
+- Na základě požadavku HZS Plzeňského kraje vytvořen parametr umožňující vypsat seznam ORP v krajské SMS.
+
+### [Knihovna/CHMU-MAIL-2]
+#### Změněno
+- Úprava způsobu výstupu popisu jevu, ošetření nevyplněné povinné položky.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava způsobu výstupu popisu jevu, ošetření nevyplněné povinné položky.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Přidáno
+- Možnost vypsat seznam ORP v krajské SMS.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava způsobu výstupu popisu jevu, ošetření nevyplněné povinné položky.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava způsobu výstupu popisu jevu, ošetření nevyplněné povinné položky.
+
+### [UVG/CHMU-SMS]
+#### Přidáno
+- Možnost vypsat seznam ORP v krajské SMS.
+
 ## verze 56 – 2019-07-02
 ### [AA/AA-CHMU-MAIL-2]
 #### Přidáno
