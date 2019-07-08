@@ -1,4 +1,4 @@
-// Verze 56
+// Verze 57
 resultText += '<style type="text/css">';
 resultText += '    body {font-family:serif;font-size:13px;}';
 resultText += '    .header {font-size:15px;text-align:center;}';

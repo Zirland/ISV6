@@ -118,6 +118,11 @@ Parametr **detailni** může nabývat hodnot *false* nebo *true*.
 - Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů jevů platných pro zvolený kraj. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev platí. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
 - Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy jevů platných pro zvolený kraj následované rozsahem platnosti tohoto jevu. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev v uvedeném časovém období platí. Rozsah platnosti celé výstrahy se neuvádí.
 
+Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*. Parametr funguje pouze v rámci konkrétního kraje, nelze uplatnit na celostátní SMS.
+
+- Při hodnotě *false* není ve výsledné SMS zprávě vyjmenován seznam ORP v rámci kraje, na jejichž území jev platí.
+- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP v rámci kraje, na jejichž území jev platí. Je tak možno rozpoznat změnu rozsahu území.
+
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
@@ -260,6 +265,11 @@ Parametr **detailni** může nabývat hodnot *false* nebo *true*.
 
 - Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů jevů platných pro zvolený kraj. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev platí. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
 - Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy jevů platných pro zvolený kraj následované rozsahem platnosti tohoto jevu. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev v uvedeném období platí. Rozsah platnosti celé výstrahy se neuvádí.
+
+Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*. Parametr funguje pouze v rámci konkrétního kraje, nelze uplatnit na celostátní SMS.
+
+- Při hodnotě *false* není ve výsledné SMS zprávě vyjmenován seznam ORP v rámci kraje, na jejichž území jev platí.
+- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP v rámci kraje, na jejichž území jev platí. Je tak možno rozpoznat změnu rozsahu území.
 
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
