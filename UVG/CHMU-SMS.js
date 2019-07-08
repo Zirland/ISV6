@@ -2,7 +2,7 @@
 
 var omezitNaKraj = -1;
 var detailni = 1;
-var vypisOrp = true;
+var vypisOrp = false;
 var oddelovac = '\n';
 
 var KRAJE_NAZVY = {
@@ -663,7 +663,7 @@ if (ref_infoList) {
 
                     sms2 += ' od ' + zahajeni2 + ' do ' + ukonceni2 + oddelovac;
                 } else {
-                    sms2 += soddelovac;
+                    sms2 += oddelovac;
                 }
             }
         }
