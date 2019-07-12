@@ -1,6 +1,23 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 58 – 2019-07-12
+### [AA/AA-CHMU-NOTIF-KRAJ]
+#### Záplata
+- Oprava zavlečené chyby v názvu proměnné.
+
+### [AA/AA-CHMU-NOTIF-ORP]
+#### Záplata
+- Oprava zavlečené chyby v názvu proměnné.
+
+### [Knihovna/CHMU-NOTIF-KRAJ]
+#### Záplata
+- Skript vyžaduje knihovnu CHMU-CISELNIK.
+
+### [Knihovna/CHMU-NOTIF-ORP]
+#### Záplata
+- Skript vyžaduje knihovnu CHMU-CISELNIK.
+
 ## verze 57 – 2019-07-08
 ### [AA/AA-CHMU-SMS-KRAJ]
 #### Přidáno
