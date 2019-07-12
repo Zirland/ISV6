@@ -1,5 +1,6 @@
 // Verze 57
 
+#import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-DATUMY";
 #import "CHMU-PREPARE";
