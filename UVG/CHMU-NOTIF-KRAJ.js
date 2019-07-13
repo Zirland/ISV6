@@ -1,4 +1,4 @@
-// Verze 57
+// Verze 58
 
 var omezitNaKraj = -1;
 
