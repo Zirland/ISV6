@@ -1,7 +1,7 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
-## verze 58 – 2019-07-12
+## verze 58 – 2019-07-13
 ### [AA/AA-CHMU-NOTIF-KRAJ]
 #### Záplata
 - Oprava zavlečené chyby v názvu proměnné.
@@ -10,6 +10,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 #### Záplata
 - Oprava zavlečené chyby v názvu proměnné.
 
+### [Knihovna/CISELNIK]
+#### Změněno
+- Přidána hodnota pro Českou republiku do seznamu kódů.
+
 ### [Knihovna/CHMU-NOTIF-KRAJ]
 #### Záplata
 - Skript vyžaduje knihovnu CHMU-CISELNIK.
@@ -17,6 +21,22 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [Knihovna/CHMU-NOTIF-ORP]
 #### Záplata
 - Skript vyžaduje knihovnu CHMU-CISELNIK.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Přidána hodnota pro Českou republiku do seznamu kódů.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Přidána hodnota pro Českou republiku do seznamu kódů.
+
+### [UVG/CHMU-NOTIF-KRAJ]
+#### Přidáno
+- Na základě požadavku MSK vytvořen nový skript pro notifikaci, zda v datech došlo ke změně nebo ne.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Přidána hodnota pro Českou republiku do seznamu kódů.
 
 ## verze 57 – 2019-07-08
 ### [AA/AA-CHMU-SMS-KRAJ]
