@@ -38,12 +38,12 @@ Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vz
 ### [CHMU-NOTIF-KRAJ]
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail.
 
-**Vyžaduje** skripty: *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
 
 ### [CHMU-NOTIF-ORP]
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail na ORP.
 
-**Vyžaduje** skripty: *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
 
 ### [CHMU-CISELNIK]
 Předpis obsahující potřebné číselníky jevů a území.
