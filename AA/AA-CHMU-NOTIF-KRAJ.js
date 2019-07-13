@@ -1,5 +1,5 @@
 //!JS
-// Verze 57
+// Verze 58
 
 var omezitNaKraj = -1;
 
@@ -23,9 +23,9 @@ var KRAJE_NAZVY = {
 
 #import "CHMU-NOTIF-KRAJ"; 
 
-if (vystupText != '') {
-    vystupText += "\n";
-    vystupText += "OPIS GŘ HZS ČR";
+if (resultText != '') {
+    resultText += "\n";
+    resultText += "OPIS GŘ HZS ČR";
 }
 
 if (resultText !== 'undefined' && resultText) {

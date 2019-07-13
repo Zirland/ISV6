@@ -1,5 +1,140 @@
 // Verze 58
 
+var omezitNaKraj = -1;
+
+var KRAJE_NAZVY = {
+    "-1": "Česká republika",
+    "19": "Hlavní město Praha",
+    "27": "Středočeský kraj",
+    "35": "Jihočeský kraj",
+    "43": "Plzeňský kraj",
+    "51": "Karlovarský kraj",
+    "60": "Ústecký kraj",
+    "78": "Liberecký kraj",
+    "86": "Královéhradecký kraj",
+    "94": "Pardubický kraj",
+    "108": "Kraj Vysočina",
+    "116": "Jihomoravský kraj",
+    "124": "Olomoucký kraj",
+    "132": "Moravskoslezský kraj",
+    "141": "Zlínský kraj"
+};
+
+var JEVY_NAZVY = {
+    "I.1" : "Vysoké teploty",
+    "0I.1" : "VÝSKYT Vysoké teploty",
+    "I.2" : "Velmi vysoké teploty",
+    "0I.2" : "VÝSKYT Velmi vysoké teploty",
+    "I.3" : "Extrémně vysoké teploty",
+    "0I.3" : "VÝSKYT Extrémně vysoké teploty",
+    "I.4" : "Silný mráz",
+    "0I.4" : "VÝSKYT Silný mráz",
+    "I.5" : "Velmi silný mráz",
+    "0I.5" : "VÝSKYT Velmi silný mráz",
+    "I.6" : "Extrémní mráz",
+    "0I.6" : "VÝSKYT Extrémní mráz",
+    "II.1" : "Mráz ve vegetačním období",
+    "0II.1" : "VÝSKYT Mráz ve vegetačním období",
+    "II.2" : "Prudký pokles teploty",
+    "0II.2" : "VÝSKYT Prudký pokles teploty",
+    "III.1" : "Silný vítr",
+    "0III.1" : "VÝSKYT Silný vítr",
+    "III.2" : "Velmi silný vítr",
+    "0III.2" : "VÝSKYT Velmi silný vítr",
+    "III.3" : "Extrémně silný vítr",
+    "0III.3" : "VÝSKYT Extrémně silný vítr",
+    "IV.1" : "Nová sněhová pokrývka",
+    "0IV.1" : "VÝSKYT Nová sněhová pokrývka",
+    "IV.2" : "Vysoká nová sněhová pokrývka",
+    "0IV.2" : "VÝSKYT Vysoká nová sněhová pokrývka",
+    "IV.3" : "Extrémní sněhová pokrývka",
+    "0IV.3" : "VÝSKYT Extrémní sněhová pokrývka",
+    "IV.4" : "Vysoká celková sněhová pokrývka",
+    "0IV.4" : "VÝSKYT Vysoká celková sněhová pokrývka",
+    "V.1" : "Silné sněžení",
+    "0V.1" : "VÝSKYT Silné sněžení",
+    "V.2" : "Extrémně silné sněžení",
+    "0V.2" : "VÝSKYT Extrémně silné sněžení",
+    "VI.1" : "Sněhové jazyky",
+    "0VI.1" : "VÝSKYT Sněhové jazyky",
+    "VI.2" : "Závěje",
+    "0VI.2" : "VÝSKYT Závěje",
+    "VI.3" : "Sněhová bouře",
+    "0VI.3" : "VÝSKYT Sněhová bouře",
+    "VII.1" : "Náledí",
+    "0VII.1" : "VÝSKYT Náledí",
+    "VIII.1" : "Ledovka",
+    "0VIII.1" : "VÝSKYT Ledovka",
+    "VIII.2" : "Silná ledovka",
+    "0VIII.2" : "VÝSKYT Silná ledovka",
+    "VIII.3" : "Velmi silná ledovka",
+    "0VIII.3" : "VÝSKYT Velmi silná ledovka",
+    "IX.1" : "Mrznoucí mlhy",
+    "0IX.1" : "VÝSKYT Mrznoucí mlhy",
+    "IX.2" : "Silná námraza ",
+    "0IX.2" : "VÝSKYT Silná námraza ",
+    "X.1" : "Silné bouřky",
+    "0X.1" : "VÝSKYT Silné bouřky",
+    "X.2" : "Velmi silné bouřky",
+    "0X.2" : "VÝSKYT Velmi silné bouřky",
+    "X.2a" : "Velmi silné bouřky s přívalovými srážkami",
+    "0X.2a" : "VÝSKYT Velmi silné bouřky s přívalovými srážkami",
+    "X.3" : "Extrémně silné bouřky",
+    "0X.3" : "VÝSKYT Extrémně silné bouřky",
+    "X.3a" : "Extrémně silné bouřky s přívalovými srážkami",
+    "0X.3a" : "VÝSKYT Extrémně silné bouřky s přívalovými srážkami",
+    "XI.1" : "Vydatný déšť",
+    "0XI.1" : "VÝSKYT Vydatný déšť",
+    "XI.2" : "Velmi vydatný déšť",
+    "0XI.2" : "VÝSKYT Velmi vydatný déšť",
+    "XI.3" : "Extrémní srážky",
+    "0XI.3" : "VÝSKYT Extrémní srážky",
+    "XII.1" : "Povodňová bdělost",
+    "0XII.1" : "VÝSKYT Povodňová bdělost",
+    "XII.2" : "Povodňová pohotovost",
+    "0XII.2" : "VÝSKYT Povodňová pohotovost",
+    "XII.3" : "Povodňové ohrožení",
+    "0XII.3" : "VÝSKYT Povodňové ohrožení",
+    "XII.4" : "Extrémní povodňové ohrožení",
+    "0XII.4" : "VÝSKYT Extrémní povodňové ohrožení",
+    "XIII.1" : "Povodňová bdělost (dotok)",
+    "0XIII.1" : "VÝSKYT Povodňová bdělost (dotok)",
+    "XIII.2" : "Povodňová pohotovost (dotok)",
+    "0XIII.2" : "VÝSKYT Povodňová pohotovost (dotok)",
+    "XIII.3" : "Povodňové ohrožení (dotok)",
+    "0XIII.3" : "VÝSKYT Povodňové ohrožení (dotok)",
+    "XIII.4" : "Extrémní povodňové ohrožení (dotok)",
+    "0XIII.4" : "VÝSKYT Extrémní povodňové ohrožení (dotok)",
+    "XIV.1" : "Nebezpečí požárů",
+    "0XIV.1" : "VÝSKYT Nebezpečí požárů",
+    "XIV.2" : "Vysoké nebezpečí požárů",
+    "0XIV.2" : "VÝSKYT Vysoké nebezpečí požárů",
+    "XV.1" : "Jiný jev",
+    "0XV.1" : "VÝSKYT Jiný jev",
+    "XV.2" : "Jiný jev",
+    "0XV.2" : "VÝSKYT Jiný jev",
+    "XV.3" : "Jiný jev",
+    "0XV.3" : "VÝSKYT Jiný jev",
+    "OUTLOOK" : "Výhled nebezpečných jevů",
+    "0OUTLOOK" : "Výhled nebezpečných jevů",
+    "SMOGSIT.O3" : "Smogová situace O3",
+    "0SMOGSIT.O3" : "Smogová situace O3",
+    "WARN.O3" : "Varování O3",
+    "0WARN.O3" : "Varování O3",
+    "SMOGSIT.PM10" : "Smogová situace PM10",
+    "0SMOGSIT.PM10" : "Smogová situace PM10",
+    "REG.PM10" : "Regulace PM10",
+    "0REG.PM10" : "Regulace PM10",
+    "SMOGSIT.SO2" : "Smogová situace SO2",
+    "0SMOGSIT.SO2" : "Smogová situace SO2",
+    "REG.SO2" : "Regulace SO2",
+    "0REG.SO2" : "Regulace SO2",
+    "SMOGSIT.NO2" : "Smogová situace NO2",
+    "0SMOGSIT.NO2" : "Smogová situace NO2",
+    "REG.NO2" : "Regulace NO2",
+    "0REG.NO2" : "Regulace NO2"
+};
+
 function PrepareInfo(orp, vystraha) {
     var infoList = [];
 
@@ -176,6 +311,68 @@ function PrepareInfo(orp, vystraha) {
     return krajList;
 }
 
+function UkoncenyJev(konecJev, casZprava) {
+    if (!konecJev) {
+        konecJev = '1.1.2100 01:00:00';
+    }
+
+    var konecJev_format = Normalize(konecJev);
+    var casZprava_format = Normalize(casZprava);
+
+    var kjYear = konecJev_format.substring(0,4);
+    var kjMonth = konecJev_format.substring(4,6);
+    var kjDay = konecJev_format.substring(6,8);
+    var kjHour = konecJev_format.substring(8,10);
+    var kjMinute = konecJev_format.substring(10,12);
+    var kjSecond = konecJev_format.substring(12,14);
+    var myEndTime = new Date(kjYear, kjMonth-1, kjDay, kjHour, kjMinute, kjSecond);
+
+    myEndTime.setMinutes(myEndTime.getMinutes() - 30);
+    konecJev_format = Normalize(myEndTime);
+
+    konecJev_format_num = Number(konecJev_format);
+    casZprava_format_num = Number(casZprava_format);
+
+    if (konecJev_format_num < casZprava_format_num) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function Normalize(datum) {
+    if (!datum) {
+        datum = '1.1.2100 01:00:00';
+    }
+    var datumString = new Date(datum);
+
+    datumDen = datumString.getDate();
+    if (datumDen < 10) {
+        datumDen = '0' + datumDen;
+    }
+    datumMesic = datumString.getMonth() + 1;
+    if (datumMesic < 10) {
+        datumMesic = '0' + datumMesic;
+    }
+    datumRok = datumString.getFullYear();
+    datumHodiny = datumString.getHours();
+    if (datumHodiny < 10) {
+        datumHodiny = '0' + datumHodiny;
+    }
+    datumMinuty = datumString.getMinutes();
+    if (datumMinuty < 10) {
+        datumMinuty = '0' + datumMinuty;
+    }
+    datumSekundy = datumString.getSeconds();
+    if (datumSekundy < 10) {
+        datumSekundy = '0' + datumSekundy;
+    }
+
+    datum = datumRok.toString() +  datumMesic.toString() + datumDen.toString() + datumHodiny.toString() + datumMinuty.toString() + datumSekundy.toString();
+
+    return datum;
+}
+
 function PrintInfoList(krajList, ref_krajList, headers) {
     var resultText = '';
     var zpracovanyInfoStupen = [];
@@ -212,12 +409,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                 if (!found && zobrazitZmeny) {
                     if (first) {
                         first = false;
-                        (headers == 0 ? '' : resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>');
                     }
 
                     ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                     pomoc = PrintInfo(null, ref_info);
-                    resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
             }
@@ -241,12 +436,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
             if (first) {
                 first = false;
-                (headers == 0 ? '' : resultText += '</div><br/><div><b>' + KRAJE_NAZVY[krajList[k].id] + '</b>');
                 empty = false;
             }
 
             pomoc = PrintInfo(info, ref_info);
-            resultText += pomoc.split('|')[0];
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
         }
 
@@ -273,12 +466,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         if (!found && zobrazitZmeny) {
                             if (first) {
                                 first = false;
-                                (headers == 0 ? '' : resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>');
                             }
 
                             ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                             pomoc = PrintInfo(null, ref_info);
-                            resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                         }
                     }
@@ -307,12 +498,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
                     if (first) {
                         first = false;
-                        (headers == 0 ? '' : resultText += '</div><br/><div><b>Okres ' + krajList[k].okresList[o].nazev + '</b>');
                         empty = false;
                     }
 
                     pomoc = PrintInfo(info, ref_info);
-                    resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
             }
@@ -338,11 +527,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             if (!found && zobrazitZmeny) {
                                 if (first) {
                                     first = false;
-                                    (headers == 0 ? '' : resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>');
                                 }
 
                                 pomoc = PrintInfo(null, ref_info);
-                                resultText += pomoc.split('|')[0];
                                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                             }
                         }
@@ -369,12 +556,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
                         if (first) {
                             first = false;
-                            (headers == 0 ? '' : resultText += '</div><br/><div><b>ORP ' + krajList[k].okresList[o].orpList[ol].nazev + '</b>');
                             empty = false;
                         }
 
                         pomoc = PrintInfo(info, ref_info);
-                        resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
                 }
@@ -392,12 +577,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                 
                 if (first) {
                     first = false;
-                    (headers == 0 ? '' : resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>');
                 }
 
                 ref_zpracovanyInfoStupen.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                 pomoc = PrintInfo(null, ref_info);
-                resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
             }
 
@@ -411,12 +594,10 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                         if (first) {
                             first = false;
-                            (headers == 0 ? '' : resultText += '</div><br/><div><b>Okres ' + ref_krajList[k].okresList[o].nazev + '</b>');
                         }
 
                         ref_zpracovanyInfoStupenOkres.push(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec);
                         pomoc = PrintInfo(null, ref_info);
-                        resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
                 }
@@ -430,11 +611,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         if (ref_zpracovanyInfoStupen.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1 && ref_zpracovanyInfoStupenOkres.indexOf(ref_info.jev_kod + (ref_info.vyska ? ref_info.vyska : '[]') + ref_info.dc_zacatek + '-' + ref_info.dc_konec) == -1) {
                             if (first) {
                                 first = false;
-                                (headers == 0 ? '' : resultText += '</div><br/><div><b>ORP ' + ref_krajList[k].okresList[o].orpList[ol].nazev + '</b>');
                             }
 
                             pomoc = PrintInfo(null, ref_info);
-                            resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                         }
                     }
@@ -445,76 +624,6 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
     resultText = resultText + '|' + zmen;
     return resultText;
-}
-
-function GetWarningColor(info) {
-    var color = '';
-
-    if (info) {
-        switch (info.zavaznost_kod) {
-            case 'Moderate' : 
-                color = 'Nízký st. nebezpečí';
-            break;
-            case 'Severe' : 
-                color = 'Vysoký st. nebezpečí';
-            break;
-            case 'Extreme' : 
-                color = 'Extrémní st. nebezpečí';
-            break;
-            default :
-                color = '';
-            break;
-        }
-    }
-
-    return color;
-}
-
-function PozadiColor(info) {
-    var pozadi = '#fff';
-
-    if (info) {
-        switch (info.zavaznost_kod) {
-            case 'Moderate' : 
-                pozadi = '#ff0';
-            break;
-            case 'Severe' : 
-                pozadi = '#ffa500';
-            break;
-            case 'Extreme' : 
-                pozadi = '#f00';
-            break;
-            default :
-                pozadi = '#fff';
-            break;
-        }
-    }
-
-    return pozadi;
-}
-
-function PrintVyska(info) {
-
-    var vyskaText = '';
-
-    if (info && info.vyska) {
-        var vyska = info.vyska.substring(1, info.vyska.length - 1);
-        var vyskaSplit = vyska.split('-');
-
-        if (vyskaSplit.length == 2) {
-            if (vyskaSplit[0] && vyskaSplit[1]) {
-                vyskaText = '<br/>mezi ' + Math.round(vyskaSplit[0] * 0.3048) + ' a ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
-            } else if (vyskaSplit[0]) {
-                vyskaText = '<br/>nad ' + Math.round(vyskaSplit[0] * 0.3048) + ' m n.m.';
-            } else if (vyskaSplit[1]) {
-                vyskaText = '<br/>pod ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
-            }
-        } else {
-            vyskaText = '<br/>' + Math.round(vyska * 0.3048);
-        }
-    }
-
-    return vyskaText;
 }
 
 function PrintInfo(info, ref_info) {
@@ -566,179 +675,322 @@ function PrintInfo(info, ref_info) {
         }
     }
 
-    if (zobrazitZmeny) {
-        resultText += '<table class="tg" width="100%" border="1">';
+    pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        resultText += '<tr>';
-        resultText += '<td width="20%">';
-        pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    pomoc = HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        pomoc = HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    pomoc = HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        pomoc = HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    pomoc = HighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-        resultText += '</td>';
-        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">';
-
-        pomoc = HighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '<td>';
-
-        if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
-            resultText += 'do odvolání';
-        } else {
-            resultText += '<table class="no" border="0">';
-            resultText += '<tr><td>';
-                
-            if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
-                resultText += ZobrazDatum(info.dc_zacatek, 'short');
-            } else {
-                pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
-                resultText += pomoc.split('|')[0];
-                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-            }
-                
-            resultText += '</td>';
-            resultText += '<td>&nbsp;–&nbsp;</td>';
-
-            resultText += '<td>';
-            pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-            resultText += '</td></tr>';
-            resultText += '</table>';
-        }
-        resultText += '</td>';
-        resultText += '</tr>';
-
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ';
-
-        pomoc = HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '</tr>';
-
-        if (info && (info.hydroPredpoved)) {
-            resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
-
-            pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
-            resultText += pomoc.split('|')[0];
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            resultText += '</td>';
-            resultText += '</tr>';
-        }
-
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Doporučení:</b> ';
-
-        pomoc = HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '');
-        resultText += pomoc.split('|')[0];
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '</tr>';
-        resultText += '</table>';
+    if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
+        resultText += 'do odvolání';
     } else {
-        resultText += '<table class="tg" width="100%" border="1 ">';
-
-        resultText += '<tr>';
-        resultText += '<td width="20%">';
-        pomoc = SimpleHighlightDiff(info != null ? vyskyt : '', ref_info != null ? ref_vyskyt : '');
-        resultText += (info != null ? vyskyt : '');
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        pomoc = HighlightDiff(info != null ? JEVY_NAZVY[info.stupen_kod] : '', ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : '');
-        resultText += (info != null ? JEVY_NAZVY[info.stupen_kod] : '');
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        pomoc = HighlightDiff(info != null ? PrintVyska(info) : '', ref_info != null ? PrintVyska(ref_info) : '');
-        resultText += (info != null ? PrintVyska(info) : '') + '</td>';
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '<td width="20%" style="background-color: ' + PozadiColor(info) + ';">';
-
-        pomoc = HighlightDiff(info != null ? GetWarningColor(info) : '', ref_info != null ? GetWarningColor(ref_info) : '');
-        resultText += (info != null ? GetWarningColor(info) : '');
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '<td>';
-
-        if ((info != null && info.SVRS == '1') || (ref_info != null && ref_info.SVRS == '1')) {
-            resultText += 'do odvolání';
+        if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
+            resultText += ZobrazDatum(info.dc_zacatek, 'short');
         } else {
-            resultText += '<table class="no" border="0">';
-            resultText += '<tr><td>';
-
-            if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
-                resultText += (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '');
-            } else {
-                pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
-                resultText += (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '');
-                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-            }
-                
-            resultText += '</td>';
-            resultText += '<td>&nbsp;–&nbsp;</td>';
-            resultText += '<td>';
-            pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
-            resultText += (info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '');
+            pomoc = SimpleHighlightDiff(info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '', ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : '');
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-            resultText += '</td></tr>';
-            resultText += '</table>';
-        }
-        resultText += '</td>';
-        resultText += '</tr>';
-
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Popis:</b> ';
-
-        pomoc = HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '');
-        resultText += (info != null ? upr_info : '');
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '</tr>';
-
-        if (info && (info.hydroPredpoved)) {
-            resultText += '<tr>';
-            resultText += '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
-
-            pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
-            resultText += (info != null ? upr_hydro : '');
-            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-            resultText += '</td>';
-            resultText += '</tr>';
         }
 
-        resultText += '<tr>';
-        resultText += '<td colspan="3"><b>Doporučení:</b> ';
-
-        pomoc = HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '');
-        resultText += (info != null ? upr_doporuceni : '');
+        pomoc = SimpleHighlightDiff(info != null ?  ZobrazDatum(info.dc_konec, 'short', 1) : '', ref_info != null ?  ZobrazDatum(ref_info.dc_konec, 'short', 1) : '');
         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-        resultText += '</td>';
-        resultText += '</tr>';
-        resultText += '</table>';
     }
+
+    pomoc = HighlightDiff(info != null ? upr_info : '', ref_info != null ? ref_upr_info : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+    if (info && (info.hydroPredpoved)) {
+        pomoc = HighlightDiff(info != null ? upr_hydro : '', ref_info != null ? ref_upr_hydro : '');
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    }
+
+    pomoc = HighlightDiff(info != null ? upr_doporuceni : '', ref_info != null ? ref_upr_doporuceni : '');
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
     resultText = resultText + '|' + zmen;
     return resultText;
 }
+
+function SimpleHighlightDiff(newValue, oldValue) {
+    var resultText = '';
+    var zmena = 0;
+    var newText = newValue ? newValue.toString() : '';
+    var oldText = oldValue ? oldValue.toString() : '';
+
+    if (oldText == newText) {
+        resultText += oldText;
+    } else {
+        resultText += '<font color="red"><s>' + oldText + '</s></font>';
+        resultText += oldText && newText ? '<br/>' : '';
+        resultText += '<font color="green">' + newText + '</font>';
+        zmena = 1;
+    }
+
+    resultText = resultText + '|' + zmena;
+    return resultText;
+}
+
+function HighlightDiff(newValue, oldValue) {
+    var resultText = '';
+    var zmena = 0;
+
+    var newValueSplit = newValue != undefined ? newValue.split(' ') : [];
+    var oldValueSplit = oldValue != undefined ? oldValue.split(' ') : [];
+
+    if (newValueSplit.length == 0 || oldValueSplit.length == 0) {
+        resultText = SimpleHighlightDiff(newValue, oldValue);
+    } else {
+        var matrix = GetLCSLength(newValueSplit, oldValueSplit);
+
+        var i = newValueSplit.length;
+        var j = oldValueSplit.length;
+
+        var changeList = [];
+
+        while (i > 0 && j > 0) {
+            if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {
+                var changeValue = {};
+                changeValue.text = newValueSplit[i - 1];
+                changeValue.change = 0;
+
+                changeList.push(changeValue);
+
+                i--;
+                j--;
+            } else if (matrix[i][j - 1] > matrix[i - 1][j]) {
+                var changeValue = {};
+                changeValue.text = oldValueSplit[j - 1];
+                changeValue.change = -1;
+
+                changeList.push(changeValue);
+
+                j--;
+            } else {
+                var changeValue = {};
+                changeValue.text = newValueSplit[i - 1];
+                changeValue.change = 1;
+
+                changeList.push(changeValue);
+
+                i--;
+            }
+        }
+
+        while (i > 0) {
+            var changeValue = {};
+            changeValue.text = newValueSplit[i - 1];
+            changeValue.change = 1;
+
+            changeList.push(changeValue);
+
+            i--;
+        }
+
+        while (j > 0) {
+            var changeValue = {};
+            changeValue.text = oldValueSplit[j - 1];
+            changeValue.change = -1;
+
+            changeList.push(changeValue);
+
+            j--;
+        }
+
+        var lastChange = 0;
+
+        for (var index = changeList.length; index > 0; index--) {
+            if (lastChange != changeList[index - 1].change) {
+                if (index != changeList.length) {
+                    resultText += (lastChange == -1 ? '</s></font>' : '');
+                }
+
+                lastChange = changeList[index - 1].change;
+
+                if (lastChange == 1) {
+                    resultText += '<font color="green">';
+                    zmena = 1;
+                } else if (lastChange == -1) {
+                    resultText += '<font color="red"><s>';
+                    zmena = 1;
+                } else {
+                    resultText += '</s><font color="black">';
+                }
+            }
+
+            resultText += changeList[index - 1].text + ' ';
+        }
+
+        if (changeList.length > 0) {
+            if (lastChange == 1) {
+                resultText += '</font>';
+            } else if (lastChange == -1) {
+                resultText += '</s></font>';
+            } else {
+                resultText += '</font>';
+            }
+        }
+        resultText = resultText + '|' + zmena;
+    }
+
+    return resultText;
+}
+
+function GetLCSLength(newValueSplit, oldValueSplit) {
+    var matrix = new Array(newValueSplit.length + 1);
+
+    for (var i = 0; i < newValueSplit.length + 1; i++) {
+        matrix[i] = new Array(oldValueSplit.length + 1);
+
+        for (var j = 0; j < oldValueSplit.length + 1; j++) {
+            matrix[i][j] = 0;
+        }
+    }
+
+    for (var i = 1; i < (newValueSplit.length + 1); i++) {
+        for (var j = 1; j < (oldValueSplit.length + 1); j++) {
+            if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {
+                matrix[i][j] = matrix[i - 1][j - 1] + 1;
+            } else {
+                matrix[i][j] = Math.max(matrix[i][j - 1], matrix[i - 1][j]);
+            }
+        }
+    }
+
+    return matrix;
+}
+
+function PrintVyska(info) {
+
+    var vyskaText = '';
+
+    if (info && info.vyska) {
+        var vyska = info.vyska.substring(1, info.vyska.length - 1);
+        var vyskaSplit = vyska.split('-');
+
+        if (vyskaSplit.length == 2) {
+            if (vyskaSplit[0] && vyskaSplit[1]) {
+                vyskaText = '<br/>mezi ' + Math.round(vyskaSplit[0] * 0.3048) + ' a ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
+            } else if (vyskaSplit[0]) {
+                vyskaText = '<br/>nad ' + Math.round(vyskaSplit[0] * 0.3048) + ' m n.m.';
+            } else if (vyskaSplit[1]) {
+                vyskaText = '<br/>pod ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
+            }
+        } else {
+            vyskaText = '<br/>' + Math.round(vyska * 0.3048);
+        }
+    }
+
+    return vyskaText;
+}
+
+function GetWarningColor(info) {
+    var color = '';
+
+    if (info) {
+        switch (info.zavaznost_kod) {
+            case 'Moderate' : 
+                color = 'Nízký st. nebezpečí';
+            break;
+            case 'Severe' : 
+                color = 'Vysoký st. nebezpečí';
+            break;
+            case 'Extreme' : 
+                color = 'Extrémní st. nebezpečí';
+            break;
+            default :
+                color = '';
+            break;
+        }
+    }
+
+    return color;
+}
+
+function ZobrazDatum(datum, format, end) {
+    normDatum = Normalize(datum);
+    if (normDatum == 21000101010000) {
+        format_datum = 'do odvolání';
+    } else {
+        var normDatumRok = normDatum.substring(0,4);
+        var normDatumMesic = normDatum.substring(4,6);
+        var normDatumDen = normDatum.substring(6,8);
+        var normDatumHodina = normDatum.substring(8,10);
+        var normDatumMinuta = normDatum.substring(10,12);
+        var normDatumSekunda = normDatum.substring(12,14);
+
+        if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
+            var myNewDay = new Date(normDatumRok, normDatumMesic-1, normDatumDen-1);
+            var newNormDatum = Normalize(myNewDay);
+            normDatumRok = newNormDatum.substring(0,4);
+            normDatumMesic = newNormDatum.substring(4,6);
+            normDatumDen = newNormDatum.substring(6,8);
+            normDatumHodina = '24';
+        }
+
+        switch (format) {
+            case 'short' :
+                format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '. ' + normDatumHodina + ':' + normDatumMinuta;
+            break;
+            case 'long' :
+            default :
+                format_datum = Number(normDatumDen) + '.' + Number(normDatumMesic) + '.' + normDatumRok + ' ' + normDatumHodina + ':' + normDatumMinuta + ':' + normDatumSekunda;
+            break;
+        }
+    }
+
+    return format_datum;
+}
+
+var zobrazitVyhled = false;
+var zobrazitZmeny = true;
+
+if (omezitNaKraj != -1) {
+    var orpTmp = [];
+
+    for (var i = 0; i < orp.length; i++) {
+        if (omezitNaKraj == orp[i].kraj.id) {
+            orpTmp.push(orp[i]);
+        }
+    }
+
+    orp = orpTmp;
+}
+
+var resultText = '';
+var krajList = [];
+var ref_krajList = [];
+var info;
+var vytvoreni = vystraha.dc_odeslano;
+var pomoc = '';
+
+if (vystraha.info && vystraha.info.length > 0) {
+    krajList = PrepareInfo(orp, vystraha);
+}
+
+if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+    ref_krajList = PrepareInfo(orp, ref_vystraha);
+}
+
+var empty = true;
+var zmen = 0;
+
+if (vystraha.info && vystraha.info.length > 0) {
+    pomoc = PrintInfoList(krajList, ref_krajList);
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+} else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+    pomoc = PrintInfoList(krajList, ref_krajList);
+    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+}
+
+if (Number(zmen) != 0) {
+    resultText = 'V datech pro území ' + KRAJE_NAZVY[omezitNaKraj] + ' jsou změny, budou vygenerovány e-maily a SMS.';
+} else {
+    resultText = 'V datech pro území ' + KRAJE_NAZVY[omezitNaKraj] + ' nejsou žádné změny, nedojde k odeslání žádných zpráv.';
+}
+
+return resultText;

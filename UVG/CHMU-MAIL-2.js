@@ -1,4 +1,4 @@
-// Verze 57
+// Verze 58
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
@@ -24,7 +24,7 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-var KRAJE_KODY  = { "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
+var KRAJE_KODY  = { "-1": "ČR", "19": "PHA", "27": "SČK", "35": "JČK", "43": "PLK", "51": "KVK", "60": "ULK", "78": "LIK", "86": "KHK", "94": "PAK", "108": "VYK", "116": "JMK", "124": "OLK", "132": "MSK", "141": "ZLK"};
 
 var JEVY_NAZVY = {
     "I.1" : "Vysoké teploty",
