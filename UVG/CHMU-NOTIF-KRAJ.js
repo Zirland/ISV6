@@ -189,7 +189,7 @@ function PrepareInfo(orp, vystraha) {
         } else {
             podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         }
-        
+
         if (podminka) {
             infoListFilter.push(infoList[x]);
         }
@@ -574,7 +574,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
                 ref_info = ref_krajList[k].info[ri];
-                
+
                 if (first) {
                     first = false;
                 }
@@ -893,13 +893,13 @@ function GetWarningColor(info) {
 
     if (info) {
         switch (info.zavaznost_kod) {
-            case 'Moderate' : 
+            case 'Moderate' :
                 color = 'Nízký st. nebezpečí';
             break;
-            case 'Severe' : 
+            case 'Severe' :
                 color = 'Vysoký st. nebezpečí';
             break;
-            case 'Extreme' : 
+            case 'Extreme' :
                 color = 'Extrémní st. nebezpečí';
             break;
             default :

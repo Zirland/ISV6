@@ -27,7 +27,7 @@ var KRAJE_NAZVY = {
     "141": "Zlínský kraj"
 };
 
-#import "CHMU-EMAIL-KRAJ"; 
+#import "CHMU-EMAIL-KRAJ";
 
 if (resultText !== 'undefined' && resultText) {
     print(resultText);

@@ -440,7 +440,7 @@ function PrepareInfo(orp, vystraha) {
         } else {
             podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         }
-        
+
         if (podminka) {
             infoListFilter.push(infoList[x]);
         }
@@ -763,7 +763,7 @@ function PrintInfoList(krajList, ref_krajList) {
 
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
                 ref_info = ref_krajList[k].info[ri];
-                
+
                 if (first) {
                     first = false;
                 }
@@ -820,13 +820,13 @@ function GetWarningColor(info) {
 
     if (info) {
         switch (info.zavaznost_kod) {
-            case 'Moderate' : 
+            case 'Moderate' :
                 color = 'Nízký st. nebezpečí';
             break;
-            case 'Severe' : 
+            case 'Severe' :
                 color = 'Vysoký st. nebezpečí';
             break;
-            case 'Extreme' : 
+            case 'Extreme' :
                 color = 'Extrémní st. nebezpečí';
             break;
             default :
@@ -843,13 +843,13 @@ function PozadiColor(info) {
 
     if (info) {
         switch (info.zavaznost_kod) {
-            case 'Moderate' : 
+            case 'Moderate' :
                 pozadi = '#ff0';
             break;
-            case 'Severe' : 
+            case 'Severe' :
                 pozadi = '#ffa500';
             break;
-            case 'Extreme' : 
+            case 'Extreme' :
                 pozadi = '#f00';
             break;
             default :
@@ -1029,12 +1029,12 @@ function PrepareInfo2(vystraha) {
         } else {
             podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         }
-        
+
         if (podminka) {
             infoListFilter.push(infoList[x]);
         }
     }
-    
+
     infoList = infoListFilter;
 
     infoList = infoList.sort(function (a, b) {
@@ -1208,7 +1208,7 @@ function PrintInfo2(info, ref_info) {
         uzemi_seznam = pole_uzemi[0];
         uzemi_count = pole_uzemi[1];
     }
-    
+
     if (ref_info) {
         ref_nactiUzemi = JevUzemi(ref_info);
         ref_pole_uzemi = ref_nactiUzemi.split('|');
@@ -1284,7 +1284,7 @@ function JevUzemi(info) {
         if (orp_pole.indexOf('19') != -1) { // Praha
             uzemiOkresu.push('3100');
             Remove(orp_pole, '19');
-        } 
+        }
         if (uzemiOkresu.indexOf('3100') != -1) { // Hl. m. Praha
             uzemiKraje.push('19');
             Remove(uzemiOkresu, '3100');
@@ -1294,7 +1294,7 @@ function JevUzemi(info) {
             Remove(orp_pole, '27');
             Remove(orp_pole, '35');
             Remove(orp_pole, '43');
-        } 
+        }
         if (orp_pole.indexOf('51') != -1 && orp_pole.indexOf('60') != -1) { // Beroun
             uzemiOkresu.push('3202');
             Remove(orp_pole, '51');

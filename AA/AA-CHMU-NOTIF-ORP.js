@@ -1,9 +1,9 @@
 //!JS
 // Verze 58
 
-var omezitNaOrp = 337; 
+var omezitNaOrp = 337;
 
-#import "CHMU-NOTIF-ORP"; 
+#import "CHMU-NOTIF-ORP";
 
 if (resultText != '') {
     resultText += "\n";

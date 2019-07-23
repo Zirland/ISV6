@@ -1,11 +1,11 @@
 //!JS
 // Verze 58
 
-var omezitNaOrp = 1945; 
+var omezitNaOrp = 1945;
 var detailni = 1;
-var oddelovac = '\n'; 
+var oddelovac = '\n';
 
-#import "CHMU-SMS-ORP"; 
+#import "CHMU-SMS-ORP";
 
 if (vystupText != '') {
     vystupText += "\n";

@@ -300,7 +300,7 @@ if (vystraha.info) {
 if (infoList) {
     var poleJevy = [];
     for (var i = 0; i < infoList.length; i++) {
-        if (infoList[i].stupen_kod != 'OUTLOOK') { 
+        if (infoList[i].stupen_kod != 'OUTLOOK') {
             var pomKod = '';
             if (infoList[i].jistota_kod == 'Observed') {
                 pomKod += '0';
@@ -330,7 +330,7 @@ if (infoList) {
                 for (var j = 0; j < infoList[i].kraj.length; j++) {
                     if (found) {
                         jevKrajeList.push(infoList[i].kraj[j].UID);
-                        
+
                         var OrpList = infoList[i].orp_list;
                         var OrpListArr = OrpList.split(',');
                         for (var k = 0; k < OrpListArr.length; k++) {
@@ -340,7 +340,7 @@ if (infoList) {
                                 }
                             }
                         }
-                        
+
                         var warn_type = 'SVRS';
                         if (infoList[i].SIVS == '1') {
                             warn_type = 'SIVS';
@@ -472,7 +472,7 @@ if (infoList) {
             case 'Test' :
                 var uvod = 'Testovací zpráva ';
             break;
-            default : 
+            default :
                 var uvod = 'Výstraha ';
             break;
         }
