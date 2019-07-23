@@ -59,7 +59,7 @@ function PrepareInfo2(vystraha) {
         } else {
             podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         }
-        
+
         if (podminka) {
             infoListFilter.push(infoList[x]);
         }
@@ -238,7 +238,7 @@ function PrintInfo2(info, ref_info) {
         uzemi_seznam = pole_uzemi[0];
         uzemi_count = pole_uzemi[1];
     }
-    
+
     if (ref_info) {
         ref_nactiUzemi = JevUzemi(ref_info);
         ref_pole_uzemi = ref_nactiUzemi.split('|');
@@ -314,7 +314,7 @@ function JevUzemi(info) {
         if (orp_pole.indexOf('19') != -1) { // Praha
             uzemiOkresu.push('3100');
             Remove(orp_pole, '19');
-        } 
+        }
         if (uzemiOkresu.indexOf('3100') != -1) { // Hl. m. Praha
             uzemiKraje.push('19');
             Remove(uzemiOkresu, '3100');
@@ -324,7 +324,7 @@ function JevUzemi(info) {
             Remove(orp_pole, '27');
             Remove(orp_pole, '35');
             Remove(orp_pole, '43');
-        } 
+        }
         if (orp_pole.indexOf('51') != -1 && orp_pole.indexOf('60') != -1) { // Beroun
             uzemiOkresu.push('3202');
             Remove(orp_pole, '51');
@@ -947,9 +947,7 @@ function JevUzemi(info) {
         var uzemiTmp = [];
 
         for (var i = 0; i < uzemiList.length; i++) {
-            // Pokud se jedná o hlavní kraj
             if (omezitNaKraj == uzemiList[i].kraj) {
-                // Dáme na začátek seznamu
                 uzemiTmp.push(uzemiList[i]);
             }
         }

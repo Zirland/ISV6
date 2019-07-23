@@ -49,7 +49,7 @@ if (vystraha.info) {
 if (infoList) {
     var poleJevy = [];
     for (var i = 0; i < infoList.length; i++) {
-        if (infoList[i].stupen_kod != 'OUTLOOK') { 
+        if (infoList[i].stupen_kod != 'OUTLOOK') {
             var pomKod = '';
             if (infoList[i].jistota_kod == 'Observed') {
                 pomKod += '0';
@@ -221,7 +221,7 @@ if (infoList) {
             case 'Test' :
                 var uvod = 'Testovací zpráva ';
             break;
-            default : 
+            default :
                 var uvod = 'Výstraha ';
             break;
         }
@@ -291,7 +291,7 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
 if (ref_infoList) {
     var poleJevy2 = [];
     for (var i = 0; i < ref_infoList.length; i++) {
-        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)) { 
+        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)) {
             var pomKod2 = '';
             if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKod2 += '0';

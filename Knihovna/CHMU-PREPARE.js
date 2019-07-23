@@ -54,7 +54,7 @@ function PrepareInfo(orp, vystraha) {
         } else {
             podminka = (infoList[x].jev_kod != 'OUTLOOK' && !UkoncenyJev(infoList[x].dc_konec, vytvoreni));
         }
-        
+
         if (podminka) {
             infoListFilter.push(infoList[x]);
         }
@@ -389,7 +389,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
                 ref_info = ref_krajList[k].info[ri];
-                
+
                 if (first) {
                     first = false;
                     (headers == 0 ? '' : resultText += '</div><br/><div><b>' + KRAJE_NAZVY[ref_krajList[k].id] + '</b>');
@@ -452,13 +452,13 @@ function GetWarningColor(info) {
 
     if (info) {
         switch (info.zavaznost_kod) {
-            case 'Moderate' : 
+            case 'Moderate' :
                 color = 'Nízký st. nebezpečí';
             break;
-            case 'Severe' : 
+            case 'Severe' :
                 color = 'Vysoký st. nebezpečí';
             break;
-            case 'Extreme' : 
+            case 'Extreme' :
                 color = 'Extrémní st. nebezpečí';
             break;
             default :
@@ -475,13 +475,13 @@ function PozadiColor(info) {
 
     if (info) {
         switch (info.zavaznost_kod) {
-            case 'Moderate' : 
+            case 'Moderate' :
                 pozadi = '#ff0';
             break;
-            case 'Severe' : 
+            case 'Severe' :
                 pozadi = '#ffa500';
             break;
-            case 'Extreme' : 
+            case 'Extreme' :
                 pozadi = '#f00';
             break;
             default :
@@ -598,7 +598,7 @@ function PrintInfo(info, ref_info) {
         } else {
             resultText += '<table class="no" border="0">';
             resultText += '<tr><td>';
-                
+
             if (info && ref_info && !UkoncenyJev(ref_info.dc_konec, vytvoreni) && info.nalehavost_kod == 'Immediate') {
                 resultText += ZobrazDatum(info.dc_zacatek, 'short');
             } else {
@@ -606,7 +606,7 @@ function PrintInfo(info, ref_info) {
                 resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
             }
-                
+
             resultText += '</td>';
             resultText += '<td>&nbsp;–&nbsp;</td>';
 
@@ -692,7 +692,7 @@ function PrintInfo(info, ref_info) {
                 resultText += (info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '');
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
             }
-                
+
             resultText += '</td>';
             resultText += '<td>&nbsp;–&nbsp;</td>';
             resultText += '<td>';

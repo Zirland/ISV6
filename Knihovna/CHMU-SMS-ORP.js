@@ -50,7 +50,7 @@ if (infoList) {
     var poleJevy = [];
     var platne = [];
     for (var i = 0; i < infoList.length; i++) {
-        if (infoList[i].stupen_kod != 'OUTLOOK' && (infoList[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) { 
+        if (infoList[i].stupen_kod != 'OUTLOOK' && (infoList[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) {
             var pomKod = '';
             if (infoList[i].jistota_kod == 'Observed') {
                 pomKod += '0';
@@ -138,7 +138,7 @@ if (infoList) {
             case 'Test' :
                 var uvod = 'Testovací zpráva ';
             break;
-            default : 
+            default :
                 var uvod = 'Výstraha ';
             break;
         }
@@ -206,7 +206,7 @@ if (ref_infoList) {
     var poleJevy2 = [];
     var platne2 = [];
     for (var i = 0; i < ref_infoList.length; i++) {
-        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano) && (ref_infoList[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) { 
+        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano) && (ref_infoList[i].orp_list.toString().split(',').indexOf(omezitNaOrp.toString()) > -1)) {
             var pomKod2 = '';
             if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKod2 += '0';
@@ -248,7 +248,7 @@ if (ref_infoList) {
 
             var jevEndy2 = Math.max.apply(null, jevEnd2);
             var jevKonec2 = jevEndy2.toString();
-            
+
             var zahajeni2 = ZobrazDatumSMS(jevZacatek2);
             var ukonceni2 = ZobrazDatumSMS(jevKonec2, 1);
 
