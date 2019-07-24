@@ -241,17 +241,17 @@ function PrintInfo2(info, ref_info) {
     }
 
     if (info) {
-        nactiUzemi = JevUzemi(info);
-        pole_uzemi = nactiUzemi.split('|');
-        uzemi_seznam = pole_uzemi[0];
-        uzemi_count = pole_uzemi[1];
+        var nactiUzemi = JevUzemi(info);
+        var pole_uzemi = nactiUzemi.split('|');
+        var uzemi_seznam = pole_uzemi[0];
+        var uzemi_count = pole_uzemi[1];
     }
 
     if (ref_info) {
-        ref_nactiUzemi = JevUzemi(ref_info);
-        ref_pole_uzemi = ref_nactiUzemi.split('|');
-        ref_uzemi_seznam = ref_pole_uzemi[0];
-        ref_uzemi_count = ref_pole_uzemi[1];
+        var ref_nactiUzemi = JevUzemi(ref_info);
+        var ref_pole_uzemi = ref_nactiUzemi.split('|');
+        var ref_uzemi_seznam = ref_pole_uzemi[0];
+        var ref_uzemi_count = ref_pole_uzemi[1];
     }
 
     if (uzemi_count > 0) {
@@ -341,8 +341,8 @@ function JevUzemi(info) {
         return a - b;
     });
 
-    uzemiKraje = [];
-    uzemiOkresu = [];
+    var uzemiKraje = [];
+    var uzemiOkresu = [];
 
     if (slucovat) {
         if (orp_pole.indexOf('19') != -1) {
@@ -1428,7 +1428,7 @@ var ref_krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
 
 if (vystraha.info && vystraha.info.length > 0) {
-    infoList = PrepareInfo2(vystraha);
+    var infoList = PrepareInfo2(vystraha);
     krajList = PrepareKraje(orp, infoList);
 }
 
@@ -1471,7 +1471,7 @@ if (vystraha.info && vystraha.info.length > 0) {
         resultText += '<hr/>';
     }
 
-    for (x = 0; x < infoList.length; x++) {
+    for (var x = 0; x < infoList.length; x++) {
         var info = infoList[x];
         resultText += PrintInfo2(info);
         empty = false;

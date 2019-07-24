@@ -633,9 +633,9 @@ function PrintInfoList(krajList, ref_krajList) {
         zpracovanyInfoStupen = [];
         ref_zpracovanyInfoStupen = [];
         first = true;
-        opakovanyKraj = [];
-        opakovanyOkres = [];
-        opakovanyOrp = [];
+        var opakovanyKraj = [];
+        var opakovanyOkres = [];
+        var opakovanyOrp = [];
 
         if (ref_krajList.length > 0) {
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
@@ -1643,17 +1643,17 @@ function PrintInfo2(info, ref_info) {
     }
 
     if (info) {
-        nactiUzemi = JevUzemi(info);
-        pole_uzemi = nactiUzemi.split('|');
-        uzemi_seznam = pole_uzemi[0];
-        uzemi_count = pole_uzemi[1];
+        var nactiUzemi = JevUzemi(info);
+        var pole_uzemi = nactiUzemi.split('|');
+        var uzemi_seznam = pole_uzemi[0];
+        var uzemi_count = pole_uzemi[1];
     }
 
     if (ref_info) {
-        ref_nactiUzemi = JevUzemi(ref_info);
-        ref_pole_uzemi = ref_nactiUzemi.split('|');
-        ref_uzemi_seznam = ref_pole_uzemi[0];
-        ref_uzemi_count = ref_pole_uzemi[1];
+        var ref_nactiUzemi = JevUzemi(ref_info);
+        var ref_pole_uzemi = ref_nactiUzemi.split('|');
+        var ref_uzemi_seznam = ref_pole_uzemi[0];
+        var ref_uzemi_count = ref_pole_uzemi[1];
     }
 
     if (uzemi_count > 0) {
@@ -1743,8 +1743,8 @@ function JevUzemi(info) {
         return a - b;
     });
 
-    uzemiKraje = [];
-    uzemiOkresu = [];
+    var uzemiKraje = [];
+    var uzemiOkresu = [];
 
     if (slucovat) {
         if (orp_pole.indexOf('19') != -1) {
@@ -2873,7 +2873,7 @@ var krajList = [];
 var ref_krajList = [];
 
 if (vystraha.info && vystraha.info.length > 0) {
-    infoList = PrepareInfo2(vystraha);
+    var infoList = PrepareInfo2(vystraha);
     krajList = PrepareKraje(orp, infoList);
 }
 
@@ -2978,7 +2978,7 @@ var found = false;
 if (vystraha.ucel == 'Actual') {
     for (var k = 0; k < krajList.length && found == false; k++) {
         for (var i = 0; i < krajList[k].info.length && found == false; i++) {
-            info = krajList[k].info[i];
+            var info = krajList[k].info[i];
 
             if (info.jev_kod && info.jev_kod != 'OUTLOOK') {
                 found = true;
@@ -3104,7 +3104,7 @@ switch (vystraha.ucel) {
     case 'Exercise':
     case 'System':
     case 'Test':
-        header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
+        var header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
         if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM';
         }
@@ -3117,7 +3117,7 @@ switch (vystraha.ucel) {
         break;
     case 'Actual':
     default:
-        header = 'VÝSTRAHA ČHMÚ';
+        var header = 'VÝSTRAHA ČHMÚ';
         if (svrs && !sivs && !hpps) {
             header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU';
         }
@@ -3183,7 +3183,7 @@ if (vystraha.info && vystraha.info.length > 0) {
         resultText += '<hr/>';
     }
 
-    for (x = 0; x < infoList.length; x++) {
+    for (var x = 0; x < infoList.length; x++) {
         var info = infoList[x];
         resultText += PrintInfo2(info);
         empty = false;
