@@ -1,13 +1,12 @@
 //!JS
 //Verze 58
 
-var hlavniKraj = -1;
-var zobrazovatVsechnyKraje = true;
-var razeniPodleNazvu = false;
+var mojeUzemi = ['779', '787', '795'];
+var nazevUzemi = 'okres Jablonec nad Nisou';
+
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
 var pouzeZmeny = true;
-var distrSeznamNahore = false;
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
@@ -27,7 +26,7 @@ var KRAJE_NAZVY = {
     '141': 'Zlínský kraj',
 };
 
-#import "CHMU-EMAIL-KRAJ";
+#import "CHMU-EMAIL-OKRES";
 
 if (resultText !== 'undefined' && resultText) {
     print(resultText);

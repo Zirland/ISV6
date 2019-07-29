@@ -1,4 +1,4 @@
-// Verze 58
+//Verze 58
 
 function SimpleHighlightDiff(newValue, oldValue) {
     var resultText = '';
@@ -90,7 +90,7 @@ function HighlightDiff(newValue, oldValue) {
         for (var index = changeList.length; index > 0; index--) {
             if (lastChange != changeList[index - 1].change) {
                 if (index != changeList.length) {
-                    resultText += (lastChange == -1 ? '</s></font>' : '');
+                    resultText += lastChange == -1 ? '</s></font>' : '';
                 }
 
                 lastChange = changeList[index - 1].change;
@@ -135,8 +135,8 @@ function GetLCSLength(newValueSplit, oldValueSplit) {
         }
     }
 
-    for (var i = 1; i < (newValueSplit.length + 1); i++) {
-        for (var j = 1; j < (oldValueSplit.length + 1); j++) {
+    for (var i = 1; i < newValueSplit.length + 1; i++) {
+        for (var j = 1; j < oldValueSplit.length + 1; j++) {
             if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {
                 matrix[i][j] = matrix[i - 1][j - 1] + 1;
             } else {
