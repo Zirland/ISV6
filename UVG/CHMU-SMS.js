@@ -372,7 +372,7 @@ if (infoList) {
                         jevKrajeList.push(infoList[i].kraj[j].UID);
 
                         var OrpList = infoList[i].orp_list;
-                        var OrpListArr = OrpList.split(',');
+                        var OrpListArr = OrpList.toString().split(',');
                         for (var k = 0; k < OrpListArr.length; k++) {
                             for (var l = 0; l < orp.length; l++) {
                                 if (
@@ -635,7 +635,7 @@ if (ref_infoList) {
                         jevKrajeList2.push(ref_infoList[i].kraj[j].UID);
 
                         var OrpList2 = ref_infoList[i].orp_list;
-                        var OrpListArr2 = OrpList2.split(',');
+                        var OrpListArr2 = OrpList2.toString().split(',');
                         for (var k = 0; k < OrpListArr2.length; k++) {
                             for (var l = 0; l < orp.length; l++) {
                                 if (
