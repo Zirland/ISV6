@@ -314,14 +314,7 @@ var vystupText = '';
 if (vystraha.info) {
     var infoList = [];
     for (var l = 0; l < vystraha.info.length; l++) {
-        for (var j = 0; j < vystraha.info[l].kraj.length; j++) {
-            if (
-                vystraha.info[l].kraj[j].UID == omezitNaKraj ||
-                omezitNaKraj == -1
-            ) {
-                infoList.push(vystraha.info[l]);
-            }
-        }
+        infoList.push(vystraha.info[l]);
     }
 
     infoList = infoList.sort(function(a, b) {
@@ -585,14 +578,7 @@ var sms2 = '';
 if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
     var ref_infoList = [];
     for (var l = 0; l < ref_vystraha.info.length; l++) {
-        for (var j = 0; j < ref_vystraha.info[l].kraj.length; j++) {
-            if (
-                ref_vystraha.info[l].kraj[j].UID == omezitNaKraj ||
-                omezitNaKraj == -1
-            ) {
-                ref_infoList.push(ref_vystraha.info[l]);
-            }
-        }
+        ref_infoList.push(ref_vystraha.info[l]);
     }
 
     ref_infoList = ref_infoList.sort(function(a, b) {
