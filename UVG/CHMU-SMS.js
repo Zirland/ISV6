@@ -590,7 +590,7 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
                 ref_vystraha.info[l].kraj[j].UID == omezitNaKraj ||
                 omezitNaKraj == -1
             ) {
-                reF_infoList.push(ref_vystraha.info[l]);
+                ref_infoList.push(ref_vystraha.info[l]);
             }
         }
     }

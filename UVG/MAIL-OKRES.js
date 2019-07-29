@@ -1904,4 +1904,4 @@ if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
     resultText = '';
 }
 
-console.log(resultText);
+return resultText;
