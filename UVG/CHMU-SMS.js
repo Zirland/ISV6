@@ -162,24 +162,24 @@ function Normalize(datum) {
     }
     var datumString = new Date(datum);
 
-    datumDen = datumString.getDate();
+    var datumDen = datumString.getDate();
     if (datumDen < 10) {
         datumDen = '0' + datumDen;
     }
-    datumMesic = datumString.getMonth() + 1;
+    var datumMesic = datumString.getMonth() + 1;
     if (datumMesic < 10) {
         datumMesic = '0' + datumMesic;
     }
-    datumRok = datumString.getFullYear();
-    datumHodiny = datumString.getHours();
+    var datumRok = datumString.getFullYear();
+    var datumHodiny = datumString.getHours();
     if (datumHodiny < 10) {
         datumHodiny = '0' + datumHodiny;
     }
-    datumMinuty = datumString.getMinutes();
+    var datumMinuty = datumString.getMinutes();
     if (datumMinuty < 10) {
         datumMinuty = '0' + datumMinuty;
     }
-    datumSekundy = datumString.getSeconds();
+    var datumSekundy = datumString.getSeconds();
     if (datumSekundy < 10) {
         datumSekundy = '0' + datumSekundy;
     }
@@ -221,8 +221,8 @@ function UkoncenyJev(konecJev, casZprava) {
     myEndTime.setMinutes(myEndTime.getMinutes() - 30);
     konecJev_format = Normalize(myEndTime);
 
-    konecJev_format_num = Number(konecJev_format);
-    casZprava_format_num = Number(casZprava_format);
+    var konecJev_format_num = Number(konecJev_format);
+    var casZprava_format_num = Number(casZprava_format);
 
     if (konecJev_format_num < casZprava_format_num) {
         return true;
@@ -232,6 +232,7 @@ function UkoncenyJev(konecJev, casZprava) {
 }
 
 function ZobrazDatum(datum, end) {
+    var format_datum = '';
     if (datum == 21000101010000) {
         format_datum = 'odvolání';
     } else {
@@ -242,7 +243,6 @@ function ZobrazDatum(datum, end) {
         var normDatumDen = normDatum.substring(6, 8);
         var normDatumHodina = normDatum.substring(8, 10);
         var normDatumMinuta = normDatum.substring(10, 12);
-        var normDatumSekunda = normDatum.substring(12, 14);
 
         if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
             var myNewDay = new Date(

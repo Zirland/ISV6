@@ -263,7 +263,7 @@ if (ref_infoList) {
             if (platne2[i].jistota_kod == 'Observed') {
                 pomKodIvnj2 = '0';
             }
-            if (poleJevy2[h] == pomKodIvnj + platne2[i].stupen_kod) {
+            if (poleJevy2[h] == pomKodIvnj2 + platne2[i].stupen_kod) {
                 var nyni = Zaokrouhli(vystraha.dc_odeslano);
                 var zacatek2 = Normalize(platne2[i].dc_zacatek);
                 if (zacatek2 < nyni) {

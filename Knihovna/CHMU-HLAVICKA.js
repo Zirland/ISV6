@@ -80,7 +80,7 @@ var found = false;
 if (vystraha.ucel == 'Actual') {
     for (var k = 0; k < krajList.length && found == false; k++) {
         for (var i = 0; i < krajList[k].info.length && found == false; i++) {
-            info = krajList[k].info[i];
+            var info = krajList[k].info[i];
 
             if (info.jev_kod && info.jev_kod != 'OUTLOOK') {
                 found = true;
@@ -206,7 +206,7 @@ switch (vystraha.ucel) {
     case 'Exercise':
     case 'System':
     case 'Test':
-        header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
+        var header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
         if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM';
         }
@@ -219,7 +219,7 @@ switch (vystraha.ucel) {
         break;
     case 'Actual':
     default:
-        header = 'VÝSTRAHA ČHMÚ';
+        var header = 'VÝSTRAHA ČHMÚ';
         if (svrs && !sivs && !hpps) {
             header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU';
         }
@@ -237,7 +237,7 @@ switch (vystraha.ucel) {
 
 resultText += '<div class="header">' + header + '</div>';
 resultText += '<br/>Zpráva č. ' + vystraha.id.substring(vystraha.id.length - 6);
-resultText += '<br/>Odesláno: ' + ZobrazDatum(vystraha.dc_odeslano, 'long');
+resultText += '<br/>Odesláno: ' + ZobrazDatum(vytvoreni, 'long');
 
 if (vystraha.reference) {
     var referenceSplit = vystraha.reference.split(',');

@@ -195,9 +195,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
         zpracovanyInfoStupen = [];
         ref_zpracovanyInfoStupen = [];
         first = true;
-        opakovanyKraj = [];
-        opakovanyOkres = [];
-        opakovanyOrp = [];
+        var opakovanyKraj = [];
+        var opakovanyOkres = [];
+        var opakovanyOrp = [];
 
         if (ref_krajList.length > 0) {
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {

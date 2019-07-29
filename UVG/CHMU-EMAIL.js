@@ -159,6 +159,139 @@ var JEVY_NAZVY = {
     '0REG.NO2': 'Regulace NO2'
 };
 
+function Normalize(datum) {
+    if (!datum) {
+        datum = '1.1.2100 01:00:00';
+    }
+    var datumString = new Date(datum);
+
+    var datumDen = datumString.getDate();
+    if (datumDen < 10) {
+        datumDen = '0' + datumDen;
+    }
+    var datumMesic = datumString.getMonth() + 1;
+    if (datumMesic < 10) {
+        datumMesic = '0' + datumMesic;
+    }
+    var datumRok = datumString.getFullYear();
+    var datumHodiny = datumString.getHours();
+    if (datumHodiny < 10) {
+        datumHodiny = '0' + datumHodiny;
+    }
+    var datumMinuty = datumString.getMinutes();
+    if (datumMinuty < 10) {
+        datumMinuty = '0' + datumMinuty;
+    }
+    var datumSekundy = datumString.getSeconds();
+    if (datumSekundy < 10) {
+        datumSekundy = '0' + datumSekundy;
+    }
+
+    datum =
+        datumRok.toString() +
+        datumMesic.toString() +
+        datumDen.toString() +
+        datumHodiny.toString() +
+        datumMinuty.toString() +
+        datumSekundy.toString();
+
+    return datum;
+}
+
+function UkoncenyJev(konecJev, casZprava) {
+    if (!konecJev) {
+        konecJev = '1.1.2100 01:00:00';
+    }
+
+    var konecJev_format = Normalize(konecJev);
+    var casZprava_format = Normalize(casZprava);
+
+    var kjYear = konecJev_format.substring(0, 4);
+    var kjMonth = konecJev_format.substring(4, 6);
+    var kjDay = konecJev_format.substring(6, 8);
+    var kjHour = konecJev_format.substring(8, 10);
+    var kjMinute = konecJev_format.substring(10, 12);
+    var kjSecond = konecJev_format.substring(12, 14);
+    var myEndTime = new Date(
+        kjYear,
+        kjMonth - 1,
+        kjDay,
+        kjHour,
+        kjMinute,
+        kjSecond
+    );
+
+    myEndTime.setMinutes(myEndTime.getMinutes() - 30);
+    konecJev_format = Normalize(myEndTime);
+
+    var konecJev_format_num = Number(konecJev_format);
+    var casZprava_format_num = Number(casZprava_format);
+
+    if (konecJev_format_num < casZprava_format_num) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function ZobrazDatum(datum, format, end) {
+    var normDatum = Normalize(datum);
+    var format_datum = '';
+    if (normDatum == 21000101010000) {
+        format_datum = 'do odvolání';
+    } else {
+        var normDatumRok = normDatum.substring(0, 4);
+        var normDatumMesic = normDatum.substring(4, 6);
+        var normDatumDen = normDatum.substring(6, 8);
+        var normDatumHodina = normDatum.substring(8, 10);
+        var normDatumMinuta = normDatum.substring(10, 12);
+        var normDatumSekunda = normDatum.substring(12, 14);
+
+        if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
+            var myNewDay = new Date(
+                normDatumRok,
+                normDatumMesic - 1,
+                normDatumDen - 1
+            );
+            var newNormDatum = Normalize(myNewDay);
+            normDatumRok = newNormDatum.substring(0, 4);
+            normDatumMesic = newNormDatum.substring(4, 6);
+            normDatumDen = newNormDatum.substring(6, 8);
+            normDatumHodina = '24';
+        }
+
+        switch (format) {
+            case 'short':
+                format_datum =
+                    Number(normDatumDen) +
+                    '.' +
+                    Number(normDatumMesic) +
+                    '. ' +
+                    normDatumHodina +
+                    ':' +
+                    normDatumMinuta;
+                break;
+            case 'long':
+            default:
+                format_datum =
+                    Number(normDatumDen) +
+                    '.' +
+                    Number(normDatumMesic) +
+                    '.' +
+                    normDatumRok +
+                    ' ' +
+                    normDatumHodina +
+                    ':' +
+                    normDatumMinuta +
+                    ':' +
+                    normDatumSekunda;
+                break;
+        }
+    }
+
+    return format_datum;
+}
+
 function SimpleHighlightDiff(newValue, oldValue) {
     var resultText = '';
     var zmena = 0;
@@ -305,138 +438,6 @@ function GetLCSLength(newValueSplit, oldValueSplit) {
     }
 
     return matrix;
-}
-
-function Normalize(datum) {
-    if (!datum) {
-        datum = '1.1.2100 01:00:00';
-    }
-    var datumString = new Date(datum);
-
-    datumDen = datumString.getDate();
-    if (datumDen < 10) {
-        datumDen = '0' + datumDen;
-    }
-    datumMesic = datumString.getMonth() + 1;
-    if (datumMesic < 10) {
-        datumMesic = '0' + datumMesic;
-    }
-    datumRok = datumString.getFullYear();
-    datumHodiny = datumString.getHours();
-    if (datumHodiny < 10) {
-        datumHodiny = '0' + datumHodiny;
-    }
-    datumMinuty = datumString.getMinutes();
-    if (datumMinuty < 10) {
-        datumMinuty = '0' + datumMinuty;
-    }
-    datumSekundy = datumString.getSeconds();
-    if (datumSekundy < 10) {
-        datumSekundy = '0' + datumSekundy;
-    }
-
-    datum =
-        datumRok.toString() +
-        datumMesic.toString() +
-        datumDen.toString() +
-        datumHodiny.toString() +
-        datumMinuty.toString() +
-        datumSekundy.toString();
-
-    return datum;
-}
-
-function UkoncenyJev(konecJev, casZprava) {
-    if (!konecJev) {
-        konecJev = '1.1.2100 01:00:00';
-    }
-
-    var konecJev_format = Normalize(konecJev);
-    var casZprava_format = Normalize(casZprava);
-
-    var kjYear = konecJev_format.substring(0, 4);
-    var kjMonth = konecJev_format.substring(4, 6);
-    var kjDay = konecJev_format.substring(6, 8);
-    var kjHour = konecJev_format.substring(8, 10);
-    var kjMinute = konecJev_format.substring(10, 12);
-    var kjSecond = konecJev_format.substring(12, 14);
-    var myEndTime = new Date(
-        kjYear,
-        kjMonth - 1,
-        kjDay,
-        kjHour,
-        kjMinute,
-        kjSecond
-    );
-
-    myEndTime.setMinutes(myEndTime.getMinutes() - 30);
-    konecJev_format = Normalize(myEndTime);
-
-    konecJev_format_num = Number(konecJev_format);
-    casZprava_format_num = Number(casZprava_format);
-
-    if (konecJev_format_num < casZprava_format_num) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function ZobrazDatum(datum, format, end) {
-    normDatum = Normalize(datum);
-    if (normDatum == 21000101010000) {
-        format_datum = 'do odvolání';
-    } else {
-        var normDatumRok = normDatum.substring(0, 4);
-        var normDatumMesic = normDatum.substring(4, 6);
-        var normDatumDen = normDatum.substring(6, 8);
-        var normDatumHodina = normDatum.substring(8, 10);
-        var normDatumMinuta = normDatum.substring(10, 12);
-        var normDatumSekunda = normDatum.substring(12, 14);
-
-        if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
-            var myNewDay = new Date(
-                normDatumRok,
-                normDatumMesic - 1,
-                normDatumDen - 1
-            );
-            var newNormDatum = Normalize(myNewDay);
-            normDatumRok = newNormDatum.substring(0, 4);
-            normDatumMesic = newNormDatum.substring(4, 6);
-            normDatumDen = newNormDatum.substring(6, 8);
-            normDatumHodina = '24';
-        }
-
-        switch (format) {
-            case 'short':
-                format_datum =
-                    Number(normDatumDen) +
-                    '.' +
-                    Number(normDatumMesic) +
-                    '. ' +
-                    normDatumHodina +
-                    ':' +
-                    normDatumMinuta;
-                break;
-            case 'long':
-            default:
-                format_datum =
-                    Number(normDatumDen) +
-                    '.' +
-                    Number(normDatumMesic) +
-                    '.' +
-                    normDatumRok +
-                    ' ' +
-                    normDatumHodina +
-                    ':' +
-                    normDatumMinuta +
-                    ':' +
-                    normDatumSekunda;
-                break;
-        }
-    }
-
-    return format_datum;
 }
 
 function PrepareInfo(orp, vystraha) {
@@ -634,9 +635,9 @@ function PrintInfoList(krajList, ref_krajList) {
         zpracovanyInfoStupen = [];
         ref_zpracovanyInfoStupen = [];
         first = true;
-        opakovanyKraj = [];
-        opakovanyOkres = [];
-        opakovanyOrp = [];
+        var opakovanyKraj = [];
+        var opakovanyOkres = [];
+        var opakovanyOrp = [];
 
         if (ref_krajList.length > 0) {
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
@@ -1727,6 +1728,7 @@ resultText += '<BODY>';
 
 if (distrSeznamNahore == true) {
     resultText += 'Distribuce: ';
+
     var dist = '';
 
     for (var k = 0; k < krajList.length; k++) {
@@ -1793,7 +1795,7 @@ var found = false;
 if (vystraha.ucel == 'Actual') {
     for (var k = 0; k < krajList.length && found == false; k++) {
         for (var i = 0; i < krajList[k].info.length && found == false; i++) {
-            info = krajList[k].info[i];
+            var info = krajList[k].info[i];
 
             if (info.jev_kod && info.jev_kod != 'OUTLOOK') {
                 found = true;
@@ -1919,7 +1921,7 @@ switch (vystraha.ucel) {
     case 'Exercise':
     case 'System':
     case 'Test':
-        header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
+        var header = 'ÚČELOVÁ INFORMACE ČHMÚ – TESTOVACÍ ZPRÁVA';
         if (svrs && !sivs && !hpps) {
             header += '<br/>SMOGOVÝ VAROVNÝ A REGULAČNÍ SYSTÉM';
         }
@@ -1932,7 +1934,7 @@ switch (vystraha.ucel) {
         break;
     case 'Actual':
     default:
-        header = 'VÝSTRAHA ČHMÚ';
+        var header = 'VÝSTRAHA ČHMÚ';
         if (svrs && !sivs && !hpps) {
             header = 'ZPRÁVA SMOGOVÉHO VAROVNÉHO A REGULAČNÍHO SYSTÉMU';
         }
