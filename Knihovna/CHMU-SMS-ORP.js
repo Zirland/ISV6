@@ -23,7 +23,14 @@ var vystupText = '';
 if (vystraha.info) {
     var infoList = [];
     for (var l = 0; l < vystraha.info.length; l++) {
-        infoList.push(vystraha.info[l]);
+        if (
+            infoList[i].orp_list
+                .toString()
+                .split(',')
+                .indexOf(omezitNaOrp.toString()) > -1
+        ) {
+            infoList.push(vystraha.info[l]);
+        }
     }
 
     infoList = infoList.sort(function(a, b) {
@@ -31,6 +38,8 @@ if (vystraha.info) {
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
+        var zahajeni1 = a.dc_zacatek;
+        var zahajeni2 = b.dc_zacatek;
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -38,10 +47,16 @@ if (vystraha.info) {
         if (b.jistota_kod == 'Observed') {
             vyskyt2 = 1;
         }
+
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
+
+        if (zahajeni1 < zahajeni2) return -1;
+        if (zahajeni1 > zahajeni2) return 1;
+
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
+
         return 0;
     });
 }
@@ -50,13 +65,7 @@ if (infoList) {
     var poleJevy = [];
     var platne = [];
     for (var i = 0; i < infoList.length; i++) {
-        if (
-            infoList[i].stupen_kod != 'OUTLOOK' &&
-            infoList[i].orp_list
-                .toString()
-                .split(',')
-                .indexOf(omezitNaOrp.toString()) > -1
-        ) {
+        if (infoList[i].stupen_kod != 'OUTLOOK') {
             var pomKod = '';
             if (infoList[i].jistota_kod == 'Observed') {
                 pomKod += '0';
@@ -208,7 +217,14 @@ var sms2 = '';
 if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
     var ref_infoList = [];
     for (var l = 0; l < ref_vystraha.info.length; l++) {
-        ref_infoList.push(ref_vystraha.info[l]);
+        if (
+            ref_infoList[i].orp_list
+                .toString()
+                .split(',')
+                .indexOf(omezitNaOrp.toString()) > -1
+        ) {
+            ref_infoList.push(ref_vystraha.info[l]);
+        }
     }
 
     ref_infoList = ref_infoList.sort(function(a, b) {
@@ -216,6 +232,8 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
+        var zahajeni1 = a.dc_zacatek;
+        var zahajeni2 = b.dc_zacatek;
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -223,10 +241,16 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
         if (b.jistota_kod == 'Observed') {
             vyskyt2 = 1;
         }
+
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
+
+        if (zahajeni1 < zahajeni2) return -1;
+        if (zahajeni1 > zahajeni2) return 1;
+
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
+
         return 0;
     });
 }
@@ -237,11 +261,7 @@ if (ref_infoList) {
     for (var i = 0; i < ref_infoList.length; i++) {
         if (
             ref_infoList[i].stupen_kod != 'OUTLOOK' &&
-            !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano) &&
-            ref_infoList[i].orp_list
-                .toString()
-                .split(',')
-                .indexOf(omezitNaOrp.toString()) > -1
+            !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)
         ) {
             var pomKod2 = '';
             if (ref_infoList[i].jistota_kod == 'Observed') {
