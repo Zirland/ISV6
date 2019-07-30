@@ -1,4 +1,4 @@
-// Verze 58
+//Verze 59
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -8,9 +8,8 @@
 var orpTmp = [];
 
 for (var i = 0; i < orp.length; i++) {
-    if (omezitNaOrp == orp[i].id)
-    {
-       orpTmp.push(orp[i]);
+    if (omezitNaOrp == orp[i].id) {
+        orpTmp.push(orp[i]);
     }
 }
 
@@ -27,7 +26,11 @@ if (vystraha.info && vystraha.info.length > 0) {
     krajList = PrepareInfo(orp, vystraha);
 }
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+if (
+    typeof ref_vystraha !== 'undefined' &&
+    ref_vystraha.info &&
+    ref_vystraha.info.length > 0
+) {
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
@@ -58,8 +61,8 @@ if (vystraha.info && vystraha.info.length > 0) {
         }
     }
 
-   if (situace.length > 0) {
-        var upr_situace = situace[0].replace(/<br\/>/g,' ');
+    if (situace.length > 0) {
+        var upr_situace = situace[0].replace(/<br\/>/g, ' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/><div>';
     }
@@ -67,14 +70,19 @@ if (vystraha.info && vystraha.info.length > 0) {
     pomoc = PrintInfoList(krajList, ref_krajList, 0);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-} else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+} else if (
+    typeof ref_vystraha !== 'undefined' &&
+    ref_vystraha.info &&
+    ref_vystraha.info.length > 0
+) {
     pomoc = PrintInfoList(krajList, ref_krajList, 0);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }
 
 if (empty) {
-    resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
+    resultText +=
+        '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
 resultText += '</div>';

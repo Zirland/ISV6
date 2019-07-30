@@ -1,13 +1,13 @@
 //!JS
-// Verze 58
+//Verze 59
 
-var omezitNaOrp = 337; 
+var omezitNaOrp = 337;
 
-#import "CHMU-NOTIF-ORP"; 
+#import "CHMU-NOTIF-ORP";
 
 if (resultText != '') {
-    resultText += "\n";
-    resultText += "OPIS GŘ HZS ČR";
+    resultText += '\n';
+    resultText += 'OPIS GŘ HZS ČR';
 }
 
 if (resultText !== 'undefined' && resultText) {

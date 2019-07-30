@@ -1,11 +1,11 @@
-// Verze 58
+//Verze 59
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
 
 function removeDuplicates(arr) {
     var unique_array = [];
-    for (var i = 0;i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
         if (unique_array.indexOf(arr[i]) == -1) {
             unique_array.push(arr[i]);
         }
@@ -26,7 +26,7 @@ if (vystraha.info) {
         infoList.push(vystraha.info[l]);
     }
 
-    infoList = infoList.sort(function (a, b) {
+    infoList = infoList.sort(function(a, b) {
         var vyskyt1 = 0;
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
@@ -49,7 +49,7 @@ if (vystraha.info) {
 if (infoList) {
     var poleJevy = [];
     for (var i = 0; i < infoList.length; i++) {
-        if (infoList[i].stupen_kod != 'OUTLOOK') { 
+        if (infoList[i].stupen_kod != 'OUTLOOK') {
             var pomKod = '';
             if (infoList[i].jistota_kod == 'Observed') {
                 pomKod += '0';
@@ -81,10 +81,13 @@ if (infoList) {
                         jevKrajeList.push(infoList[i].kraj[j].UID);
 
                         var OrpList = infoList[i].orp_list;
-                        var OrpListArr = OrpList.split(',');
+                        var OrpListArr = OrpList.toString().split(',');
                         for (var k = 0; k < OrpListArr.length; k++) {
                             for (var l = 0; l < orp.length; l++) {
-                                if (OrpListArr[k] == orp[l].id && orp[l].kraj.id == omezitNaKraj) {
+                                if (
+                                    OrpListArr[k] == orp[l].id &&
+                                    orp[l].kraj.id == omezitNaKraj
+                                ) {
                                     jevOrpList.push(orp[l].nazev);
                                 }
                             }
@@ -110,15 +113,13 @@ if (infoList) {
             }
         }
         jevKrajeList = removeDuplicates(jevKrajeList);
-        jevKrajeList = jevKrajeList.sort(function (a, b) {
-            return a-b;
+        jevKrajeList = jevKrajeList.sort(function(a, b) {
+            return a - b;
         });
         jevOrpList = removeDuplicates(jevOrpList);
-        jevOrpList = jevOrpList.sort(function (a, b) {
-            if (a < b)
-                return -1;
-            if (a > b)
-                return 1;
+        jevOrpList = jevOrpList.sort(function(a, b) {
+            if (a < b) return -1;
+            if (a > b) return 1;
             return 0;
         });
 
@@ -134,7 +135,7 @@ if (infoList) {
                 for (var t = 0; t < jevKrajeList.length; t++) {
                     seznkraje += KRAJE_KODY[jevKrajeList[t]] + ', ';
                 }
-                seznkraje = seznkraje.substring(0, seznkraje.length-2);
+                seznkraje = seznkraje.substring(0, seznkraje.length - 2);
                 resultText += seznkraje;
                 sms1 += seznkraje;
 
@@ -148,7 +149,8 @@ if (infoList) {
                     var zahajeni = ZobrazDatumSMS(jevZacatek);
                     var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
-                    resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    resultText +=
+                        ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += oddelovac;
@@ -166,7 +168,7 @@ if (infoList) {
                     for (var t = 0; t < jevOrpList.length; t++) {
                         seznOrp += jevOrpList[t] + ', ';
                     }
-                    seznOrp = seznOrp.substring(0, seznOrp.length-2);
+                    seznOrp = seznOrp.substring(0, seznOrp.length - 2);
                     resultText += seznOrp;
                     sms1 += seznOrp;
                 }
@@ -180,7 +182,8 @@ if (infoList) {
                     var zahajeni = ZobrazDatumSMS(jevZacatek);
                     var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
-                    resultText += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                    resultText +=
+                        ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                     sms1 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += oddelovac;
@@ -208,37 +211,38 @@ if (infoList) {
     }
 
     if (start == 'Infinity') {
-        vystupText += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+        vystupText +=
+            'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
         sms1 += vystupText;
     } else {
         switch (vystraha.ucel) {
-            case 'Exercise' :
+            case 'Exercise':
                 var uvod = 'Cvičná zpráva ';
-            break;
-            case 'System' :
+                break;
+            case 'System':
                 var uvod = 'Systémová zpráva ';
-            break;
-            case 'Test' :
+                break;
+            case 'Test':
                 var uvod = 'Testovací zpráva ';
-            break;
-            default : 
+                break;
+            default:
                 var uvod = 'Výstraha ';
-            break;
+                break;
         }
 
         switch (rezim) {
-            case 'HPPS' :
+            case 'HPPS':
                 uvod += 'HPPS ';
-            break;
-            case 'SIVS' :
+                break;
+            case 'SIVS':
                 uvod += 'SIVS ';
-            break;
-            case 'SVRS' :
+                break;
+            case 'SVRS':
                 uvod += 'SVRS ';
-            break;
-            default :
+                break;
+            default:
                 uvod += 'ČHMÚ';
-            break;
+                break;
         }
 
         var poradi_zpravy = vystraha.id.substring(vystraha.id.length - 6);
@@ -248,8 +252,18 @@ if (infoList) {
         vystupText += resultText;
 
         if (!detailni) {
-            vystupText += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
-            sms1 += 'Platnost od ' + total_zahajeni + ' do ' + total_ukonceni + oddelovac;
+            vystupText +=
+                'Platnost od ' +
+                total_zahajeni +
+                ' do ' +
+                total_ukonceni +
+                oddelovac;
+            sms1 +=
+                'Platnost od ' +
+                total_zahajeni +
+                ' do ' +
+                total_ukonceni +
+                oddelovac;
         }
         if (omezitNaKraj == -1) {
             vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
@@ -262,13 +276,13 @@ var zacatky2 = [];
 var konce2 = [];
 var sms2 = '';
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
+if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
     var ref_infoList = [];
     for (var l = 0; l < ref_vystraha.info.length; l++) {
         ref_infoList.push(ref_vystraha.info[l]);
     }
 
-    ref_infoList = ref_infoList.sort(function (a, b) {
+    ref_infoList = ref_infoList.sort(function(a, b) {
         var vyskyt1 = 0;
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
@@ -291,7 +305,10 @@ if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info) {
 if (ref_infoList) {
     var poleJevy2 = [];
     for (var i = 0; i < ref_infoList.length; i++) {
-        if (ref_infoList[i].stupen_kod != 'OUTLOOK' && !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)) { 
+        if (
+            ref_infoList[i].stupen_kod != 'OUTLOOK' &&
+            !UkoncenyJev(ref_infoList[i].dc_konec, vystraha.dc_odeslano)
+        ) {
             var pomKod2 = '';
             if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKod2 += '0';
@@ -315,7 +332,11 @@ if (ref_infoList) {
             }
             if (poleJevy2[h] == pomKod2Ivnj + ref_infoList[i].stupen_kod) {
                 var found = omezitNaKraj == -1;
-                for (var j = 0; j < ref_infoList[i].kraj.length && !found; j++) {
+                for (
+                    var j = 0;
+                    j < ref_infoList[i].kraj.length && !found;
+                    j++
+                ) {
                     found = ref_infoList[i].kraj[j].UID == omezitNaKraj;
                 }
                 for (var j = 0; j < ref_infoList[i].kraj.length; j++) {
@@ -323,10 +344,13 @@ if (ref_infoList) {
                         jevKrajeList2.push(ref_infoList[i].kraj[j].UID);
 
                         var OrpList2 = ref_infoList[i].orp_list;
-                        var OrpListArr2 = OrpList2.split(',');
+                        var OrpListArr2 = OrpList2.toString().split(',');
                         for (var k = 0; k < OrpListArr2.length; k++) {
                             for (var l = 0; l < orp.length; l++) {
-                                if (OrpListArr2[k] == orp[l].id && orp[l].kraj.id == omezitNaKraj) {
+                                if (
+                                    OrpListArr2[k] == orp[l].id &&
+                                    orp[l].kraj.id == omezitNaKraj
+                                ) {
                                     jevOrpList2.push(orp[l].nazev);
                                 }
                             }
@@ -349,15 +373,13 @@ if (ref_infoList) {
             }
         }
         jevKrajeList2 = removeDuplicates(jevKrajeList2);
-        jevKrajeList2 = jevKrajeList2.sort(function (a, b) {
-            return a-b;
+        jevKrajeList2 = jevKrajeList2.sort(function(a, b) {
+            return a - b;
         });
         jevOrpList2 = removeDuplicates(jevOrpList2);
-        jevOrpList2 = jevOrpList2.sort(function (a, b) {
-            if (a < b)
-                return -1;
-            if (a > b)
-                return 1;
+        jevOrpList2 = jevOrpList2.sort(function(a, b) {
+            if (a < b) return -1;
+            if (a > b) return 1;
             return 0;
         });
 
@@ -371,7 +393,7 @@ if (ref_infoList) {
                 for (var t = 0; t < jevKrajeList2.length; t++) {
                     seznkraje2 += KRAJE_KODY[jevKrajeList2[t]] + ', ';
                 }
-                seznkraje2 = seznkraje2.substring(0, seznkraje2.length-2);
+                seznkraje2 = seznkraje2.substring(0, seznkraje2.length - 2);
                 sms2 += seznkraje2;
 
                 if (detailni) {
@@ -398,7 +420,7 @@ if (ref_infoList) {
                     for (var t = 0; t < jevOrpList2.length; t++) {
                         seznOrp2 += jevOrpList2[t] + ', ';
                     }
-                    seznOrp2 = seznOrp2.substring(0, seznOrp2.length-2);
+                    seznOrp2 = seznOrp2.substring(0, seznOrp2.length - 2);
                     sms2 += seznOrp2;
                 }
                 if (detailni) {
@@ -432,7 +454,12 @@ if (ref_infoList) {
         sms2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
     } else {
         if (!detailni) {
-            sms2 += 'Platnost od ' + total_zahajeni2 + ' do ' + total_ukonceni2 + oddelovac;
+            sms2 +=
+                'Platnost od ' +
+                total_zahajeni2 +
+                ' do ' +
+                total_ukonceni2 +
+                oddelovac;
         }
     }
 }

@@ -1,4 +1,4 @@
-// Verze 58
+//Verze 59
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -7,7 +7,7 @@
 
 if (!razeniPodleNazvu) {
     var orpSort = orp;
-    orpSort.sort(function (a, b) {
+    orpSort.sort(function(a, b) {
         var kraj1 = parseFloat(a.kraj.id);
         var kraj2 = parseFloat(b.kraj.id);
         var okres1 = parseFloat(a.okres.id);
@@ -56,7 +56,11 @@ if (vystraha.info && vystraha.info.length > 0) {
     krajList = PrepareInfo(orp, vystraha);
 }
 
-if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+if (
+    typeof ref_vystraha !== 'undefined' &&
+    ref_vystraha.info &&
+    ref_vystraha.info.length > 0
+) {
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
@@ -85,8 +89,8 @@ if (vystraha.info && vystraha.info.length > 0) {
         }
     }
 
-   if (situace.length > 0) {
-        var upr_situace = situace[0].replace(/<br\/>/g,' ');
+    if (situace.length > 0) {
+        var upr_situace = situace[0].replace(/<br\/>/g, ' ');
         resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
         resultText += '<hr/><div>';
     }
@@ -94,14 +98,19 @@ if (vystraha.info && vystraha.info.length > 0) {
     pomoc = PrintInfoList(krajList, ref_krajList);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-} else if (typeof(ref_vystraha) != 'undefined' && ref_vystraha.info && ref_vystraha.info.length > 0) {
+} else if (
+    typeof ref_vystraha !== 'undefined' &&
+    ref_vystraha.info &&
+    ref_vystraha.info.length > 0
+) {
     pomoc = PrintInfoList(krajList, ref_krajList);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }
 
 if (empty) {
-    resultText += '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
+    resultText +=
+        '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
 if (distrSeznamNahore == false) {
@@ -111,13 +120,26 @@ if (distrSeznamNahore == false) {
     var dist = '';
 
     for (var k = 0; k < krajList.length; k++) {
-        var found = krajList[k].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+        var found =
+            krajList[k].info.length > 0 ||
+            (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
 
         for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
-            found = krajList[k].okresList[o].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+            found =
+                krajList[k].okresList[o].info.length > 0 ||
+                (ref_krajList.length > 0 &&
+                    ref_krajList[k].okresList[o].info.length > 0);
 
-            for (var ol = 0; ol < krajList[k].okresList[o].orpList.length && !found; ol++) {
-                found = krajList[k].okresList[o].orpList[ol].info.length > 0 || (ref_krajList.length > 0 && ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
+            for (
+                var ol = 0;
+                ol < krajList[k].okresList[o].orpList.length && !found;
+                ol++
+            ) {
+                found =
+                    krajList[k].okresList[o].orpList[ol].info.length > 0 ||
+                    (ref_krajList.length > 0 &&
+                        ref_krajList[k].okresList[o].orpList[ol].info.length >
+                            0);
             }
         }
 
@@ -130,11 +152,21 @@ if (distrSeznamNahore == false) {
         for (var k = 0; k < ref_krajList.length; k++) {
             var found = ref_krajList[k].info.length > 0;
 
-            for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+            for (
+                var o = 0;
+                o < ref_krajList[k].okresList.length && !found;
+                o++
+            ) {
                 found = ref_krajList[k].okresList[o].info.length > 0;
 
-                for (var ol = 0; ol < ref_krajList[k].okresList[o].orpList.length && !found; ol++) {
-                    found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+                for (
+                    var ol = 0;
+                    ol < ref_krajList[k].okresList[o].orpList.length && !found;
+                    ol++
+                ) {
+                    found =
+                        ref_krajList[k].okresList[o].orpList[ol].info.length >
+                        0;
                 }
             }
 

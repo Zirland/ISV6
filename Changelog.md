@@ -1,6 +1,31 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 59 – 2019-07-30
+### [AA/AA-CHMU-EMAIL-OKRES]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro mail, sestava pro územní odbor.
+
+### [AA/AA-CHMU-SMS-OKRES]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, údaje za územní odbor.
+
+### [Knihovna/CHMU-EMAIL-OKRES]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro mail, sestava pro územní odbor.
+
+### [Knihovna/CHMU-SMS-OKRES]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, údaje za územní odbor.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Záplata
+- Oprava chyby při výpisu ORP.
+
+### [UVG/CHMU-SMS]
+#### Záplata
+- Oprava chyby při výpisu ORP.
+
 ## verze 58 – 2019-07-13
 ### [AA/AA-CHMU-NOTIF-KRAJ]
 #### Záplata
