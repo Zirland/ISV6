@@ -30,10 +30,15 @@ Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vz
 
 **Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-HLAVICKA*, *CHMU-ZVYR-ZMEN*, *CHMU-PREPARE*, *CHMU-DIFF*
 
-### [CHMU-EMAIL-KRAJ]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska území.
+### [CHMU-EMAIL-OKRES]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres). Sestava vychází z krajské sestavy.
 
 **Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
+
+### [CHMU-SMS-OKRES]
+Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
+
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
 ### [CHMU-NOTIF-KRAJ]
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail.
@@ -205,6 +210,49 @@ Parametr **slucovat** může nabývat logických hodnot *false* nebo *true*.
 - Při hodnotě *true* dochází ke slučování území na vyšší prvky (okresy, kraje) pro zkrácení výstupu.
 
 Předpis neumožňuje barevné zvýrazenění rozdílu aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
+
+---
+
+### [AA-CHMU-EMAIL-OKRES]
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
+
+Parametr **mojeUzemi** obsahuje seznam jednotlivých kódů ORP, které pokrývají zájmové území.
+
+Parametr **nazevUzemi** obsahuje pojmenování vymezeného území. Slouží výhradně pro výpis v hlavičce tiskové sestavy, může obsahovat volný text.
+
+Parametr **zobrazitVyhled** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je jev "Výhled nebezpečných jevů" z tiskové sestavy vyloučen.
+- Při hodnotě *true* je jev "Výhled nebezpečných jevů" do tiskové sestavy zahrnut.
+
+Parametr **zobrazitZmeny** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* není zobrazeno porovnávání s předchozí výstrahou. Všechny texty jsou "černé". Zobrazuje se pouze obsah aktuální výstrahy.
+- Při hodnotě *true* je zobrazeno porovnávání aktuální výstrahy s předchozí výstrahou. Nové texty jsou zeleně, smazané texty červeně. Ukončené jevy jsou zobrazeny jako škrtnuté.
+
+Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
+- Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
+
+### [AA-CHMU-SMS-KRAJ]
+Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
+
+Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
+
+Parametr **mojeUzemi** obsahuje seznam jednotlivých kódů ORP, které pokrývají zájmové území.
+
+Parametr **detailni** může nabývat hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů jevů platných pro zvolený kraj. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev platí. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
+- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy jevů platných pro zvolený kraj následované rozsahem platnosti tohoto jevu. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev v uvedeném časovém období platí. Rozsah platnosti celé výstrahy se neuvádí.
+
+Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
+
+- Při hodnotě *false* není ve výsledné SMS zprávě vyjmenován seznam ORP v rámci kraje, na jejichž území jev platí.
+- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP v rámci kraje, na jejichž území jev platí. Je tak možno rozpoznat změnu rozsahu území.
+
+Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 ---
 ---

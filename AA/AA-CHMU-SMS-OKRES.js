@@ -2,8 +2,8 @@
 //Verze 58
 
 var mojeUzemi = [1139, 1147, 1155];
-var vypisOrp = true;
 var detailni = 1;
+var vypisOrp = true;
 var oddelovac = '\n';
 
 #import "CHMU-SMS-OKRES";
