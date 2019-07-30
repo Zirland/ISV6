@@ -1,8 +1,8 @@
 //!JS
 //Verze 58
 
-var mojeUzemi = ['779', '787', '795'];
-var nazevUzemi = 'okres Jablonec nad Nisou';
+var mojeUzemi = [1139, 1147, 1155];
+var nazevUzemi = 'územní odbor Semily';
 
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
