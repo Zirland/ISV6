@@ -322,8 +322,6 @@ if (vystraha.info) {
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
-        var zahajeni1 = a.dc_zacatek;
-        var zahajeni2 = b.dc_zacatek;
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -334,9 +332,6 @@ if (vystraha.info) {
 
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
-
-        if (zahajeni1 < zahajeni2) return -1;
-        if (zahajeni1 > zahajeni2) return 1;
 
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
@@ -586,8 +581,6 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
-        var zahajeni1 = a.dc_zacatek;
-        var zahajeni2 = b.dc_zacatek;
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -598,9 +591,6 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
 
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
-
-        if (zahajeni1 < zahajeni2) return -1;
-        if (zahajeni1 > zahajeni2) return 1;
 
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
