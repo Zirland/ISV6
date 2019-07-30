@@ -1,5 +1,5 @@
 //!JS
-//Verze 58
+//Verze 59
 
 var omezitNaOrp = 337;
 var zobrazitVyhled = false;

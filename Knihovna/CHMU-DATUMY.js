@@ -1,4 +1,4 @@
-//Verze 58
+//Verze 59
 
 function Normalize(datum) {
     if (!datum) {
