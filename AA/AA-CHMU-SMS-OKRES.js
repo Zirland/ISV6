@@ -1,5 +1,5 @@
 //!JS
-//Verze 58
+//Verze 59
 
 var mojeUzemi = [1139, 1147, 1155];
 var detailni = 1;
