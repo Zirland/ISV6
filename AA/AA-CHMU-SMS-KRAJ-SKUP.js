@@ -1,12 +1,10 @@
 //!JS
 //Verze 60
 
-var mojeUzemi = [1139, 1147, 1155];
-var nazevUzemi = 'územní odbor Semily';
-
-var zobrazitVyhled = false;
-var zobrazitZmeny = true;
-var pouzeZmeny = true;
+var omezitNaKraj = -1;
+var detailni = 1;
+var vypisOrp = false;
+var oddelovac = '\n';
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
@@ -26,8 +24,13 @@ var KRAJE_NAZVY = {
     '141': 'Zlínský kraj'
 };
 
-#import "CHMU-EMAIL-OKRES";
+#import "CHMU-SMS-KRAJ-SKUP";
 
-if (resultText !== 'undefined' && resultText) {
-    print(resultText);
+if (vystupText != '') {
+    vystupText += '\n';
+    vystupText += 'OPIS GŘ HZS ČR';
+}
+
+if (vystupText !== 'undefined' && vystupText) {
+    print(vystupText);
 }

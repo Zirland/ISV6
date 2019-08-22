@@ -1,6 +1,39 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 60 – 2019-08-22
+### [AA/AA-CHMU-SMS-KRAJ-SKUP]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů.
+
+### [AA/AA-CHMU-SMS-OKRES-SKUP]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů.
+
+### [AA/AA-CHMU-SMS-ORP-SKUP]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů.
+
+### [Knihovna/CHMU-CISELNIK]
+#### Přidáno
+- Vytvořen číselník pro skupiny jevů.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUP]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů.
+
+### [Knihovna/CHMU-SMS-OKRES-SKUP]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů.
+
+### [UVG/CHMU-SMS-SKUPINY]
+#### Přidáno
+- Na základě požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů.
+
 ## verze 59 – 2019-07-30
 ### [AA/AA-CHMU-EMAIL-OKRES]
 #### Přidáno

@@ -61,7 +61,13 @@ if (infoList) {
             if (infoList[i].jistota_kod == 'Observed') {
                 pomKod += '0';
             }
-            pomKod += infoList[i].stupen_kod;
+            var splitkod = infoList[i].stupen_kod.split('.');
+            var skupina = splitkod[0];
+            if (skupina == 'WARN' || skupina == 'REG' || skupina == 'SMOGSIT') {
+                skupina = splitkod[1];
+            }
+
+            pomKod += skupina;
             poleJevy.push(pomKod);
             platne.push(infoList[i]);
         }
@@ -77,7 +83,17 @@ if (infoList) {
             if (platne[i].jistota_kod == 'Observed') {
                 pomKodIvnj = '0';
             }
-            if (poleJevy[h] == pomKodIvnj + platne[i].stupen_kod) {
+            var splitkodJev = infoList[i].stupen_kod.split('.');
+            var skupinaJev = splitkodJev[0];
+            if (
+                skupinaJev == 'WARN' ||
+                skupinaJev == 'REG' ||
+                skupinaJev == 'SMOGSIT'
+            ) {
+                skupinaJev = splitkodJev[1];
+            }
+
+            if (poleJevy[h] == pomKodIvnj + skupinaJev) {
                 var warn_type = 'SVRS';
                 if (platne[i].SIVS == '1') {
                     warn_type = 'SIVS';
@@ -106,22 +122,22 @@ if (infoList) {
             var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
             resultText +=
-                JEVY_NAZVY[poleJevy[h]] +
+                JEVY_SKUPINY[poleJevy[h]] +
                 ' od ' +
                 zahajeni +
                 ' do ' +
                 ukonceni +
                 oddelovac;
             sms1 +=
-                JEVY_NAZVY[poleJevy[h]] +
+                JEVY_SKUPINY[poleJevy[h]] +
                 ' od ' +
                 zahajeni +
                 ' do ' +
                 ukonceni +
                 oddelovac;
         } else {
-            resultText += JEVY_NAZVY[poleJevy[h]] + oddelovac;
-            sms1 += JEVY_NAZVY[poleJevy[h]] + oddelovac;
+            resultText += JEVY_SKUPINY[poleJevy[h]] + oddelovac;
+            sms1 += JEVY_SKUPINY[poleJevy[h]] + oddelovac;
         }
     }
 
@@ -247,7 +263,17 @@ if (ref_infoList) {
             if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKod2 += '0';
             }
-            pomKod2 += ref_infoList[i].stupen_kod;
+            var splitkod2 = ref_infoList[i].stupen_kod.split('.');
+            var skupina2 = splitkod2[0];
+            if (
+                skupina2 == 'WARN' ||
+                skupina2 == 'REG' ||
+                skupina2 == 'SMOGSIT'
+            ) {
+                skupina2 = splitkod2[1];
+            }
+
+            pomKod2 += skupina2;
             poleJevy2.push(pomKod2);
             platne2.push(ref_infoList[i]);
         }
@@ -260,10 +286,22 @@ if (ref_infoList) {
         var jevEnd2 = [];
         for (var i = 0; i < platne2.length; i++) {
             var pomKodIvnj2 = '';
-            if (platne2[i].jistota_kod == 'Observed') {
+            if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKodIvnj2 = '0';
             }
-            if (poleJevy2[h] == pomKodIvnj2 + platne2[i].stupen_kod) {
+
+
+            var splitkodJev2 = ref_infoList[i].stupen_kod.split('.');
+            var skupinaJev2 = splitkodJev2[0];
+            if (
+                skupinaJev2 == 'WARN' ||
+                skupinaJev2 == 'REG' ||
+                skupinaJev2 == 'SMOGSIT'
+            ) {
+                skupinaJev2 = splitkodJev2[1];
+            }
+
+            if (poleJevy2[h] == pomKodIvnj2 + skupinaJev2) {
                 var nyni = Zaokrouhli(vystraha.dc_odeslano);
                 var zacatek2 = Normalize(platne2[i].dc_zacatek);
                 if (zacatek2 < nyni) {
@@ -289,14 +327,14 @@ if (ref_infoList) {
             var ukonceni2 = ZobrazDatumSMS(jevKonec2, 1);
 
             sms2 +=
-                JEVY_NAZVY[poleJevy2[h]] +
+                JEVY_SKUPINY[poleJevy2[h]] +
                 ' od ' +
                 zahajeni2 +
                 ' do ' +
                 ukonceni2 +
                 oddelovac;
         } else {
-            sms2 += JEVY_NAZVY[poleJevy2[h]] + oddelovac;
+            sms2 += JEVY_SKUPINY[poleJevy2[h]] + oddelovac;
         }
     }
 

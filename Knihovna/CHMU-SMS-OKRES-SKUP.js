@@ -67,7 +67,13 @@ if (infoList) {
             if (infoList[i].jistota_kod == 'Observed') {
                 pomKod += '0';
             }
-            pomKod += infoList[i].stupen_kod;
+            var splitkod = infoList[i].stupen_kod.split('.');
+            var skupina = splitkod[0];
+            if (skupina == 'WARN' || skupina == 'REG' || skupina == 'SMOGSIT') {
+                skupina = splitkod[1];
+            }
+
+            pomKod += skupina;
             poleJevy.push(pomKod);
             platne.push(infoList[i]);
         }
@@ -84,7 +90,17 @@ if (infoList) {
             if (platne[i].jistota_kod == 'Observed') {
                 pomKodIvnj = '0';
             }
-            if (poleJevy[h] == pomKodIvnj + platne[i].stupen_kod) {
+            var splitkodJev = infoList[i].stupen_kod.split('.');
+            var skupinaJev = splitkodJev[0];
+            if (
+                skupinaJev == 'WARN' ||
+                skupinaJev == 'REG' ||
+                skupinaJev == 'SMOGSIT'
+            ) {
+                skupinaJev = splitkodJev[1];
+            }
+
+            if (poleJevy[h] == pomKodIvnj + skupinaJev) {
                 var OrpList = infoList[i].orp_list;
                 var OrpListArr = OrpList.toString().split(',');
 
@@ -125,8 +141,8 @@ if (infoList) {
             return 0;
         });
 
-        resultText += JEVY_NAZVY[poleJevy[h]];
-        sms1 += JEVY_NAZVY[poleJevy[h]];
+        resultText += JEVY_SKUPINY[poleJevy[h]];
+        sms1 += JEVY_SKUPINY[poleJevy[h]];
         if (vypisOrp) {
             resultText += ' pro ORP ';
             sms1 += ' pro ORP ';
@@ -288,7 +304,17 @@ if (ref_infoList) {
             if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKod2 += '0';
             }
-            pomKod2 += ref_infoList[i].stupen_kod;
+            var splitkod2 = ref_infoList[i].stupen_kod.split('.');
+            var skupina2 = splitkod2[0];
+            if (
+                skupina2 == 'WARN' ||
+                skupina2 == 'REG' ||
+                skupina2 == 'SMOGSIT'
+            ) {
+                skupina2 = splitkod2[1];
+            }
+
+            pomKod2 += skupina2;
             poleJevy2.push(pomKod2);
             platne2.push(ref_infoList[i]);
         }
@@ -302,10 +328,22 @@ if (ref_infoList) {
         var jevOrpList2 = [];
         for (var i = 0; i < platne2.length; i++) {
             var pomKodIvnj2 = '';
-            if (platne2[i].jistota_kod == 'Observed') {
+            if (ref_infoList[i].jistota_kod == 'Observed') {
                 pomKodIvnj2 = '0';
             }
-            if (poleJevy2[h] == pomKodIvnj2 + platne2[i].stupen_kod) {
+
+
+            var splitkodJev2 = ref_infoList[i].stupen_kod.split('.');
+            var skupinaJev2 = splitkodJev2[0];
+            if (
+                skupinaJev2 == 'WARN' ||
+                skupinaJev2 == 'REG' ||
+                skupinaJev2 == 'SMOGSIT'
+            ) {
+                skupinaJev2 = splitkodJev2[1];
+            }
+
+            if (poleJevy2[h] == pomKodIvnj2 + skupinaJev2) {
                 var OrpList2 = ref_infoList[i].orp_list;
                 var OrpListArr2 = OrpList2.toString().split(',');
 
@@ -343,7 +381,7 @@ if (ref_infoList) {
             return 0;
         });
 
-        sms2 += JEVY_NAZVY[poleJevy2[h]];
+        sms2 += JEVY_SKUPINY[poleJevy2[h]];
         if (vypisOrp) {
             sms2 += ' pro ORP ';
 

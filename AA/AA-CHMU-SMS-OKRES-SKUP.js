@@ -6,7 +6,7 @@ var detailni = 1;
 var vypisOrp = true;
 var oddelovac = '\n';
 
-#import "CHMU-SMS-OKRES";
+#import "CHMU-SMS-OKRES-SKUP";
 
 if (vystupText != '') {
     vystupText += '\n';
