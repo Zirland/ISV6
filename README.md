@@ -40,6 +40,21 @@ Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahují
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
+### [CHMU-SMS-KRAJ-SKUP]
+Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
+
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
+
+### [CHMU-SMS-OKRES-SKUP]
+Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
+
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
+
+### [CHMU-SMS-ORP-SKUP]
+Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu ORP.
+
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
+
 ### [CHMU-NOTIF-KRAJ]
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail.
 
@@ -132,6 +147,27 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
+### [AA-CHMU-SMS-KRAJ-SKUP]
+Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
+
+Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
+
+Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v parametru *KRAJE_NAZVY*.
+
+Parametr **detailni** může nabývat hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů skupin jevů platných pro zvolený kraj. V případě celostátní verze se za názvem skupiny jevů uvádí přehled krajů, ve kterých jevy platí. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
+- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy skupin jevů platných pro zvolený kraj následované rozsahem platnosti tohoto jevu. V případě celostátní verze se za názvem skupiny jevů uvádí přehled krajů, ve kterých jevy v uvedeném časovém období platí. Rozsah platnosti celé výstrahy se neuvádí.
+
+Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*. Parametr funguje pouze v rámci konkrétního kraje, nelze uplatnit na celostátní SMS.
+
+- Při hodnotě *false* není ve výsledné SMS zprávě vyjmenován seznam ORP v rámci kraje, na jejichž území jevy platí.
+- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP v rámci kraje, na jejichž území jevy platí. Je tak možno rozpoznat změnu rozsahu území.
+
+Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
+
+V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
+
 ### [AA-CHMU-NOTIF-KRAJ]
 Předpis pro vytvoření SMS zprávy notifikující odeslání e-mailu s výstrahou vztahující se ke konkrétnímu kraji nebo celé republice.
 
@@ -176,6 +212,20 @@ Parametr **detailni** může nabývat hodnot *false* nebo *true*.
 - Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy jevů platných pro zvolené ORP následované rozsahem platnosti tohoto jevu. Rozsah platnosti celé výstrahy se neuvádí.
 
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
+
+### [AA-CHMU-SMS-ORP-SKUP]
+Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu ORP.
+
+Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
+
+Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Číselník území je v samostatném souboru "seznam_ORP.csv".
+
+Parametr **detailni** může nabývat hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů skupin jevů platných pro zvolené ORP. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
+- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy skupin jevů platných pro zvolené ORP následované rozsahem platnosti tohoto jevu. Rozsah platnosti celé výstrahy se neuvádí.
+
+Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 ### [AA-CHMU-NOTIF-ORP]
 Předpis pro vytvoření SMS zprávy notifikující odeslání e-mailu s výstrahou vztahujícího se ke konkrétnímu ORP.
@@ -235,7 +285,7 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
 
-### [AA-CHMU-SMS-KRAJ]
+### [AA-CHMU-SMS-OKRES]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
@@ -244,15 +294,34 @@ Parametr **mojeUzemi** obsahuje seznam jednotlivých kódů ORP, které pokrýva
 
 Parametr **detailni** může nabývat hodnot *false* nebo *true*.
 
-- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů jevů platných pro zvolený kraj. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev platí. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
-- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy jevů platných pro zvolený kraj následované rozsahem platnosti tohoto jevu. V případě celostátní verze se za názvem jevu uvádí přehled krajů, ve kterých jev v uvedeném časovém období platí. Rozsah platnosti celé výstrahy se neuvádí.
+- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů jevů platných pro zvolené území. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
+- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy jevů platných pro zvolené území následované rozsahem platnosti tohoto jevu. Rozsah platnosti celé výstrahy se neuvádí.
 
 Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 
-- Při hodnotě *false* není ve výsledné SMS zprávě vyjmenován seznam ORP v rámci kraje, na jejichž území jev platí.
-- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP v rámci kraje, na jejichž území jev platí. Je tak možno rozpoznat změnu rozsahu území.
+- Při hodnotě *false* není ve výsledné SMS zprávě vyjmenován seznam ORP, na jejichž území jev platí.
+- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP, na jejichž území jev platí. Je tak možno rozpoznat změnu rozsahu území.
 
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
+
+### [AA-CHMU-SMS-OKRES-SKUP]
+Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
+
+Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
+
+Parametr **mojeUzemi** obsahuje seznam jednotlivých kódů ORP, které pokrývají zájmové území.
+
+Parametr **detailni** může nabývat hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů skupin jevů platných pro zvolené území. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
+- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy skupin jevů platných pro zvolené území následované rozsahem platnosti této  skupiny jevů. Rozsah platnosti celé výstrahy se neuvádí.
+
+Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
+
+- Při hodnotě *false* není výpis doplněn.
+- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP, na jejichž území jev platí. Je tak možno rozpoznat změnu rozsahu území.
+
+Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 ---
 ---
@@ -323,7 +392,6 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
-
 Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
 ```javascript
 //!JS
@@ -364,5 +432,34 @@ Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesí
 //!JS
 if (N !== 'undefined' && N.textEMAIL) {
     print(N.textEMAIL);
+}
+```
+
+### [CHMU-SMS-KRAJ-SKUP]
+Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
+
+Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
+
+Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v parametru *KRAJE_NAZVY*.
+
+Parametr **detailni** může nabývat hodnot *false* nebo *true*.
+
+- Při hodnotě *false* je generována souhrnná sestava, která obsahuje pouze přehled názvů skupin jevů platných pro zvolený kraj. V případě celostátní verze se za názvem skupiny jevů uvádí přehled krajů, ve kterých jevy platí. Na konci souhrnné sestavy je generován rozsah platnosti celé výstrahy tj. začátek prvního jevu až konec posledního jevu.
+- Při hodnotě *true* je generována podrobná sestava, která obsahuje názvy skupin jevů platných pro zvolený kraj následované rozsahem platnosti tohoto jevu. V případě celostátní verze se za názvem skupiny jevů uvádí přehled krajů, ve kterých jevy v uvedeném časovém období platí. Rozsah platnosti celé výstrahy se neuvádí.
+
+Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*. Parametr funguje pouze v rámci konkrétního kraje, nelze uplatnit na celostátní SMS.
+
+- Při hodnotě *false* není ve výsledné SMS zprávě vyjmenován seznam ORP v rámci kraje, na jejichž území jevy platí.
+- Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP v rámci kraje, na jejichž území jevy platí. Je tak možno rozpoznat změnu rozsahu území.
+
+Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
+
+V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
+
+Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+```javascript
+//!JS
+if (N !== 'undefined' && N.textSMS) {
+    print(N.textSMS);
 }
 ```

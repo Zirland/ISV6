@@ -132,3 +132,27 @@ var JEVY_NAZVY = {
     'REG.NO2': 'Regulace NO2',
     '0REG.NO2': 'Regulace NO2'
 };
+
+var JEVY_SKUPINY = {
+    I: 'Maximální a minimální teploty',
+    II: 'Pokles teplot pod nulu',
+    III: 'Vítr',
+    IV: 'Sněhová pokrývka',
+    V: 'Sněhové srážky',
+    VI: 'Sněhové jevy',
+    VII: 'Náledí',
+    VIII: 'Ledovka',
+    IX: 'Námrazové jevy',
+    X: 'Bouřkové jevy',
+    XI: 'Dešťové srážky',
+    XII: 'Povodňové jevy',
+    XIII: 'Dotok',
+    XIV: 'Požáry',
+    XV: 'Jiné jevy',
+    OUTLOOK: 'Výhled jevů',
+    O3: 'Přízemní ozón',
+    NO2: 'Oxid dusičitý',
+    SO2: 'Oxid siřičitý',
+    PM10: 'Prachové částice'
+};
+
