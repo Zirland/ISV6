@@ -1,5 +1,5 @@
 //!JS
-//Verze 59
+//Verze 60
 
 var mojeUzemi = [1139, 1147, 1155];
 var nazevUzemi = 'územní odbor Semily';
