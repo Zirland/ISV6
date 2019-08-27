@@ -134,7 +134,7 @@ var JEVY_NAZVY = {
 };
 
 var JEVY_SKUPINY = {
-    I: 'Maximální a minimální teploty',
+    I: 'Extrémní teploty',
     II: 'Pokles teplot pod nulu',
     III: 'Vítr',
     IV: 'Sněhová pokrývka',

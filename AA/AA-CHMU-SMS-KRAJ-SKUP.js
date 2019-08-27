@@ -4,7 +4,7 @@
 var omezitNaKraj = -1;
 var detailni = 1;
 var vypisOrp = false;
-var oddelovac = '\n';
+var oddelovac = ', ';
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
@@ -27,8 +27,7 @@ var KRAJE_NAZVY = {
 #import "CHMU-SMS-KRAJ-SKUP";
 
 if (vystupText != '') {
-    vystupText += '\n';
-    vystupText += 'OPIS GŘ HZS ČR';
+    vystupText += 'KOPIS HZS LK';
 }
 
 if (vystupText !== 'undefined' && vystupText) {
