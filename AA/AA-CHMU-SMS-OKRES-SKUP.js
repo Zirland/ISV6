@@ -4,12 +4,13 @@
 var mojeUzemi = [1139, 1147, 1155];
 var detailni = 1;
 var vypisOrp = true;
-var oddelovac = ', ';
+var oddelovac = '\n';
 
 #import "CHMU-SMS-OKRES-SKUP";
 
 if (vystupText != '') {
-    vystupText += 'KOPIS HZS LK';
+    vystupText += '\n';
+    vystupText += 'OPIS GŘ HZS ČR';
 }
 
 if (vystupText !== 'undefined' && vystupText) {
