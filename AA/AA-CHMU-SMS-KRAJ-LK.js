@@ -24,7 +24,7 @@ var KRAJE_NAZVY = {
 #import "CHMU-SMS-KRAJ-LK";
 
 if (vystupText != '') {
-    vystupText += 'KOPIS HZS LK';
+    vystupText += '. KOPIS HZS LK';
 }
 
 if (vystupText !== 'undefined' && vystupText) {

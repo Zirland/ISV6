@@ -17,6 +17,7 @@ function removeDuplicates(arr) {
 
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
+var vystupText = '';
 
 var orpTmp = [];
 
@@ -64,7 +65,7 @@ if (vystraha.info && vystraha.info.length > 0) {
 
 if (Number(zmen) != 0) {
     var zacatky = [];
-    var vystupText = 'Na Váš e-mail byla odeslána ';
+    vystupText += 'Na Váš e-mail byla odeslána ';
 
     if (vystraha.info) {
         var infoList = [];
