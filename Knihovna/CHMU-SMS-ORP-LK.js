@@ -5,8 +5,20 @@
 #import "CHMU-DATUMY";
 #import "CHMU-PREPARE";
 
+function removeDuplicates(arr) {
+    var unique_array = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (unique_array.indexOf(arr[i]) == -1) {
+            unique_array.push(arr[i]);
+        }
+    }
+    return unique_array;
+}
+
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
+var vystupText = '';
+
 var orpTmp = [];
 
 for (var i = 0; i < orp.length; i++) {
@@ -52,36 +64,21 @@ if (vystraha.info && vystraha.info.length > 0) {
 }
 
 if (Number(zmen) != 0) {
-
-    function removeDuplicates(arr) {
-        var unique_array = [];
-        for (var i = 0; i < arr.length; i++) {
-            if (unique_array.indexOf(arr[i]) == -1) {
-                unique_array.push(arr[i]);
-            }
-        }
-        return unique_array;
-    }
-    
     var zacatky = [];
-    var konce = [];
-    var sms1 = '';
-    var seznjevu = [];
-    var resultText = '';
-    var vystupText = '';
-    
+    vystupText += 'Na Váš e-mail byla odeslána ';
+
     if (vystraha.info) {
         var infoList = [];
         for (var l = 0; l < vystraha.info.length; l++) {
             infoList.push(vystraha.info[l]);
         }
-    
+
         infoList = infoList.sort(function(a, b) {
             var vyskyt1 = 0;
             var vyskyt2 = 0;
             var jev1 = a.stupen_kod;
             var jev2 = b.stupen_kod;
-    
+
             if (a.jistota_kod == 'Observed') {
                 vyskyt1 = 1;
             }
@@ -95,7 +92,7 @@ if (Number(zmen) != 0) {
             return 0;
         });
     }
-    
+
     if (infoList) {
         var poleJevy = [];
         var platne = [];
@@ -113,21 +110,23 @@ if (Number(zmen) != 0) {
                 }
                 var splitkod = infoList[i].stupen_kod.split('.');
                 var skupina = splitkod[0];
-                if (skupina == 'WARN' || skupina == 'REG' || skupina == 'SMOGSIT') {
+                if (
+                    skupina == 'WARN' ||
+                    skupina == 'REG' ||
+                    skupina == 'SMOGSIT'
+                ) {
                     skupina = splitkod[1];
                 }
-    
+
                 pomKod += skupina;
                 poleJevy.push(pomKod);
                 platne.push(infoList[i]);
             }
         }
-    
+
         poleJevy = removeDuplicates(poleJevy);
-    
+
         for (var h = 0; h < poleJevy.length; h++) {
-            var jevStart = [];
-            var jevEnd = [];
             for (var i = 0; i < platne.length; i++) {
                 var pomKodIvnj = '';
                 if (platne[i].jistota_kod == 'Observed') {
@@ -142,131 +141,40 @@ if (Number(zmen) != 0) {
                 ) {
                     skupinaJev = splitkodJev[1];
                 }
-    
+
                 if (poleJevy[h] == pomKodIvnj + skupinaJev) {
-                    var warn_type = 'SVRS';
-                    if (platne[i].SIVS == '1') {
-                        warn_type = 'SIVS';
-                    }
-                    if (platne[i].HPPS == '1') {
-                        warn_type = 'HPPS';
-                    }
-                    seznjevu.push(warn_type);
                     var zacatek = Normalize(platne[i].dc_zacatek);
                     zacatky.push(zacatek);
-                    var konec = Normalize(platne[i].dc_konec);
-                    konce.push(konec);
-    
-                    jevStart.push(zacatek);
-                    jevEnd.push(konec);
                 }
             }
-            if (detailni) {
-                var jevStarty = Math.min.apply(null, jevStart);
-                var jevZacatek = jevStarty.toString();
-    
-                var jevEndy = Math.max.apply(null, jevEnd);
-                var jevKonec = jevEndy.toString();
-    
-                var zahajeni = ZobrazDatumSMS(jevZacatek);
-                var ukonceni = ZobrazDatumSMS(jevKonec, 1);
-    
-                resultText +=
-                    JEVY_SKUPINY[poleJevy[h]] +
-                    ' od ' +
-                    zahajeni +
-                    ' do ' +
-                    ukonceni +
-                    oddelovac;
-                sms1 +=
-                    JEVY_SKUPINY[poleJevy[h]] +
-                    ' od ' +
-                    zahajeni +
-                    ' do ' +
-                    ukonceni +
-                    oddelovac;
-            } else {
-                resultText += JEVY_SKUPINY[poleJevy[h]] + oddelovac;
-                sms1 += JEVY_SKUPINY[poleJevy[h]] + oddelovac;
-            }
+            resultText += JEVY_SKUPINY[poleJevy[h]] + ', ';
         }
-    
+
         var starty = Math.min.apply(null, zacatky);
         var start = starty.toString();
-    
-        var endy = Math.max.apply(null, konce);
-        var end = endy.toString();
-    
-        var total_zahajeni = ZobrazDatumSMS(start);
-        var total_ukonceni = ZobrazDatumSMS(end, 1);
-    
-        var rezim = 'SVRS';
-        if (seznjevu.indexOf('SIVS') > -1) {
-            rezim = 'SIVS';
-        }
-        if (seznjevu.indexOf('HPPS') > -1) {
-            rezim = 'HPPS';
-        }
-    
+
         if (start == 'Infinity') {
-            vystupText +=
-                'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
-            sms1 += vystupText;
+            vystupText += 'informace ČHMÚ - není v platnosti žádná výstraha.';
+            vystupText += ', ';
         } else {
+            var uvod = '';
             switch (vystraha.ucel) {
                 case 'Exercise':
-                    var uvod = 'Cvičná zpráva ';
+                    uvod = 'cvičná zpráva ČHMÚ - ';
                     break;
                 case 'System':
-                    var uvod = 'Systémová zpráva ';
+                    uvod = 'systémová zpráva ČHMÚ - ';
                     break;
                 case 'Test':
-                    var uvod = 'Testovací zpráva ';
+                    uvod = 'testovací zpráva ČHMÚ - ';
                     break;
                 default:
-                    var uvod = 'Výstraha ';
+                    uvod = 'výstraha ČHMÚ - ';
                     break;
             }
-    
-            switch (rezim) {
-                case 'HPPS':
-                    uvod += 'HPPS ';
-                    break;
-                case 'SIVS':
-                    uvod += 'SIVS ';
-                    break;
-                case 'SVRS':
-                    uvod += 'SVRS ';
-                    break;
-                default:
-                    uvod += 'ČHMÚ';
-                    break;
-            }
-    
-            var poradi_zpravy = vystraha.id.substring(vystraha.id.length - 6);
-            uvod += 'č. ' + Number(poradi_zpravy) + ': ';
             vystupText += uvod;
-    
             vystupText += resultText;
-    
-            if (!detailni) {
-                vystupText +=
-                    'Platnost od ' +
-                    total_zahajeni +
-                    ' do ' +
-                    total_ukonceni +
-                    oddelovac;
-                sms1 +=
-                    'Platnost od ' +
-                    total_zahajeni +
-                    ' do ' +
-                    total_ukonceni +
-                    oddelovac;
-            }
         }
-        vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
+        vystupText = vystupText.substring(0, vystupText.length - 2);
     }
-    
-
-    resultText = 'Na Váš e-mail byla odeslána zpráva.';
 }
