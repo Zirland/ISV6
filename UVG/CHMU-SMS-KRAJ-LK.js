@@ -1,6 +1,6 @@
 // Verze 61
 
-var omezitNaKraj = -1;
+var omezitNaKraj = 78;
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
@@ -115,7 +115,7 @@ var JEVY_NAZVY = {
     '0XV.2': 'VÝSKYT Jiný jev',
     'XV.3': 'Jiný jev',
     '0XV.3': 'VÝSKYT Jiný jev',
-    'OUTLOOK': 'Výhled nebezpečných jevů',
+    OUTLOOK: 'Výhled nebezpečných jevů',
     '0OUTLOOK': 'Výhled nebezpečných jevů',
     'SMOGSIT.O3': 'Smogová situace O3',
     '0SMOGSIT.O3': 'Smogová situace O3',
@@ -134,6 +134,177 @@ var JEVY_NAZVY = {
     'REG.NO2': 'Regulace NO2',
     '0REG.NO2': 'Regulace NO2'
 };
+
+var JEVY_SKUPINY = {
+    I: 'Extrémní teploty',
+    II: 'Pokles teplot pod nulu',
+    III: 'Vítr',
+    IV: 'Sněhová pokrývka',
+    V: 'Sněhové srážky',
+    VI: 'Sněhové jevy',
+    VII: 'Náledí',
+    VIII: 'Ledovka',
+    IX: 'Námrazové jevy',
+    X: 'Bouřkové jevy',
+    XI: 'Dešťové srážky',
+    XII: 'Povodňové jevy',
+    XIII: 'Dotok',
+    XIV: 'Požáry',
+    XV: 'Jiné jevy',
+    OUTLOOK: 'Výhled jevů',
+    O3: 'Přízemní ozón',
+    NO2: 'Oxid dusičitý',
+    SO2: 'Oxid siřičitý',
+    PM10: 'Prachové částice'
+};
+
+function SimpleHighlightDiff(newValue, oldValue) {
+    var resultText = '';
+    var zmena = 0;
+    var newText = newValue ? newValue.toString() : '';
+    var oldText = oldValue ? oldValue.toString() : '';
+
+    if (oldText == newText) {
+        resultText += oldText;
+    } else {
+        resultText += '<font color="red"><s>' + oldText + '</s></font>';
+        resultText += oldText && newText ? '<br/>' : '';
+        resultText += '<font color="green">' + newText + '</font>';
+        zmena = 1;
+    }
+
+    resultText = resultText + '|' + zmena;
+    return resultText;
+}
+
+function HighlightDiff(newValue, oldValue) {
+    var resultText = '';
+    var zmena = 0;
+
+    var newValueSplit = newValue != undefined ? newValue.split(' ') : [];
+    var oldValueSplit = oldValue != undefined ? oldValue.split(' ') : [];
+
+    if (newValueSplit.length == 0 || oldValueSplit.length == 0) {
+        resultText = SimpleHighlightDiff(newValue, oldValue);
+    } else {
+        var matrix = GetLCSLength(newValueSplit, oldValueSplit);
+
+        var i = newValueSplit.length;
+        var j = oldValueSplit.length;
+
+        var changeList = [];
+
+        while (i > 0 && j > 0) {
+            if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {
+                var changeValue = {};
+                changeValue.text = newValueSplit[i - 1];
+                changeValue.change = 0;
+
+                changeList.push(changeValue);
+
+                i--;
+                j--;
+            } else if (matrix[i][j - 1] > matrix[i - 1][j]) {
+                var changeValue = {};
+                changeValue.text = oldValueSplit[j - 1];
+                changeValue.change = -1;
+
+                changeList.push(changeValue);
+
+                j--;
+            } else {
+                var changeValue = {};
+                changeValue.text = newValueSplit[i - 1];
+                changeValue.change = 1;
+
+                changeList.push(changeValue);
+
+                i--;
+            }
+        }
+
+        while (i > 0) {
+            var changeValue = {};
+            changeValue.text = newValueSplit[i - 1];
+            changeValue.change = 1;
+
+            changeList.push(changeValue);
+
+            i--;
+        }
+
+        while (j > 0) {
+            var changeValue = {};
+            changeValue.text = oldValueSplit[j - 1];
+            changeValue.change = -1;
+
+            changeList.push(changeValue);
+
+            j--;
+        }
+
+        var lastChange = 0;
+
+        for (var index = changeList.length; index > 0; index--) {
+            if (lastChange != changeList[index - 1].change) {
+                if (index != changeList.length) {
+                    resultText += lastChange == -1 ? '</s></font>' : '';
+                }
+
+                lastChange = changeList[index - 1].change;
+
+                if (lastChange == 1) {
+                    resultText += '<font color="green">';
+                    zmena = 1;
+                } else if (lastChange == -1) {
+                    resultText += '<font color="red"><s>';
+                    zmena = 1;
+                } else {
+                    resultText += '</s><font color="black">';
+                }
+            }
+
+            resultText += changeList[index - 1].text + ' ';
+        }
+
+        if (changeList.length > 0) {
+            if (lastChange == 1) {
+                resultText += '</font>';
+            } else if (lastChange == -1) {
+                resultText += '</s></font>';
+            } else {
+                resultText += '</font>';
+            }
+        }
+        resultText = resultText + '|' + zmena;
+    }
+
+    return resultText;
+}
+
+function GetLCSLength(newValueSplit, oldValueSplit) {
+    var matrix = new Array(newValueSplit.length + 1);
+
+    for (var i = 0; i < newValueSplit.length + 1; i++) {
+        matrix[i] = new Array(oldValueSplit.length + 1);
+
+        for (var j = 0; j < oldValueSplit.length + 1; j++) {
+            matrix[i][j] = 0;
+        }
+    }
+
+    for (var i = 1; i < newValueSplit.length + 1; i++) {
+        for (var j = 1; j < oldValueSplit.length + 1; j++) {
+            if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {
+                matrix[i][j] = matrix[i - 1][j - 1] + 1;
+            } else {
+                matrix[i][j] = Math.max(matrix[i][j - 1], matrix[i - 1][j]);
+            }
+        }
+    }
+
+    return matrix;
+}
 
 function Normalize(datum) {
     if (!datum) {
@@ -463,9 +634,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
         zpracovanyInfoStupen = [];
         ref_zpracovanyInfoStupen = [];
         first = true;
-        opakovanyKraj = [];
-        opakovanyOkres = [];
-        opakovanyOrp = [];
+        var opakovanyKraj = [];
+        var opakovanyOkres = [];
+        var opakovanyOrp = [];
 
         if (ref_krajList.length > 0) {
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
@@ -482,6 +653,12 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                 if (!found && zobrazitZmeny) {
                     if (first) {
                         first = false;
+                        headers == 0
+                            ? ''
+                            : (resultText +=
+                                  '</div><br/><div><b>' +
+                                  KRAJE_NAZVY[ref_krajList[k].id] +
+                                  '</b>');
                     }
 
                     ref_zpracovanyInfoStupen.push(
@@ -492,6 +669,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             ref_info.dc_konec
                     );
                     pomoc = PrintInfo(null, ref_info);
+                    resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
             }
@@ -532,10 +710,17 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
             if (first) {
                 first = false;
+                headers == 0
+                    ? ''
+                    : (resultText +=
+                          '</div><br/><div><b>' +
+                          KRAJE_NAZVY[krajList[k].id] +
+                          '</b>');
                 empty = false;
             }
 
             pomoc = PrintInfo(info, ref_info);
+            resultText += pomoc.split('|')[0];
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
         }
 
@@ -589,6 +774,12 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         if (!found && zobrazitZmeny) {
                             if (first) {
                                 first = false;
+                                headers == 0
+                                    ? ''
+                                    : (resultText +=
+                                          '</div><br/><div><b>Okres ' +
+                                          ref_krajList[k].okresList[o].nazev +
+                                          '</b>');
                             }
 
                             ref_zpracovanyInfoStupenOkres.push(
@@ -599,6 +790,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                     ref_info.dc_konec
                             );
                             pomoc = PrintInfo(null, ref_info);
+                            resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                         }
                     }
@@ -695,10 +887,17 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
                     if (first) {
                         first = false;
+                        headers == 0
+                            ? ''
+                            : (resultText +=
+                                  '</div><br/><div><b>Okres ' +
+                                  krajList[k].okresList[o].nazev +
+                                  '</b>');
                         empty = false;
                     }
 
                     pomoc = PrintInfo(info, ref_info);
+                    resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
             }
@@ -777,9 +976,17 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             if (!found && zobrazitZmeny) {
                                 if (first) {
                                     first = false;
+                                    headers == 0
+                                        ? ''
+                                        : (resultText +=
+                                              '</div><br/><div><b>ORP ' +
+                                              ref_krajList[k].okresList[o]
+                                                  .orpList[ol].nazev +
+                                              '</b>');
                                 }
 
                                 pomoc = PrintInfo(null, ref_info);
+                                resultText += pomoc.split('|')[0];
                                 zmen =
                                     Number(zmen) + Number(pomoc.split('|')[1]);
                             }
@@ -905,10 +1112,18 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
                         if (first) {
                             first = false;
+                            headers == 0
+                                ? ''
+                                : (resultText +=
+                                      '</div><br/><div><b>ORP ' +
+                                      krajList[k].okresList[o].orpList[ol]
+                                          .nazev +
+                                      '</b>');
                             empty = false;
                         }
 
                         pomoc = PrintInfo(info, ref_info);
+                        resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
                 }
@@ -926,6 +1141,12 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
                 if (first) {
                     first = false;
+                    headers == 0
+                        ? ''
+                        : (resultText +=
+                              '</div><br/><div><b>' +
+                              KRAJE_NAZVY[ref_krajList[k].id] +
+                              '</b>');
                 }
 
                 ref_zpracovanyInfoStupen.push(
@@ -936,6 +1157,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         ref_info.dc_konec
                 );
                 pomoc = PrintInfo(null, ref_info);
+                resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
             }
 
@@ -961,6 +1183,12 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     ) {
                         if (first) {
                             first = false;
+                            headers == 0
+                                ? ''
+                                : (resultText +=
+                                      '</div><br/><div><b>Okres ' +
+                                      ref_krajList[k].okresList[o].nazev +
+                                      '</b>');
                         }
 
                         ref_zpracovanyInfoStupenOkres.push(
@@ -971,6 +1199,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                 ref_info.dc_konec
                         );
                         pomoc = PrintInfo(null, ref_info);
+                        resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
                 }
@@ -1009,9 +1238,18 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         ) {
                             if (first) {
                                 first = false;
+                                headers == 0
+                                    ? ''
+                                    : (resultText +=
+                                          '</div><br/><div><b>ORP ' +
+                                          ref_krajList[k].okresList[o].orpList[
+                                              ol
+                                          ].nazev +
+                                          '</b>');
                             }
 
                             pomoc = PrintInfo(null, ref_info);
+                            resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                         }
                     }
@@ -1022,6 +1260,86 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
     resultText = resultText + '|' + zmen;
     return resultText;
+}
+
+function GetWarningColor(info) {
+    var color = '';
+
+    if (info) {
+        switch (info.zavaznost_kod) {
+            case 'Moderate':
+                color = 'Nízký st. nebezpečí';
+                break;
+            case 'Severe':
+                color = 'Vysoký st. nebezpečí';
+                break;
+            case 'Extreme':
+                color = 'Extrémní st. nebezpečí';
+                break;
+            default:
+                color = '';
+                break;
+        }
+    }
+
+    return color;
+}
+
+function PozadiColor(info) {
+    var pozadi = '#fff';
+
+    if (info) {
+        switch (info.zavaznost_kod) {
+            case 'Moderate':
+                pozadi = '#ff0';
+                break;
+            case 'Severe':
+                pozadi = '#ffa500';
+                break;
+            case 'Extreme':
+                pozadi = '#f00';
+                break;
+            default:
+                pozadi = '#fff';
+                break;
+        }
+    }
+
+    return pozadi;
+}
+
+function PrintVyska(info) {
+    var vyskaText = '';
+
+    if (info && info.vyska) {
+        var vyska = info.vyska.substring(1, info.vyska.length - 1);
+        var vyskaSplit = vyska.split('-');
+
+        if (vyskaSplit.length == 2) {
+            if (vyskaSplit[0] && vyskaSplit[1]) {
+                vyskaText =
+                    '<br/>mezi ' +
+                    Math.round(vyskaSplit[0] * 0.3048) +
+                    ' a ' +
+                    Math.round(vyskaSplit[1] * 0.3048) +
+                    ' m n.m.';
+            } else if (vyskaSplit[0]) {
+                vyskaText =
+                    '<br/>nad ' +
+                    Math.round(vyskaSplit[0] * 0.3048) +
+                    ' m n.m.';
+            } else if (vyskaSplit[1]) {
+                vyskaText =
+                    '<br/>pod ' +
+                    Math.round(vyskaSplit[1] * 0.3048) +
+                    ' m n.m.';
+            }
+        } else {
+            vyskaText = '<br/>' + Math.round(vyska * 0.3048);
+        }
+    }
+
+    return vyskaText;
 }
 
 function PrintInfo(info, ref_info) {
@@ -1079,303 +1397,295 @@ function PrintInfo(info, ref_info) {
         }
     }
 
-    pomoc = SimpleHighlightDiff(
-        info != null ? vyskyt : '',
-        ref_info != null ? ref_vyskyt : ''
-    );
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+    if (zobrazitZmeny) {
+        resultText += '<table class="tg" width="100%" border="1">';
 
-    pomoc = HighlightDiff(
-        info != null ? JEVY_NAZVY[info.stupen_kod] : '',
-        ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : ''
-    );
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+        resultText += '<tr>';
+        resultText += '<td width="20%">';
+        pomoc = SimpleHighlightDiff(
+            info != null ? vyskyt : '',
+            ref_info != null ? ref_vyskyt : ''
+        );
+        resultText += pomoc.split('|')[0];
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-    pomoc = HighlightDiff(
-        info != null ? PrintVyska(info) : '',
-        ref_info != null ? PrintVyska(ref_info) : ''
-    );
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+        pomoc = HighlightDiff(
+            info != null ? JEVY_NAZVY[info.stupen_kod] : '',
+            ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : ''
+        );
+        resultText += pomoc.split('|')[0];
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-    pomoc = HighlightDiff(
-        info != null ? GetWarningColor(info) : '',
-        ref_info != null ? GetWarningColor(ref_info) : ''
-    );
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+        pomoc = HighlightDiff(
+            info != null ? PrintVyska(info) : '',
+            ref_info != null ? PrintVyska(ref_info) : ''
+        );
+        resultText += pomoc.split('|')[0];
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 
-    if (
-        (info != null && info.SVRS == '1') ||
-        (ref_info != null && ref_info.SVRS == '1')
-    ) {
-        resultText += 'do odvolání';
-    } else {
+        resultText += '</td>';
+        resultText +=
+            '<td width="20%" style="background-color: ' +
+            PozadiColor(info) +
+            ';">';
+
+        pomoc = HighlightDiff(
+            info != null ? GetWarningColor(info) : '',
+            ref_info != null ? GetWarningColor(ref_info) : ''
+        );
+        resultText += pomoc.split('|')[0];
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '<td>';
+
         if (
-            info &&
-            ref_info &&
-            !UkoncenyJev(ref_info.dc_konec, vytvoreni) &&
-            info.nalehavost_kod == 'Immediate'
+            (info != null && info.SVRS == '1') ||
+            (ref_info != null && ref_info.SVRS == '1')
         ) {
-            resultText += ZobrazDatum(info.dc_zacatek, 'short');
+            resultText += 'do odvolání';
         } else {
+            resultText += '<table class="no" border="0">';
+            resultText += '<tr><td>';
+
+            if (
+                info &&
+                ref_info &&
+                !UkoncenyJev(ref_info.dc_konec, vytvoreni) &&
+                info.nalehavost_kod == 'Immediate'
+            ) {
+                resultText += ZobrazDatum(info.dc_zacatek, 'short');
+            } else {
+                pomoc = SimpleHighlightDiff(
+                    info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '',
+                    ref_info != null
+                        ? ZobrazDatum(ref_info.dc_zacatek, 'short')
+                        : ''
+                );
+                resultText += pomoc.split('|')[0];
+                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+            }
+
+            resultText += '</td>';
+            resultText += '<td>&nbsp;–&nbsp;</td>';
+
+            resultText += '<td>';
             pomoc = SimpleHighlightDiff(
-                info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '',
+                info != null ? ZobrazDatum(info.dc_konec, 'short', 1) : '',
                 ref_info != null
-                    ? ZobrazDatum(ref_info.dc_zacatek, 'short')
+                    ? ZobrazDatum(ref_info.dc_konec, 'short', 1)
                     : ''
             );
+            resultText += pomoc.split('|')[0];
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+            resultText += '</td></tr>';
+            resultText += '</table>';
+        }
+        resultText += '</td>';
+        resultText += '</tr>';
+
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Popis:</b> ';
+
+        pomoc = HighlightDiff(
+            info != null ? upr_info : '',
+            ref_info != null ? ref_upr_info : ''
+        );
+        resultText += pomoc.split('|')[0];
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '</tr>';
+
+        if (info && info.hydroPredpoved) {
+            resultText += '<tr>';
+            resultText +=
+                '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
+
+            pomoc = HighlightDiff(
+                info != null ? upr_hydro : '',
+                ref_info != null ? ref_upr_hydro : ''
+            );
+            resultText += pomoc.split('|')[0];
+            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+            resultText += '</td>';
+            resultText += '</tr>';
         }
 
-        pomoc = SimpleHighlightDiff(
-            info != null ? ZobrazDatum(info.dc_konec, 'short', 1) : '',
-            ref_info != null ? ZobrazDatum(ref_info.dc_konec, 'short', 1) : ''
-        );
-        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-    }
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Doporučení:</b> ';
 
-    pomoc = HighlightDiff(
-        info != null ? upr_info : '',
-        ref_info != null ? ref_upr_info : ''
-    );
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-
-    if (info && info.hydroPredpoved) {
         pomoc = HighlightDiff(
-            info != null ? upr_hydro : '',
-            ref_info != null ? ref_upr_hydro : ''
+            info != null ? upr_doporuceni : '',
+            ref_info != null ? ref_upr_doporuceni : ''
         );
+        resultText += pomoc.split('|')[0];
         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
-    }
 
-    pomoc = HighlightDiff(
-        info != null ? upr_doporuceni : '',
-        ref_info != null ? ref_upr_doporuceni : ''
-    );
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+        resultText += '</td>';
+        resultText += '</tr>';
+        resultText += '</table>';
+    } else {
+        resultText += '<table class="tg" width="100%" border="1 ">';
+
+        resultText += '<tr>';
+        resultText += '<td width="20%">';
+        pomoc = SimpleHighlightDiff(
+            info != null ? vyskyt : '',
+            ref_info != null ? ref_vyskyt : ''
+        );
+        resultText += info != null ? vyskyt : '';
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        pomoc = HighlightDiff(
+            info != null ? JEVY_NAZVY[info.stupen_kod] : '',
+            ref_info != null ? JEVY_NAZVY[ref_info.stupen_kod] : ''
+        );
+        resultText += info != null ? JEVY_NAZVY[info.stupen_kod] : '';
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        pomoc = HighlightDiff(
+            info != null ? PrintVyska(info) : '',
+            ref_info != null ? PrintVyska(ref_info) : ''
+        );
+        resultText += (info != null ? PrintVyska(info) : '') + '</td>';
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText +=
+            '<td width="20%" style="background-color: ' +
+            PozadiColor(info) +
+            ';">';
+
+        pomoc = HighlightDiff(
+            info != null ? GetWarningColor(info) : '',
+            ref_info != null ? GetWarningColor(ref_info) : ''
+        );
+        resultText += info != null ? GetWarningColor(info) : '';
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '<td>';
+
+        if (
+            (info != null && info.SVRS == '1') ||
+            (ref_info != null && ref_info.SVRS == '1')
+        ) {
+            resultText += 'do odvolání';
+        } else {
+            resultText += '<table class="no" border="0">';
+            resultText += '<tr><td>';
+
+            if (
+                info &&
+                ref_info &&
+                !UkoncenyJev(ref_info.dc_konec, vytvoreni) &&
+                info.nalehavost_kod == 'Immediate'
+            ) {
+                resultText +=
+                    info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '';
+            } else {
+                pomoc = SimpleHighlightDiff(
+                    info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '',
+                    ref_info != null
+                        ? ZobrazDatum(ref_info.dc_zacatek, 'short')
+                        : ''
+                );
+                resultText +=
+                    info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '';
+                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+            }
+
+            resultText += '</td>';
+            resultText += '<td>&nbsp;–&nbsp;</td>';
+            resultText += '<td>';
+            pomoc = SimpleHighlightDiff(
+                info != null ? ZobrazDatum(info.dc_konec, 'short', 1) : '',
+                ref_info != null
+                    ? ZobrazDatum(ref_info.dc_konec, 'short', 1)
+                    : ''
+            );
+            resultText +=
+                info != null ? ZobrazDatum(info.dc_konec, 'short', 1) : '';
+            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+            resultText += '</td></tr>';
+            resultText += '</table>';
+        }
+        resultText += '</td>';
+        resultText += '</tr>';
+
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Popis:</b> ';
+
+        pomoc = HighlightDiff(
+            info != null ? upr_info : '',
+            ref_info != null ? ref_upr_info : ''
+        );
+        resultText += info != null ? upr_info : '';
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '</tr>';
+
+        if (info && info.hydroPredpoved) {
+            resultText += '<tr>';
+            resultText +=
+                '<td colspan="3"><b>Hydrologická regionální informační zpráva</b>: ';
+
+            pomoc = HighlightDiff(
+                info != null ? upr_hydro : '',
+                ref_info != null ? ref_upr_hydro : ''
+            );
+            resultText += info != null ? upr_hydro : '';
+            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+            resultText += '</td>';
+            resultText += '</tr>';
+        }
+
+        resultText += '<tr>';
+        resultText += '<td colspan="3"><b>Doporučení:</b> ';
+
+        pomoc = HighlightDiff(
+            info != null ? upr_doporuceni : '',
+            ref_info != null ? ref_upr_doporuceni : ''
+        );
+        resultText += info != null ? upr_doporuceni : '';
+        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
+        resultText += '</td>';
+        resultText += '</tr>';
+        resultText += '</table>';
+    }
 
     resultText = resultText + '|' + zmen;
     return resultText;
 }
 
-function SimpleHighlightDiff(newValue, oldValue) {
-    var resultText = '';
-    var zmena = 0;
-    var newText = newValue ? newValue.toString() : '';
-    var oldText = oldValue ? oldValue.toString() : '';
-
-    if (oldText == newText) {
-        resultText += oldText;
-    } else {
-        resultText += '<font color="red"><s>' + oldText + '</s></font>';
-        resultText += oldText && newText ? '<br/>' : '';
-        resultText += '<font color="green">' + newText + '</font>';
-        zmena = 1;
-    }
-
-    resultText = resultText + '|' + zmena;
-    return resultText;
-}
-
-function HighlightDiff(newValue, oldValue) {
-    var resultText = '';
-    var zmena = 0;
-
-    var newValueSplit = newValue != undefined ? newValue.split(' ') : [];
-    var oldValueSplit = oldValue != undefined ? oldValue.split(' ') : [];
-
-    if (newValueSplit.length == 0 || oldValueSplit.length == 0) {
-        resultText = SimpleHighlightDiff(newValue, oldValue);
-    } else {
-        var matrix = GetLCSLength(newValueSplit, oldValueSplit);
-
-        var i = newValueSplit.length;
-        var j = oldValueSplit.length;
-
-        var changeList = [];
-
-        while (i > 0 && j > 0) {
-            if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {
-                var changeValue = {};
-                changeValue.text = newValueSplit[i - 1];
-                changeValue.change = 0;
-
-                changeList.push(changeValue);
-
-                i--;
-                j--;
-            } else if (matrix[i][j - 1] > matrix[i - 1][j]) {
-                var changeValue = {};
-                changeValue.text = oldValueSplit[j - 1];
-                changeValue.change = -1;
-
-                changeList.push(changeValue);
-
-                j--;
-            } else {
-                var changeValue = {};
-                changeValue.text = newValueSplit[i - 1];
-                changeValue.change = 1;
-
-                changeList.push(changeValue);
-
-                i--;
-            }
-        }
-
-        while (i > 0) {
-            var changeValue = {};
-            changeValue.text = newValueSplit[i - 1];
-            changeValue.change = 1;
-
-            changeList.push(changeValue);
-
-            i--;
-        }
-
-        while (j > 0) {
-            var changeValue = {};
-            changeValue.text = oldValueSplit[j - 1];
-            changeValue.change = -1;
-
-            changeList.push(changeValue);
-
-            j--;
-        }
-
-        var lastChange = 0;
-
-        for (var index = changeList.length; index > 0; index--) {
-            if (lastChange != changeList[index - 1].change) {
-                if (index != changeList.length) {
-                    resultText += lastChange == -1 ? '</s></font>' : '';
-                }
-
-                lastChange = changeList[index - 1].change;
-
-                if (lastChange == 1) {
-                    resultText += '<font color="green">';
-                    zmena = 1;
-                } else if (lastChange == -1) {
-                    resultText += '<font color="red"><s>';
-                    zmena = 1;
-                } else {
-                    resultText += '</s><font color="black">';
-                }
-            }
-
-            resultText += changeList[index - 1].text + ' ';
-        }
-
-        if (changeList.length > 0) {
-            if (lastChange == 1) {
-                resultText += '</font>';
-            } else if (lastChange == -1) {
-                resultText += '</s></font>';
-            } else {
-                resultText += '</font>';
-            }
-        }
-        resultText = resultText + '|' + zmena;
-    }
-
-    return resultText;
-}
-
-function GetLCSLength(newValueSplit, oldValueSplit) {
-    var matrix = new Array(newValueSplit.length + 1);
-
-    for (var i = 0; i < newValueSplit.length + 1; i++) {
-        matrix[i] = new Array(oldValueSplit.length + 1);
-
-        for (var j = 0; j < oldValueSplit.length + 1; j++) {
-            matrix[i][j] = 0;
+function removeDuplicates(arr) {
+    var unique_array = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (unique_array.indexOf(arr[i]) == -1) {
+            unique_array.push(arr[i]);
         }
     }
-
-    for (var i = 1; i < newValueSplit.length + 1; i++) {
-        for (var j = 1; j < oldValueSplit.length + 1; j++) {
-            if (newValueSplit[i - 1] == oldValueSplit[j - 1]) {
-                matrix[i][j] = matrix[i - 1][j - 1] + 1;
-            } else {
-                matrix[i][j] = Math.max(matrix[i][j - 1], matrix[i - 1][j]);
-            }
-        }
-    }
-
-    return matrix;
-}
-
-function PrintVyska(info) {
-    var vyskaText = '';
-
-    if (info && info.vyska) {
-        var vyska = info.vyska.substring(1, info.vyska.length - 1);
-        var vyskaSplit = vyska.split('-');
-
-        if (vyskaSplit.length == 2) {
-            if (vyskaSplit[0] && vyskaSplit[1]) {
-                vyskaText =
-                    '<br/>mezi ' +
-                    Math.round(vyskaSplit[0] * 0.3048) +
-                    ' a ' +
-                    Math.round(vyskaSplit[1] * 0.3048) +
-                    ' m n.m.';
-            } else if (vyskaSplit[0]) {
-                vyskaText =
-                    '<br/>nad ' +
-                    Math.round(vyskaSplit[0] * 0.3048) +
-                    ' m n.m.';
-            } else if (vyskaSplit[1]) {
-                vyskaText =
-                    '<br/>pod ' +
-                    Math.round(vyskaSplit[1] * 0.3048) +
-                    ' m n.m.';
-            }
-        } else {
-            vyskaText = '<br/>' + Math.round(vyska * 0.3048);
-        }
-    }
-
-    return vyskaText;
-}
-
-function GetWarningColor(info) {
-    var color = '';
-
-    if (info) {
-        switch (info.zavaznost_kod) {
-            case 'Moderate':
-                color = 'Nízký st. nebezpečí';
-                break;
-            case 'Severe':
-                color = 'Vysoký st. nebezpečí';
-                break;
-            case 'Extreme':
-                color = 'Extrémní st. nebezpečí';
-                break;
-            default:
-                color = '';
-                break;
-        }
-    }
-
-    return color;
+    return unique_array;
 }
 
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
+var vystupText = '';
 
-if (omezitNaKraj != -1) {
-    var orpTmp = [];
+var orpTmp = [];
 
-    for (var i = 0; i < orp.length; i++) {
-        if (omezitNaKraj == orp[i].kraj.id) {
-            orpTmp.push(orp[i]);
-        }
+for (var i = 0; i < orp.length; i++) {
+    if (omezitNaKraj == orp[i].kraj.id) {
+        orpTmp.push(orp[i]);
     }
-
-    orp = orpTmp;
 }
+
+orp = orpTmp;
 
 var resultText = '';
 var krajList = [];
@@ -1412,15 +1722,139 @@ if (vystraha.info && vystraha.info.length > 0) {
 }
 
 if (Number(zmen) != 0) {
-    resultText =
-        'V datech pro území ' +
-        KRAJE_NAZVY[omezitNaKraj] +
-        ' jsou změny, budou vygenerovány e-maily a SMS.';
-} else {
-    resultText =
-        'V datech pro území ' +
-        KRAJE_NAZVY[omezitNaKraj] +
-        ' nejsou žádné změny, nedojde k odeslání žádných zpráv.';
+    var zacatky = [];
+    vystupText += 'Na Váš e-mail byla odeslána ';
+
+    if (vystraha.info) {
+        var infoList = [];
+        for (var l = 0; l < vystraha.info.length; l++) {
+            infoList.push(vystraha.info[l]);
+        }
+
+        infoList = infoList.sort(function(a, b) {
+            var vyskyt1 = 0;
+            var vyskyt2 = 0;
+            var jev1 = a.stupen_kod;
+            var jev2 = b.stupen_kod;
+
+            if (a.jistota_kod == 'Observed') {
+                vyskyt1 = 1;
+            }
+            if (b.jistota_kod == 'Observed') {
+                vyskyt2 = 1;
+            }
+            if (vyskyt1 > vyskyt2) return -1;
+            if (vyskyt1 < vyskyt2) return 1;
+            if (jev1 < jev2) return -1;
+            if (jev1 > jev2) return 1;
+            return 0;
+        });
+    }
+
+    if (infoList) {
+        var poleJevy = [];
+        for (var i = 0; i < infoList.length; i++) {
+            if (infoList[i].stupen_kod != 'OUTLOOK') {
+                var pomKod = '';
+                if (infoList[i].jistota_kod == 'Observed') {
+                    pomKod += '0';
+                }
+                var splitkod = infoList[i].stupen_kod.split('.');
+                var skupina = splitkod[0];
+                if (
+                    skupina == 'WARN' ||
+                    skupina == 'REG' ||
+                    skupina == 'SMOGSIT'
+                ) {
+                    skupina = splitkod[1];
+                }
+
+                pomKod += skupina;
+                poleJevy.push(pomKod);
+            }
+        }
+
+        poleJevy = removeDuplicates(poleJevy);
+
+        for (var h = 0; h < poleJevy.length; h++) {
+            var jevKrajeList = [];
+            for (var i = 0; i < infoList.length; i++) {
+                var pomKodIvnj = '';
+                if (infoList[i].jistota_kod == 'Observed') {
+                    pomKodIvnj = '0';
+                }
+                var splitkodJev = infoList[i].stupen_kod.split('.');
+                var skupinaJev = splitkodJev[0];
+                if (
+                    skupinaJev == 'WARN' ||
+                    skupinaJev == 'REG' ||
+                    skupinaJev == 'SMOGSIT'
+                ) {
+                    skupinaJev = splitkodJev[1];
+                }
+
+                if (poleJevy[h] == pomKodIvnj + skupinaJev) {
+                    var found = false;
+                    for (
+                        var j = 0;
+                        j < infoList[i].kraj.length && !found;
+                        j++
+                    ) {
+                        found = infoList[i].kraj[j].UID == omezitNaKraj;
+                    }
+                    for (var j = 0; j < infoList[i].kraj.length; j++) {
+                        if (found) {
+                            jevKrajeList.push(infoList[i].kraj[j].UID);
+                            var zacatek = Normalize(infoList[i].dc_zacatek);
+                            zacatky.push(zacatek);
+                        }
+                    }
+                }
+            }
+            jevKrajeList = removeDuplicates(jevKrajeList);
+            jevKrajeList = jevKrajeList.sort(function(a, b) {
+                return a - b;
+            });
+
+            if (jevKrajeList.length > 0) {
+                resultText += JEVY_SKUPINY[poleJevy[h]] + ', ';
+            }
+        }
+
+        var starty = Math.min.apply(null, zacatky);
+        var start = starty.toString();
+
+        if (start == 'Infinity') {
+            vystupText += 'informace ČHMÚ - není v platnosti žádná výstraha.';
+            vystupText += ', ';
+        } else {
+            var uvod = '';
+            switch (vystraha.ucel) {
+                case 'Exercise':
+                    uvod = 'cvičná zpráva ČHMÚ - ';
+                    break;
+                case 'System':
+                    uvod = 'systémová zpráva ČHMÚ - ';
+                    break;
+                case 'Test':
+                    uvod = 'testovací zpráva ČHMÚ - ';
+                    break;
+                default:
+                    uvod = 'výstraha ČHMÚ - ';
+                    break;
+            }
+
+            vystupText += uvod;
+            vystupText += resultText;
+        }
+        vystupText = vystupText.substring(0, vystupText.length - 2);
+    }
 }
 
-return resultText;
+if (vystupText != '') {
+    vystupText += '. KOPIS HZS LK';
+}
+
+if (vystupText !== 'undefined' && vystupText) {
+    print(vystupText);
+}

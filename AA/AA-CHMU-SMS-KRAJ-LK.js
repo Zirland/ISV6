@@ -1,11 +1,7 @@
 //!JS
 // Verze 61
 
-var omezitNaKraj = -1;
-var zobrazitVyhled = false;
-var pouzeZmeny = true;
-var distrSeznamNahore = false;
-var slucovat = true;
+var omezitNaKraj = 78;
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
@@ -25,8 +21,12 @@ var KRAJE_NAZVY = {
     '141': 'Zlínský kraj'
 };
 
-#import "CHMU-MAIL-2";
+#import "CHMU-SMS-KRAJ-LK";
 
-if (resultText !== 'undefined' && resultText) {
-    print(resultText);
+if (vystupText != '') {
+    vystupText += '. KOPIS HZS LK';
+}
+
+if (vystupText !== 'undefined' && vystupText) {
+    print(vystupText);
 }

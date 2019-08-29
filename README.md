@@ -65,6 +65,21 @@ Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslá
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
 
+### [CHMU-SMS-KRAJ-LK]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail v Libereckém kraji.
+
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+
+### [CHMU-SMS-OKRES-LK]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro skupinu ORP (okres) v Libereckém kraji.
+
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+
+### [CHMU-SMS-ORP-LK]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro ORP v Libereckém kraji.
+
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+
 ### [CHMU-CISELNIK]
 Předpis obsahující potřebné číselníky jevů a území.
 
@@ -322,6 +337,22 @@ Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 - Při hodnotě *true* je text SMS zprávy rozšířen o seznam ORP, na jejichž území jev platí. Je tak možno rozpoznat změnu rozsahu území.
 
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
+
+---
+### [AA-CHMU-SMS-KRAJ-LK]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail v Libereckém kraji.
+
+Parametr **omezitNaKraj** obsahuje číselný kód Libereckého kraje. Hodnotu prosím neměňte.
+
+### [AA-CHMU-SMS-OKRES-LK]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail na skupinu ORP (okres) v Libereckém kraji.
+
+Parametr **mojeUzemi** obsahuje číselné kódy ORP, které definují zájmové území. Formát zprávy je dle požadavků HZS LIK. Skript neprovádí kontrolu, zda je zájmové území uvnitř Libereckého kraje.
+
+### [AA-CHMU-SMS-KRAJ-LK]
+Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro ORP v Libereckém kraji.
+
+Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Skript neprovádí kontrolu, zda je ORP uvnitř Libereckého kraje. Číselník území je v samostatném souboru "seznam_ORP.csv".
 
 ---
 ---

@@ -2,15 +2,11 @@
 // Verze 61
 
 var mojeUzemi = [1139, 1147, 1155];
-var detailni = 1;
-var vypisOrp = true;
-var oddelovac = '\n';
 
-#import "CHMU-SMS-OKRES-SKUP";
+#import "CHMU-SMS-OKRES-LK";
 
 if (vystupText != '') {
-    vystupText += '\n';
-    vystupText += 'OPIS GŘ HZS ČR';
+    vystupText += '. KOPIS HZS LK';
 }
 
 if (vystupText !== 'undefined' && vystupText) {
