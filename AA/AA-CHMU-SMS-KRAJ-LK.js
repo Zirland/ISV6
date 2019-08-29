@@ -1,5 +1,5 @@
 //!JS
-//Verze 60
+// Verze 61
 
 var omezitNaKraj = 78;
 

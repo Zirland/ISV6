@@ -1,4 +1,4 @@
-//Verze 60
+// Verze 61
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
