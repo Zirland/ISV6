@@ -1,6 +1,39 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 61 – 2019-08-29
+### [AA/AA-CHMU-SMS-KRAJ-LK]
+#### Přidáno
+- Na základě upřesněného požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů, specifický pro Liberecký kraj.
+
+### [AA/AA-CHMU-SMS-OKRES-LK]
+#### Přidáno
+- Na základě upřesněného požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů, specifický pro Liberecký kraj.
+
+### [AA/AA-CHMU-SMS-ORP-LK]
+#### Přidáno
+- Na základě upřesněného požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů, specifický pro Liberecký kraj.
+
+### [Knihovna/CHMU-CISELNIK]
+#### Změněno
+- Upraveno jméno pro skupinu I dle požadavku LIK.
+
+### [Knihovna/CHMU-SMS-KRAJ-LK]
+#### Přidáno
+- Na základě upřesněného požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů, specifický pro Liberecký kraj.
+
+### [Knihovna/CHMU-SMS-OKRES-LK]
+#### Přidáno
+- Na základě upřesněného požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů, specifický pro Liberecký kraj.
+
+### [Knihovna/CHMU-SMS-ORP-LK]
+#### Přidáno
+- Na základě upřesněného požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů, specifický pro Liberecký kraj.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+#### Přidáno
+- Na základě upřesněného požadavku HZS LIK vytvořen nový skript pro SMS, informace o skupinách jevů, specifický pro Liberecký kraj.
+
 ## verze 60 – 2019-08-22
 ### [AA/AA-CHMU-SMS-KRAJ-SKUP]
 #### Přidáno
