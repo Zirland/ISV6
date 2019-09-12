@@ -642,9 +642,9 @@ function PrintInfoList(krajList, ref_krajList) {
 
             if (first) {
                 first = false;
-                empty = false;
             }
 
+            empty = false;
             pomoc = PrintInfo(info, ref_info);
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
         }
@@ -704,9 +704,9 @@ function PrintInfoList(krajList, ref_krajList) {
 
                     if (first) {
                         first = false;
-                        empty = false;
                     }
 
+                    empty = false;
                     pomoc = PrintInfo(info, ref_info);
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
@@ -762,9 +762,9 @@ function PrintInfoList(krajList, ref_krajList) {
 
                         if (first) {
                             first = false;
-                            empty = false;
                         }
 
+                        empty = false;
                         pomoc = PrintInfo(info, ref_info);
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
@@ -780,7 +780,7 @@ function PrintInfoList(krajList, ref_krajList) {
 
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
                 ref_info = ref_krajList[k].info[ri];
-                
+
                 if (first) {
                     first = false;
                 }
