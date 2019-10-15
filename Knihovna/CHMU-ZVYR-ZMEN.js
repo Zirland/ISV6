@@ -1,4 +1,4 @@
-// Verze 61
+// Verze 62
 
 function SimpleHighlightDiff(newValue, oldValue) {
     var resultText = '';

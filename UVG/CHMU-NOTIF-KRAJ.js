@@ -1,4 +1,4 @@
-// Verze 61
+// Verze 62
 
 var omezitNaKraj = -1;
 
@@ -532,9 +532,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
             if (first) {
                 first = false;
-                empty = false;
             }
 
+            empty = false;
             pomoc = PrintInfo(info, ref_info);
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
         }
@@ -695,9 +695,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
                     if (first) {
                         first = false;
-                        empty = false;
                     }
 
+                    empty = false;
                     pomoc = PrintInfo(info, ref_info);
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
@@ -905,9 +905,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
 
                         if (first) {
                             first = false;
-                            empty = false;
                         }
 
+                        empty = false;
                         pomoc = PrintInfo(info, ref_info);
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }

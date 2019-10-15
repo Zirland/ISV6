@@ -1,4 +1,4 @@
-// Verze 61
+// Verze 62
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -667,6 +667,7 @@ function PrintInfoList(krajList, ref_krajList) {
                             '-' +
                             ref_info.dc_konec
                     );
+
                     pomoc = PrintInfo(null, ref_info);
                     resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -713,9 +714,9 @@ function PrintInfoList(krajList, ref_krajList) {
                     '</div><br/><div><b>' +
                     KRAJE_NAZVY[krajList[k].id] +
                     '</b>';
-                empty = false;
             }
 
+            empty = false;
             pomoc = PrintInfo(info, ref_info);
             resultText += pomoc.split('|')[0];
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -784,6 +785,7 @@ function PrintInfoList(krajList, ref_krajList) {
                                     '-' +
                                     ref_info.dc_konec
                             );
+
                             pomoc = PrintInfo(null, ref_info);
                             resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -889,6 +891,7 @@ function PrintInfoList(krajList, ref_krajList) {
                         empty = false;
                     }
 
+                    empty = false;
                     pomoc = PrintInfo(info, ref_info);
                     resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -1107,9 +1110,9 @@ function PrintInfoList(krajList, ref_krajList) {
                                 '</div><br/><div><b>ORP ' +
                                 krajList[k].okresList[o].orpList[ol].nazev +
                                 '</b>';
-                            empty = false;
                         }
 
+                        empty = false;
                         pomoc = PrintInfo(info, ref_info);
                         resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -1142,6 +1145,7 @@ function PrintInfoList(krajList, ref_krajList) {
                         '-' +
                         ref_info.dc_konec
                 );
+
                 pomoc = PrintInfo(null, ref_info);
                 resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -1182,6 +1186,7 @@ function PrintInfoList(krajList, ref_krajList) {
                                 '-' +
                                 ref_info.dc_konec
                         );
+
                         pomoc = PrintInfo(null, ref_info);
                         resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
