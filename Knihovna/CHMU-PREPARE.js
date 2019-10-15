@@ -277,9 +277,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                           '</div><br/><div><b>' +
                           KRAJE_NAZVY[krajList[k].id] +
                           '</b>');
-                empty = false;
             }
 
+            empty = false;
             pomoc = PrintInfo(info, ref_info);
             resultText += pomoc.split('|')[0];
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -454,9 +454,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                   '</div><br/><div><b>Okres ' +
                                   krajList[k].okresList[o].nazev +
                                   '</b>');
-                        empty = false;
                     }
 
+                    empty = false;
                     pomoc = PrintInfo(info, ref_info);
                     resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -680,9 +680,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                       krajList[k].okresList[o].orpList[ol]
                                           .nazev +
                                       '</b>');
-                            empty = false;
                         }
 
+                        empty = false;
                         pomoc = PrintInfo(info, ref_info);
                         resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
