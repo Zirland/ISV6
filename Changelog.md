@@ -1,6 +1,28 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 62 – 2019-10-15
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava zpracování prázdné nebo rušící výstrahy.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava zpracování prázdné nebo rušící výstrahy.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava zpracování prázdné nebo rušící výstrahy.
+
+### [UVG/CHMU-NOTIF-KRAJ]
+#### Změněno
+- Úprava zpracování prázdné nebo rušící výstrahy.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+#### Změněno
+- Úprava zpracování prázdné nebo rušící výstrahy.
+- Úprava a zjednodušení zdrojového kódu.
+
 ## verze 61 – 2019-08-29
 ### [AA/AA-CHMU-SMS-KRAJ-LK]
 #### Přidáno
