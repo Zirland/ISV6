@@ -1,4 +1,4 @@
-// Verze 61
+// Verze 62
 
 var omezitNaKraj = -1;
 var detailni = 1;

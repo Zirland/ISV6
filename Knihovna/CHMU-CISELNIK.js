@@ -1,4 +1,4 @@
-// Verze 61
+// Verze 62
 
 var KRAJE_KODY = {
     '-1': 'ČR',
