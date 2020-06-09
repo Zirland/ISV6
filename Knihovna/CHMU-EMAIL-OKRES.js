@@ -1,4 +1,4 @@
-// Verze 62
+// Verze 63
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -8,7 +8,7 @@
 var orpTmp = [];
 
 for (var i = 0; i < orp.length; i++) {
-    if (mojeUzemi.indexOf(orp[i].id) > -1) {
+    if (mojeUzemi.toString().indexOf(orp[i].id) > -1) {
         orpTmp.push(orp[i]);
     }
 }

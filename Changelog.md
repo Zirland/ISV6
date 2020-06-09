@@ -1,6 +1,11 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 63 – 2020-06-09
+### [Knihovna/CHMU-EMAIL-OKRES]
+#### Změněno
+- Úprava zpracování zpracování seznamu ORP vymezujících území.
+
 ## verze 62 – 2019-10-15
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno
