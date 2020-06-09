@@ -1,5 +1,5 @@
 //!JS
-// Verze 62
+// Verze 63
 
 var omezitNaOrp = 337;
 

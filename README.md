@@ -349,7 +349,7 @@ Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslá
 
 Parametr **mojeUzemi** obsahuje číselné kódy ORP, které definují zájmové území. Formát zprávy je dle požadavků HZS LIK. Skript neprovádí kontrolu, zda je zájmové území uvnitř Libereckého kraje.
 
-### [AA-CHMU-SMS-KRAJ-LK]
+### [AA-CHMU-SMS-ORP-LK]
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro ORP v Libereckém kraji.
 
 Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Skript neprovádí kontrolu, zda je ORP uvnitř Libereckého kraje. Číselník území je v samostatném souboru "seznam_ORP.csv".
