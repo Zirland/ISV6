@@ -2802,6 +2802,8 @@ for (var i = 0; i < orp.length; i++) {
 orp = orpTmp;
 
 var resultText = '';
+resultText += JSON.stringify(orp);
+
 var krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
 
