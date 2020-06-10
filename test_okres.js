@@ -2802,7 +2802,10 @@ for (var i = 0; i < orp.length; i++) {
 orp = orpTmp;
 
 var resultText = '';
+
+resultText += 'orp ';
 resultText += JSON.stringify(orp);
+resultText += '\n\n';
 
 var krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
@@ -2811,6 +2814,7 @@ if (vystraha.info && vystraha.info.length > 0) {
     krajList = PrepareInfo(orp, vystraha);
 }
 
+resultText += 'krajList ';
 resultText += JSON.stringify(krajList);
 
 if (resultText !== 'undefined' && resultText) {
