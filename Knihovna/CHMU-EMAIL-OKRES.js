@@ -5,16 +5,6 @@
 #import "CHMU-DATUMY";
 #import "CHMU-PREPARE";
 
-var orpTmp = [];
-
-for (var i = 0; i < orp.length; i++) {
-    if (mojeUzemi.toString().indexOf(orp[i].id) > -1) {
-        orpTmp.push(orp[i]);
-    }
-}
-
-orp = orpTmp;
-
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];
@@ -23,7 +13,7 @@ var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
 if (vystraha.info && vystraha.info.length > 0) {
-    krajList = PrepareInfo(orp, vystraha);
+    krajList = PrepareInfo(orp, vystraha, mojeUzemi);
 }
 
 if (
@@ -31,7 +21,7 @@ if (
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    ref_krajList = PrepareInfo(orp, ref_vystraha);
+    ref_krajList = PrepareInfo(orp, ref_vystraha, mojeUzemi);
 }
 
 var distrSeznamNahore = false;
