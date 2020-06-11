@@ -20,6 +20,12 @@ var seznjevu = [];
 var resultText = '';
 var vystupText = '';
 
+var pom_mojeUzemi = [];
+if (typeof mojeUzemi != 'object') {
+    pom_mojeUzemi.push(mojeUzemi);
+    mojeUzemi = pom_mojeUzemi;
+}
+
 if (vystraha.info) {
     var infoList = [];
     for (var i = 0; i < vystraha.info.length; i++) {
@@ -164,8 +170,8 @@ if (infoList) {
     var endy = Math.max.apply(null, konce);
     var end = endy.toString();
 
-    var total_zahajeni = ZobrazDatum(start);
-    var total_ukonceni = ZobrazDatum(end, 1);
+    var total_zahajeni = ZobrazDatumSMS(start);
+    var total_ukonceni = ZobrazDatumSMS(end, 1);
 
     var rezim = 'SVRS';
     if (seznjevu.indexOf('SIVS') > -1) {
