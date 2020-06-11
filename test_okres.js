@@ -2615,7 +2615,7 @@ function UkoncenyJev(konecJev, casZprava) {
     }
 }
 
-function PrepareInfo(orp, vystraha) {
+function PrepareInfo(orp, vystraha, mojeUzemi) {
     var infoList = [];
 
     for (var i = 0; i < vystraha.info.length; i++) {
@@ -2629,11 +2629,22 @@ function PrepareInfo(orp, vystraha) {
         for (var j = 0; j < orpSplit.length; j++) {
             var index = orpSplit[j].indexOf('[');
             if (index == -1) {
-                vystraha.info[i].orp.push(orpSplit[j]);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(orpSplit[j])) > -1
+                ) {
+                    vystraha.info[i].orp.push(orpSplit[j]);
+                }
             } else {
-                var vyska = orpSplit[j].substring(index);
-                if (vyskaList.indexOf(vyska) == -1) {
-                    vyskaList.push(vyska);
+                var pouzeOrp = orpSplit[j].substring(0, index);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(pouzeOrp)) > -1
+                ) {
+                    var vyska = orpSplit[j].substring(index);
+                    if (vyskaList.indexOf(vyska) == -1) {
+                        vyskaList.push(vyska);
+                    }
                 }
             }
         }
@@ -2789,18 +2800,6 @@ function PrepareInfo(orp, vystraha) {
     return krajList;
 }
 
-var orpTmp = [];
-
-for (var i = 0; i < orp.length; i++) {
-    for (var j = 0; j < mojeUzemi.length; j++) {
-        if (mojeUzemi[j].toString() == orp[i].id) {
-            orpTmp.push(orp[i]);
-        }
-    }
-}
-
-orp = orpTmp;
-
 var resultText = '';
 
 resultText += 'orp ';
@@ -2811,7 +2810,7 @@ var krajList = [];
 var vytvoreni = vystraha.dc_odeslano;
 
 if (vystraha.info && vystraha.info.length > 0) {
-    krajList = PrepareInfo(orp, vystraha);
+    krajList = PrepareInfo(orp, vystraha, mojeUzemi);
 }
 
 resultText += 'krajList ';
