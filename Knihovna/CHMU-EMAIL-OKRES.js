@@ -8,8 +8,10 @@
 var orpTmp = [];
 
 for (var i = 0; i < orp.length; i++) {
-    if (mojeUzemi.toString().indexOf(orp[i].id) > -1) {
-        orpTmp.push(orp[i]);
+    for (var j = 0; j < mojeUzemi.length; j++) {
+        if (mojeUzemi[j].toString() == orp[i].id) {
+            orpTmp.push(orp[i]);
+        }
     }
 }
 
