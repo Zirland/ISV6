@@ -35,6 +35,16 @@ var distrSeznamNahore = false;
 
 resultText += '<br/>Územní platnost: ' + nazevUzemi;
 
+if (nazevUzemi == undefined && mojeUzemi.length == 1) {
+    var findOrp = orp.filter(function(e) {
+        return e.id == mojeUzemi;
+    });
+    if (findOrp.length > 0) {
+        var nazevORP = findOrp[0].nazev;
+    }
+    resultText += 'ORP ' + nazevORP;
+}
+
 resultText += '<hr/>';
 
 var empty = true;
