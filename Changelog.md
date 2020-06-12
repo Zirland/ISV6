@@ -1,6 +1,100 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 64 – 2020-06-14
+### [AA/AA-CHMU-EMAIL-OKRES]
+#### Odstraněno
+- Funkce integrovány do skriptu [AA-CHMU-EMAIL-ORP].
+
+### [AA/AA-CHMU-EMAIL-ORP]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Změna názvu parametru **omezitNaOrp** -> **mojeUzemi**.
+- Přidání parametru **nazevUzemi**.
+
+### [AA/AA-CHMU-SMS-KRAJ-LK]
+#### Změněno
+- Vzhledem k tomu, že skript je cíleně určen pro Liberecký kraj, byl odstraněn parametr **omezitNaKraj**, jehož hodnota je konstatní.
+- Odstraněn číselník krajů.
+
+### [AA/AA-CHMU-SMS-OKRES]
+#### Odstraněno
+- Funkce integrovány do skriptu [AA-CHMU-SMS-ORP].
+
+### [AA/AA-CHMU-SMS-OKRES-LK]
+#### Odstraněno
+- Funkce integrovány do skriptu [AA-CHMU-SMS-ORP-LK].
+
+### [AA/AA-CHMU-SMS-OKRES-SKUP]
+#### Odstraněno
+- Funkce integrovány do skriptu [AA-CHMU-SMS-ORP-SKUP].
+
+### [AA/AA-CHMU-SMS-ORP]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Změna názvu parametru **omezitNaOrp** -> **mojeUzemi**.
+- Přidání parametru **vypisOrp**.
+
+### [AA/AA-CHMU-SMS-ORP-LK]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Změna názvu parametru **omezitNaOrp** -> **mojeUzemi**.
+
+### [AA/AA-CHMU-SMS-ORP-SKUP]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Změna názvu parametru **omezitNaOrp** -> **mojeUzemi**.
+- Přidání parametru **vypisOrp**.
+
+### [Knihovna/CHMU-CISELNIK]
+#### Přidáno
+- Přidán číselník krajů.
+
+### [Knihovna/CHMU-EMAIL-OKRES]
+#### Odstraněno
+- Funkce integrovány do skriptu [CHMU-EMAIL-ORP].
+
+### [Knihovna/CHMU-EMAIL-ORP]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Úprava zpracování seznamu ORP vymezující území.
+- Územní platnost je text definovaný uživatelem.
+
+### [Knihovna/CHMU-MAIL2]
+#### Změněno
+- Úprava zpracování seznamu ORP vymezující území.
+
+### [Knihovna/CHMU-SMS-KRAJ-LK]
+#### Přidáno
+- Hodnota **omezitNaKraj** je konstanta nastavená na Liberecký kraj.
+
+### [Knihovna/CHMU-SMS-OKRES]
+#### Odstraněno
+- Funkce integrovány do skriptu [CHMU-SMS-ORP].
+
+### [Knihovna/CHMU-SMS-OKRES-LK]
+#### Odstraněno
+- Funkce integrovány do skriptu [CHMU-SMS-ORP-LK].
+
+### [Knihovna/CHMU-SMS-OKRES-SKUP]
+#### Odstraněno
+- Funkce integrovány do skriptu [CHMU-SMS-ORP-SKUP].
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Úprava zpracování seznamu ORP vymezující území.
+
+### [Knihovna/CHMU-SMS-ORP-LK]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Úprava zpracování seznamu ORP vymezující území.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Změněno
+- Integrace vlastností pro více ORP (okres).
+- Úprava zpracování seznamu ORP vymezující území.
+
 ## verze 63 – 2020-06-09
 ### [Knihovna/CHMU-EMAIL-OKRES]
 #### Změněno
