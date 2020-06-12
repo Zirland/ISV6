@@ -95,6 +95,10 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 - Integrace vlastností pro více ORP (okres).
 - Úprava zpracování seznamu ORP vymezující území.
 
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava zpracování seznamu ORP vymezující území. (autor: Stratil Petr, RCS Kladno)
+
 ## verze 63 – 2020-06-09
 ### [Knihovna/CHMU-EMAIL-OKRES]
 #### Změněno
