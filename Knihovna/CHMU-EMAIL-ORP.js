@@ -12,6 +12,12 @@ var info;
 var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
+var pom_mojeUzemi = [];
+if (typeof mojeUzemi != 'object') {
+    pom_mojeUzemi.push(mojeUzemi);
+    mojeUzemi = pom_mojeUzemi;
+}
+
 if (vystraha.info && vystraha.info.length > 0) {
     krajList = PrepareInfo(orp, vystraha, mojeUzemi);
 }
@@ -27,18 +33,17 @@ if (
 var distrSeznamNahore = false;
 #import "CHMU-HLAVICKA";
 
-resultText += '<br/>Územní platnost: ';
-var findOrp = orp.filter(function(e) {
-    return e.id == omezitNaOrp;
-});
-if (findOrp.length > 0) {
-    var nazevORP = findOrp[0].nazev;
-}
-resultText += 'ORP ' + nazevORP;
+resultText += '<br/>Územní platnost: ' + nazevUzemi;
 resultText += '<hr/>';
 
 var empty = true;
 var zmen = 0;
+var headers;
+if (mojeUzemi.length == 1) {
+    headers = 0;
+} else {
+    headers = 1;
+}
 
 if (vystraha.info && vystraha.info.length > 0) {
     var situace = [];
@@ -57,7 +62,7 @@ if (vystraha.info && vystraha.info.length > 0) {
         resultText += '<hr/><div>';
     }
 
-    pomoc = PrintInfoList(krajList, ref_krajList, 0);
+    pomoc = PrintInfoList(krajList, ref_krajList, headers);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 } else if (
@@ -65,7 +70,7 @@ if (vystraha.info && vystraha.info.length > 0) {
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    pomoc = PrintInfoList(krajList, ref_krajList, 0);
+    pomoc = PrintInfoList(krajList, ref_krajList, headers);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }
@@ -76,7 +81,6 @@ if (empty) {
 }
 
 resultText += '</div>';
-
 resultText += '</BODY>';
 resultText += '</HTML>';
 

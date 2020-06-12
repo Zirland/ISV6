@@ -15,6 +15,7 @@ function removeDuplicates(arr) {
     return unique_array;
 }
 
+var omezitNaKraj = 78;
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
 var vystupText = '';
