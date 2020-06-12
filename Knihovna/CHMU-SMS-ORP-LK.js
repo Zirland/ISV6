@@ -17,27 +17,23 @@ function removeDuplicates(arr) {
 
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
+var resultText = '';
 var vystupText = '';
 
-var orpTmp = [];
-
-for (var i = 0; i < orp.length; i++) {
-    if (mojeUzemi.indexOf(orp[i].id) > -1) {
-        orpTmp.push(orp[i]);
-    }
-}
-
-orp = orpTmp;
-
-var resultText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
 var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
+var pom_mojeUzemi = [];
+if (typeof mojeUzemi != 'object') {
+    pom_mojeUzemi.push(mojeUzemi);
+    mojeUzemi = pom_mojeUzemi;
+}
+
 if (vystraha.info && vystraha.info.length > 0) {
-    krajList = PrepareInfo(orp, vystraha);
+    krajList = PrepareInfo(orp, vystraha, mojeUzemi);
 }
 
 if (
@@ -45,7 +41,7 @@ if (
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    ref_krajList = PrepareInfo(orp, ref_vystraha);
+    ref_krajList = PrepareInfo(orp, ref_vystraha, mojeUzemi);
 }
 
 var empty = true;
@@ -69,9 +65,18 @@ if (Number(zmen) != 0) {
 
     if (vystraha.info) {
         var infoList = [];
-        for (var l = 0; l < vystraha.info.length; l++) {
-            infoList.push(vystraha.info[l]);
+    for (var i = 0; i < vystraha.info.length; i++) {
+        for (j = 0; j < mojeUzemi.length; j++) {
+            if (
+                vystraha.info[i].orp_list
+                    .toString()
+                    .split(',')
+                    .indexOf(mojeUzemi[j].toString()) > -1
+            ) {
+                infoList.push(vystraha.info[i]);
+            }
         }
+    }
 
         infoList = infoList.sort(function(a, b) {
             var vyskyt1 = 0;
@@ -85,10 +90,13 @@ if (Number(zmen) != 0) {
             if (b.jistota_kod == 'Observed') {
                 vyskyt2 = 1;
             }
+
             if (vyskyt1 > vyskyt2) return -1;
             if (vyskyt1 < vyskyt2) return 1;
+
             if (jev1 < jev2) return -1;
             if (jev1 > jev2) return 1;
+
             return 0;
         });
     }
@@ -97,13 +105,7 @@ if (Number(zmen) != 0) {
         var poleJevy = [];
         var platne = [];
         for (var i = 0; i < infoList.length; i++) {
-            if (
-                infoList[i].stupen_kod != 'OUTLOOK' &&
-                infoList[i].orp_list
-                    .toString()
-                    .split(',')
-                    .indexOf(omezitNaOrp.toString()) > -1
-            ) {
+        if (infoList[i].stupen_kod != 'OUTLOOK') {
                 var pomKod = '';
                 if (infoList[i].jistota_kod == 'Observed') {
                     pomKod += '0';
