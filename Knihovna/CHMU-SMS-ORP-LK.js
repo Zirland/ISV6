@@ -134,7 +134,7 @@ if (Number(zmen) != 0) {
                 if (platne[i].jistota_kod == 'Observed') {
                     pomKodIvnj = '0';
                 }
-                var splitkodJev = infoList[i].stupen_kod.split('.');
+                var splitkodJev = platne[i].stupen_kod.split('.');
                 var skupinaJev = splitkodJev[0];
                 if (
                     skupinaJev == 'WARN' ||
