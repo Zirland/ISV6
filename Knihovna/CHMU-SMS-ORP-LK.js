@@ -22,7 +22,7 @@ var vystupText = '';
 var orpTmp = [];
 
 for (var i = 0; i < orp.length; i++) {
-    if (omezitNaOrp == orp[i].id) {
+    if (mojeUzemi.indexOf(orp[i].id) > -1) {
         orpTmp.push(orp[i]);
     }
 }
@@ -172,9 +172,10 @@ if (Number(zmen) != 0) {
                     uvod = 'výstraha ČHMÚ - ';
                     break;
             }
+
             vystupText += uvod;
             vystupText += resultText;
         }
-        vystupText = vystupText.substring(0, vystupText.length - 2);
+        vystupText = vystupText.substring(0,vystupText.length - 2);
     }
 }

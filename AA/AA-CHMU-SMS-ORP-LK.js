@@ -1,7 +1,7 @@
 //!JS
 // Verze 63
 
-var omezitNaOrp = 1147;
+var mojeUzemi = [1139, 1147, 1155];
 
 #import "CHMU-SMS-ORP-LK";
 
