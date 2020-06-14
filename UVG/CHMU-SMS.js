@@ -322,6 +322,10 @@ if (vystraha.info) {
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
+        var barva1 = a.stupen_kod.split('.')[1];
+        var zavaznost1 = Number(barva1.substring(0, 1));
+        var barva2 = b.stupen_kod.split('.')[1];
+        var zavaznost2 = Number(barva2.substring(0, 1));
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -329,13 +333,12 @@ if (vystraha.info) {
         if (b.jistota_kod == 'Observed') {
             vyskyt2 = 1;
         }
-
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
-
+        if (zavaznost1 > zavaznost2) return -1;
+        if (zavaznost1 < zavaznost2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
-
         return 0;
     });
 }
@@ -581,6 +584,10 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
         var vyskyt2 = 0;
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
+        var barva1 = a.stupen_kod.split('.')[1];
+        var zavaznost1 = Number(barva1.substring(0, 1));
+        var barva2 = b.stupen_kod.split('.')[1];
+        var zavaznost2 = Number(barva2.substring(0, 1));
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -588,10 +595,10 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
         if (b.jistota_kod == 'Observed') {
             vyskyt2 = 1;
         }
-
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
-
+        if (zavaznost1 > zavaznost2) return -1;
+        if (zavaznost1 < zavaznost2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
         return 0;

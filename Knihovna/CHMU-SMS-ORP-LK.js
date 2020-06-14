@@ -65,24 +65,28 @@ if (Number(zmen) != 0) {
 
     if (vystraha.info) {
         var infoList = [];
-    for (var i = 0; i < vystraha.info.length; i++) {
-        for (j = 0; j < mojeUzemi.length; j++) {
-            if (
-                vystraha.info[i].orp_list
-                    .toString()
-                    .split(',')
-                    .indexOf(mojeUzemi[j].toString()) > -1
-            ) {
-                infoList.push(vystraha.info[i]);
+        for (var i = 0; i < vystraha.info.length; i++) {
+            for (j = 0; j < mojeUzemi.length; j++) {
+                if (
+                    vystraha.info[i].orp_list
+                        .toString()
+                        .split(',')
+                        .indexOf(mojeUzemi[j].toString()) > -1
+                ) {
+                    infoList.push(vystraha.info[i]);
+                }
             }
         }
-    }
 
         infoList = infoList.sort(function(a, b) {
             var vyskyt1 = 0;
             var vyskyt2 = 0;
             var jev1 = a.stupen_kod;
             var jev2 = b.stupen_kod;
+            var barva1 = a.stupen_kod.split('.')[1];
+            var zavaznost1 = Number(barva1.substring(0, 1));
+            var barva2 = b.stupen_kod.split('.')[1];
+            var zavaznost2 = Number(barva2.substring(0, 1));
 
             if (a.jistota_kod == 'Observed') {
                 vyskyt1 = 1;
@@ -90,13 +94,12 @@ if (Number(zmen) != 0) {
             if (b.jistota_kod == 'Observed') {
                 vyskyt2 = 1;
             }
-
             if (vyskyt1 > vyskyt2) return -1;
             if (vyskyt1 < vyskyt2) return 1;
-
+            if (zavaznost1 > zavaznost2) return -1;
+            if (zavaznost1 < zavaznost2) return 1;
             if (jev1 < jev2) return -1;
             if (jev1 > jev2) return 1;
-
             return 0;
         });
     }
@@ -105,7 +108,7 @@ if (Number(zmen) != 0) {
         var poleJevy = [];
         var platne = [];
         for (var i = 0; i < infoList.length; i++) {
-        if (infoList[i].stupen_kod != 'OUTLOOK') {
+            if (infoList[i].stupen_kod != 'OUTLOOK') {
                 var pomKod = '';
                 if (infoList[i].jistota_kod == 'Observed') {
                     pomKod += '0';
@@ -178,6 +181,6 @@ if (Number(zmen) != 0) {
             vystupText += uvod;
             vystupText += resultText;
         }
-        vystupText = vystupText.substring(0,vystupText.length - 2);
+        vystupText = vystupText.substring(0, vystupText.length - 2);
     }
 }
