@@ -85,6 +85,10 @@ function PrepareInfo2(vystraha, mojeUzemi) {
         var vyskyt2 = 0;
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
+        var barva1 = a.stupen_kod.split('.')[1];
+        var zavaznost1 = Number(barva1.substring(0, 1));
+        var barva2 = b.stupen_kod.split('.')[1];
+        var zavaznost2 = Number(barva2.substring(0, 1));
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
 
@@ -98,6 +102,8 @@ function PrepareInfo2(vystraha, mojeUzemi) {
         if (vyskyt1 < vyskyt2) return 1;
         if (start1 < start2) return -1;
         if (start1 > start2) return 1;
+        if (zavaznost1 > zavaznost2) return -1;
+        if (zavaznost1 < zavaznost2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
         return 0;
@@ -1448,7 +1454,7 @@ if (
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    ref_infoList = PrepareInfo2(ref_vystraha);
+    var ref_infoList = PrepareInfo2(ref_vystraha);
     ref_krajList = PrepareKraje(orp, ref_infoList);
 }
 
