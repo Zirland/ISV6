@@ -1,6 +1,6 @@
-// Verze 63
+// Verze 64
 
-function PrepareInfo(orp, vystraha) {
+function PrepareInfo(orp, vystraha, mojeUzemi) {
     var infoList = [];
 
     for (var i = 0; i < vystraha.info.length; i++) {
@@ -14,11 +14,22 @@ function PrepareInfo(orp, vystraha) {
         for (var j = 0; j < orpSplit.length; j++) {
             var index = orpSplit[j].indexOf('[');
             if (index == -1) {
-                vystraha.info[i].orp.push(orpSplit[j]);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(orpSplit[j])) > -1
+                ) {
+                    vystraha.info[i].orp.push(orpSplit[j]);
+                }
             } else {
-                var vyska = orpSplit[j].substring(index);
-                if (vyskaList.indexOf(vyska) == -1) {
-                    vyskaList.push(vyska);
+                var pouzeOrp = orpSplit[j].substring(0, index);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(pouzeOrp)) > -1
+                ) {
+                    var vyska = orpSplit[j].substring(index);
+                    if (vyskaList.indexOf(vyska) == -1) {
+                        vyskaList.push(vyska);
+                    }
                 }
             }
         }
@@ -229,6 +240,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             '-' +
                             ref_info.dc_konec
                     );
+
                     pomoc = PrintInfo(null, ref_info);
                     resultText += pomoc.split('|')[0];
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -350,6 +362,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                     '-' +
                                     ref_info.dc_konec
                             );
+
                             pomoc = PrintInfo(null, ref_info);
                             resultText += pomoc.split('|')[0];
                             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -717,6 +730,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         '-' +
                         ref_info.dc_konec
                 );
+
                 pomoc = PrintInfo(null, ref_info);
                 resultText += pomoc.split('|')[0];
                 zmen = Number(zmen) + Number(pomoc.split('|')[1]);
@@ -759,6 +773,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                 '-' +
                                 ref_info.dc_konec
                         );
+
                         pomoc = PrintInfo(null, ref_info);
                         resultText += pomoc.split('|')[0];
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);

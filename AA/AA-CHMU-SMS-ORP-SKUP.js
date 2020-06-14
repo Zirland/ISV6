@@ -1,8 +1,9 @@
 //!JS
-// Verze 63
+// Verze 64
 
-var omezitNaOrp = 1945;
+var mojeUzemi = [1139, 1147, 1155];
 var detailni = 1;
+var vypisOrp = true;
 var oddelovac = '\n';
 
 #import "CHMU-SMS-ORP-SKUP";

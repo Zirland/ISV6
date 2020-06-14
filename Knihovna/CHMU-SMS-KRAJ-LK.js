@@ -1,4 +1,4 @@
-// Verze 63
+// Verze 64
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -15,6 +15,7 @@ function removeDuplicates(arr) {
     return unique_array;
 }
 
+var omezitNaKraj = 78;
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
 var vystupText = '';

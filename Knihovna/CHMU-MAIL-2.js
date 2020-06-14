@@ -1,11 +1,11 @@
-// Verze 63
+// Verze 64
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-PREPARE";
 
-function PrepareInfo2(vystraha) {
+function PrepareInfo2(vystraha, mojeUzemi) {
     var infoList = [];
 
     for (var i = 0; i < vystraha.info.length; i++) {
@@ -19,11 +19,22 @@ function PrepareInfo2(vystraha) {
         for (var j = 0; j < orpSplit.length; j++) {
             var index = orpSplit[j].indexOf('[');
             if (index == -1) {
-                vystraha.info[i].orp.push(orpSplit[j]);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(orpSplit[j])) > -1
+                ) {
+                    vystraha.info[i].orp.push(orpSplit[j]);
+                }
             } else {
-                var vyska = orpSplit[j].substring(index);
-                if (vyskaList.indexOf(vyska) == -1) {
-                    vyskaList.push(vyska);
+                var pouzeOrp = orpSplit[j].substring(0, index);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(pouzeOrp)) > -1
+                ) {
+                    var vyska = orpSplit[j].substring(index);
+                    if (vyskaList.indexOf(vyska) == -1) {
+                        vyskaList.push(vyska);
+                    }
                 }
             }
         }
@@ -74,6 +85,10 @@ function PrepareInfo2(vystraha) {
         var vyskyt2 = 0;
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
+        var barva1 = a.stupen_kod.split('.')[1];
+        var zavaznost1 = Number(barva1.substring(0, 1));
+        var barva2 = b.stupen_kod.split('.')[1];
+        var zavaznost2 = Number(barva2.substring(0, 1));
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
 
@@ -87,6 +102,8 @@ function PrepareInfo2(vystraha) {
         if (vyskyt1 < vyskyt2) return 1;
         if (start1 < start2) return -1;
         if (start1 > start2) return 1;
+        if (zavaznost1 > zavaznost2) return -1;
+        if (zavaznost1 < zavaznost2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
         return 0;
@@ -1437,7 +1454,7 @@ if (
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    ref_infoList = PrepareInfo2(ref_vystraha);
+    var ref_infoList = PrepareInfo2(ref_vystraha);
     ref_krajList = PrepareKraje(orp, ref_infoList);
 }
 

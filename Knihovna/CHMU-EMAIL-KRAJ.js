@@ -1,4 +1,4 @@
-// Verze 63
+// Verze 64
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -95,7 +95,7 @@ if (vystraha.info && vystraha.info.length > 0) {
         resultText += '<hr/><div>';
     }
 
-    pomoc = PrintInfoList(krajList, ref_krajList);
+    pomoc = PrintInfoList(krajList, ref_krajList, 1);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 } else if (
@@ -103,7 +103,7 @@ if (vystraha.info && vystraha.info.length > 0) {
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    pomoc = PrintInfoList(krajList, ref_krajList);
+    pomoc = PrintInfoList(krajList, ref_krajList, 1);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }

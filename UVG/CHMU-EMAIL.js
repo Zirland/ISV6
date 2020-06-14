@@ -1,4 +1,4 @@
-// Verze 63
+// Verze 64
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -454,11 +454,22 @@ function PrepareInfo(orp, vystraha) {
         for (var j = 0; j < orpSplit.length; j++) {
             var index = orpSplit[j].indexOf('[');
             if (index == -1) {
-                vystraha.info[i].orp.push(orpSplit[j]);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(orpSplit[j])) > -1
+                ) {
+                    vystraha.info[i].orp.push(orpSplit[j]);
+                }
             } else {
-                var vyska = orpSplit[j].substring(index);
-                if (vyskaList.indexOf(vyska) == -1) {
-                    vyskaList.push(vyska);
+                var pouzeOrp = orpSplit[j].substring(0, index);
+                if (
+                    mojeUzemi == undefined ||
+                    mojeUzemi.indexOf(Number(pouzeOrp)) > -1
+                ) {
+                    var vyska = orpSplit[j].substring(index);
+                    if (vyskaList.indexOf(vyska) == -1) {
+                        vyskaList.push(vyska);
+                    }
                 }
             }
         }
@@ -618,7 +629,7 @@ function PrepareInfo(orp, vystraha) {
     return krajList;
 }
 
-function PrintInfoList(krajList, ref_krajList) {
+function PrintInfoList(krajList, ref_krajList, headers) {
     var resultText = '';
     var zpracovanyInfoStupen = [];
     var zpracovanyInfoStupenOkres = [];
@@ -654,10 +665,12 @@ function PrintInfoList(krajList, ref_krajList) {
                 if (!found && zobrazitZmeny) {
                     if (first) {
                         first = false;
-                        resultText +=
-                            '</div><br/><div><b>' +
-                            KRAJE_NAZVY[ref_krajList[k].id] +
-                            '</b>';
+                        headers == 0
+                            ? ''
+                            : (resultText +=
+                                  '</div><br/><div><b>' +
+                                  KRAJE_NAZVY[ref_krajList[k].id] +
+                                  '</b>');
                     }
 
                     ref_zpracovanyInfoStupen.push(
@@ -710,10 +723,12 @@ function PrintInfoList(krajList, ref_krajList) {
 
             if (first) {
                 first = false;
-                resultText +=
-                    '</div><br/><div><b>' +
-                    KRAJE_NAZVY[krajList[k].id] +
-                    '</b>';
+                headers == 0
+                    ? ''
+                    : (resultText +=
+                          '</div><br/><div><b>' +
+                          KRAJE_NAZVY[krajList[k].id] +
+                          '</b>');
             }
 
             empty = false;
@@ -772,10 +787,12 @@ function PrintInfoList(krajList, ref_krajList) {
                         if (!found && zobrazitZmeny) {
                             if (first) {
                                 first = false;
-                                resultText +=
-                                    '</div><br/><div><b>Okres ' +
-                                    ref_krajList[k].okresList[o].nazev +
-                                    '</b>';
+                                headers == 0
+                                    ? ''
+                                    : (resultText +=
+                                          '</div><br/><div><b>Okres ' +
+                                          ref_krajList[k].okresList[o].nazev +
+                                          '</b>');
                             }
 
                             ref_zpracovanyInfoStupenOkres.push(
@@ -884,11 +901,12 @@ function PrintInfoList(krajList, ref_krajList) {
 
                     if (first) {
                         first = false;
-                        resultText +=
-                            '</div><br/><div><b>Okres ' +
-                            krajList[k].okresList[o].nazev +
-                            '</b>';
-                        empty = false;
+                        headers == 0
+                            ? ''
+                            : (resultText +=
+                                  '</div><br/><div><b>Okres ' +
+                                  krajList[k].okresList[o].nazev +
+                                  '</b>');
                     }
 
                     empty = false;
@@ -972,11 +990,13 @@ function PrintInfoList(krajList, ref_krajList) {
                             if (!found && zobrazitZmeny) {
                                 if (first) {
                                     first = false;
-                                    resultText +=
-                                        '</div><br/><div><b>ORP ' +
-                                        ref_krajList[k].okresList[o].orpList[ol]
-                                            .nazev +
-                                        '</b>';
+                                    headers == 0
+                                        ? ''
+                                        : (resultText +=
+                                              '</div><br/><div><b>ORP ' +
+                                              ref_krajList[k].okresList[o]
+                                                  .orpList[ol].nazev +
+                                              '</b>');
                                 }
 
                                 pomoc = PrintInfo(null, ref_info);
@@ -1106,10 +1126,13 @@ function PrintInfoList(krajList, ref_krajList) {
 
                         if (first) {
                             first = false;
-                            resultText +=
-                                '</div><br/><div><b>ORP ' +
-                                krajList[k].okresList[o].orpList[ol].nazev +
-                                '</b>';
+                            headers == 0
+                                ? ''
+                                : (resultText +=
+                                      '</div><br/><div><b>ORP ' +
+                                      krajList[k].okresList[o].orpList[ol]
+                                          .nazev +
+                                      '</b>');
                         }
 
                         empty = false;
@@ -1132,10 +1155,12 @@ function PrintInfoList(krajList, ref_krajList) {
 
                 if (first) {
                     first = false;
-                    resultText +=
-                        '</div><br/><div><b>' +
-                        KRAJE_NAZVY[ref_krajList[k].id] +
-                        '</b>';
+                    headers == 0
+                        ? ''
+                        : (resultText +=
+                              '</div><br/><div><b>' +
+                              KRAJE_NAZVY[ref_krajList[k].id] +
+                              '</b>');
                 }
 
                 ref_zpracovanyInfoStupen.push(
@@ -1173,10 +1198,12 @@ function PrintInfoList(krajList, ref_krajList) {
                     ) {
                         if (first) {
                             first = false;
-                            resultText +=
-                                '</div><br/><div><b>Okres ' +
-                                ref_krajList[k].okresList[o].nazev +
-                                '</b>';
+                            headers == 0
+                                ? ''
+                                : (resultText +=
+                                      '</div><br/><div><b>Okres ' +
+                                      ref_krajList[k].okresList[o].nazev +
+                                      '</b>');
                         }
 
                         ref_zpracovanyInfoStupenOkres.push(
@@ -1227,11 +1254,14 @@ function PrintInfoList(krajList, ref_krajList) {
                         ) {
                             if (first) {
                                 first = false;
-                                resultText +=
-                                    '</div><br/><div><b>ORP ' +
-                                    ref_krajList[k].okresList[o].orpList[ol]
-                                        .nazev +
-                                    '</b>';
+                                headers == 0
+                                    ? ''
+                                    : (resultText +=
+                                          '</div><br/><div><b>ORP ' +
+                                          ref_krajList[k].okresList[o].orpList[
+                                              ol
+                                          ].nazev +
+                                          '</b>');
                             }
 
                             pomoc = PrintInfo(null, ref_info);
@@ -2006,7 +2036,7 @@ if (vystraha.info && vystraha.info.length > 0) {
         resultText += '<hr/><div>';
     }
 
-    pomoc = PrintInfoList(krajList, ref_krajList);
+    pomoc = PrintInfoList(krajList, ref_krajList, 1);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 } else if (
@@ -2014,7 +2044,7 @@ if (vystraha.info && vystraha.info.length > 0) {
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    pomoc = PrintInfoList(krajList, ref_krajList);
+    pomoc = PrintInfoList(krajList, ref_krajList, 1);
     resultText += pomoc.split('|')[0];
     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }
@@ -2024,10 +2054,10 @@ if (empty) {
         '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
-resultText += '</div>';
-
 if (distrSeznamNahore == false) {
-    resultText += '<hr/>Distribuce: ';
+    resultText += '</div><hr/>';
+    resultText += '<br/>Distribuce: ';
+
     var dist = '';
 
     for (var k = 0; k < krajList.length; k++) {

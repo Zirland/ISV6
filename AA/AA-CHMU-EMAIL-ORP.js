@@ -1,7 +1,9 @@
 //!JS
-// Verze 63
+// Verze 64
 
-var omezitNaOrp = 337;
+var mojeUzemi = 1996;
+var nazevUzemi = 'ORP Přerov';
+
 var zobrazitVyhled = false;
 var zobrazitZmeny = true;
 var pouzeZmeny = true;

@@ -1,4 +1,22 @@
-// Verze 63
+// Verze 64
+
+var KRAJE_NAZVY = {
+    '-1': 'Česká republika',
+    '19': 'Hlavní město Praha',
+    '27': 'Středočeský kraj',
+    '35': 'Jihočeský kraj',
+    '43': 'Plzeňský kraj',
+    '51': 'Karlovarský kraj',
+    '60': 'Ústecký kraj',
+    '78': 'Liberecký kraj',
+    '86': 'Královéhradecký kraj',
+    '94': 'Pardubický kraj',
+    '108': 'Kraj Vysočina',
+    '116': 'Jihomoravský kraj',
+    '124': 'Olomoucký kraj',
+    '132': 'Moravskoslezský kraj',
+    '141': 'Zlínský kraj'
+};
 
 var KRAJE_KODY = {
     '-1': 'ČR',
@@ -134,25 +152,25 @@ var JEVY_NAZVY = {
 };
 
 var JEVY_SKUPINY = {
-    I: 'Extrémní teploty',
-    II: 'Pokles teplot pod nulu',
-    III: 'Vítr',
-    IV: 'Sněhová pokrývka',
-    V: 'Sněhové srážky',
-    VI: 'Sněhové jevy',
-    VII: 'Náledí',
-    VIII: 'Ledovka',
-    IX: 'Námrazové jevy',
-    X: 'Bouřkové jevy',
-    XI: 'Dešťové srážky',
-    XII: 'Povodňové jevy',
-    XIII: 'Dotok',
-    XIV: 'Požáry',
-    XV: 'Jiné jevy',
-    OUTLOOK: 'Výhled jevů',
-    O3: 'Přízemní ozón',
-    NO2: 'Oxid dusičitý',
-    SO2: 'Oxid siřičitý',
-    PM10: 'Prachové částice'
+    'I' : 'Extrémní teploty',
+    'II' : 'Pokles teplot pod nulu',
+    'III' : 'Vítr',
+    'IV' : 'Sněhová pokrývka',
+    'V' : 'Sněhové srážky',
+    'VI' : 'Sněhové jevy',
+    'VII' : 'Náledí',
+    'VIII' : 'Ledovka',
+    'IX' : 'Námrazové jevy',
+    'X' : 'Bouřkové jevy',
+    'XI' : 'Dešťové srážky',
+    'XII' : 'Povodňové jevy',
+    'XIII' : 'Dotok',
+    'XIV' : 'Požáry',
+    'XV' : 'Jiné jevy',
+    'OUTLOOK' : 'Výhled jevů',
+    'O3' : 'Přízemní ozón',
+    'NO2' : 'Oxid dusičitý',
+    'SO2' : 'Oxid siřičitý',
+    'PM10' : 'Prachové částice'
 };
 
