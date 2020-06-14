@@ -63,6 +63,7 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [Knihovna/CHMU-MAIL2]
 #### Změněno
 - Úprava zpracování seznamu ORP vymezující území.
+- Řazení jevů podle závažnosti.
 
 ### [Knihovna/CHMU-SMS-KRAJ-LK]
 #### Přidáno
@@ -98,6 +99,11 @@ Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovan
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno
 - Úprava zpracování seznamu ORP vymezující území. (autor: Stratil Petr, RCS Kladno)
+
+### [UVG/CHMU-MAIL2]
+#### Změněno
+- Úprava zpracování seznamu ORP vymezující území. (autor: Stratil Petr, RCS Kladno)
+- Řazení jevů podle závažnosti.
 
 ## verze 63 – 2020-06-09
 ### [Knihovna/CHMU-EMAIL-OKRES]
