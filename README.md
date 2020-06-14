@@ -431,29 +431,29 @@ if (N !== 'undefined' && N.textSMS) {
 ARCHIV verze 63
 ---
 
-### [CHMU-EMAIL-OKRES]
+### [Knihovna/CHMU-EMAIL-OKRES]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres). Sestava vychází z krajské sestavy.
 
 **Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
 
-### [CHMU-SMS-OKRES]
+### [Knihovna/CHMU-SMS-OKRES]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
-### [CHMU-SMS-OKRES-SKUP]
+### [Knihovna/CHMU-SMS-OKRES-SKUP]
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
-### [CHMU-SMS-OKRES-LK]
+### [Knihovna/CHMU-SMS-OKRES-LK]
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro skupinu ORP (okres) v Libereckém kraji.
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
 
 ---
 
-### [AA-CHMU-EMAIL-OKRES]
+### [AA/AA-CHMU-EMAIL-OKRES]
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 Parametr **mojeUzemi** obsahuje seznam jednotlivých kódů ORP, které pokrývají zájmové území.
@@ -475,7 +475,7 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 - Při hodnotě *false* je vždy na výstupu tisková sestava obsahující výpis zprávy CAP, a to i v případě, že na zvoleném území nedochází ke změně oproti minulé výstraze.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
 
-### [AA-CHMU-SMS-OKRES]
+### [AA/AA-CHMU-SMS-OKRES]
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
@@ -494,7 +494,7 @@ Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
-### [AA-CHMU-SMS-OKRES-SKUP]
+### [AA/AA-CHMU-SMS-OKRES-SKUP]
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
@@ -514,7 +514,7 @@ Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 
-### [AA-CHMU-SMS-ORP-LK]
+### [AA/AA-CHMU-SMS-ORP-LK]
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro ORP v Libereckém kraji.
 
 Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Skript neprovádí kontrolu, zda je ORP uvnitř Libereckého kraje. 
