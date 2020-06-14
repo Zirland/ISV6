@@ -1,4 +1,4 @@
-// Verze 63
+// Verze 64
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
