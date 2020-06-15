@@ -440,7 +440,7 @@ function GetLCSLength(newValueSplit, oldValueSplit) {
     return matrix;
 }
 
-function PrepareInfo(orp, vystraha) {
+function PrepareInfo(orp, vystraha, mojeUzemi) {
     var infoList = [];
 
     for (var i = 0; i < vystraha.info.length; i++) {
