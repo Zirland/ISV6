@@ -1381,10 +1381,6 @@ function PrintInfo(info, ref_info) {
         }
         if (info.doporuceni) {
             upr_doporuceni = info.doporuceni.replace(/<br\/>/g, ' ');
-            upr_doporuceni = upr_doporuceni.replace(
-                /hasičské záchranné služby/g,
-                'hasičského záchranného sboru'
-            );
         }
     }
 
@@ -1406,10 +1402,6 @@ function PrintInfo(info, ref_info) {
         }
         if (ref_info.doporuceni) {
             ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g, ' ');
-            ref_upr_doporuceni = ref_upr_doporuceni.replace(
-                /hasičské záchranné služby/g,
-                'hasičského záchranného sboru'
-            );
         }
     }
 
