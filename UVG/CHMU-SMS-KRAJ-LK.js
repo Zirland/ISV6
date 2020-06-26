@@ -1,4 +1,4 @@
-// Verze 64
+// Verze 65
 
 var omezitNaKraj = 78;
 
@@ -483,9 +483,17 @@ function PrepareInfo(orp, vystraha) {
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
         var barva1 = a.stupen_kod.split('.')[1];
-        var zavaznost1 = Number(barva1.substring(0, 1));
+        if (typeof barva1 !== 'undefined' && barva1) {
+            var zavaznost1 = Number(barva1.substring(0, 1));
+        } else {
+            var zavaznost1 = 0;
+        }
         var barva2 = b.stupen_kod.split('.')[1];
-        var zavaznost2 = Number(barva2.substring(0, 1));
+        if (typeof barva2 !== 'undefined' && barva2) {
+            var zavaznost2 = Number(barva2.substring(0, 1));
+        } else {
+            var zavaznost2 = 0;
+        }
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -1273,10 +1281,6 @@ function PrintInfo(info, ref_info) {
         }
         if (info.doporuceni) {
             upr_doporuceni = info.doporuceni.replace(/<br\/>/g, ' ');
-            upr_doporuceni = upr_doporuceni.replace(
-                /hasičské záchranné služby/g,
-                'hasičského záchranného sboru'
-            );
         }
     }
 
@@ -1298,10 +1302,6 @@ function PrintInfo(info, ref_info) {
         }
         if (ref_info.doporuceni) {
             ref_upr_doporuceni = ref_info.doporuceni.replace(/<br\/>/g, ' ');
-            ref_upr_doporuceni = ref_upr_doporuceni.replace(
-                /hasičské záchranné služby/g,
-                'hasičského záchranného sboru'
-            );
         }
     }
 
@@ -1455,10 +1455,18 @@ if (Number(zmen) != 0) {
             var jev1 = a.stupen_kod;
             var jev2 = b.stupen_kod;
             var barva1 = a.stupen_kod.split('.')[1];
-            var zavaznost1 = Number(barva1.substring(0, 1));
+            if (typeof barva1 !== 'undefined' && barva1) {
+                var zavaznost1 = Number(barva1.substring(0, 1));
+            } else {
+                var zavaznost1 = 0;
+            }
             var barva2 = b.stupen_kod.split('.')[1];
-            var zavaznost2 = Number(barva2.substring(0, 1));
-
+            if (typeof barva2 !== 'undefined' && barva2) {
+                var zavaznost2 = Number(barva2.substring(0, 1));
+            } else {
+                var zavaznost2 = 0;
+            }
+    
             if (a.jistota_kod == 'Observed') {
                 vyskyt1 = 1;
             }
