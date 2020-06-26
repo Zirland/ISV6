@@ -1,6 +1,72 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 65 – 2020-06-26
+### [Knihovna/CHMU-MAIL-2]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+#### Změněno
+- Aktualizace seznamu automatických oprav textu.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+### [Knihovna/CHMU-SMS-KRAJ-LK]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUP]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+### [Knihovna/CHMU-SMS-ORP-LK]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Aktualizace seznamu automatických oprav textu.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Aktualizace seznamu automatických oprav textu.
+
+### [UVG/CHMU-MAIL2]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+#### Změněno
+- Aktualizace seznamu automatických oprav textu.
+
+### [UVG/NOTIF-KRAJ]
+#### Změněno
+- Aktualizace seznamu automatických oprav textu.
+
+### [UVG/CHMU-SMS]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
+#### Změněno
+- Aktualizace seznamu automatických oprav textu.
+
+### [UVG/CHMU-SMS-SKUP]
+#### Záplata
+- Oprava chybového stavu při výhledu nebezpečných jevů.
+
 ## verze 64 – 2020-06-14
 ### [AA/AA-CHMU-EMAIL-OKRES]
 #### Odstraněno
