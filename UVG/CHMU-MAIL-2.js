@@ -482,9 +482,17 @@ function PrepareInfo(orp, vystraha, mojeUzemi) {
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
         var barva1 = a.stupen_kod.split('.')[1];
-        var zavaznost1 = Number(barva1.substring(0, 1));
+        if (typeof barva1 !== 'undefined' && barva1) {
+            var zavaznost1 = Number(barva1.substring(0, 1));
+        } else {
+            var zavaznost1 = 0;
+        }
         var barva2 = b.stupen_kod.split('.')[1];
-        var zavaznost2 = Number(barva2.substring(0, 1));
+        if (typeof barva2 !== 'undefined' && barva2) {
+            var zavaznost2 = Number(barva2.substring(0, 1));
+        } else {
+            var zavaznost2 = 0;
+        }
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
 
@@ -1077,9 +1085,17 @@ function PrepareInfo2(vystraha) {
         var start1 = parseFloat(Normalize(a.dc_zacatek));
         var start2 = parseFloat(Normalize(b.dc_zacatek));
         var barva1 = a.stupen_kod.split('.')[1];
-        var zavaznost1 = Number(barva1.substring(0, 1));
+        if (typeof barva1 !== 'undefined' && barva1) {
+            var zavaznost1 = Number(barva1.substring(0, 1));
+        } else {
+            var zavaznost1 = 0;
+        }
         var barva2 = b.stupen_kod.split('.')[1];
-        var zavaznost2 = Number(barva2.substring(0, 1));
+        if (typeof barva2 !== 'undefined' && barva2) {
+            var zavaznost2 = Number(barva2.substring(0, 1));
+        } else {
+            var zavaznost2 = 0;
+        }
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
 
