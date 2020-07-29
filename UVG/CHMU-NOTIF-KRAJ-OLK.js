@@ -1405,12 +1405,12 @@ if (vystraha.info && vystraha.info.length > 0) {
 
 if (Number(zmen) != 0) {
     var poradi_zpravy = vystraha.id.substring(vystraha.id.length - 6);
-    uvod += 'č. ' + Number(poradi_zpravy) + ': ';
+    var uvod = 'č. ' + Number(poradi_zpravy) + '. ';
 
     resultText =
         'Výstraha ČHMÚ ' +
         uvod +
-        '. Více viz mail nebo www.chmi.cz. KOPIS HZS OLK';
+        'Více viz mail nebo www.chmi.cz. KOPIS HZS OLK';
 } else {
     resultText =
         '';
