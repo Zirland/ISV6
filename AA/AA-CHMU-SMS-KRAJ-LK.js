@@ -1,5 +1,5 @@
 //!JS
-// Verze 65
+// Verze 66
 
 #import "CHMU-SMS-KRAJ-LK";
 

@@ -1,4 +1,4 @@
-// Verze 65
+// Verze 66
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
