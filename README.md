@@ -424,6 +424,16 @@ if (N !== 'undefined' && N.textSMS) {
 }
 ```
 
+### [CHMU-NOTIF-KRAJ-OLK]
+Předpis pro vytvoření SMS zprávy ve znění požadovaném HZS OLK pro upozornění příjemce e-mailu na vydání výstrahy.
+
+Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+```javascript
+//!JS
+if (N !== 'undefined' && N.textSMS) {
+    print(N.textSMS);
+}
+```
 
 
 ---
