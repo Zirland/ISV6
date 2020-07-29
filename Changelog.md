@@ -1,6 +1,11 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 66 – 2020-07-29
+### [UVG/CHMU-NOTIF-KRAJ-OLK]
+#### Přidáno
+- Vytvoření SMS zprávy ve znění požadovaném HZS OLK pro upozornění příjemce e-mailu na vydání výstrahy.
+
 ## verze 65 – 2020-06-26
 ### [Knihovna/CHMU-MAIL-2]
 #### Záplata

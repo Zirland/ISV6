@@ -1,4 +1,4 @@
-// Verze 65
+// Verze 66
 
 var omezitNaKraj = -1;
 var detailni = 1;
