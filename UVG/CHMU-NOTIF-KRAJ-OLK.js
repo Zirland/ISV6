@@ -1325,10 +1325,10 @@ function GetWarningColor(info) {
                 color = 'Nízký st. nebezpečí';
                 break;
             case 'Severe':
-                color = 'vysoký st. nebezpečí';
+                color = 'Vysoký st. nebezpečí';
                 break;
             case 'Extreme':
-                color = 'extrémní st. nebezpečí';
+                color = 'Extrémní st. nebezpečí';
                 break;
             default:
                 color = '';
