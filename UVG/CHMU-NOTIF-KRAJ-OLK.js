@@ -2,24 +2,6 @@
 
 var omezitNaKraj = 124;
 
-var KRAJE_NAZVY = {
-    '-1': 'Česká republika',
-    '19': 'Hlavní město Praha',
-    '27': 'Středočeský kraj',
-    '35': 'Jihočeský kraj',
-    '43': 'Plzeňský kraj',
-    '51': 'Karlovarský kraj',
-    '60': 'Ústecký kraj',
-    '78': 'Liberecký kraj',
-    '86': 'Královéhradecký kraj',
-    '94': 'Pardubický kraj',
-    '108': 'Kraj Vysočina',
-    '116': 'Jihomoravský kraj',
-    '124': 'Olomoucký kraj',
-    '132': 'Moravskoslezský kraj',
-    '141': 'Zlínský kraj'
-};
-
 var JEVY_NAZVY = {
     'I.1': 'Vysoké teploty',
     '0I.1': 'VÝSKYT Vysoké teploty',
@@ -268,6 +250,16 @@ function ZobrazDatum(datum, format, end) {
     return format_datum;
 }
 
+function removeDuplicates(arr) {
+    var unique_array = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (unique_array.indexOf(arr[i]) == -1) {
+            unique_array.push(arr[i]);
+        }
+    }
+    return unique_array;
+}
+
 function PrepareInfo(orp, vystraha) {
     var infoList = [];
 
@@ -317,13 +309,9 @@ function PrepareInfo(orp, vystraha) {
     var infoListFilter = [];
     for (var x = 0; x < infoList.length; x++) {
         var podminka = true;
-        if (zobrazitVyhled) {
-            podminka = !UkoncenyJev(infoList[x].dc_konec, vytvoreni);
-        } else {
-            podminka =
-                infoList[x].jev_kod != 'OUTLOOK' &&
-                !UkoncenyJev(infoList[x].dc_konec, vytvoreni);
-        }
+        podminka =
+            infoList[x].jev_kod != 'OUTLOOK' &&
+            !UkoncenyJev(infoList[x].dc_konec, vytvoreni);
 
         if (podminka) {
             infoListFilter.push(infoList[x]);
@@ -446,7 +434,7 @@ function PrepareInfo(orp, vystraha) {
     return krajList;
 }
 
-function PrintInfoList(krajList, ref_krajList, headers) {
+function PrintInfoList(krajList, ref_krajList) {
     var resultText = '';
     var zpracovanyInfoStupen = [];
     var zpracovanyInfoStupenOkres = [];
@@ -463,9 +451,9 @@ function PrintInfoList(krajList, ref_krajList, headers) {
         zpracovanyInfoStupen = [];
         ref_zpracovanyInfoStupen = [];
         first = true;
-        opakovanyKraj = [];
-        opakovanyOkres = [];
-        opakovanyOrp = [];
+        var opakovanyKraj = [];
+        var opakovanyOkres = [];
+        var opakovanyOrp = [];
 
         if (ref_krajList.length > 0) {
             for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
@@ -479,7 +467,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                     }
                 }
 
-                if (!found && zobrazitZmeny) {
+                if (!found) {
                     if (first) {
                         first = false;
                     }
@@ -534,7 +522,6 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                 first = false;
             }
 
-            empty = false;
             pomoc = PrintInfo(info, ref_info);
             zmen = Number(zmen) + Number(pomoc.split('|')[1]);
         }
@@ -586,7 +573,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             }
                         }
 
-                        if (!found && zobrazitZmeny) {
+                        if (!found) {
                             if (first) {
                                 first = false;
                             }
@@ -697,7 +684,6 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         first = false;
                     }
 
-                    empty = false;
                     pomoc = PrintInfo(info, ref_info);
                     zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
@@ -774,7 +760,7 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                 }
                             }
 
-                            if (!found && zobrazitZmeny) {
+                            if (!found) {
                                 if (first) {
                                     first = false;
                                 }
@@ -907,7 +893,6 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                             first = false;
                         }
 
-                        empty = false;
                         pomoc = PrintInfo(info, ref_info);
                         zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
@@ -1354,25 +1339,18 @@ function GetWarningColor(info) {
     return color;
 }
 
-var zobrazitVyhled = false;
-var zobrazitZmeny = true;
+var orpTmp = [];
 
-if (omezitNaKraj != -1) {
-    var orpTmp = [];
-
-    for (var i = 0; i < orp.length; i++) {
-        if (omezitNaKraj == orp[i].kraj.id) {
-            orpTmp.push(orp[i]);
-        }
+for (var i = 0; i < orp.length; i++) {
+    if (omezitNaKraj == orp[i].kraj.id) {
+        orpTmp.push(orp[i]);
     }
-
-    orp = orpTmp;
 }
 
-var resultText = '';
+orp = orpTmp;
+
 var krajList = [];
 var ref_krajList = [];
-var info;
 var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
@@ -1388,7 +1366,6 @@ if (
     ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
-var empty = true;
 var zmen = 0;
 
 if (vystraha.info && vystraha.info.length > 0) {
@@ -1404,16 +1381,104 @@ if (vystraha.info && vystraha.info.length > 0) {
 }
 
 if (Number(zmen) != 0) {
-    var poradi_zpravy = vystraha.id.substring(vystraha.id.length - 6);
-    var uvod = 'č. ' + Number(poradi_zpravy) + '. ';
+    var resultText = '';
+    var uvod = '';
 
-    resultText =
-        'Výstraha ČHMÚ ' +
-        uvod +
-        'Více viz mail nebo www.chmi.cz. KOPIS HZS OLK';
-} else {
-    resultText =
-        '';
+    if (vystraha.info) {
+        var infoList = [];
+        for (var l = 0; l < vystraha.info.length; l++) {
+            infoList.push(vystraha.info[l]);
+        }
+
+        infoList = infoList.sort(function(a, b) {
+            var vyskyt1 = 0;
+            var vyskyt2 = 0;
+            var jev1 = a.stupen_kod;
+            var jev2 = b.stupen_kod;
+            var barva1 = a.stupen_kod.split('.')[1];
+            if (typeof barva1 !== 'undefined' && barva1) {
+                var zavaznost1 = Number(barva1.substring(0, 1));
+            } else {
+                var zavaznost1 = 0;
+            }
+            var barva2 = b.stupen_kod.split('.')[1];
+            if (typeof barva2 !== 'undefined' && barva2) {
+                var zavaznost2 = Number(barva2.substring(0, 1));
+            } else {
+                var zavaznost2 = 0;
+            }
+
+            if (a.jistota_kod == 'Observed') {
+                vyskyt1 = 1;
+            }
+            if (b.jistota_kod == 'Observed') {
+                vyskyt2 = 1;
+            }
+            if (vyskyt1 > vyskyt2) return -1;
+            if (vyskyt1 < vyskyt2) return 1;
+            if (zavaznost1 > zavaznost2) return -1;
+            if (zavaznost1 < zavaznost2) return 1;
+            if (jev1 < jev2) return -1;
+            if (jev1 > jev2) return 1;
+            return 0;
+        });
+    }
+
+    if (infoList) {
+        var poleJevy = [];
+        for (var i = 0; i < infoList.length; i++) {
+            if (infoList[i].stupen_kod != 'OUTLOOK') {
+                var pomKod = '';
+                if (infoList[i].jistota_kod == 'Observed') {
+                    pomKod += '0';
+                }
+                pomKod += infoList[i].stupen_kod;
+                poleJevy.push(pomKod);
+            }
+        }
+
+        poleJevy = removeDuplicates(poleJevy);
+
+        for (var h = 0; h < poleJevy.length; h++) {
+            var jevKrajeList = [];
+            for (var i = 0; i < infoList.length; i++) {
+                var pomKodIvnj = '';
+                if (infoList[i].jistota_kod == 'Observed') {
+                    pomKodIvnj = '0';
+                }
+                if (poleJevy[h] == pomKodIvnj + infoList[i].stupen_kod) {
+                    var found = omezitNaKraj == -1;
+                    for (
+                        var j = 0;
+                        j < infoList[i].kraj.length && !found;
+                        j++
+                    ) {
+                        found = infoList[i].kraj[j].UID == omezitNaKraj;
+                    }
+                    for (var j = 0; j < infoList[i].kraj.length; j++) {
+                        if (found) {
+                            jevKrajeList.push(infoList[i].kraj[j].UID);
+                        }
+                    }
+                }
+            }
+            jevKrajeList = removeDuplicates(jevKrajeList);
+            jevKrajeList = jevKrajeList.sort(function(a, b) {
+                return a - b;
+            });
+
+            if (jevKrajeList.length > 0) {
+                uvod += JEVY_NAZVY[poleJevy[h]];
+                uvod += ', ';
+            }
+        }
+    }
 }
+
+uvod = uvod.substring(0, uvod.length - 2);
+
+resultText = 'Výstraha ČHMÚ (';
+resultText += uvod;
+resultText += '). Více viz mail nebo www.chmi.cz. KOPIS HZS OLK';
 
 return resultText;
