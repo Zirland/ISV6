@@ -1,6 +1,69 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 67 – 2020-08-11
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Úprava řazení jevů.
+
+### [Knihovna/CHMU-SMS-KRAJ-LK]
+#### Změněno
+- Úprava řazení jevů.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUP]
+#### Změněno
+- Úprava řazení jevů.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Úprava řazení jevů.
+
+### [Knihovna/CHMU-SMS-ORP-LK]
+#### Změněno
+- Úprava řazení jevů.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Záplata
+- Oprava chyby při generování názvů ORP.
+
+#### Změněno
+- Úprava řazení jevů.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Záplata
+- Oprava chyby při generování názvů ORP.
+
+#### Změněno
+- Úprava řazení jevů.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Úprava řazení jevů.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Úprava řazení jevů.
+
+### [UVG/CHMU-NOTIF-KRAJ-OLK]
+#### Změněno
+- Úprava řazení jevů.
+
+### [UVG/CHMU-NOTIF-KRAJ]
+#### Změněno
+- Úprava řazení jevů.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+#### Změněno
+- Úprava řazení jevů.
+
+### [UVG/CHMU-SMS-SKUPINY]
+#### Změněno
+- Úprava řazení jevů.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Úprava řazení jevů.
+
 ## verze 66 – 2020-07-29
 ### [UVG/CHMU-NOTIF-KRAJ-OLK]
 #### Přidáno

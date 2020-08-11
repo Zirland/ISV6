@@ -1,4 +1,4 @@
-// Verze 66
+// Verze 67
 
 #import "CHMU-CISELNIK";
 #import "CHMU-DATUMY";
@@ -26,9 +26,11 @@ if (vystraha.info) {
         infoList.push(vystraha.info[l]);
     }
 
-    infoList = infoList.sort(function(a, b) {
+    infoList = infoList.sort(function (a, b) {
         var vyskyt1 = 0;
         var vyskyt2 = 0;
+        var start1 = parseFloat(Normalize(a.dc_zacatek));
+        var start2 = parseFloat(Normalize(b.dc_zacatek));
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
         var barva1 = a.stupen_kod.split('.')[1];
@@ -52,6 +54,8 @@ if (vystraha.info) {
         }
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
         if (zavaznost1 > zavaznost2) return -1;
         if (zavaznost1 < zavaznost2) return 1;
         if (jev1 < jev2) return -1;
@@ -312,9 +316,11 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
         ref_infoList.push(ref_vystraha.info[l]);
     }
 
-    ref_infoList = ref_infoList.sort(function(a, b) {
+    ref_infoList = ref_infoList.sort(function (a, b) {
         var vyskyt1 = 0;
         var vyskyt2 = 0;
+        var start1 = parseFloat(Normalize(a.dc_zacatek));
+        var start2 = parseFloat(Normalize(b.dc_zacatek));
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
         var barva1 = a.stupen_kod.split('.')[1];
@@ -338,6 +344,8 @@ if (typeof ref_vystraha !== 'undefined' && ref_vystraha.info) {
         }
         if (vyskyt1 > vyskyt2) return -1;
         if (vyskyt1 < vyskyt2) return 1;
+        if (start1 < start2) return -1;
+        if (start1 > start2) return 1;
         if (zavaznost1 > zavaznost2) return -1;
         if (zavaznost1 < zavaznost2) return 1;
         if (jev1 < jev2) return -1;

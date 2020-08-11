@@ -1,4 +1,4 @@
-// Verze 66
+// Verze 67
 
 var omezitNaKraj = 124;
 
@@ -327,6 +327,18 @@ function PrepareInfo(orp, vystraha) {
         var start2 = parseFloat(Normalize(b.dc_zacatek));
         var jev1 = a.stupen_kod;
         var jev2 = b.stupen_kod;
+        var barva1 = a.stupen_kod.split('.')[1];
+        if (typeof barva1 !== 'undefined' && barva1) {
+            var zavaznost1 = Number(barva1.substring(0, 1));
+        } else {
+            var zavaznost1 = 0;
+        }
+        var barva2 = b.stupen_kod.split('.')[1];
+        if (typeof barva2 !== 'undefined' && barva2) {
+            var zavaznost2 = Number(barva2.substring(0, 1));
+        } else {
+            var zavaznost2 = 0;
+        }
 
         if (a.jistota_kod == 'Observed') {
             vyskyt1 = 1;
@@ -338,6 +350,8 @@ function PrepareInfo(orp, vystraha) {
         if (vyskyt1 < vyskyt2) return 1;
         if (start1 < start2) return -1;
         if (start1 > start2) return 1;
+        if (zavaznost1 > zavaznost2) return -1;
+        if (zavaznost1 < zavaznost2) return 1;
         if (jev1 < jev2) return -1;
         if (jev1 > jev2) return 1;
         return 0;
@@ -1392,6 +1406,8 @@ if (Number(zmen) != 0) {
         infoList = infoList.sort(function (a, b) {
             var vyskyt1 = 0;
             var vyskyt2 = 0;
+            var start1 = parseFloat(Normalize(a.dc_zacatek));
+            var start2 = parseFloat(Normalize(b.dc_zacatek));
             var jev1 = a.stupen_kod;
             var jev2 = b.stupen_kod;
             var barva1 = a.stupen_kod.split('.')[1];
@@ -1415,6 +1431,8 @@ if (Number(zmen) != 0) {
             }
             if (vyskyt1 > vyskyt2) return -1;
             if (vyskyt1 < vyskyt2) return 1;
+            if (start1 < start2) return -1;
+            if (start1 > start2) return 1;
             if (zavaznost1 > zavaznost2) return -1;
             if (zavaznost1 < zavaznost2) return 1;
             if (jev1 < jev2) return -1;
