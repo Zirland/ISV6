@@ -1,4 +1,4 @@
-// Verze 66
+// Verze 67
 
 zobrazitZmeny = true;
 
