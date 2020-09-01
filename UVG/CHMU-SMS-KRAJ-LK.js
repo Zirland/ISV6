@@ -1,4 +1,4 @@
-// Verze 67
+// Verze 68
 
 var omezitNaKraj = 78;
 
@@ -1561,7 +1561,7 @@ if (Number(zmen) != 0) {
         var start = starty.toString();
 
         if (start == 'Infinity') {
-            vystupText += 'informace ČHMÚ - není v platnosti žádná výstraha.';
+            vystupText += 'informace ČHMÚ - byla ukončena platnost vydané výstrahy.';
             vystupText += ', ';
         } else {
             var uvod = '';
