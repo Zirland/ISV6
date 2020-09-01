@@ -1,4 +1,4 @@
-// Verze 67
+// Verze 68
 
 var omezitNaKraj = -1;
 var detailni = 1;
