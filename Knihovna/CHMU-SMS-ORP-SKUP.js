@@ -214,7 +214,7 @@ if (infoList) {
 
     if (start == 'Infinity') {
         vystupText +=
-            'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+            'Informace ČHMÚ: byla ukončena platnost vydané výstrahy.' + oddelovac;
         sms1 += vystupText;
     } else {
         switch (vystraha.ucel) {
@@ -454,7 +454,7 @@ if (ref_infoList) {
     var total_ukonceni2 = ZobrazDatumSMS(end2, 1);
 
     if (start2 == 'Infinity') {
-        sms2 += 'Informace ČHMÚ: není v platnosti žádná výstraha.' + oddelovac;
+        sms2 += 'Informace ČHMÚ: byla ukončena platnost vydané výstrahy.' + oddelovac;
     } else {
         if (!detailni) {
             sms2 +=

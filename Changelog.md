@@ -1,6 +1,43 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 68 – 2020-09-01
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-KRAJ-LK]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUP]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-ORP-LK]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
+### [UVG/CHMU-SMS-SKUPINY]
+#### Změněno
+- Změna textu SMS při předčasném ukončení výstrahy.
+
 ## verze 67 – 2020-08-11
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno
