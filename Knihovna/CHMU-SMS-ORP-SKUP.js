@@ -129,7 +129,7 @@ if (infoList) {
                     for (var l = 0; l < orp.length; l++) {
                         if (
                             OrpListArr[k] == orp[l].id &&
-                            orp[l].id.toString().indexOf(mojeUzemi.toString()) >
+                            mojeUzemi.toString().indexOf(orp[l].id.toString()) >
                             -1
                         ) {
                             jevOrpList.push(orp[l].nazev);
@@ -386,7 +386,7 @@ if (ref_infoList) {
                     for (var l = 0; l < orp.length; l++) {
                         if (
                             OrpListArr2[k] == orp[l].id &&
-                            orp[l].id.toString().indexOf(mojeUzemi.toString()) >
+                            mojeUzemi.toString().indexOf(orp[l].id.toString()) >
                             -1
                         ) {
                             jevOrpList2.push(orp[l].nazev);
