@@ -1,5 +1,5 @@
 //!JS
-// Verze 68
+// Verze 69
 
 var omezitNaKraj = -1;
 var detailni = 1;
