@@ -1,6 +1,15 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 69 – 2020-09-25
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Záplata
+- Oprava chyby při generování názvů ORP.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Záplata
+- Oprava chyby při generování názvů ORP.
+
 ## verze 68 – 2020-09-01
 ### [Knihovna/CHMU-SMS-KRAJ]
 #### Změněno
