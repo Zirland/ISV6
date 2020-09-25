@@ -127,12 +127,13 @@ if (infoList) {
 
                 for (var k = 0; k < OrpListArr.length; k++) {
                     for (var l = 0; l < orp.length; l++) {
-                        if (
-                            OrpListArr[k] == orp[l].id &&
-                            mojeUzemi.toString().indexOf(orp[l].id.toString()) >
-                            -1
-                        ) {
-                            jevOrpList.push(orp[l].nazev);
+                        for (var m = 0; m < mojeUzemi.length; m++) {
+                            if (
+                                OrpListArr[k] == orp[l].id &&
+                                orp[l].id == mojeUzemi[m]
+                            ) {
+                                jevOrpList.push(orp[l].nazev);
+                            }
                         }
                     }
                 }
@@ -384,12 +385,13 @@ if (ref_infoList) {
 
                 for (var k = 0; k < OrpListArr2.length; k++) {
                     for (var l = 0; l < orp.length; l++) {
-                        if (
-                            OrpListArr2[k] == orp[l].id &&
-                            mojeUzemi.toString().indexOf(orp[l].id.toString()) >
-                            -1
-                        ) {
-                            jevOrpList2.push(orp[l].nazev);
+                        for (var m = 0; m < mojeUzemi.length; m++) {
+                            if (
+                                OrpListArr2[k] == orp[l].id &&
+                                orp[l].id == mojeUzemi[m]
+                            ) {
+                                jevOrpList2.push(orp[l].nazev);
+                            }
                         }
                     }
                 }
