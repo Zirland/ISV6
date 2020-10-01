@@ -181,7 +181,7 @@ if (ref_infoList) {
     var total_zahajeni2 = ZobrazDatumSMS(start2);
     var total_ukonceni2 = ZobrazDatumSMS(end2, 1);
 
-    if (start2 == 'Infinity') {
+    if (start2 == 'Infinity' && poleJevy2 && poleJevy2.length > 0) {
         sms2 += 'Informace ČHMÚ: byla ukončena platnost vydané výstrahy.' + oddelovac;
     } else {
         if (!detailni) {
