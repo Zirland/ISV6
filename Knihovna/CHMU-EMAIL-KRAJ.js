@@ -1,4 +1,4 @@
-// Verze 70
+// Verze 71
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
