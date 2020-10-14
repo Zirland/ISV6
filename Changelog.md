@@ -1,6 +1,15 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 71 – 2020-10-14
+### [Knihovna/CHMU-PREPARE]
+#### Záplata
+- Oprava chyby při detekci ukončených jevů s vypnutým zvýrazněním změn.
+
+### [UVG/CHMU-EMAIL]
+#### Záplata
+- Oprava chyby při detekci ukončených jevů s vypnutým zvýrazněním změn.
+
 ## verze 70 – 2020-10-14
 ### [Knihovna/CHMU-EMAIL-KRAJ]
 #### Záplata
