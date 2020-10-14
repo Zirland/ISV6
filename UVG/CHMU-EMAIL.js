@@ -2129,7 +2129,7 @@ if (distrSeznamNahore == false) {
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
+if (Number(zmen) == 0 && pouzeZmeny) {
     resultText = '';
 }
 
