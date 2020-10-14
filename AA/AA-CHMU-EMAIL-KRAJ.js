@@ -1,5 +1,5 @@
 //!JS
-// Verze 69
+// Verze 70
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;

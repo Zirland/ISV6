@@ -1,4 +1,4 @@
-// Verze 69
+// Verze 70
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -2129,7 +2129,7 @@ if (distrSeznamNahore == false) {
 resultText += '</BODY>';
 resultText += '</HTML>';
 
-if (Number(zmen) == 0 && pouzeZmeny && zobrazitZmeny) {
+if (Number(zmen) == 0 && pouzeZmeny) {
     resultText = '';
 }
 
