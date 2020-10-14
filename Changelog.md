@@ -1,6 +1,43 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 70 – 2020-10-14
+### [Knihovna/CHMU-EMAIL-KRAJ]
+#### Záplata
+- Oprava chyby při generování sestavy s vypnutým zvýrazněním změn.
+
+### [Knihovna/CHMU-EMAIL-ORP]
+#### Záplata
+- Oprava chyby při generování sestavy s vypnutým zvýrazněním změn.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUP]
+#### Změněno
+- Úprava procesu tvorby SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Úprava procesu tvorby SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Změněno
+- Úprava procesu tvorby SMS při předčasném ukončení výstrahy.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Změněno
+- Úprava procesu tvorby SMS při předčasném ukončení výstrahy.
+
+### [UVG/CHMU-EMAIL]
+#### Záplata
+- Oprava chyby při generování sestavy s vypnutým zvýrazněním změn.
+
+### [UVG/CHMU-SMS-SKUPINY]
+#### Změněno
+- Úprava procesu tvorby SMS při předčasném ukončení výstrahy.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Úprava procesu tvorby SMS při předčasném ukončení výstrahy.
+
 ## verze 69 – 2020-09-25
 ### [Knihovna/CHMU-SMS-ORP-SKUP]
 #### Záplata
