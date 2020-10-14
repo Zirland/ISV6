@@ -1,4 +1,4 @@
-// Verze 70
+// Verze 71
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -694,11 +694,11 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                         '-' +
                         ref_info.dc_konec
                     );
-
                     pomoc = PrintInfo(null, ref_info);
                     resultText += pomoc.split('|')[0];
-                    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                 }
+                pomoc = PrintInfo(null, ref_info);
+                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
             }
         }
 
@@ -816,11 +816,11 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                 '-' +
                                 ref_info.dc_konec
                             );
-
                             pomoc = PrintInfo(null, ref_info);
                             resultText += pomoc.split('|')[0];
-                            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                         }
+                        pomoc = PrintInfo(null, ref_info);
+                        zmen = Number(zmen) + Number(pomoc.split('|')[1]);
                     }
                 }
             }
@@ -1012,12 +1012,12 @@ function PrintInfoList(krajList, ref_krajList, headers) {
                                                 .orpList[ol].nazev +
                                             '</b>');
                                 }
-
                                 pomoc = PrintInfo(null, ref_info);
                                 resultText += pomoc.split('|')[0];
-                                zmen =
-                                    Number(zmen) + Number(pomoc.split('|')[1]);
                             }
+                            pomoc = PrintInfo(null, ref_info);
+                            zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+
                         }
                     }
                 }
