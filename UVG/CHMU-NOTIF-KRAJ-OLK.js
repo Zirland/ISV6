@@ -1334,22 +1334,39 @@ function GetWarningColor(info) {
     var color = '';
 
     if (info) {
-        switch (info.zavaznost_kod) {
-            case 'Moderate':
-                color = 'Nízký st. nebezpečí';
-                break;
-            case 'Severe':
-                color = 'Vysoký st. nebezpečí';
-                break;
-            case 'Extreme':
-                color = 'Extrémní st. nebezpečí';
-                break;
+        switch (info.jistota_kod) {
+            case 'Possible':
+                switch (info.zavaznost_kod) {
+                    case 'Moderate':
+                    case 'Severe':
+                        color = 'Nízký st. nebezpečí';
+                        break;
+                        case 'Extreme':
+                        color = 'Vysoký st. nebezpečí';
+                        break;
+                    default:
+                        color = '';
+                        break;
+                }
+                break;    
             default:
-                color = '';
+                switch (info.zavaznost_kod) {
+                    case 'Moderate':
+                        color = 'Nízký st. nebezpečí';
+                        break;
+                    case 'Severe':
+                        color = 'Vysoký st. nebezpečí';
+                        break;
+                    case 'Extreme':
+                        color = 'Extrémní st. nebezpečí';
+                        break;
+                    default:
+                        color = '';
+                        break;
+                }
                 break;
         }
     }
-
     return color;
 }
 
