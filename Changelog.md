@@ -1,6 +1,47 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 73 – 2021-04-12
+### [Knihovna/CHMU-PREPARE]
+#### Změněno
+- Implementace matice určení závažnosti jevu na základě pravděpodobnosti.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUP]
+#### Změněno
+- Úprava adresy na detail výstrahy na webu ČHMÚ.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Změněno
+- Úprava adresy na detail výstrahy na webu ČHMÚ.
+
+### [UVG/CHMU-EMAIL]
+#### Změněno
+- Implementace matice určení závažnosti jevu na základě pravděpodobnosti.
+
+### [UVG/CHMU-MAIL-2]
+#### Změněno
+- Implementace matice určení závažnosti jevu na základě pravděpodobnosti.
+
+### [UVG/CHMU-NOTIF-KRAJ-OLK]
+#### Změněno
+- Implementace matice určení závažnosti jevu na základě pravděpodobnosti.
+
+### [UVG/CHMU-NOTIF-KRAJ]
+#### Změněno
+- Implementace matice určení závažnosti jevu na základě pravděpodobnosti.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+#### Změněno
+- Implementace matice určení závažnosti jevu na základě pravděpodobnosti.
+
+### [UVG/CHMU-SMS-SKUPINY]
+#### Změněno
+- Úprava adresy na detail výstrahy na webu ČHMÚ.
+
+### [UVG/CHMU-SMS]
+#### Změněno
+- Úprava adresy na detail výstrahy na webu ČHMÚ.
+
 ## verze 72 – 2020-10-25
 ### [Knihovna/CHMU-PREPARE]
 #### Záplata

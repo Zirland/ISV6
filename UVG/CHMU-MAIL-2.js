@@ -1,4 +1,4 @@
-// Verze 72
+// Verze 73
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
@@ -861,22 +861,39 @@ function GetWarningColor(info) {
     var color = '';
 
     if (info) {
-        switch (info.zavaznost_kod) {
-            case 'Moderate':
-                color = 'Nízký st. nebezpečí';
-                break;
-            case 'Severe':
-                color = 'Vysoký st. nebezpečí';
-                break;
-            case 'Extreme':
-                color = 'Extrémní st. nebezpečí';
-                break;
+        switch (info.jistota_kod) {
+            case 'Possible':
+                switch (info.zavaznost_kod) {
+                    case 'Moderate':
+                    case 'Severe':
+                        color = 'Nízký st. nebezpečí';
+                        break;
+                        case 'Extreme':
+                        color = 'Vysoký st. nebezpečí';
+                        break;
+                    default:
+                        color = '';
+                        break;
+                }
+                break;    
             default:
-                color = '';
+                switch (info.zavaznost_kod) {
+                    case 'Moderate':
+                        color = 'Nízký st. nebezpečí';
+                        break;
+                    case 'Severe':
+                        color = 'Vysoký st. nebezpečí';
+                        break;
+                    case 'Extreme':
+                        color = 'Extrémní st. nebezpečí';
+                        break;
+                    default:
+                        color = '';
+                        break;
+                }
                 break;
         }
     }
-
     return color;
 }
 
@@ -884,18 +901,36 @@ function PozadiColor(info) {
     var pozadi = '#fff';
 
     if (info) {
-        switch (info.zavaznost_kod) {
-            case 'Moderate':
-                pozadi = '#ff0';
-                break;
-            case 'Severe':
-                pozadi = '#ffa500';
-                break;
-            case 'Extreme':
-                pozadi = '#f00';
-                break;
+        switch (info.jistota_kod) {
+            case 'Possible':
+                switch (info.zavaznost_kod) {
+                    case 'Moderate':
+                    case 'Severe':
+                        pozadi = '#ff0';
+                        break;
+                        case 'Extreme':
+                            pozadi = '#ffa500';
+                        break;
+                    default:
+                        pozadi = '#fff';
+                        break;
+                }
+                break;    
             default:
-                pozadi = '#fff';
+                switch (info.zavaznost_kod) {
+                    case 'Moderate':
+                        pozadi = '#ff0';
+                        break;
+                    case 'Severe':
+                        pozadi = '#ffa500';
+                        break;
+                    case 'Extreme':
+                        pozadi = '#f00';
+                        break;
+                    default:
+                        pozadi = '#fff';
+                        break;
+                }
                 break;
         }
     }
