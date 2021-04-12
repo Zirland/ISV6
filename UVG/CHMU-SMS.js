@@ -784,7 +784,7 @@ if (infoList) {
                 oddelovac;
         }
         if (omezitNaKraj == -1) {
-            vystupText += 'Podrobnosti: http://bit.ly/2Sb0ItG' + oddelovac;
+            vystupText += 'Podrobnosti: http://bit.ly/3uEnMUV' + oddelovac;
         }
     }
     vystupText = vystupText.substring(0, vystupText.length - oddelovac.length);
