@@ -1,5 +1,5 @@
 //!JS
-// Verze 72
+// Verze 73
 
 var omezitNaKraj = -1;
 var zobrazitVyhled = false;
