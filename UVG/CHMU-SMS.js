@@ -372,9 +372,10 @@ if (ref_infoList) {
                         var OrpList2 = ref_infoList[i].orp_list;
                         var OrpListArr2 = OrpList2.toString().split(',');
                         for (var k = 0; k < OrpListArr2.length; k++) {
+                            var OrpListSplit2 = OrpListArr2[k].split('[')[0];
                             for (var l = 0; l < orp.length; l++) {
                                 if (
-                                    OrpListArr2[k] == orp[l].id &&
+                                    OrpListSplit2 == orp[l].id &&
                                     orp[l].kraj.id == omezitNaKraj
                                 ) {
                                     jevOrpList2.push(orp[l].nazev);
@@ -398,6 +399,7 @@ if (ref_infoList) {
                 }
             }
         }
+
         jevKrajeList2 = removeDuplicates(jevKrajeList2);
         jevKrajeList2 = jevKrajeList2.sort(function (a, b) {
             return a - b;
@@ -580,9 +582,10 @@ if (infoList) {
                         var OrpList = infoList[i].orp_list;
                         var OrpListArr = OrpList.toString().split(',');
                         for (var k = 0; k < OrpListArr.length; k++) {
+                            var OrpListSplit = OrpListArr[k].split('[')[0];
                             for (var l = 0; l < orp.length; l++) {
                                 if (
-                                    OrpListArr[k] == orp[l].id &&
+                                    OrpListSplit == orp[l].id &&
                                     orp[l].kraj.id == omezitNaKraj
                                 ) {
                                     jevOrpList.push(orp[l].nazev);
