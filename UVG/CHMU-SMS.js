@@ -417,6 +417,7 @@ if (ref_infoList) {
                 sms2 += ' pro kraje ';
 
                 var seznkraje2 = '';
+
                 for (var t = 0; t < jevKrajeList2.length; t++) {
                     seznkraje2 += KRAJE_KODY[jevKrajeList2[t]] + ', ';
                 }
