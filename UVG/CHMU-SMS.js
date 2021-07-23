@@ -20,7 +20,7 @@ var KRAJE_NAZVY = {
     '116': 'Jihomoravský kraj',
     '124': 'Olomoucký kraj',
     '132': 'Moravskoslezský kraj',
-    141: 'Zlínský kraj',
+    '141': 'Zlínský kraj',
 };
 
 var KRAJE_KODY = {
@@ -38,7 +38,7 @@ var KRAJE_KODY = {
     '116': 'JMK',
     '124': 'OLK',
     '132': 'MSK',
-    141: 'ZLK',
+    '141': 'ZLK',
 };
 
 var JEVY_NAZVY = {
@@ -494,6 +494,7 @@ if (ref_infoList) {
 }
 
 var zacatky = [];
+var zacatkytxt = [];
 var konce = [];
 var sms1 = '';
 var seznjevu = [];
@@ -604,10 +605,12 @@ if (infoList) {
                         var zacatek = Normalize(infoList[i].dc_zacatek);
                         if (zacatek < nyni) {
                             jevStart.push(0);
+                            zacatky.push(0);
                         } else {
                             jevStart.push(zacatek);
+                            zacatky.push(zacatek);
                         }
-                        zacatky.push(zacatek);
+                        zacatkytxt.push(zacatek);
                         jevStarttxt.push(zacatek);
 
                         var konec = Normalize(infoList[i].dc_konec);
@@ -709,10 +712,14 @@ if (infoList) {
     var starty = Math.min.apply(null, zacatky);
     var start = starty.toString();
 
+    var startytxt = Math.min.apply(null, zacatkytxt);
+    var starttxt = startytxt.toString();
+
     var endy = Math.max.apply(null, konce);
     var end = endy.toString();
 
     var total_zahajeni = ZobrazDatum(start);
+    var total_zahajenitxt = ZobrazDatum(starttxt);
     var total_ukonceni = ZobrazDatum(end, 1);
 
     var rezim = 'SVRS';
@@ -768,7 +775,7 @@ if (infoList) {
         if (!detailni) {
             vystupText +=
                 'Platnost od ' +
-                total_zahajeni +
+                total_zahajenitxt +
                 ' do ' +
                 total_ukonceni +
                 oddelovac;
