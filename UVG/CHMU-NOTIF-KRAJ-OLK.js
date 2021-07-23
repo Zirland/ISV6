@@ -114,7 +114,7 @@ var JEVY_NAZVY = {
     'SMOGSIT.NO2': 'smogová situace NO2',
     '0SMOGSIT.NO2': 'smogová situace NO2',
     'REG.NO2': 'regulace NO2',
-    '0REG.NO2': 'regulace NO2'
+    '0REG.NO2': 'regulace NO2',
 };
 
 function Normalize(datum) {
