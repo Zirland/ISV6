@@ -126,9 +126,10 @@ if (ref_infoList) {
                         var OrpList2 = ref_infoList[i].orp_list;
                         var OrpListArr2 = OrpList2.toString().split(',');
                         for (var k = 0; k < OrpListArr2.length; k++) {
+                            var OrpListSplit2 = OrpListArr2[k].split('[')[0];
                             for (var l = 0; l < orp.length; l++) {
                                 if (
-                                    OrpListArr2[k] == orp[l].id &&
+                                    OrpListSplit2 == orp[l].id &&
                                     orp[l].kraj.id == omezitNaKraj
                                 ) {
                                     jevOrpList2.push(orp[l].nazev);
@@ -136,11 +137,11 @@ if (ref_infoList) {
                             }
                         }
 
-                        var nyni = Zaokrouhli(vystraha.dc_odeslano);
+                        var nyni = Normalize(vystraha.dc_odeslano);
                         var zacatek2 = Normalize(ref_infoList[i].dc_zacatek);
                         if (zacatek2 < nyni) {
-                            zacatky2.push(nyni);
-                            jevStart2.push(nyni);
+                            zacatky2.push(0);
+                            jevStart2.push(0);
                         } else {
                             zacatky2.push(zacatek2);
                             jevStart2.push(zacatek2);
@@ -152,6 +153,7 @@ if (ref_infoList) {
                 }
             }
         }
+
         jevKrajeList2 = removeDuplicates(jevKrajeList2);
         jevKrajeList2 = jevKrajeList2.sort(function (a, b) {
             return a - b;
@@ -231,7 +233,9 @@ if (ref_infoList) {
     var total_ukonceni2 = ZobrazDatumSMS(end2, 1);
 
     if (start2 == 'Infinity' && poleJevy2 && poleJevy2.length > 0) {
-        sms2 += 'Informace ČHMÚ: byla ukončena platnost vydané výstrahy.' + oddelovac;
+        sms2 +=
+            'Informace ČHMÚ: byla ukončena platnost vydané výstrahy.' +
+            oddelovac;
     } else {
         if (!detailni) {
             sms2 +=
@@ -245,6 +249,7 @@ if (ref_infoList) {
 }
 
 var zacatky = [];
+var zacatkytxt = [];
 var konce = [];
 var sms1 = '';
 var seznjevu = [];
@@ -318,6 +323,7 @@ if (infoList) {
 
     for (var h = 0; h < poleJevy.length; h++) {
         var jevStart = [];
+        var jevStarttxt = [];
         var jevEnd = [];
         var jevKrajeList = [];
         var jevOrpList = [];
@@ -348,9 +354,10 @@ if (infoList) {
                         var OrpList = infoList[i].orp_list;
                         var OrpListArr = OrpList.toString().split(',');
                         for (var k = 0; k < OrpListArr.length; k++) {
+                            var OrpListSplit = OrpListArr[k].split('[')[0];
                             for (var l = 0; l < orp.length; l++) {
                                 if (
-                                    OrpListArr[k] == orp[l].id &&
+                                    OrpListSplit == orp[l].id &&
                                     orp[l].kraj.id == omezitNaKraj
                                 ) {
                                     jevOrpList.push(orp[l].nazev);
@@ -367,11 +374,18 @@ if (infoList) {
                         }
                         seznjevu.push(warn_type);
                         var zacatek = Normalize(infoList[i].dc_zacatek);
-                        zacatky.push(zacatek);
+                        if (zacatek < nyni) {
+                            jevStart.push(0);
+                            zacatky.push(0);
+                        } else {
+                            jevStart.push(zacatek);
+                            zacatky.push(zacatek);
+                        }
+                        zacatkytxt.push(zacatek);
+                        jevStarttxt.push(zacatek);
+
                         var konec = Normalize(infoList[i].dc_konec);
                         konce.push(konec);
-
-                        jevStart.push(zacatek);
                         jevEnd.push(konec);
                     }
                 }
@@ -408,14 +422,18 @@ if (infoList) {
                     var jevStarty = Math.min.apply(null, jevStart);
                     var jevZacatek = jevStarty.toString();
 
+                    var jevStartytxt = Math.min.apply(null, jevStarttxt);
+                    var jevZacatektxt = jevStartytxt.toString();
+
                     var jevEndy = Math.max.apply(null, jevEnd);
                     var jevKonec = jevEndy.toString();
 
                     var zahajeni = ZobrazDatumSMS(jevZacatek);
+                    var zahajenitxt = ZobrazDatumSMS(jevZacatektxt);
                     var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
                     resultText +=
-                        ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                        ' od ' + zahajenitxt + ' do ' + ukonceni + oddelovac;
                     sms1 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += oddelovac;
@@ -441,14 +459,18 @@ if (infoList) {
                     var jevStarty = Math.min.apply(null, jevStart);
                     var jevZacatek = jevStarty.toString();
 
+                    var jevStartytxt = Math.min.apply(null, jevStarttxt);
+                    var jevZacatektxt = jevStartytxt.toString();
+
                     var jevEndy = Math.max.apply(null, jevEnd);
                     var jevKonec = jevEndy.toString();
 
                     var zahajeni = ZobrazDatumSMS(jevZacatek);
+                    var zahajenitxt = ZobrazDatumSMS(jevZacatektxt);
                     var ukonceni = ZobrazDatumSMS(jevKonec, 1);
 
                     resultText +=
-                        ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
+                        ' od ' + zahajenitxt + ' do ' + ukonceni + oddelovac;
                     sms1 += ' od ' + zahajeni + ' do ' + ukonceni + oddelovac;
                 } else {
                     resultText += oddelovac;
@@ -461,10 +483,14 @@ if (infoList) {
     var starty = Math.min.apply(null, zacatky);
     var start = starty.toString();
 
+    var startytxt = Math.min.apply(null, zacatkytxt);
+    var starttxt = startytxt.toString();
+
     var endy = Math.max.apply(null, konce);
     var end = endy.toString();
 
     var total_zahajeni = ZobrazDatumSMS(start);
+    var total_zahajenitxt = ZobrazDatumSMS(starttxt);
     var total_ukonceni = ZobrazDatumSMS(end, 1);
 
     var rezim = 'SVRS';
@@ -477,7 +503,8 @@ if (infoList) {
 
     if (start == 'Infinity' && poleJevy2 && poleJevy2.length > 0) {
         vystupText +=
-            'Informace ČHMÚ: byla ukončena platnost vydané výstrahy.' + oddelovac;
+            'Informace ČHMÚ: byla ukončena platnost vydané výstrahy.' +
+            oddelovac;
         sms1 += vystupText;
     } else {
         switch (vystraha.ucel) {
@@ -519,7 +546,7 @@ if (infoList) {
         if (!detailni) {
             vystupText +=
                 'Platnost od ' +
-                total_zahajeni +
+                total_zahajenitxt +
                 ' do ' +
                 total_ukonceni +
                 oddelovac;
