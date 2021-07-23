@@ -1,4 +1,4 @@
-// Verze 73
+// Verze 74
 
 var omezitNaKraj = -1;
 
@@ -17,7 +17,7 @@ var KRAJE_NAZVY = {
     '116': 'Jihomoravský kraj',
     '124': 'Olomoucký kraj',
     '132': 'Moravskoslezský kraj',
-    '141': 'Zlínský kraj'
+    '141': 'Zlínský kraj',
 };
 
 var JEVY_NAZVY = {
@@ -132,7 +132,7 @@ var JEVY_NAZVY = {
     'SMOGSIT.NO2': 'Smogová situace NO2',
     '0SMOGSIT.NO2': 'Smogová situace NO2',
     'REG.NO2': 'Regulace NO2',
-    '0REG.NO2': 'Regulace NO2'
+    '0REG.NO2': 'Regulace NO2',
 };
 
 function Normalize(datum) {

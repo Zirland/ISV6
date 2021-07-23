@@ -1,4 +1,4 @@
-// Verze 73
+// Verze 74
 
 var omezitNaKraj = 78;
 
@@ -17,7 +17,7 @@ var KRAJE_NAZVY = {
     '116': 'Jihomoravský kraj',
     '124': 'Olomoucký kraj',
     '132': 'Moravskoslezský kraj',
-    '141': 'Zlínský kraj'
+    '141': 'Zlínský kraj',
 };
 
 var JEVY_NAZVY = {
@@ -115,7 +115,7 @@ var JEVY_NAZVY = {
     '0XV.2': 'VÝSKYT Jiný jev',
     'XV.3': 'Jiný jev',
     '0XV.3': 'VÝSKYT Jiný jev',
-    OUTLOOK: 'Výhled nebezpečných jevů',
+    'OUTLOOK': 'Výhled nebezpečných jevů',
     '0OUTLOOK': 'Výhled nebezpečných jevů',
     'SMOGSIT.O3': 'Smogová situace O3',
     '0SMOGSIT.O3': 'Smogová situace O3',
@@ -132,7 +132,7 @@ var JEVY_NAZVY = {
     'SMOGSIT.NO2': 'Smogová situace NO2',
     '0SMOGSIT.NO2': 'Smogová situace NO2',
     'REG.NO2': 'Regulace NO2',
-    '0REG.NO2': 'Regulace NO2'
+    '0REG.NO2': 'Regulace NO2',
 };
 
 var JEVY_SKUPINY = {
@@ -155,7 +155,7 @@ var JEVY_SKUPINY = {
     O3: 'Přízemní ozón',
     NO2: 'Oxid dusičitý',
     SO2: 'Oxid siřičitý',
-    PM10: 'Prachové částice'
+    PM10: 'Prachové částice',
 };
 
 function SimpleHighlightDiff(newValue, oldValue) {

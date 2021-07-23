@@ -1,4 +1,4 @@
-// Verze 73
+// Verze 74
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
@@ -15,7 +15,7 @@ var KRAJE_NAZVY = {
     '116': 'Jihomoravský kraj',
     '124': 'Olomoucký kraj',
     '132': 'Moravskoslezský kraj',
-    '141': 'Zlínský kraj'
+    '141': 'Zlínský kraj',
 };
 
 var KRAJE_KODY = {
@@ -33,7 +33,7 @@ var KRAJE_KODY = {
     '116': 'JMK',
     '124': 'OLK',
     '132': 'MSK',
-    '141': 'ZLK'
+    '141': 'ZLK',
 };
 
 var JEVY_NAZVY = {
@@ -148,7 +148,7 @@ var JEVY_NAZVY = {
     'SMOGSIT.NO2': 'Smogová situace NO2',
     '0SMOGSIT.NO2': 'Smogová situace NO2',
     'REG.NO2': 'Regulace NO2',
-    '0REG.NO2': 'Regulace NO2'
+    '0REG.NO2': 'Regulace NO2',
 };
 
 var JEVY_SKUPINY = {
@@ -171,6 +171,6 @@ var JEVY_SKUPINY = {
     'O3' : 'Přízemní ozón',
     'NO2' : 'Oxid dusičitý',
     'SO2' : 'Oxid siřičitý',
-    'PM10' : 'Prachové částice'
+    'PM10' : 'Prachové částice',
 };
 
