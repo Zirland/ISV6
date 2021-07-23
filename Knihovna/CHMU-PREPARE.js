@@ -1,4 +1,4 @@
-// Verze 73
+// Verze 74
 
 function PrepareInfo(orp, vystraha, mojeUzemi) {
     var infoList = [];

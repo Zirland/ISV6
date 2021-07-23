@@ -1,4 +1,4 @@
-// Verze 73
+// Verze 74
 
 var omezitNaKraj = -1;
 var detailni = 1;
