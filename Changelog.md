@@ -1,6 +1,87 @@
 # Changelog
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 74 – 2021-07-23
+### [Knihovna/CHMU-CISELNIK]
+#### Záplata
+- Formální úprava hodnot číselníku.
+
+### [Knihovna/CHMU-DATUMY]
+#### Odstraněno
+- Odstraněna nepoužitá funkce Zaokrouhli(datum), sloužící k zaokrouhlení na nejbliží následující půlhodinu. Návaznost na změny informačního systému ČHMÚ na podzim 2020.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+#### Záplata
+- Oprava výpisu ORP při výškovém omezení platnosti jevu.
+
+#### Změněno
+- Implementace kontroly změny při probíhajícím platném jevu.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUO]
+#### Záplata
+- Oprava výpisu ORP při výškovém omezení platnosti jevu.
+
+#### Změněno
+- Implementace kontroly změny při probíhajícím platném jevu.
+
+### [Knihovna/CHMU-SMS-ORP]
+#### Záplata
+- Oprava výpisu ORP při výškovém omezení platnosti jevu.
+
+#### Změněno
+- Implementace kontroly změny při probíhajícím platném jevu.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+#### Záplata
+- Oprava výpisu ORP při výškovém omezení platnosti jevu.
+
+#### Změněno
+- Implementace kontroly změny při probíhajícím platném jevu.
+
+### [UVG/CHMU-EMAIL]
+#### Záplata
+- Formální úprava hodnot číselníku.
+- Formátování kódu (zmenšení velikosti souboru).
+
+### [UVG/CHMU-MAIL-2]
+#### Záplata
+- Formální úprava hodnot číselníku.
+- Formátování kódu (zmenšení velikosti souboru).
+
+### [UVG/CHMU-NOTIF-KRAJ-OLK]
+#### Záplata
+- Formální úprava hodnot číselníku.
+
+### [UVG/CHMU-NOTIF-KRAJ]
+#### Záplata
+- Formální úprava hodnot číselníku.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+#### Záplata
+- Formální úprava hodnot číselníku.
+
+### [UVG/CHMU-SMS-KRAJ]
+#### Záplata
+- Formální úprava hodnot číselníku.
+- Oprava výpisu ORP při výškovém omezení platnosti jevu.
+
+#### Změněno
+- Implementace kontroly změny při probíhajícím platném jevu.
+
+#### Odstraněno
+- Odstraněna nepoužitá funkce Zaokrouhli(datum), sloužící k zaokrouhlení na nejbliží následující půlhodinu. Návaznost na změny informačního systému ČHMÚ na podzim 2020.
+
+### [UVG/CHMU-SMS-SKUPINY]
+#### Záplata
+- Formální úprava hodnot číselníku.
+- Oprava výpisu ORP při výškovém omezení platnosti jevu.
+
+#### Změněno
+- Implementace kontroly změny při probíhajícím platném jevu.
+
+#### Odstraněno
+- Odstraněna nepoužitá funkce Zaokrouhli(datum), sloužící k zaokrouhlení na nejbliží následující půlhodinu. Návaznost na změny informačního systému ČHMÚ na podzim 2020.
+
 ## verze 73 – 2021-04-12
 ### [Knihovna/CHMU-PREPARE]
 #### Změněno
