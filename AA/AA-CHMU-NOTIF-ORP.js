@@ -1,12 +1,12 @@
 //!JS
-// Verze 74
+// Verze 75
 
 var omezitNaOrp = 337;
 
 #import "CHMU-NOTIF-ORP";
 
 if (resultText != '') {
-    resultText += '\n';
+    resultText += oddelovac;
     resultText += 'OPIS GŘ HZS ČR';
 }
 

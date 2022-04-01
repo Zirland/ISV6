@@ -1,4 +1,4 @@
-// Verze 74
+// Verze 75
 
 var omezitNaKraj = -1;
 
@@ -213,7 +213,7 @@ function UkoncenyJev(konecJev, casZprava) {
 function ZobrazDatum(datum, format, end) {
     var normDatum = Normalize(datum);
     var format_datum = '';
-    if (normDatum == 21000101010000) {
+    if (normDatum == 21000101010000 || normDatum == 'NaNNaNNaNNaNNaNNaN') {
         format_datum = 'do odvolání';
     } else {
         var normDatumRok = normDatum.substring(0, 4);

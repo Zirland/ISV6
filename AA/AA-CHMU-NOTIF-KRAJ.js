@@ -1,5 +1,5 @@
 //!JS
-// Verze 74
+// Verze 75
 
 var omezitNaKraj = -1;
 
@@ -24,7 +24,7 @@ var KRAJE_NAZVY = {
 #import "CHMU-NOTIF-KRAJ";
 
 if (resultText != '') {
-    resultText += '\n';
+    resultText += oddelovac;
     resultText += 'OPIS GŘ HZS ČR';
 }
 

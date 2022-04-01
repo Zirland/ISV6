@@ -1,5 +1,5 @@
 //!JS
-// Verze 74
+// Verze 75
 
 var omezitNaKraj = -1;
 var detailni = 1;
@@ -27,7 +27,7 @@ var KRAJE_NAZVY = {
 #import "CHMU-SMS-KRAJ";
 
 if (vystupText != '') {
-    vystupText += '\n';
+    vystupText += oddelovac;
     vystupText += 'OPIS GŘ HZS ČR';
 }
 
