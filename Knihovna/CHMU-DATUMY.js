@@ -78,7 +78,7 @@ function UkoncenyJev(konecJev, casZprava) {
 function ZobrazDatum(datum, format, end) {
     var normDatum = Normalize(datum);
     var format_datum = '';
-    if (normDatum == 21000101010000) {
+    if (normDatum == 21000101010000 || normDatum == 'NaNNaNNaNNaNNaNNaN') {
         format_datum = 'do odvolání';
     } else {
         var normDatumRok = normDatum.substring(0, 4);
@@ -135,7 +135,7 @@ function ZobrazDatum(datum, format, end) {
 
 function ZobrazDatumSMS(datum, end) {
     var format_datum = '';
-    if (datum == 21000101010000) {
+    if (normDatum == 21000101010000 || normDatum == 'NaNNaNNaNNaNNaNNaN') {
         format_datum = 'odvolání';
     } else {
         var normDatum = datum.toString();
