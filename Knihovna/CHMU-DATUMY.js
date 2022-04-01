@@ -135,7 +135,7 @@ function ZobrazDatum(datum, format, end) {
 
 function ZobrazDatumSMS(datum, end) {
     var format_datum = '';
-    if (normDatum == 21000101010000 || normDatum == 'NaNNaNNaNNaNNaNNaN') {
+    if (datum == 21000101010000 || datum == 'NaNNaNNaNNaNNaNNaN') {
         format_datum = 'odvolání';
     } else {
         var normDatum = datum.toString();
