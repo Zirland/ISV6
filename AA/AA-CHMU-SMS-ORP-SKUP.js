@@ -9,7 +9,7 @@ var oddelovac = '\n';
 #import "CHMU-SMS-ORP-SKUP";
 
 if (vystupText != '') {
-    vystupText += '\n';
+    vystupText += oddelovac;
     vystupText += 'OPIS GŘ HZS ČR';
 }
 

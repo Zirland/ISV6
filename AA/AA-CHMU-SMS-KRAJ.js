@@ -27,7 +27,7 @@ var KRAJE_NAZVY = {
 #import "CHMU-SMS-KRAJ";
 
 if (vystupText != '') {
-    vystupText += '\n';
+    vystupText += oddelovac;
     vystupText += 'OPIS GŘ HZS ČR';
 }
 
