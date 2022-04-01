@@ -24,7 +24,7 @@ var KRAJE_NAZVY = {
 #import "CHMU-NOTIF-KRAJ";
 
 if (resultText != '') {
-    resultText += '\n';
+    resultText += oddelovac;
     resultText += 'OPIS GŘ HZS ČR';
 }
 

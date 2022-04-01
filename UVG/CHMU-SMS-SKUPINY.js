@@ -141,7 +141,7 @@ function UkoncenyJev(konecJev, casZprava) {
 
 function ZobrazDatum(datum, end) {
     var format_datum = '';
-    if (datum == 21000101010000) {
+    if (datum == 21000101010000 || datum == 'NaNNaNNaNNaNNaNNaN') {
         format_datum = 'odvolání';
     } else {
         var normDatum = datum.toString();
