@@ -32,8 +32,19 @@ if (typeof mojeUzemi != 'object') {
     mojeUzemi = pom_mojeUzemi;
 }
 
+var orpTmp = [];
+for (var i = 0; i < orp.length; i++) {
+    for (var j = 0; j < orp.length; j++) {
+        if (mojeUzemi[j] == orp[i].id) {
+            orpTmp.push(orp[i]);
+        }
+    }
+}
+
+orp = orpTmp;
+
 if (vystraha.info && vystraha.info.length > 0) {
-    krajList = PrepareInfo(orp, vystraha, mojeUzemi);
+    krajList = PrepareInfo(orp, vystraha);
 }
 
 if (
@@ -41,7 +52,7 @@ if (
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    ref_krajList = PrepareInfo(orp, ref_vystraha, mojeUzemi);
+    ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
 var empty = true;

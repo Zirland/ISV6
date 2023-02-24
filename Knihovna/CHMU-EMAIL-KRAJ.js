@@ -41,7 +41,7 @@ if (hlavniKraj != -1) {
             }
         }
     }
-
+    
     orp = orpTmp;
 }
 
