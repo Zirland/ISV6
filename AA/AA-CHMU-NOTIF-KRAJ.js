@@ -2,6 +2,7 @@
 // Verze 75
 
 var omezitNaKraj = -1;
+var oddelovac = '\n';
 
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
@@ -17,15 +18,15 @@ var KRAJE_NAZVY = {
     '108': 'Kraj Vysočina',
     '116': 'Jihomoravský kraj',
     '124': 'Olomoucký kraj',
-    '132': 'Moravskoslezský kraj',
-    '141': 'Zlínský kraj'
+    '141': 'Zlínský kraj',
+    '132': 'Moravskoslezský kraj'
 };
 
 #import "CHMU-NOTIF-KRAJ";
 
 if (resultText != '') {
     resultText += oddelovac;
-    resultText += 'OPIS GŘ HZS ČR';
+    resultText += 'NOPIS GŘ HZS ČR';
 }
 
 if (resultText !== 'undefined' && resultText) {

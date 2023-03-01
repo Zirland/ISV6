@@ -22,28 +22,28 @@ var KRAJE_NAZVY = {
     '108': 'Kraj Vysočina',
     '116': 'Jihomoravský kraj',
     '124': 'Olomoucký kraj',
-    '132': 'Moravskoslezský kraj',
     '141': 'Zlínský kraj',
+    '132': 'Moravskoslezský kraj'
   };
-  
+
   var KRAJE_KODY = {
     '-1': 'ČR',
     '19': 'PHA',
-    '27': 'SČK',
-    '35': 'JČK',
+    '27': 'STC',
+    '35': 'JHC',
     '43': 'PLK',
     '51': 'KVK',
     '60': 'ULK',
-    '78': 'LIK',
-    '86': 'KHK',
+    '78': 'LBK',
+    '86': 'HKK',
     '94': 'PAK',
-    '108': 'VYK',
-    '116': 'JMK',
+    '108': 'VYS',
+    '116': 'JHM',
     '124': 'OLK',
-    '132': 'MSK',
     '141': 'ZLK',
+    '132': 'MSK'
   };
-  
+
   var JEVY_NAZVY = {
     'I.1': 'Vysoké teploty',
     '0I.1': 'VÝSKYT Vysoké teploty',
@@ -158,7 +158,7 @@ var KRAJE_NAZVY = {
     'REG.NO2': 'Regulace NO2',
     '0REG.NO2': 'Regulace NO2',
   };
-  
+
   function Normalize(datum) {
   if (!datum) {
     datum = '1.1.2100 01:00:00';

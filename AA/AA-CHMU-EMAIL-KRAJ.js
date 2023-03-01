@@ -23,8 +23,8 @@ var KRAJE_NAZVY = {
     '108': 'Kraj Vysočina',
     '116': 'Jihomoravský kraj',
     '124': 'Olomoucký kraj',
-    '132': 'Moravskoslezský kraj',
-    '141': 'Zlínský kraj'
+    '141': 'Zlínský kraj',
+    '132': 'Moravskoslezský kraj'
 };
 
 #import "CHMU-EMAIL-KRAJ";

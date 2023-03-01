@@ -4,7 +4,7 @@
 #import "CHMU-SMS-KRAJ-LK";
 
 if (vystupText != '') {
-    vystupText += '. KOPIS HZS LK';
+    vystupText += '. KOPIS HZS LBK';
 }
 
 if (vystupText !== 'undefined' && vystupText) {
