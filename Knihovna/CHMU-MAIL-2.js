@@ -5,7 +5,7 @@
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-PREPARE";
 
-function PrepareInfo2(vystraha, mojeUzemi) {
+function PrepareInfo2(vystraha) {
     var infoList = [];
 
     for (var i = 0; i < vystraha.info.length; i++) {
@@ -19,22 +19,12 @@ function PrepareInfo2(vystraha, mojeUzemi) {
         for (var j = 0; j < orpSplit.length; j++) {
             var index = orpSplit[j].indexOf('[');
             if (index == -1) {
-                if (
-                    mojeUzemi == undefined ||
-                    mojeUzemi.indexOf(Number(orpSplit[j])) > -1
-                ) {
-                    vystraha.info[i].orp.push(orpSplit[j]);
-                }
+                vystraha.info[i].orp.push(orpSplit[j]);
             } else {
                 var pouzeOrp = orpSplit[j].substring(0, index);
-                if (
-                    mojeUzemi == undefined ||
-                    mojeUzemi.indexOf(Number(pouzeOrp)) > -1
-                ) {
-                    var vyska = orpSplit[j].substring(index);
-                    if (vyskaList.indexOf(vyska) == -1) {
-                        vyskaList.push(vyska);
-                    }
+                var vyska = orpSplit[j].substring(index);
+                if (vyskaList.indexOf(vyska) == -1) {
+                    vyskaList.push(vyska);
                 }
             }
         }
@@ -80,7 +70,7 @@ function PrepareInfo2(vystraha, mojeUzemi) {
 
     infoList = infoListFilter;
 
-    infoList = infoList.sort(function(a, b) {
+    infoList = infoList.sort(function (a, b) {
         var vyskyt1 = 0;
         var vyskyt2 = 0;
         var start1 = parseFloat(Normalize(a.dc_zacatek));
@@ -354,7 +344,7 @@ function JevUzemi(info) {
     var orp_seznam = info.orp.toString();
 
     var orp_pole = orp_seznam.split(',');
-    orp_pole = orp_pole.sort(function(a, b) {
+    orp_pole = orp_pole.sort(function (a, b) {
         return a - b;
     });
 
@@ -1297,7 +1287,7 @@ function JevUzemi(info) {
 
     for (var b = 0; b < uzemiOkresu.length; b++) {
         var uzemi = {};
-        var findOrp = orp.filter(function(e) {
+        var findOrp = orp.filter(function (e) {
             return e.okres.id == uzemiOkresu[b];
         });
         if (findOrp.length > 0) {
@@ -1311,7 +1301,7 @@ function JevUzemi(info) {
 
     for (var c = 0; c < orp_pole.length; c++) {
         var uzemi = {};
-        var findOrp = orp.filter(function(e) {
+        var findOrp = orp.filter(function (e) {
             return e.id == orp_pole[c];
         });
         if (findOrp.length > 0) {
@@ -1323,7 +1313,7 @@ function JevUzemi(info) {
         }
     }
 
-    uzemiList.sort(function(a, b) {
+    uzemiList.sort(function (a, b) {
         var kraj1 = parseFloat(a.kraj);
         var kraj2 = parseFloat(b.kraj);
         var okres1 = parseFloat(a.okres);
@@ -1410,7 +1400,7 @@ function JevUzemi(info) {
 #import "CHMU-DIFF";
 
 var orpSort = orp;
-orpSort.sort(function(a, b) {
+orpSort.sort(function (a, b) {
     var kraj1 = parseFloat(a.kraj.id);
     var kraj2 = parseFloat(b.kraj.id);
     var okres1 = parseFloat(a.okres.id);

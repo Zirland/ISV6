@@ -10,7 +10,7 @@ if (omezitNaKraj != -1) {
             orpTmp.push(orp[i]);
         }
     }
-
+    
     orp = orpTmp;
 }
 

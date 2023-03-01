@@ -438,7 +438,7 @@ function GetLCSLength(newValueSplit, oldValueSplit) {
   return matrix;
 }
 
-function PrepareInfo(orp, vystraha, mojeUzemi) {
+function PrepareInfo(orp, vystraha) {
   var infoList = [];
 
   for (var i = 0; i < vystraha.info.length; i++) {
@@ -452,22 +452,11 @@ function PrepareInfo(orp, vystraha, mojeUzemi) {
     for (var j = 0; j < orpSplit.length; j++) {
       var index = orpSplit[j].indexOf('[');
       if (index == -1) {
-        if (
-          mojeUzemi == undefined ||
-          mojeUzemi.indexOf(Number(orpSplit[j])) > -1
-        ) {
-          vystraha.info[i].orp.push(orpSplit[j]);
-        }
+        vystraha.info[i].orp.push(orpSplit[j]);
       } else {
-        var pouzeOrp = orpSplit[j].substring(0, index);
-        if (
-          mojeUzemi == undefined ||
-          mojeUzemi.indexOf(Number(pouzeOrp)) > -1
-        ) {
-          var vyska = orpSplit[j].substring(index);
-          if (vyskaList.indexOf(vyska) == -1) {
-            vyskaList.push(vyska);
-          }
+        var vyska = orpSplit[j].substring(index);
+        if (vyskaList.indexOf(vyska) == -1) {
+          vyskaList.push(vyska);
         }
       }
     }
@@ -707,7 +696,9 @@ function PrintInfoList(krajList, ref_krajList) {
         for (var ri = 0; ri < ref_krajList[k].info.length; ri++) {
           if (
             ref_krajList[k].info[ri].jev_kod == info.jev_kod &&
-            opakovanyKraj.indexOf(k.toString() + '-' + ri.toString()) == -1
+            opakovanyKraj.indexOf(
+              k.toString() + '-' + ri.toString()
+            ) == -1
           ) {
             opakovanyKraj.push(k.toString() + '-' + ri.toString());
             ref_info = ref_krajList[k].info[ri];
@@ -738,7 +729,11 @@ function PrintInfoList(krajList, ref_krajList) {
       ref_zpracovanyInfoStupenOkres = [];
 
       if (ref_krajList.length > 0) {
-        for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++) {
+        for (
+          var ri = 0;
+          ri < ref_krajList[k].okresList[o].info.length;
+          ri++
+        ) {
           ref_info = ref_krajList[k].okresList[o].info[ri];
           found = false;
 
@@ -760,9 +755,14 @@ function PrintInfoList(krajList, ref_krajList) {
                   ref_info.dc_konec
               ) == -1
             ) {
-              for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
+              for (
+                var i = 0;
+                i < krajList[k].okresList[o].info.length;
+                i++
+              ) {
                 if (
-                  krajList[k].okresList[o].info[i].jev_kod == ref_info.jev_kod
+                  krajList[k].okresList[o].info[i].jev_kod ==
+                  ref_info.jev_kod
                 ) {
                   found = true;
                   break;
@@ -826,28 +826,47 @@ function PrintInfoList(krajList, ref_krajList) {
                 ri++
               ) {
                 if (
-                  ref_krajList[k].okresList[o].info[ri].jev_kod ==
-                    info.jev_kod &&
+                  ref_krajList[k].okresList[o].info[ri]
+                    .jev_kod == info.jev_kod &&
                   opakovanyOkres.indexOf(
-                    k.toString() + '-' + o.toString() + '-' + ri.toString()
+                    k.toString() +
+                      '-' +
+                      o.toString() +
+                      '-' +
+                      ri.toString()
                   ) == -1 &&
                   ref_zpracovanyInfoStupen.indexOf(
-                    ref_krajList[k].okresList[o].info[ri].jev_kod +
-                      (ref_krajList[k].okresList[o].info[ri].vyska
-                        ? ref_krajList[k].okresList[o].info[ri].vyska
+                    ref_krajList[k].okresList[o].info[ri]
+                      .jev_kod +
+                      (ref_krajList[k].okresList[o].info[
+                        ri
+                      ].vyska
+                        ? ref_krajList[k].okresList[o]
+                            .info[ri].vyska
                         : '[]') +
-                      ref_krajList[k].okresList[o].info[ri].dc_zacatek +
+                      ref_krajList[k].okresList[o].info[
+                        ri
+                      ].dc_zacatek +
                       '-' +
-                      ref_krajList[k].okresList[o].info[ri].dc_konec
+                      ref_krajList[k].okresList[o].info[
+                        ri
+                      ].dc_konec
                   ) == -1
                 ) {
                   opakovanyOkres.push(
-                    k.toString() + '-' + o.toString() + '-' + ri.toString()
+                    k.toString() +
+                      '-' +
+                      o.toString() +
+                      '-' +
+                      ri.toString()
                   );
-                  ref_info = ref_krajList[k].okresList[o].info[ri];
+                  ref_info =
+                    ref_krajList[k].okresList[o].info[ri];
                   ref_zpracovanyInfoStupenOkres.push(
                     ref_info.jev_kod +
-                      (ref_info.vyska ? ref_info.vyska : '[]') +
+                      (ref_info.vyska
+                        ? ref_info.vyska
+                        : '[]') +
                       ref_info.dc_zacatek +
                       '-' +
                       ref_info.dc_konec
@@ -868,16 +887,22 @@ function PrintInfoList(krajList, ref_krajList) {
         }
       }
 
-      for (var ol = 0; ol < krajList[k].okresList[o].orpList.length; ol++) {
+      for (
+        var ol = 0;
+        ol < krajList[k].okresList[o].orpList.length;
+        ol++
+      ) {
         first = true;
 
         if (ref_krajList.length > 0) {
           for (
             var ri = 0;
-            ri < ref_krajList[k].okresList[o].orpList[ol].info.length;
+            ri <
+            ref_krajList[k].okresList[o].orpList[ol].info.length;
             ri++
           ) {
-            ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
+            ref_info =
+              ref_krajList[k].okresList[o].orpList[ol].info[ri];
             found = false;
 
             if (
@@ -899,14 +924,18 @@ function PrintInfoList(krajList, ref_krajList) {
               if (
                 zpracovanyInfoStupen.indexOf(
                   ref_info.jev_kod +
-                    (ref_info.vyska ? ref_info.vyska : '[]') +
+                    (ref_info.vyska
+                      ? ref_info.vyska
+                      : '[]') +
                     ref_info.dc_zacatek +
                     '-' +
                     ref_info.dc_konec
                 ) == -1 &&
                 zpracovanyInfoStupenOkres.indexOf(
                   ref_info.jev_kod +
-                    (ref_info.vyska ? ref_info.vyska : '[]') +
+                    (ref_info.vyska
+                      ? ref_info.vyska
+                      : '[]') +
                     ref_info.dc_zacatek +
                     '-' +
                     ref_info.dc_konec
@@ -914,12 +943,14 @@ function PrintInfoList(krajList, ref_krajList) {
               ) {
                 for (
                   var i = 0;
-                  i < krajList[k].okresList[o].orpList[ol].info.length;
+                  i <
+                  krajList[k].okresList[o].orpList[ol].info
+                    .length;
                   i++
                 ) {
                   if (
-                    krajList[k].okresList[o].orpList[ol].info[i].jev_kod ==
-                    ref_info.jev_kod
+                    krajList[k].okresList[o].orpList[ol]
+                      .info[i].jev_kod == ref_info.jev_kod
                   ) {
                     found = true;
                     break;
@@ -933,7 +964,8 @@ function PrintInfoList(krajList, ref_krajList) {
                 }
 
                 pomoc = PrintInfo(null, ref_info);
-                zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+                zmen =
+                  Number(zmen) + Number(pomoc.split('|')[1]);
               }
             }
           }
@@ -983,12 +1015,14 @@ function PrintInfoList(krajList, ref_krajList) {
               ) {
                 for (
                   var ri = 0;
-                  ri < ref_krajList[k].okresList[o].orpList[ol].info.length;
+                  ri <
+                  ref_krajList[k].okresList[o].orpList[ol]
+                    .info.length;
                   ri++
                 ) {
                   if (
-                    ref_krajList[k].okresList[o].orpList[ol].info[ri].jev_kod ==
-                      info.jev_kod &&
+                    ref_krajList[k].okresList[o].orpList[ol]
+                      .info[ri].jev_kod == info.jev_kod &&
                     opakovanyOrp.indexOf(
                       k.toString() +
                         '-' +
@@ -999,29 +1033,39 @@ function PrintInfoList(krajList, ref_krajList) {
                         ri.toString()
                     ) == -1 &&
                     ref_zpracovanyInfoStupen.indexOf(
-                      ref_krajList[k].okresList[o].orpList[ol].info[ri]
-                        .jev_kod +
-                        (ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska
-                          ? ref_krajList[k].okresList[o].orpList[ol].info[ri]
+                      ref_krajList[k].okresList[o]
+                        .orpList[ol].info[ri].jev_kod +
+                        (ref_krajList[k].okresList[o]
+                          .orpList[ol].info[ri].vyska
+                          ? ref_krajList[k].okresList[
+                              o
+                            ].orpList[ol].info[ri]
                               .vyska
                           : '[]') +
-                        ref_krajList[k].okresList[o].orpList[ol].info[ri]
+                        ref_krajList[k].okresList[o]
+                          .orpList[ol].info[ri]
                           .dc_zacatek +
                         '-' +
-                        ref_krajList[k].okresList[o].orpList[ol].info[ri]
+                        ref_krajList[k].okresList[o]
+                          .orpList[ol].info[ri]
                           .dc_konec
                     ) == -1 &&
                     ref_zpracovanyInfoStupenOkres.indexOf(
-                      ref_krajList[k].okresList[o].orpList[ol].info[ri]
-                        .jev_kod +
-                        (ref_krajList[k].okresList[o].orpList[ol].info[ri].vyska
-                          ? ref_krajList[k].okresList[o].orpList[ol].info[ri]
+                      ref_krajList[k].okresList[o]
+                        .orpList[ol].info[ri].jev_kod +
+                        (ref_krajList[k].okresList[o]
+                          .orpList[ol].info[ri].vyska
+                          ? ref_krajList[k].okresList[
+                              o
+                            ].orpList[ol].info[ri]
                               .vyska
                           : '[]') +
-                        ref_krajList[k].okresList[o].orpList[ol].info[ri]
+                        ref_krajList[k].okresList[o]
+                          .orpList[ol].info[ri]
                           .dc_zacatek +
                         '-' +
-                        ref_krajList[k].okresList[o].orpList[ol].info[ri]
+                        ref_krajList[k].okresList[o]
+                          .orpList[ol].info[ri]
                           .dc_konec
                     ) == -1
                   ) {
@@ -1035,7 +1079,8 @@ function PrintInfoList(krajList, ref_krajList) {
                         ri.toString()
                     );
                     ref_info =
-                      ref_krajList[k].okresList[o].orpList[ol].info[ri];
+                      ref_krajList[k].okresList[o]
+                        .orpList[ol].info[ri];
                     break;
                   }
                 }
@@ -1082,7 +1127,11 @@ function PrintInfoList(krajList, ref_krajList) {
         first = true;
         ref_zpracovanyInfoStupenOkres = [];
 
-        for (var ri = 0; ri < ref_krajList[k].okresList[o].info.length; ri++) {
+        for (
+          var ri = 0;
+          ri < ref_krajList[k].okresList[o].info.length;
+          ri++
+        ) {
           ref_info = ref_krajList[k].okresList[o].info[ri];
 
           if (
@@ -1119,10 +1168,12 @@ function PrintInfoList(krajList, ref_krajList) {
 
           for (
             var ri = 0;
-            ri < ref_krajList[k].okresList[o].orpList[ol].info.length;
+            ri <
+            ref_krajList[k].okresList[o].orpList[ol].info.length;
             ri++
           ) {
-            ref_info = ref_krajList[k].okresList[o].orpList[ol].info[ri];
+            ref_info =
+              ref_krajList[k].okresList[o].orpList[ol].info[ri];
 
             if (
               ref_zpracovanyInfoStupen.indexOf(
@@ -1255,10 +1306,14 @@ function PrintVyska(info) {
           ' m n.m.';
       } else if (vyskaSplit[0]) {
         vyskaText =
-          '<br/>nad ' + Math.round(vyskaSplit[0] * 0.3048) + ' m n.m.';
+          '<br/>nad ' +
+          Math.round(vyskaSplit[0] * 0.3048) +
+          ' m n.m.';
       } else if (vyskaSplit[1]) {
         vyskaText =
-          '<br/>pod ' + Math.round(vyskaSplit[1] * 0.3048) + ' m n.m.';
+          '<br/>pod ' +
+          Math.round(vyskaSplit[1] * 0.3048) +
+          ' m n.m.';
       }
     } else {
       vyskaText = '<br/>' + Math.round(vyska * 0.3048);
@@ -1355,7 +1410,9 @@ function PrintInfo(info, ref_info) {
     } else {
       pomoc = SimpleHighlightDiff(
         info != null ? ZobrazDatum(info.dc_zacatek, 'short') : '',
-        ref_info != null ? ZobrazDatum(ref_info.dc_zacatek, 'short') : ''
+        ref_info != null
+          ? ZobrazDatum(ref_info.dc_zacatek, 'short')
+          : ''
       );
       zmen = Number(zmen) + Number(pomoc.split('|')[1]);
     }
@@ -2732,7 +2789,8 @@ function JevUzemi(info) {
   for (var d = 0; d < uzemiList.length; d++) {
     if (d == 0 && omezitNaKraj == -1) {
       if (uzemiList[d].okres != 0) {
-        resultText += '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
+        resultText +=
+          '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
       }
     }
     if (
@@ -2750,7 +2808,8 @@ function JevUzemi(info) {
       uzemiList[d].okres != 0 &&
       omezitNaKraj == -1
     ) {
-      resultText += '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
+      resultText +=
+        '<b><u>' + KRAJE_NAZVY[uzemiList[d].kraj] + '</u></b> (';
     }
 
     resultText += uzemiList[d].nazev + ', ';
@@ -2882,17 +2941,17 @@ resultText += '<META charset="utf-8"/>';
 resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
 resultText += '<style type="text/css">';
-resultText += '    body {font-family:serif;font-size:13px;}';
-resultText += '    .header {font-size:15px;text-align:center;}';
-resultText += '    .tg  {border-collapse:collapse;border-spacing:0;}';
+resultText += '   body {font-family:serif;font-size:13px;}';
+resultText += '   .header {font-size:15px;text-align:center;}';
+resultText += '   .tg  {border-collapse:collapse;border-spacing:0;}';
 resultText +=
-  '    .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-resultText += '    .no  {border-collapse:collapse;border-spacing:0;}';
+  '   .tg td{padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
+resultText += '   .no  {border-collapse:collapse;border-spacing:0;}';
 resultText +=
-  '    .no td{padding:0px 0px;border-style:none;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
-resultText += '    @media print {';
-resultText += '        div {page-break-inside: avoid;}';
-resultText += '    }';
+  '   .no td{padding:0px 0px;border-style:none;border-width:0px;overflow:hidden;word-break:normal;font-family:serif;font-size:12px;}';
+resultText += '   @media print {';
+resultText += '  div {page-break-inside: avoid;}';
+resultText += '   }';
 resultText += '</style>';
 
 resultText += '</HEAD>';
@@ -2922,7 +2981,8 @@ if (distrSeznamNahore == true) {
         found =
           krajList[k].okresList[o].orpList[ol].info.length > 0 ||
           (ref_krajList.length > 0 &&
-            ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
+            ref_krajList[k].okresList[o].orpList[ol].info.length >
+              0);
       }
     }
 
@@ -2935,7 +2995,11 @@ if (distrSeznamNahore == true) {
     for (var k = 0; k < ref_krajList.length; k++) {
       var found = ref_krajList[k].info.length > 0;
 
-      for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+      for (
+        var o = 0;
+        o < ref_krajList[k].okresList.length && !found;
+        o++
+      ) {
         found = ref_krajList[k].okresList[o].info.length > 0;
 
         for (
@@ -2943,7 +3007,9 @@ if (distrSeznamNahore == true) {
           ol < ref_krajList[k].okresList[o].orpList.length && !found;
           ol++
         ) {
-          found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+          found =
+            ref_krajList[k].okresList[o].orpList[ol].info.length >
+            0;
         }
       }
 
@@ -2967,7 +3033,11 @@ if (vystraha.ucel == 'Actual') {
       }
     }
 
-    for (var o = 0; o < krajList[k].okresList.length && found == false; o++) {
+    for (
+      var o = 0;
+      o < krajList[k].okresList.length && found == false;
+      o++
+    ) {
       for (var i = 0; i < krajList[k].okresList[o].info.length; i++) {
         info = krajList[k].okresList[o].info[i];
 
@@ -3169,7 +3239,8 @@ if (vystraha.info && vystraha.info.length > 0) {
 }
 
 if (empty) {
-  resultText += '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
+  resultText +=
+    '<br/>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
 if (distrSeznamNahore == false) {
@@ -3197,7 +3268,8 @@ if (distrSeznamNahore == false) {
         found =
           krajList[k].okresList[o].orpList[ol].info.length > 0 ||
           (ref_krajList.length > 0 &&
-            ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
+            ref_krajList[k].okresList[o].orpList[ol].info.length >
+              0);
       }
     }
 
@@ -3210,7 +3282,11 @@ if (distrSeznamNahore == false) {
     for (var k = 0; k < ref_krajList.length; k++) {
       var found = ref_krajList[k].info.length > 0;
 
-      for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+      for (
+        var o = 0;
+        o < ref_krajList[k].okresList.length && !found;
+        o++
+      ) {
         found = ref_krajList[k].okresList[o].info.length > 0;
 
         for (
@@ -3218,7 +3294,9 @@ if (distrSeznamNahore == false) {
           ol < ref_krajList[k].okresList[o].orpList.length && !found;
           ol++
         ) {
-          found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+          found =
+            ref_krajList[k].okresList[o].orpList[ol].info.length >
+            0;
         }
       }
 
