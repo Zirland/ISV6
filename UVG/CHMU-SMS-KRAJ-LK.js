@@ -1,4 +1,4 @@
-// Verze 75
+// Verze 76
 
 var omezitNaKraj = 78;
 
