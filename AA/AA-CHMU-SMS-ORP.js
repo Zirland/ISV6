@@ -10,7 +10,7 @@ var oddelovac = '\n';
 
 if (vystupText != '') {
     vystupText += oddelovac;
-    vystupText += 'OPIS GŘ HZS ČR';
+    vystupText += 'NOPIS GŘ HZS ČR';
 }
 
 if (vystupText !== 'undefined' && vystupText) {

@@ -2,12 +2,13 @@
 // Verze 75
 
 var omezitNaOrp = 337;
+var oddelovac = '\n';
 
 #import "CHMU-NOTIF-ORP";
 
 if (resultText != '') {
     resultText += oddelovac;
-    resultText += 'OPIS GŘ HZS ČR';
+    resultText += 'NOPIS GŘ HZS ČR';
 }
 
 if (resultText !== 'undefined' && resultText) {
