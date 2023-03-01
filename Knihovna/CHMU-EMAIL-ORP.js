@@ -1,9 +1,26 @@
-// Verze 75
+// Verze 76
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-DATUMY";
 #import "CHMU-PREPARE";
+
+var pom_mojeUzemi = [];
+if (typeof mojeUzemi != 'object') {
+    pom_mojeUzemi.push(mojeUzemi);
+    mojeUzemi = pom_mojeUzemi;
+}
+
+var orpTmp = [];
+for (var i = 0; i < orp.length; i++) {
+    for (var j = 0; j < orp.length; j++) {
+        if (mojeUzemi[j] == orp[i].id) {
+            orpTmp.push(orp[i]);
+        }
+    }
+}
+
+orp = orpTmp;
 
 var resultText = '';
 var krajList = [];
@@ -12,14 +29,8 @@ var info;
 var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
-var pom_mojeUzemi = [];
-if (typeof mojeUzemi != 'object') {
-    pom_mojeUzemi.push(mojeUzemi);
-    mojeUzemi = pom_mojeUzemi;
-}
-
 if (vystraha.info && vystraha.info.length > 0) {
-    krajList = PrepareInfo(orp, vystraha, mojeUzemi);
+    krajList = PrepareInfo(orp, vystraha);
 }
 
 if (
@@ -27,7 +38,7 @@ if (
     ref_vystraha.info &&
     ref_vystraha.info.length > 0
 ) {
-    ref_krajList = PrepareInfo(orp, ref_vystraha, mojeUzemi);
+    ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
 var distrSeznamNahore = false;
@@ -38,6 +49,7 @@ resultText += '<hr/>';
 
 var empty = true;
 var zmen = 0;
+
 var headers;
 if (mojeUzemi.length == 1) {
     headers = 0;

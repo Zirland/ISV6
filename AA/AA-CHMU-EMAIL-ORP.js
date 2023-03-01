@@ -1,5 +1,5 @@
 //!JS
-// Verze 75
+// Verze 76
 
 var mojeUzemi = 1996;
 var nazevUzemi = 'ORP Přerov';

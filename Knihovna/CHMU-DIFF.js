@@ -1,4 +1,4 @@
-// Verze 75
+// Verze 76
 
 zobrazitZmeny = true;
 
@@ -10,7 +10,7 @@ if (omezitNaKraj != -1) {
             orpTmp.push(orp[i]);
         }
     }
-
+    
     orp = orpTmp;
 }
 

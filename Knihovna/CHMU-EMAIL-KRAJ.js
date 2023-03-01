@@ -1,4 +1,4 @@
-// Verze 75
+// Verze 76
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
@@ -41,7 +41,7 @@ if (hlavniKraj != -1) {
             }
         }
     }
-
+    
     orp = orpTmp;
 }
 
