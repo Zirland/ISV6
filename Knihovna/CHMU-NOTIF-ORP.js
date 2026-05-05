@@ -21,7 +21,6 @@ var resultText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
-var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
 if (vystraha.info && vystraha.info.length > 0) {

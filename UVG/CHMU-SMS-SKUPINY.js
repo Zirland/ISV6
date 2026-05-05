@@ -5,8 +5,10 @@ var detailni = 1;
 var vypisOrp = false;
 var oddelovac = '\n';
 
+var vytvoreni = vystraha.dc_odeslano;
+
 var KRAJE_NAZVY = {
-    '-1': 'Česká republika',
+  '-1': 'Česká republika',
     '19': 'Hlavní město Praha',
     '27': 'Středočeský kraj',
     '35': 'Jihočeský kraj',
@@ -38,30 +40,53 @@ var KRAJE_KODY = {
     '116': 'JHM',
     '124': 'OLK',
     '141': 'ZLK',
-    '132': 'MSK',
+  '132': 'MSK',
 };
 
-var JEVY_SKUPINY = {
-    'I': 'Maximální a minimální teploty',
-    'II': 'Pokles teplot pod nulu',
-    'III': 'Vítr',
-    'IV': 'Sněhová pokrývka',
-    'V': 'Sněhové srážky',
-    'VI': 'Sněhové jevy',
-    'VII': 'Náledí',
-    'VIII': 'Ledovka',
-    'IX': 'Námrazové jevy',
-    'X': 'Bouřkové jevy',
-    'XI': 'Dešťové srážky',
-    'XII': 'Povodňové jevy',
-    'XIII': 'Dotok',
-    'XIV': 'Požáry',
-    'XV': 'Jiné jevy',
-    'OUTLOOK': 'Výhled jevů',
-    'O3': 'Přízemní ozón',
-    'NO2': 'Oxid dusičitý',
-    'SO2': 'Oxid siřičitý',
-    'PM10': 'Prachové částice',
+if (vytvoreni < '2026-07-01 00:00:00') {
+  var JEVY_SKUPINY = {
+    I: 'Extrémní teploty',
+    II: 'Pokles teplot pod nulu',
+    III: 'Vítr',
+    IV: 'Sněhová pokrývka',
+    V: 'Sněhové srážky',
+    VI: 'Sněhové jevy',
+    VII: 'Náledí',
+    VIII: 'Ledovka',
+    IX: 'Námrazové jevy',
+    X: 'Bouřkové jevy',
+    XI: 'Dešťové srážky',
+    XII: 'Povodňové jevy',
+    XIII: 'Dotok',
+    XIV: 'Požáry',
+    XV: 'Jiné jevy',
+    OUTLOOK: 'Výhled jevů',
+    O3: 'Přízemní ozón',
+    NO2: 'Oxid dusičitý',
+    SO2: 'Oxid siřičitý',
+    PM10: 'Prachové částice',
+  };
+} else {
+  var JEVY_SKUPINY = {
+    I: 'Vysoké teploty hospodářství',
+    II: 'Nízké teploty hospodářství',
+    III: 'Vysoké teploty zdraví',
+    IV: 'Nízké teploty zdraví',
+    V: 'Vítr',
+    VI: 'Sníh',
+    VII: 'Námraza na komunikacích',
+    VIII: 'Námraza na objektech',
+    IX: 'Konvektivní bouře',
+    X: 'Déšť',
+    XI: 'Povodňové jevy',
+    XII: 'Požáry',
+    XIII: 'Nezařazené jevy',
+    OUTLOOK: 'Výhled jevů',
+    O3: 'Přízemní ozón',
+    NO2: 'Oxid dusičitý',
+    SO2: 'Oxid siřičitý',
+    PM10: 'Prachové částice',
+  };
 };
 
 function Normalize(datum) {

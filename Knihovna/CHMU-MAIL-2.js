@@ -1432,10 +1432,9 @@ if (omezitNaKraj != -1) {
 var resultText = '';
 var krajList = [];
 var ref_krajList = [];
-var vytvoreni = vystraha.dc_odeslano;
 
 if (vystraha.info && vystraha.info.length > 0) {
-    var infoList = PrepareInfo2(vystraha);
+  var infoList = PrepareInfo2(vystraha);
     krajList = PrepareKraje(orp, infoList);
 }
 
