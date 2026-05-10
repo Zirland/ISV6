@@ -9,10 +9,10 @@ var oddelovac = '\n';
 #import "CHMU-SMS-ORP";
 
 if (vystupText != '') {
-    vystupText += oddelovac;
-    vystupText += 'NOPIS GŘ HZS ČR';
+  vystupText += oddelovac;
+  vystupText += 'NOPIS GŘ HZS ČR';
 }
 
 if (vystupText !== 'undefined' && vystupText) {
-    print(vystupText);
+  print(vystupText);
 }

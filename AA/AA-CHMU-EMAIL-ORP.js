@@ -11,5 +11,5 @@ var pouzeZmeny = true;
 #import "CHMU-EMAIL-ORP";
 
 if (resultText !== 'undefined' && resultText) {
-    print(resultText);
+  print(resultText);
 }
