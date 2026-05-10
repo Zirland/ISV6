@@ -1,4 +1,5 @@
-// Verze 76
+// Verze 77
+
 #import "CHMU-FUNKCE";
 
 function PrepareInfo(orp, vystraha) {

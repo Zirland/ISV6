@@ -1,96 +1,123 @@
 # JavaScript předpisy pro ISV6
 
 ## Kategorie Knihovna
+
 Skripty pro úlohy v rámci automatických akcí, úloha IKIS2 "Automatické akce/Knihovna JS".
+
 - Skripty neobsahují žádné konfigurovatelné parametry.
 - Název skriptu v knihovně je text před ".js", je třeba zachovat kvůli návaznosti na AA.
 
 ### [CHMU-EMAIL-KRAJ]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska území.
 
-**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*, *CHMU-FUNKCE*
 
 ### [CHMU-SMS-KRAJ]
+
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-FUNKCE*
 
 ### [CHMU-EMAIL-ORP]
-Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se k jednomu ORP nebo skupině více ORP (např. okres). Sestava je koncipována z hlediska území. 
+
+Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se k jednomu ORP nebo skupině více ORP (např. okres). Sestava je koncipována z hlediska území.
 > Skript nahrazuje funkci skriptu [CHMU-EMAIL-OKRES], který byl ve verzi 64 odstraněn.
 
-**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*, *CHMU-FUNKCE*
 
 ### [CHMU-SMS-ORP]
+
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se k jednomu ORP nebo skupině více ORP (např. okres).
 > Skript nahrazuje funkci skriptu [CHMU-SMS-OKRES], který byl ve verzi 64 odstraněn.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-FUNKCE*
 
 ### [CHMU-MAIL-2]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice. Sestava je koncipována z hlediska nebezpečných jevů a je vhodná pro tisk.
 
-**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-HLAVICKA*, *CHMU-ZVYR-ZMEN*, *CHMU-PREPARE*, *CHMU-DIFF*
+**Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-HLAVICKA*, *CHMU-ZVYR-ZMEN*, *CHMU-PREPARE*, *CHMU-DIFF*, *CHMU-FUNKCE*
 
 ### [CHMU-SMS-KRAJ-SKUP]
+
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-FUNKCE*
 
 ### [CHMU-SMS-ORP-SKUP]
+
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se k jednomu ORP nebo skupině více ORP (např. okres).
 > Skript nahrazuje funkci skriptu [CHMU-SMS-OKRES], který byl ve verzi 64 odstraněn.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*, *CHMU-FUNKCE*
 
 ### [CHMU-NOTIF-KRAJ]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-FUNKCE*
 
 ### [CHMU-NOTIF-ORP]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail na ORP.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-FUNKCE*
 
 ### [CHMU-SMS-KRAJ-LK]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail v Libereckém kraji.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-FUNKCE*
 
 ### [CHMU-SMS-ORP-LK]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro jedno ORP nebo skupinu ORP (okres) v Libereckém kraji.
 > Skript nahrazuje funkci skriptu [CHMU-SMS-OKRES-LK], který byl ve verzi 64 odstraněn.
 
-**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
+**Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-FUNKCE*
 
 ### [CHMU-CISELNIK]
+
 Předpis obsahující potřebné číselníky jevů a území.
 
 ### [CHMU-DATUMY]
+
 Předpis pro práci s datumy a časem.
 
 ### [CHMU-DIFF]
+
 Procedura pro zjištění zda došlo ke změně oproti předchozí výstraze.
 
 ### [CHMU-HLAVICKA]
+
 Předpis pro jednotný úvod tiskové sestavy.
 
 ### [CHMU-PREPARE]
+
 Předpis pro přípravu seznamu platných jevů.
 
 ### [CHMU-STYL]
+
 Předpis pro jednotný grafický styl e-mailů.
 
 ### [CHMU-ZVYR-ZMEN]
+
 Předpis pro zjištění změn a jejich zvýrazenění.
+
+### [CHMU-FUNKCE]
+
+Předpis obsahující společné funkce pro zpracování výstrahy.
 
 ---
 ---
+
 ## Kategorie AA
+
 Skripty pro automatické akce, úloha IKIS2 "Automatické akce/Evidence automatických akcí".
 
 ### [AA-CHMU-EMAIL-KRAJ]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
 Parametr **hlavniKraj** posunuje zvolený kraj na začátek výpisu, při hodnotě *-1* nedochází ke změně řazení. Číselník území je v proměnné *KRAJE_NAZVY*.
@@ -126,6 +153,7 @@ Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *t
 - Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
 
 ### [AA-CHMU-SMS-KRAJ]
+
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
@@ -147,6 +175,7 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
 ### [AA-CHMU-SMS-KRAJ-SKUP]
+
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
 Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
@@ -168,6 +197,7 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skup
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
 ### [AA-CHMU-NOTIF-KRAJ]
+
 Předpis pro vytvoření SMS zprávy notifikující odeslání e-mailu s výstrahou vztahující se ke konkrétnímu kraji nebo celé republice.
 
 Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se generují maily. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v parametru *KRAJE_NAZVY*.
@@ -175,6 +205,7 @@ Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se generuj�
 ---
 
 ### [AA-CHMU-EMAIL-ORP]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se k jednomu ORP nebo skupině více ORP (např. okres).
 > Skript nahrazuje funkci skriptu [AA-CHMU-EMAIL-OKRES], který byl ve verzi 64 odstraněn.
 
@@ -198,6 +229,7 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
 
 ### [AA-CHMU-SMS-ORP]
+
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se k jednomu ORP nebo skupině více ORP (např. okres).
 > Skript nahrazuje funkci skriptu [AA-CHMU-SMS-OKRES], který byl ve verzi 64 odstraněn.
 
@@ -218,6 +250,7 @@ Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 ### [AA-CHMU-SMS-ORP-SKUP]
+
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se k jednomu ORP nebo skupině více ORP (např. okres).
 > Skript nahrazuje funkci skriptu [AA-CHMU-SMS-OKRES-SKUP], který byl ve verzi 64 odstraněn.
 
@@ -238,6 +271,7 @@ Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 ### [AA-CHMU-NOTIF-ORP]
+
 Předpis pro vytvoření SMS zprávy notifikující odeslání e-mailu s výstrahou vztahujícího se ke konkrétnímu ORP.
 
 Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Číselník území je v samostatném souboru "seznam_ORP.csv".
@@ -245,6 +279,7 @@ Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působnos
 ---
 
 ### [AA-CHMU-MAIL-2]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se k celé republice nebo vybranému kraji. Tisková sestava je organizována podle nebezpečných jevů s vyznačením územní platnosti daného jevu. Je úsporná na tiskové strany, vhodná pro celostátní přehled nebo krajský přehled. Sestava neumožňuje filtrování na ORP.
 
 Parametr **omezitNaKraj** obsahuje číselný kód kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v parametru *KRAJE_NAZVY*.
@@ -272,12 +307,15 @@ Parametr **slucovat** může nabývat logických hodnot *false* nebo *true*.
 Předpis neumožňuje barevné zvýrazenění rozdílu aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
 ---
+
 ### [AA-CHMU-SMS-KRAJ-LK]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán krajský e-mail v Libereckém kraji.
 
 Parametr **omezitNaKraj** obsahuje číselný kód Libereckého kraje. Hodnotu prosím neměňte.
 
 ### [AA-CHMU-SMS-ORP-LK]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail na jedno ORP nebo skupinu ORP (okres) v Libereckém kraji.
 > Skript nahrazuje funkci skriptu [AA-CHMU-SMS-OKRES-LK], který byl ve verzi 64 odstraněn.
 
@@ -285,10 +323,13 @@ Parametr **mojeUzemi** obsahuje číselné kódy ORP, které definují zájmové
 
 ---
 ---
+
 ## Kategorie UVG
+
 - Skripty pro akce při zpracování výstrahy ve Spojaři, úloha IKIS2 "Administrace/JS UVG předpisy".
 
 ### [CHMU-EMAIL]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ. Slouží pro náhled výstrahy v okně Spojaře (levý sloupec) při zpracování CAP protokolu.
 
 Parametr **hlavniKraj** posunuje zvolený kraj na začátek výpisu, při hodnotě *-1* nedochází ke změně řazení. Číselník území je v proměnné *KRAJE_NAZVY*.
@@ -324,6 +365,7 @@ Parametr **distrSeznamNahore** může nabývat logických hodnot *false* nebo *t
 - Při hodnotě *true* je seznam distribuce (krajů) zobrazen nad hlavičkou výstražné zprávy na prvním řádku sestavy.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+
 ```javascript
 //!JS
 if (N !== 'undefined' && N.textEMAIL) {
@@ -332,6 +374,7 @@ if (N !== 'undefined' && N.textEMAIL) {
 ```
 
 ### [CHMU-SMS]
+
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ. Slouží pro náhled výstrahy v okně Spojaře (pravý sloupec uprostřed) při zpracování CAP protokolu.
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
@@ -353,6 +396,7 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jev�
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
 Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+
 ```javascript
 //!JS
 if (N !== 'undefined' && N.textSMS) {
@@ -361,6 +405,7 @@ if (N !== 'undefined' && N.textSMS) {
 ```
 
 ### [CHMU-MAIL-2]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů ve výstraze ČHMÚ. Slouží pro náhled výstrahy v okně Spojaře (levý sloupec) při zpracování CAP protokolu. Tisková sestava je organizována podle nebezpečných jevů s vyznačením územní platnosti daného jevu. Je úsporná na tiskové strany, vhodná pro celostátní přehled nebo krajský přehled. Sestava neumožňuje filtrování na ORP.
 
 Parametr **omezitNaKraj** obsahuje číselný kód území kraje, pro který se mají zahrnout jevy. Je možno zadat pouze jeden kraj, případně celou Českou republiku. Číselník území je v proměnné *KRAJE_NAZVY*.
@@ -388,6 +433,7 @@ Parametr **slucovat** může nabývat logických hodnot *false* nebo *true*.
 Předpis neumožňuje porovnávání aktuální výstrahy s předchozí výstrahou, zobrazen je pouze obsah aktuální výstrahy.
 
 Skript současně naplňuje UVG element *N.textEMAIL* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+
 ```javascript
 //!JS
 if (N !== 'undefined' && N.textEMAIL) {
@@ -396,6 +442,7 @@ if (N !== 'undefined' && N.textEMAIL) {
 ```
 
 ### [CHMU-SMS-KRAJ-SKUP]
+
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke konkrétnímu kraji nebo celé republice.
 
 Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
@@ -417,6 +464,7 @@ Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skup
 V celostátní sestavě je poskytován odkaz na stránku výstrahy ve formátu WOCZ59 OPIN na portálu ČHMÚ.
 
 Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+
 ```javascript
 //!JS
 if (N !== 'undefined' && N.textSMS) {
@@ -425,9 +473,11 @@ if (N !== 'undefined' && N.textSMS) {
 ```
 
 ### [CHMU-NOTIF-KRAJ-OLK]
+
 Předpis pro vytvoření SMS zprávy ve znění požadovaném HZS OLK pro upozornění příjemce e-mailu na vydání výstrahy.
 
 Skript současně naplňuje UVG element *N.textSMS* a jeho výsledek se odesílá níže uvedenou automatickou akcí.
+
 ```javascript
 //!JS
 if (N !== 'undefined' && N.textSMS) {
@@ -435,28 +485,32 @@ if (N !== 'undefined' && N.textSMS) {
 }
 ```
 
+---
+---
 
----
----
 ARCHIV verze 63
 ---
 
 ### [Knihovna/CHMU-EMAIL-OKRES]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres). Sestava vychází z krajské sestavy.
 
 **Vyžaduje** skripty: *CHMU-STYL*, *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*, *CHMU-HLAVICKA*
 
 ### [Knihovna/CHMU-SMS-OKRES]
+
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
 ### [Knihovna/CHMU-SMS-OKRES-SKUP]
+
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-DATUMY*
 
 ### [Knihovna/CHMU-SMS-OKRES-LK]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro skupinu ORP (okres) v Libereckém kraji.
 
 **Vyžaduje** skripty: *CHMU-CISELNIK*, *CHMU-ZVYR-ZMEN*, *CHMU-DATUMY*, *CHMU-PREPARE*
@@ -464,6 +518,7 @@ Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslá
 ---
 
 ### [AA/AA-CHMU-EMAIL-OKRES]
+
 Předpis pro vytvoření e-mailové zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 Parametr **mojeUzemi** obsahuje seznam jednotlivých kódů ORP, které pokrývají zájmové území.
@@ -486,6 +541,7 @@ Parametr **pouzeZmeny** může nabývat logických hodnot *false* nebo *true*.
 - Při hodnotě *true* je na výstupu tisková sestava obsahující výpis zprávy CAP pouze v případě, že na zvoleném území dochází ke změně oproti minulé výstraze. Pokud ke změně nedochází, je výstupem prázdná akce.
 
 ### [AA/AA-CHMU-SMS-OKRES]
+
 Předpis pro vytvoření SMS zprávy s přehledem nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 Jev "Výhled nebezpečných jevů" je z výstupu vyloučen.
@@ -505,6 +561,7 @@ Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
 ### [AA/AA-CHMU-SMS-OKRES-SKUP]
+
 Předpis pro vytvoření SMS zprávy s přehledem skupin nebezpečných jevů vztahujících se ke skupině ORP (typicky okres).
 
 Skupina "Výhled nebezpečných jevů" je z výstupu vyloučena.
@@ -523,8 +580,8 @@ Parametr **vypisOrp** může nabývat hodnot *false* nebo *true*.
 
 Parametr **oddelovac** definuje způsob oddělení jednotlivých záznamů (skupin jevů) od sebe. Pro zalomení řádku použijte '\n'. Když tam dáte čárku nebo středník, nezapomeňte za ně dát mezeru.
 
-
 ### [AA/AA-CHMU-SMS-ORP-LK]
+
 Předpis pro vytvoření notifikační SMS zprávy v případě, kdy byl odeslán e-mail pro ORP v Libereckém kraji.
 
-Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Skript neprovádí kontrolu, zda je ORP uvnitř Libereckého kraje. 
+Parametr **omezitNaOrp** obsahuje číselný kód obce s rozšířenou působností, pro který se mají zahrnout jevy. Je možno zadat pouze jedno ORP. Skript neprovádí kontrolu, zda je ORP uvnitř Libereckého kraje.

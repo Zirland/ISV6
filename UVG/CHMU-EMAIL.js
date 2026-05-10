@@ -1,4 +1,4 @@
-// Verze 76
+// Verze 77
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
