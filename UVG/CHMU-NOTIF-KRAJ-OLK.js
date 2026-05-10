@@ -250,10 +250,46 @@ function ZobrazDatum(datum, format, end) {
     return format_datum;
 }
 
+function getWarningSeverity(stupen_kod) {
+    var barva = stupen_kod.split('.')[1];
+    if (typeof barva !== 'undefined' && barva) {
+        return Number(barva.substring(0, 1));
+    }
+    return 0;
+}
+
+function compareInfoByPriority(a, b) {
+    var vyskyt1 = a.jistota_kod == 'Observed' ? 1 : 0;
+    var vyskyt2 = b.jistota_kod == 'Observed' ? 1 : 0;
+    var start1 = parseFloat(Normalize(a.dc_zacatek));
+    var start2 = parseFloat(Normalize(b.dc_zacatek));
+    var jev1 = a.stupen_kod;
+    var jev2 = b.stupen_kod;
+    var zavaznost1 = getWarningSeverity(jev1);
+    var zavaznost2 = getWarningSeverity(jev2);
+
+    if (vyskyt1 > vyskyt2) return -1;
+    if (vyskyt1 < vyskyt2) return 1;
+    if (start1 < start2) return -1;
+    if (start1 > start2) return 1;
+    if (zavaznost1 > zavaznost2) return -1;
+    if (zavaznost1 < zavaznost2) return 1;
+    if (jev1 < jev2) return -1;
+    if (jev1 > jev2) return 1;
+    return 0;
+}
+
+function getJevCode(infoItem) {
+    return (infoItem.jistota_kod == 'Observed' ? '0' : '') + infoItem.stupen_kod;
+}
+
 function removeDuplicates(arr) {
     var unique_array = [];
+    var seen = {};
     for (var i = 0; i < arr.length; i++) {
-        if (unique_array.indexOf(arr[i]) == -1) {
+        var key = typeof arr[i] + '|' + arr[i];
+        if (!seen[key]) {
+            seen[key] = true;
             unique_array.push(arr[i]);
         }
     }
@@ -320,42 +356,7 @@ function PrepareInfo(orp, vystraha) {
 
     infoList = infoListFilter;
 
-    infoList = infoList.sort(function (a, b) {
-        var vyskyt1 = 0;
-        var vyskyt2 = 0;
-        var start1 = parseFloat(Normalize(a.dc_zacatek));
-        var start2 = parseFloat(Normalize(b.dc_zacatek));
-        var jev1 = a.stupen_kod;
-        var jev2 = b.stupen_kod;
-        var barva1 = a.stupen_kod.split('.')[1];
-        if (typeof barva1 !== 'undefined' && barva1) {
-            var zavaznost1 = Number(barva1.substring(0, 1));
-        } else {
-            var zavaznost1 = 0;
-        }
-        var barva2 = b.stupen_kod.split('.')[1];
-        if (typeof barva2 !== 'undefined' && barva2) {
-            var zavaznost2 = Number(barva2.substring(0, 1));
-        } else {
-            var zavaznost2 = 0;
-        }
-
-        if (a.jistota_kod == 'Observed') {
-            vyskyt1 = 1;
-        }
-        if (b.jistota_kod == 'Observed') {
-            vyskyt2 = 1;
-        }
-        if (vyskyt1 > vyskyt2) return -1;
-        if (vyskyt1 < vyskyt2) return 1;
-        if (start1 < start2) return -1;
-        if (start1 > start2) return 1;
-        if (zavaznost1 > zavaznost2) return -1;
-        if (zavaznost1 < zavaznost2) return 1;
-        if (jev1 < jev2) return -1;
-        if (jev1 > jev2) return 1;
-        return 0;
-    });
+    infoList = infoList.sort(compareInfoByPriority);
 
     var krajList = [];
     var posledniKraj = {};
@@ -1341,14 +1342,14 @@ function GetWarningColor(info) {
                     case 'Severe':
                         color = 'Nízký st. nebezpečí';
                         break;
-                        case 'Extreme':
+                    case 'Extreme':
                         color = 'Vysoký st. nebezpečí';
                         break;
                     default:
                         color = '';
                         break;
                 }
-                break;    
+                break;
             default:
                 switch (info.zavaznost_kod) {
                     case 'Moderate':
@@ -1420,54 +1421,14 @@ if (Number(zmen) != 0) {
             infoList.push(vystraha.info[l]);
         }
 
-        infoList = infoList.sort(function (a, b) {
-            var vyskyt1 = 0;
-            var vyskyt2 = 0;
-            var start1 = parseFloat(Normalize(a.dc_zacatek));
-            var start2 = parseFloat(Normalize(b.dc_zacatek));
-            var jev1 = a.stupen_kod;
-            var jev2 = b.stupen_kod;
-            var barva1 = a.stupen_kod.split('.')[1];
-            if (typeof barva1 !== 'undefined' && barva1) {
-                var zavaznost1 = Number(barva1.substring(0, 1));
-            } else {
-                var zavaznost1 = 0;
-            }
-            var barva2 = b.stupen_kod.split('.')[1];
-            if (typeof barva2 !== 'undefined' && barva2) {
-                var zavaznost2 = Number(barva2.substring(0, 1));
-            } else {
-                var zavaznost2 = 0;
-            }
-
-            if (a.jistota_kod == 'Observed') {
-                vyskyt1 = 1;
-            }
-            if (b.jistota_kod == 'Observed') {
-                vyskyt2 = 1;
-            }
-            if (vyskyt1 > vyskyt2) return -1;
-            if (vyskyt1 < vyskyt2) return 1;
-            if (start1 < start2) return -1;
-            if (start1 > start2) return 1;
-            if (zavaznost1 > zavaznost2) return -1;
-            if (zavaznost1 < zavaznost2) return 1;
-            if (jev1 < jev2) return -1;
-            if (jev1 > jev2) return 1;
-            return 0;
-        });
+        infoList = infoList.sort(compareInfoByPriority);
     }
 
     if (infoList) {
         var poleJevy = [];
         for (var i = 0; i < infoList.length; i++) {
             if (infoList[i].stupen_kod != 'OUTLOOK') {
-                var pomKod = '';
-                if (infoList[i].jistota_kod == 'Observed') {
-                    pomKod += '0';
-                }
-                pomKod += infoList[i].stupen_kod;
-                poleJevy.push(pomKod);
+                poleJevy.push(getJevCode(infoList[i]));
             }
         }
 
@@ -1476,11 +1437,7 @@ if (Number(zmen) != 0) {
         for (var h = 0; h < poleJevy.length; h++) {
             var jevKrajeList = [];
             for (var i = 0; i < infoList.length; i++) {
-                var pomKodIvnj = '';
-                if (infoList[i].jistota_kod == 'Observed') {
-                    pomKodIvnj = '0';
-                }
-                if (poleJevy[h] == pomKodIvnj + infoList[i].stupen_kod) {
+                if (poleJevy[h] == getJevCode(infoList[i])) {
                     var found = omezitNaKraj == -1;
                     for (
                         var j = 0;
