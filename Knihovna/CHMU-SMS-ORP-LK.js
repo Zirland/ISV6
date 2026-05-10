@@ -14,7 +14,6 @@ var vystupText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
-var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
 var pom_mojeUzemi = [];

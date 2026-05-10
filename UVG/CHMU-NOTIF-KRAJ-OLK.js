@@ -2,7 +2,10 @@
 
 var omezitNaKraj = 124;
 
-var JEVY_NAZVY = {
+var vytvoreni = vystraha.dc_odeslano;
+
+if (vytvoreni < '2026-07-01 00:00:00') {
+  var JEVY_NAZVY = {
     'I.1': 'vysoké teploty',
     '0I.1': 'výskyt vysoké teploty',
     'I.2': 'velmi vysoké teploty',
@@ -114,7 +117,99 @@ var JEVY_NAZVY = {
     'SMOGSIT.NO2': 'smogová situace NO2',
     '0SMOGSIT.NO2': 'smogová situace NO2',
     'REG.NO2': 'regulace NO2',
+    '0REG.NO2': 'regulace NO2'
+  };
+} else {
+  var JEVY_NAZVY = {
+    'I.1': 'vysoké teploty',
+    '0I.1': 'výskyt vysoké teploty',
+    'I.2': 'velmi vysoké teploty',
+    '0I.2': 'výskyt velmi vysoké teploty',
+    'II.1': 'silný mráz',
+    '0II.1': 'výskyt silný mráz',
+    'II.2': 'velmi silný mráz',
+    '0II.2': 'výskyt velmi silný mráz',
+    'III.1': 'silná zátěž teplem',
+    '0III.1': 'výskyt silná zátěž teplem',
+    'III.2': 'velmi silná zátěž teplem',
+    '0III.2': 'výskyt velmi silná zátěž teplem',
+    'III.3': 'extrémně silná zátěž teplem',
+    '0III.3': 'výskyt extrémně silná zátěž teplem',
+    'IV.1': 'silná zátěž chladem',
+    '0IV.1': 'výskyt silná zátěž chladem',
+    'IV.2': 'velmi silná zátěž chladem',
+    '0IV.2': 'výskyt velmi silná zátěž chladem',
+    'IV.3': 'extrémně silná zátěž chladem',
+    '0IV.3': 'výskyt extrémně silná zátěž chladem',
+    'V.1': 'silný vítr',
+    '0V.1': 'výskyt silný vítr',
+    'V.2': 'velmi silný vítr',
+    '0V.2': 'výskyt velmi silný vítr',
+    'V.3': 'extrémně silný vítr',
+    '0V.3': 'výskyt extrémně silný vítr',
+    'VI.1': 'rizikové sněhové jevy',
+    '0VI.1': 'výskyt rizikové sněhové jevy',
+    'VI.2': 'velmi rizikové sněhové jevy',
+    '0VI.2': 'výskyt velmi rizikové sněhové jevy',
+    'VI.3': 'extrémně rizikové sněhové jevy',
+    '0VI.3': 'výskyt extrémně rizikové sněhové jevy',
+    'VII.1': 'kluzké povrchy',
+    '0VII.1': 'výskyt kluzké povrchy',
+    'VII.2': 'velmi kluzké povrchy',
+    '0VII.2': 'výskyt velmi kluzké povrchy',
+    'VIII.1': 'zatížení ledem',
+    '0VIII.1': 'výskyt zatížení ledem',
+    'VIII.2': 'velmi silné zatížení ledem',
+    '0VIII.2': 'výskyt velmi silné zatížení ledem',
+    'IX.1': 'silné bouřky',
+    '0IX.1': 'výskyt silné bouřky',
+    'IX.2': 'velmi silné bouřky',
+    '0IX.2': 'výskyt velmi silné bouřky',
+    'IX.3': 'extrémně silné bouřky',
+    '0IX.3': 'výskyt extrémně silné bouřky',
+    'X.1': 'rizikový déšť',
+    '0X.1': 'výskyt rizikový déšť',
+    'X.2': 'velmi rizikový déšť',
+    '0X.2': 'výskyt velmi rizikový déšť',
+    'X.3': 'extrémně rizikový déšť',
+    '0X.3': 'výskyt extrémně rizikový déšť',
+    'XI.1': 'povodňová bdělost',
+    '0XI.1': 'výskyt povodňová bdělost',
+    'XI.2': 'povodňová pohotovost',
+    '0XI.2': 'výskyt povodňová pohotovost',
+    'XI.3': 'povodňové ohrožení',
+    '0XI.3': 'výskyt povodňové ohrožení',
+    'XI.4': 'extrémní povodňové ohrožení',
+    '0XI.4': 'výskyt extrémní povodňové ohrožení',
+    'XII.1': 'riziko požárů',
+    '0XII.1': 'výskyt riziko požárů',
+    'XII.2': 'vysoké riziko požárů',
+    '0XII.2': 'výskyt vysoké riziko požárů',
+    'XIII.1': 'jev s nízkým dopadem',
+    '0XIII.1': 'výskyt jev s nízkým dopadem',
+    'XIII.2': 'jev s vysokým dopadem',
+    '0XIII.2': 'výskyt jev s vysokým dopadem',
+    'XIII.3': 'jev s extrémním dopadem',
+    '0XIII.3': 'výskyt jev s extrémním dopadem',
+    'REG.NO2': 'regulace NO2',
     '0REG.NO2': 'regulace NO2',
+    'REG.PM10': 'regulace PM10',
+    '0REG.PM10': 'regulace PM10',
+    'REG.SO2': 'regulace SO2',
+    '0REG.SO2': 'regulace SO2',
+    'SMOGSIT.NO2': 'smogová situace NO2',
+    '0SMOGSIT.NO2': 'smogová situace NO2',
+    'SMOGSIT.O3': 'smogová situace O3',
+    '0SMOGSIT.O3': 'smogová situace O3',
+    'SMOGSIT.PM10': 'smogová situace PM10',
+    '0SMOGSIT.PM10': 'smogová situace PM10',
+    'SMOGSIT.SO2': 'smogová situace SO2',
+    '0SMOGSIT.SO2': 'smogová situace SO2',
+    'WARN.O3': 'varování O3',
+    '0WARN.O3': 'varování O3',
+    'OUTLOOK': 'výhled nebezpečných jevů',
+    '0OUTLOOK': 'výhled nebezpečných jevů',
+  };
 };
 
 function Normalize(datum) {
@@ -1383,7 +1478,6 @@ orp = orpTmp;
 
 var krajList = [];
 var ref_krajList = [];
-var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
 if (vystraha.info && vystraha.info.length > 0) {

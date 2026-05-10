@@ -2,6 +2,8 @@
 
 var omezitNaKraj = -1;
 
+var vytvoreni = vystraha.dc_odeslano;
+
 var KRAJE_NAZVY = {
     '-1': 'Česká republika',
     '19': 'Hlavní město Praha',
@@ -20,6 +22,7 @@ var KRAJE_NAZVY = {
     '132': 'Moravskoslezský kraj'
 };
 
+if (vytvoreni < '2026-07-01 00:00:00') {
 var JEVY_NAZVY = {
     'I.1': 'Vysoké teploty',
     '0I.1': 'VÝSKYT Vysoké teploty',
@@ -132,7 +135,99 @@ var JEVY_NAZVY = {
     'SMOGSIT.NO2': 'Smogová situace NO2',
     '0SMOGSIT.NO2': 'Smogová situace NO2',
     'REG.NO2': 'Regulace NO2',
+    '0REG.NO2': 'Regulace NO2'
+  };
+} else {
+  var JEVY_NAZVY = {
+    'I.1': 'Vysoké teploty',
+    '0I.1': 'VÝSKYT Vysoké teploty',
+    'I.2': 'Velmi vysoké teploty',
+    '0I.2': 'VÝSKYT Velmi vysoké teploty',
+    'II.1': 'Silný mráz',
+    '0II.1': 'VÝSKYT Silný mráz',
+    'II.2': 'Velmi silný mráz',
+    '0II.2': 'VÝSKYT Velmi silný mráz',
+    'III.1': 'Silná zátěž teplem',
+    '0III.1': 'VÝSKYT Silná zátěž teplem',
+    'III.2': 'Velmi silná zátěž teplem',
+    '0III.2': 'VÝSKYT Velmi silná zátěž teplem',
+    'III.3': 'Extrémně silná zátěž teplem',
+    '0III.3': 'VÝSKYT Extrémně silná zátěž teplem',
+    'IV.1': 'Silná zátěž chladem',
+    '0IV.1': 'VÝSKYT Silná zátěž chladem',
+    'IV.2': 'Velmi silná zátěž chladem',
+    '0IV.2': 'VÝSKYT Velmi silná zátěž chladem',
+    'IV.3': 'Extrémně silná zátěž chladem',
+    '0IV.3': 'VÝSKYT Extrémně silná zátěž chladem',
+    'V.1': 'Silný vítr',
+    '0V.1': 'VÝSKYT Silný vítr',
+    'V.2': 'Velmi silný vítr',
+    '0V.2': 'VÝSKYT Velmi silný vítr',
+    'V.3': 'Extrémně silný vítr',
+    '0V.3': 'VÝSKYT Extrémně silný vítr',
+    'VI.1': 'Rizikové sněhové jevy',
+    '0VI.1': 'VÝSKYT Rizikové sněhové jevy',
+    'VI.2': 'Velmi rizikové sněhové jevy',
+    '0VI.2': 'VÝSKYT Velmi rizikové sněhové jevy',
+    'VI.3': 'Extrémně rizikové sněhové jevy',
+    '0VI.3': 'VÝSKYT Extrémně rizikové sněhové jevy',
+    'VII.1': 'Kluzké povrchy',
+    '0VII.1': 'VÝSKYT Kluzké povrchy',
+    'VII.2': 'Velmi kluzké povrchy',
+    '0VII.2': 'VÝSKYT Velmi kluzké povrchy',
+    'VIII.1': 'Zatížení ledem',
+    '0VIII.1': 'VÝSKYT Zatížení ledem',
+    'VIII.2': 'Velmi silné zatížení ledem',
+    '0VIII.2': 'VÝSKYT Velmi silné zatížení ledem',
+    'IX.1': 'Silné bouřky',
+    '0IX.1': 'VÝSKYT Silné bouřky',
+    'IX.2': 'Velmi silné bouřky',
+    '0IX.2': 'VÝSKYT Velmi silné bouřky',
+    'IX.3': 'Extrémně silné bouřky',
+    '0IX.3': 'VÝSKYT Extrémně silné bouřky',
+    'X.1': 'Rizikový déšť',
+    '0X.1': 'VÝSKYT Rizikový déšť',
+    'X.2': 'Velmi rizikový déšť',
+    '0X.2': 'VÝSKYT Velmi rizikový déšť',
+    'X.3': 'Extrémně rizikový déšť',
+    '0X.3': 'VÝSKYT Extrémně rizikový déšť',
+    'XI.1': 'Povodňová bdělost',
+    '0XI.1': 'VÝSKYT Povodňová bdělost',
+    'XI.2': 'Povodňová pohotovost',
+    '0XI.2': 'VÝSKYT Povodňová pohotovost',
+    'XI.3': 'Povodňové ohrožení',
+    '0XI.3': 'VÝSKYT Povodňové ohrožení',
+    'XI.4': 'Extrémní povodňové ohrožení',
+    '0XI.4': 'VÝSKYT Extrémní povodňové ohrožení',
+    'XII.1': 'Riziko požárů',
+    '0XII.1': 'VÝSKYT Riziko požárů',
+    'XII.2': 'Vysoké riziko požárů',
+    '0XII.2': 'VÝSKYT Vysoké riziko požárů',
+    'XIII.1': 'Jev s nízkým dopadem',
+    '0XIII.1': 'VÝSKYT Jev s nízkým dopadem',
+    'XIII.2': 'Jev s vysokým dopadem',
+    '0XIII.2': 'VÝSKYT Jev s vysokým dopadem',
+    'XIII.3': 'Jev s extrémním dopadem',
+    '0XIII.3': 'VÝSKYT Jev s extrémním dopadem',
+    'REG.NO2': 'Regulace NO2',
     '0REG.NO2': 'Regulace NO2',
+    'REG.PM10': 'Regulace PM10',
+    '0REG.PM10': 'Regulace PM10',
+    'REG.SO2': 'Regulace SO2',
+    '0REG.SO2': 'Regulace SO2',
+    'SMOGSIT.NO2': 'Smogová situace NO2',
+    '0SMOGSIT.NO2': 'Smogová situace NO2',
+    'SMOGSIT.O3': 'Smogová situace O3',
+    '0SMOGSIT.O3': 'Smogová situace O3',
+    'SMOGSIT.PM10': 'Smogová situace PM10',
+    '0SMOGSIT.PM10': 'Smogová situace PM10',
+    'SMOGSIT.SO2': 'Smogová situace SO2',
+    '0SMOGSIT.SO2': 'Smogová situace SO2',
+    'WARN.O3': 'Varování O3',
+    '0WARN.O3': 'Varování O3',
+    'OUTLOOK': 'Výhled nebezpečných jevů',
+    '0OUTLOOK': 'Výhled nebezpečných jevů',
+  };
 };
 
 function Normalize(datum) {
@@ -1388,7 +1483,6 @@ var resultText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
-var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
 if (vystraha.info && vystraha.info.length > 0) {
