@@ -1,4 +1,4 @@
-// Verze 76
+// Verze 77
 
 var omezitNaKraj = 78;
 
@@ -591,14 +591,29 @@ function PrepareInfo(orp, vystraha) {
 
   infoList = infoListFilter;
 
-    infoList = infoList.sort(compareInfoByPriority);
+  infoList = infoList.sort(compareInfoByPriority);
 
-    var krajList = [];
-    var posledniKraj = {};
-    var posledniOkres = {};
-    var posledniOrp = {};
-    var krajChange = true;
-    var okresChange = true;
+  var krajList = [];
+  var posledniKraj = {};
+  var posledniOkres = {};
+  var posledniOrp = {};
+  var krajChange = true;
+  var okresChange = true;
+
+  for (var i = 0; i < orp.length; i++) {
+    if (posledniKraj.id != orp[i].kraj.id) {
+      for (var j = 0; j < infoList.length; j++) {
+        if (posledniKraj.info && infoList[j].krajPom) {
+          posledniKraj.info.push(infoList[j]);
+        }
+      }
+
+      posledniKraj = {};
+      posledniKraj.id = orp[i].kraj.id;
+      posledniKraj.nazev = orp[i].kraj.nazev;
+      posledniKraj.zkratka = orp[i].kraj.zkratka;
+      posledniKraj.info = [];
+      posledniKraj.okresList = [];
 
       krajList.push(posledniKraj);
       krajChange = true;
@@ -670,17 +685,17 @@ function PrepareInfo(orp, vystraha) {
 }
 
 function PrintInfoList(krajList, ref_krajList) {
-    var resultText = '';
-    var zpracovanyInfoStupen = [];
-    var zpracovanyInfoStupenOkres = [];
-    var ref_zpracovanyInfoStupen = [];
-    var ref_zpracovanyInfoStupenOkres = [];
-    var info;
-    var ref_info;
-    var found = false;
-    var first = true;
-    var zmen = 0;
-    var pomoc = '';
+  var resultText = '';
+  var zpracovanyInfoStupen = [];
+  var zpracovanyInfoStupenOkres = [];
+  var ref_zpracovanyInfoStupen = [];
+  var ref_zpracovanyInfoStupenOkres = [];
+  var info;
+  var ref_info;
+  var found = false;
+  var first = true;
+  var zmen = 0;
+  var pomoc = '';
 
   for (var k = 0; k < krajList.length; k++) {
     zpracovanyInfoStupen = [];
@@ -1247,38 +1262,20 @@ function PrintInfoList(krajList, ref_krajList) {
 function GetWarningColor(info) {
   var color = '';
 
-    if (info) {
-        switch (info.jistota_kod) {
-            case 'Possible':
-                switch (info.zavaznost_kod) {
-                    case 'Moderate':
-                    case 'Severe':
-                        color = 'Nízký st. nebezpečí';
-                        break;
-                    case 'Extreme':
-                        color = 'Vysoký st. nebezpečí';
-                        break;
-                    default:
-                        color = '';
-                        break;
-                }
-                break;
-            default:
-                switch (info.zavaznost_kod) {
-                    case 'Moderate':
-                        color = 'Nízký st. nebezpečí';
-                        break;
-                    case 'Severe':
-                        color = 'Vysoký st. nebezpečí';
-                        break;
-                    case 'Extreme':
-                        color = 'Extrémní st. nebezpečí';
-                        break;
-                    default:
-                        color = '';
-                        break;
-                }
-                break;
+  if (info) {
+    switch (info.jistota_kod) {
+      case 'Possible':
+        switch (info.zavaznost_kod) {
+          case 'Moderate':
+          case 'Severe':
+            color = 'Nízký st. nebezpečí';
+            break;
+          case 'Extreme':
+            color = 'Vysoký st. nebezpečí';
+            break;
+          default:
+            color = '';
+            break;
         }
         break;
       default:
@@ -1462,60 +1459,59 @@ function PrintInfo(info, ref_info) {
 }
 
 function getWarningSeverity(stupen_kod) {
-    var barva = stupen_kod.split('.')[1];
-    if (typeof barva !== 'undefined' && barva) {
-        return Number(barva.substring(0, 1));
-    }
-    return 0;
+  var barva = stupen_kod.split('.')[1];
+  if (typeof barva !== 'undefined' && barva) {
+    return Number(barva.substring(0, 1));
+  }
+  return 0;
 }
 
 function compareInfoByPriority(a, b) {
-    var vyskyt1 = a.jistota_kod == 'Observed' ? 1 : 0;
-    var vyskyt2 = b.jistota_kod == 'Observed' ? 1 : 0;
-    var start1 = parseFloat(Normalize(a.dc_zacatek));
-    var start2 = parseFloat(Normalize(b.dc_zacatek));
-    var jev1 = a.stupen_kod;
-    var jev2 = b.stupen_kod;
-    var zavaznost1 = getWarningSeverity(jev1);
-    var zavaznost2 = getWarningSeverity(jev2);
+  var vyskyt1 = a.jistota_kod == 'Observed' ? 1 : 0;
+  var vyskyt2 = b.jistota_kod == 'Observed' ? 1 : 0;
+  var start1 = parseFloat(Normalize(a.dc_zacatek));
+  var start2 = parseFloat(Normalize(b.dc_zacatek));
+  var jev1 = a.stupen_kod;
+  var jev2 = b.stupen_kod;
+  var zavaznost1 = getWarningSeverity(jev1);
+  var zavaznost2 = getWarningSeverity(jev2);
 
-    if (vyskyt1 > vyskyt2) return -1;
-    if (vyskyt1 < vyskyt2) return 1;
-    if (start1 < start2) return -1;
-    if (start1 > start2) return 1;
-    if (zavaznost1 > zavaznost2) return -1;
-    if (zavaznost1 < zavaznost2) return 1;
-    if (jev1 < jev2) return -1;
-    if (jev1 > jev2) return 1;
-    return 0;
+  if (vyskyt1 > vyskyt2) return -1;
+  if (vyskyt1 < vyskyt2) return 1;
+  if (start1 < start2) return -1;
+  if (start1 > start2) return 1;
+  if (zavaznost1 > zavaznost2) return -1;
+  if (zavaznost1 < zavaznost2) return 1;
+  if (jev1 < jev2) return -1;
+  if (jev1 > jev2) return 1;
+  return 0;
 }
 
 function buildInfoListSorted(sourceInfo) {
-    var list = [];
-    for (var i = 0; i < sourceInfo.length; i++) {
-        list.push(sourceInfo[i]);
-    }
-    return list.sort(compareInfoByPriority);
+  var list = [];
+  for (var i = 0; i < sourceInfo.length; i++) {
+    list.push(sourceInfo[i]);
+  }
+  return list.sort(compareInfoByPriority);
 }
 
 function getJevGroupCode(infoItem) {
-    var splitkod = infoItem.stupen_kod.split('.');
-    var skupina = splitkod[0];
-    if (skupina == 'WARN' || skupina == 'REG' || skupina == 'SMOGSIT') {
-        skupina = splitkod[1];
-    }
-    return (infoItem.jistota_kod == 'Observed' ? '0' : '') + skupina;
+  var splitkod = infoItem.stupen_kod.split('.');
+  var skupina = splitkod[0];
+  if (skupina == 'WARN' || skupina == 'REG' || skupina == 'SMOGSIT') {
+    skupina = splitkod[1];
+  }
+  return (infoItem.jistota_kod == 'Observed' ? '0' : '') + skupina;
 }
 
 function removeDuplicates(arr) {
-    var unique_array = [];
-    var seen = {};
-    for (var i = 0; i < arr.length; i++) {
-        var key = typeof arr[i] + '|' + arr[i];
-        if (!seen[key]) {
-            seen[key] = true;
-            unique_array.push(arr[i]);
-        }
+  var unique_array = [];
+  var seen = {};
+  for (var i = 0; i < arr.length; i++) {
+    var key = typeof arr[i] + '|' + arr[i];
+    if (!seen[key]) {
+      seen[key] = true;
+      unique_array.push(arr[i]);
     }
   }
   return unique_array;
@@ -1570,59 +1566,24 @@ if (Number(zmen) != 0) {
   var zacatky = [];
   vystupText += 'Na Váš e-mail byla odeslána ';
 
-    if (vystraha.info) {
-        var infoList = buildInfoListSorted(vystraha.info);
-    }
+  if (vystraha.info) {
+    var infoList = buildInfoListSorted(vystraha.info);
+  }
 
-    if (infoList) {
-        var poleJevy = [];
-        for (var i = 0; i < infoList.length; i++) {
-            if (infoList[i].stupen_kod != 'OUTLOOK') {
-                poleJevy.push(getJevGroupCode(infoList[i]));
-            }
-        }
-        var splitkod = infoList[i].stupen_kod.split('.');
-        var skupina = splitkod[0];
-        if (
-          skupina == 'WARN' ||
-          skupina == 'REG' ||
-          skupina == 'SMOGSIT'
-        ) {
-          skupina = splitkod[1];
-        }
-
-        pomKod += skupina;
-        poleJevy.push(pomKod);
+  if (infoList) {
+    var poleJevy = [];
+    for (var i = 0; i < infoList.length; i++) {
+      if (infoList[i].stupen_kod != 'OUTLOOK') {
+        poleJevy.push(getJevGroupCode(infoList[i]));
       }
     }
 
-        for (var h = 0; h < poleJevy.length; h++) {
-            var jevKrajeList = [];
-            for (var i = 0; i < infoList.length; i++) {
-                if (poleJevy[h] == getJevGroupCode(infoList[i])) {
-                    var found = false;
-                    for (
-                        var j = 0;
-                        j < infoList[i].kraj.length && !found;
-                        j++
-                    ) {
-                        found = infoList[i].kraj[j].UID == omezitNaKraj;
-                    }
-                    for (var j = 0; j < infoList[i].kraj.length; j++) {
-                        if (found) {
-                            jevKrajeList.push(infoList[i].kraj[j].UID);
-                            var zacatek = Normalize(infoList[i].dc_zacatek);
-                            zacatky.push(zacatek);
-                        }
-                    }
-                }
-            }
-            jevKrajeList = removeDuplicates(jevKrajeList);
-            jevKrajeList = jevKrajeList.sort(function (a, b) {
-                return a - b;
-            });
+    poleJevy = removeDuplicates(poleJevy);
 
-        if (poleJevy[h] == pomKodIvnj + skupinaJev) {
+    for (var h = 0; h < poleJevy.length; h++) {
+      var jevKrajeList = [];
+      for (var i = 0; i < infoList.length; i++) {
+        if (poleJevy[h] == getJevGroupCode(infoList[i])) {
           var found = false;
           for (
             var j = 0;
@@ -1684,4 +1645,4 @@ if (vystupText != '') {
   vystupText += '. KOPIS HZS LK';
 }
 
-return vystupText;
+return vystupText; 
