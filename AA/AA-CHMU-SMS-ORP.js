@@ -1,5 +1,5 @@
 //!JS
-// Verze 76
+// Verze 77
 
 var mojeUzemi = [1139, 1147, 1155];
 var detailni = 1;
@@ -9,10 +9,10 @@ var oddelovac = '\n';
 #import "CHMU-SMS-ORP";
 
 if (vystupText != '') {
-    vystupText += oddelovac;
-    vystupText += 'NOPIS GŘ HZS ČR';
+  vystupText += oddelovac;
+  vystupText += 'NOPIS GŘ HZS ČR';
 }
 
 if (vystupText !== 'undefined' && vystupText) {
-    print(vystupText);
+  print(vystupText);
 }

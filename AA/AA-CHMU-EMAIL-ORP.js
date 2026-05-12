@@ -1,5 +1,5 @@
 //!JS
-// Verze 76
+// Verze 77
 
 var mojeUzemi = 1996;
 var nazevUzemi = 'ORP Přerov';
@@ -11,5 +11,5 @@ var pouzeZmeny = true;
 #import "CHMU-EMAIL-ORP";
 
 if (resultText !== 'undefined' && resultText) {
-    print(resultText);
+  print(resultText);
 }

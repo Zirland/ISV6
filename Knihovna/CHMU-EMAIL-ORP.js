@@ -1,23 +1,24 @@
-// Verze 76
+// Verze 77
 
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-DATUMY";
+#import "CHMU-FUNKCE";
 #import "CHMU-PREPARE";
 
 var pom_mojeUzemi = [];
 if (typeof mojeUzemi != 'object') {
-    pom_mojeUzemi.push(mojeUzemi);
-    mojeUzemi = pom_mojeUzemi;
+  pom_mojeUzemi.push(mojeUzemi);
+  mojeUzemi = pom_mojeUzemi;
 }
 
 var orpTmp = [];
 for (var i = 0; i < orp.length; i++) {
-    for (var j = 0; j < orp.length; j++) {
-        if (mojeUzemi[j] == orp[i].id) {
-            orpTmp.push(orp[i]);
-        }
+  for (var j = 0; j < orp.length; j++) {
+    if (mojeUzemi[j] == orp[i].id) {
+      orpTmp.push(orp[i]);
     }
+  }
 }
 
 orp = orpTmp;
@@ -26,19 +27,18 @@ var resultText = '';
 var krajList = [];
 var ref_krajList = [];
 var info;
-var vytvoreni = vystraha.dc_odeslano;
 var pomoc = '';
 
 if (vystraha.info && vystraha.info.length > 0) {
-    krajList = PrepareInfo(orp, vystraha);
+  krajList = PrepareInfo(orp, vystraha);
 }
 
 if (
-    typeof ref_vystraha !== 'undefined' &&
-    ref_vystraha.info &&
-    ref_vystraha.info.length > 0
+  typeof ref_vystraha !== 'undefined' &&
+  ref_vystraha.info &&
+  ref_vystraha.info.length > 0
 ) {
-    ref_krajList = PrepareInfo(orp, ref_vystraha);
+  ref_krajList = PrepareInfo(orp, ref_vystraha);
 }
 
 var distrSeznamNahore = false;
@@ -52,44 +52,43 @@ var zmen = 0;
 
 var headers;
 if (mojeUzemi.length == 1) {
-    headers = 0;
+  headers = 0;
 } else {
-    headers = 1;
+  headers = 1;
 }
 
 if (vystraha.info && vystraha.info.length > 0) {
-    var situace = [];
+  var situace = [];
+  var situaceSeen = {};
 
-    for (var i = 0; i < vystraha.info.length; i++) {
-        if (vystraha.info[i].situace) {
-            if (situace.indexOf(vystraha.info[i].situace) == -1) {
-                situace.push(vystraha.info[i].situace);
-            }
-        }
+  for (var i = 0; i < vystraha.info.length; i++) {
+    if (vystraha.info[i].situace) {
+      pushUniqueOrdered(situace, situaceSeen, vystraha.info[i].situace);
     }
+  }
 
-    if (situace.length > 0) {
-        var upr_situace = situace[0].replace(/<br\/>/g, ' ');
-        resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
-        resultText += '<hr/><div>';
-    }
+  if (situace.length > 0) {
+    var upr_situace = situace[0].replace(/<br\/>/g, ' ');
+    resultText += '<br/><b>Meteorologická situace:</b> ' + upr_situace;
+    resultText += '<hr/><div>';
+  }
 
-    pomoc = PrintInfoList(krajList, ref_krajList, headers);
-    resultText += pomoc.split('|')[0];
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+  pomoc = PrintInfoList(krajList, ref_krajList, headers);
+  resultText += pomoc.split('|')[0];
+  zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 } else if (
-    typeof ref_vystraha !== 'undefined' &&
-    ref_vystraha.info &&
-    ref_vystraha.info.length > 0
+  typeof ref_vystraha !== 'undefined' &&
+  ref_vystraha.info &&
+  ref_vystraha.info.length > 0
 ) {
-    pomoc = PrintInfoList(krajList, ref_krajList, headers);
-    resultText += pomoc.split('|')[0];
-    zmen = Number(zmen) + Number(pomoc.split('|')[1]);
+  pomoc = PrintInfoList(krajList, ref_krajList, headers);
+  resultText += pomoc.split('|')[0];
+  zmen = Number(zmen) + Number(pomoc.split('|')[1]);
 }
 
 if (empty) {
-    resultText +=
-        '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
+  resultText +=
+    '</div><br/><div>Na zvoleném území není v platnosti žádný nebezpečný jev.';
 }
 
 resultText += '</div>';
@@ -97,5 +96,5 @@ resultText += '</BODY>';
 resultText += '</HTML>';
 
 if (Number(zmen) == 0 && pouzeZmeny) {
-    resultText = '';
+  resultText = '';
 }
