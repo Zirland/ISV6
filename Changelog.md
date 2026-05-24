@@ -2,6 +2,160 @@
 
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 78 – 2026-05-24
+
+### [Knihovna/CHMU-CISELNIK]
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [Knihovna/CHMU-DATUMY]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [Knihovna/CHMU-EMAIL-KRAJ]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-EMAIL-ORP]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-MAIL-2]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-NOTIF-KRAJ]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-NOTIF-ORP]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-SMS-KRAJ-LK]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-SMS-KRAJ-SKUP]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-SMS-KRAJ]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-SMS-ORP-LK]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-SMS-ORP-SKUP]
+
+#### Záplata
+
+- Pořadí importu skiptů.
+
+### [Knihovna/CHMU-SMS-ORP]
+
+#### Záplata
+
+- Pořadí importu skriptů.
+
+### [UVG/CHMU-EMAIL]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [UVG/CHMU-MAIL-2]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [UVG/CHMU-NOTIF-KRAJ]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [UVG/CHMU-NOTIF-KRAJ-OLK]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [UVG/CHMU-SMS]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [UVG/CHMU-SMS-KRAJ-LK]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
+### [UVG/CHMU-SMS-SKUPINY]
+
+#### Přidáno
+
+- Vytvořena funkce pro určení platného číselníku jevů.
+
+#### Změněno
+
+- Úprava způsobu přepnutí mezi novým a starým číselníkem.
+
 ## verze 77 – 2026-05-12
 
 ### [AA/AA-SMS-KRAJ]
