@@ -4,6 +4,7 @@ var omezitNaKraj = -1;
 var detailni = 1;
 var vypisOrp = false;
 var oddelovac = '\n';
+var JEVY_CISELNIK_PRECHOD = 20260701000000;
 
 var vytvoreni = vystraha.dc_odeslano;
 
@@ -43,7 +44,60 @@ var KRAJE_KODY = {
   '132': 'MSK'
 };
 
-if (vytvoreni < '2026-07-01 00:00:00') {
+function usesNewJevyCiselnik(cas) {
+  if (!cas) {
+    return false;
+  }
+  var d = new Date(cas);
+  if (!isNaN(d.getTime())) {
+    var den = d.getDate();
+    if (den < 10) {
+      den = '0' + den;
+    }
+    var mesic = d.getMonth() + 1;
+    if (mesic < 10) {
+      mesic = '0' + mesic;
+    }
+    var rok = d.getFullYear();
+    var hodiny = d.getHours();
+    if (hodiny < 10) {
+      hodiny = '0' + hodiny;
+    }
+    var minuty = d.getMinutes();
+    if (minuty < 10) {
+      minuty = '0' + minuty;
+    }
+    var sekundy = d.getSeconds();
+    if (sekundy < 10) {
+      sekundy = '0' + sekundy;
+    }
+    var norm =
+      rok.toString() +
+      mesic.toString() +
+      den.toString() +
+      hodiny.toString() +
+      minuty.toString() +
+      sekundy.toString();
+    return Number(norm) >= JEVY_CISELNIK_PRECHOD;
+  }
+  var parts = String(cas).match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (parts) {
+    var denCz = parts[1];
+    var mesicCz = parts[2];
+    var rokCz = parts[3];
+    if (denCz.length < 2) {
+      denCz = '0' + denCz;
+    }
+    if (mesicCz.length < 2) {
+      mesicCz = '0' + mesicCz;
+    }
+    var normCz = rokCz + mesicCz + denCz + '000000';
+    return Number(normCz) >= JEVY_CISELNIK_PRECHOD;
+  }
+  return false;
+}
+
+if (!usesNewJevyCiselnik(vytvoreni)) {
   var JEVY_NAZVY = {
     'I.1': 'Vysoké teploty',
     '0I.1': 'VÝSKYT Vysoké teploty',
