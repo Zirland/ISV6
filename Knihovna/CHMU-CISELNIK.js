@@ -38,7 +38,7 @@ var KRAJE_KODY = {
   '132': 'MSK'
 };
 
-if (vytvoreni < '2026-07-01 00:00:00') {
+if (!usesNewJevyCiselnik(vytvoreni)) {
   var JEVY_NAZVY = {
     'I.1': 'Vysoké teploty',
     '0I.1': 'VÝSKYT Vysoké teploty',
