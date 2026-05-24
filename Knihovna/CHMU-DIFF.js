@@ -1,4 +1,4 @@
-// Verze 77
+// Verze 78
 
 zobrazitZmeny = true;
 
