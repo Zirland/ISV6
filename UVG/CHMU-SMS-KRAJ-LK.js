@@ -1,4 +1,4 @@
-// Verze 77
+// Verze 78
 
 var omezitNaKraj = 78;
 var JEVY_CISELNIK_PRECHOD = 20260701000000;
