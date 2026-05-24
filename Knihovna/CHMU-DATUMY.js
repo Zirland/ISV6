@@ -39,6 +39,33 @@ function Normalize(datum) {
   return datum;
 }
 
+var JEVY_CISELNIK_PRECHOD = 20260701000000;
+
+function usesNewJevyCiselnik(cas) {
+  if (!cas) {
+    return false;
+  }
+  var norm = Normalize(cas);
+  if (norm != 'NaNNaNNaNNaNNaNNaN') {
+    return Number(norm) >= JEVY_CISELNIK_PRECHOD;
+  }
+  var parts = String(cas).match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (parts) {
+    var den = parts[1];
+    var mesic = parts[2];
+    var rok = parts[3];
+    if (den.length < 2) {
+      den = '0' + den;
+    }
+    if (mesic.length < 2) {
+      mesic = '0' + mesic;
+    }
+    norm = rok + mesic + den + '000000';
+    return Number(norm) >= JEVY_CISELNIK_PRECHOD;
+  }
+  return false;
+}
+
 function UkoncenyJev(konecJev, casZprava) {
   if (!konecJev) {
     konecJev = '1.1.2100 01:00:00';
