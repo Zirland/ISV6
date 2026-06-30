@@ -3125,7 +3125,7 @@ resultText += '<META charset="utf-8"/>';
 resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
 resultText += '<style type="text/css">';
-resultText += '   body {font-family:serif;font-size:13px;}';
+resultText += '   body {font-family:serif;font-size:13px;background-color: #FFFFFF;color: #000000;}';
 resultText += '   .header {font-size:15px;text-align:center;}';
 resultText += '   .tg  {border-collapse:collapse;border-spacing:0;}';
 resultText +=
