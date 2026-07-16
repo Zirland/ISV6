@@ -4,7 +4,6 @@
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-PREPARE";
-#import "CHMU-FUNKCE";
 
 var omezitNaKraj = 78;
 var zobrazitVyhled = false;

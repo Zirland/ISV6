@@ -1,5 +1,7 @@
 // Verze 78
 
+var JEVY_CISELNIK_PRECHOD = 20260701000000;
+
 function Normalize(datum) {
   if (!datum) {
     datum = '1.1.2100 01:00:00';
@@ -38,8 +40,6 @@ function Normalize(datum) {
 
   return datum;
 }
-
-var JEVY_CISELNIK_PRECHOD = 20260701000000;
 
 function usesNewJevyCiselnik(cas) {
   if (!cas) {
