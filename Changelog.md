@@ -2,6 +2,85 @@
 
 Popis změn v JavaScript předpisech informačního systému Výjezd 6 udržovaných generálním ředitelstvím.
 
+## verze 79 – 2026-07-16
+
+### [Knihovna/CHMU-DATUMY]
+
+#### Záplata
+
+- Vyčištění kódu
+
+### [Knihovna/CHMU-DIFF]
+
+#### Záplata
+
+- Vyčištění kódu
+
+### [Knihovna/CHMU-EMAIL-KRAJ]
+
+#### Záplata
+
+- Vyčištění kódu
+
+### [Knihovna/CHMU-EMAIL-ORP]
+
+#### Záplata
+
+- Vyčištění kódu
+
+### [Knihovna/CHMU-FUNKCE]
+
+#### Přidáno
+
+- Přesun společných funkcí z dílčích skriptů
+
+### [Knihovna/CHMU-HLAVICKA]
+
+#### Změněno
+
+- Úprava tvorby distribučního seznamu krajů
+
+### [Knihovna/CHMU-MAIL-2]
+
+#### Záplata
+
+- Vyčištění kódu
+
+### [Knihovna/CHMU-SMS-KRAJ-LK]
+
+#### Záplata
+
+- Vyčištění kódu
+
+### [Knihovna/CHMU-ORP-LK]
+
+#### Záplata
+
+- Vyčištění kódu
+
+### [UVG/CHMU-EMAIL]
+
+#### Přidáno
+
+- Vynucení černého textu na bílém pozadí pro kompenzaci problému se zobrazením v tmavém barevném režimu Spojař.
+
+#### Změněno
+
+- Oprava číselníku krajů
+- Revize kódu
+
+### [UVG/CHMU-MAIL-2]
+
+#### Přidáno
+
+- Vynucení černého textu na bílém pozadí pro kompenzaci problému se zobrazením v tmavém barevném režimu Spojař.
+
+#### Změněno
+
+- Revize kódu
+- Využití společných funkcí
+- Oprava chyby při zpracování nadmořské výšky (výstraha 254)
+
 ## verze 78 – 2026-05-24
 
 ### [Knihovna/CHMU-CISELNIK]

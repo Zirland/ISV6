@@ -1,4 +1,4 @@
-// Verze 78
+// Verze 79
 
 function removeDuplicates(arr) {
   var unique_array = [];
@@ -11,13 +11,6 @@ function removeDuplicates(arr) {
     }
   }
   return unique_array;
-}
-
-function pushUniqueOrdered(list, seen, value) {
-  if (!seen[value]) {
-    seen[value] = true;
-    list.push(value);
-  }
 }
 
 function getWarningSeverity(stupen_kod) {
@@ -76,4 +69,77 @@ function getJevGroupCode(infoItem) {
     skupina = splitkod[1];
   }
   return skupina;
+}
+
+function hasAnyInfoForRegion(krajList, ref_krajList, k) {
+  var found =
+    krajList[k].info.length > 0 ||
+    (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+
+  for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
+    found =
+      krajList[k].okresList[o].info.length > 0 ||
+      (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+
+    for (
+      var ol = 0;
+      ol < krajList[k].okresList[o].orpList.length && !found;
+      ol++
+    ) {
+      found =
+        krajList[k].okresList[o].orpList[ol].info.length > 0 ||
+        (ref_krajList.length > 0 &&
+          ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
+    }
+  }
+
+  return found;
+}
+
+function hasAnyInfoForRefRegion(ref_krajList, k) {
+  var found = ref_krajList[k].info.length > 0;
+
+  for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+    found = ref_krajList[k].okresList[o].info.length > 0;
+
+    for (
+      var ol = 0;
+      ol < ref_krajList[k].okresList[o].orpList.length && !found;
+      ol++
+    ) {
+      found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+    }
+  }
+
+  return found;
+}
+
+function buildDistributionList(krajList, ref_krajList) {
+  var dist = '';
+
+  for (var k = 0; k < krajList.length; k++) {
+    if (hasAnyInfoForRegion(krajList, ref_krajList, k)) {
+      dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
+    }
+  }
+
+  if (krajList.length == 0) {
+    for (var rk = 0; rk < ref_krajList.length; rk++) {
+      if (hasAnyInfoForRefRegion(ref_krajList, rk)) {
+        dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[rk].id];
+      }
+    }
+  }
+
+  return dist;
+}
+
+function pushUniqueOrdered(list, seen, value) {
+  if (!value) {
+    return;
+  }
+  if (!seen[value]) {
+    seen[value] = true;
+    list.push(value);
+  }
 }

@@ -1,8 +1,7 @@
-// Verze 78
+// Verze 79
 
 #import "CHMU-DATUMY";
 #import "CHMU-CISELNIK";
-#import "CHMU-FUNKCE";
 #import "CHMU-ZVYR-ZMEN";
 #import "CHMU-PREPARE";
 
@@ -1442,66 +1441,7 @@ if (empty) {
 if (distrSeznamNahore == false) {
   resultText += '<hr/>';
   resultText += '<br/>Distribuce: ';
-
-  var dist = '';
-
-  for (var k = 0; k < krajList.length; k++) {
-    var found =
-      krajList[k].info.length > 0 ||
-      (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
-
-    for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
-      found =
-        krajList[k].okresList[o].info.length > 0 ||
-        (ref_krajList.length > 0 &&
-          ref_krajList[k].okresList[o].info.length > 0);
-
-      for (
-        var ol = 0;
-        ol < krajList[k].okresList[o].orpList.length && !found;
-        ol++
-      ) {
-        found =
-          krajList[k].okresList[o].orpList[ol].info.length > 0 ||
-          (ref_krajList.length > 0 &&
-            ref_krajList[k].okresList[o].orpList[ol].info.length >
-            0);
-      }
-    }
-
-    if (found) {
-      dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-    }
-  }
-
-  if (krajList.length == 0) {
-    for (var k = 0; k < ref_krajList.length; k++) {
-      var found = ref_krajList[k].info.length > 0;
-
-      for (
-        var o = 0;
-        o < ref_krajList[k].okresList.length && !found;
-        o++
-      ) {
-        found = ref_krajList[k].okresList[o].info.length > 0;
-
-        for (
-          var ol = 0;
-          ol < ref_krajList[k].okresList[o].orpList.length && !found;
-          ol++
-        ) {
-          found =
-            ref_krajList[k].okresList[o].orpList[ol].info.length >
-            0;
-        }
-      }
-
-      if (found) {
-        dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[k].id];
-      }
-    }
-  }
-
+  var dist = buildDistributionList(krajList, ref_krajList);
   resultText += dist;
 }
 

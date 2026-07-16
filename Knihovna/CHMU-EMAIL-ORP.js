@@ -1,9 +1,8 @@
-// Verze 78
+// Verze 79
 
 #import "CHMU-DATUMY";
 #import "CHMU-CISELNIK";
 #import "CHMU-ZVYR-ZMEN";
-#import "CHMU-FUNKCE";
 #import "CHMU-PREPARE";
 
 var pom_mojeUzemi = [];

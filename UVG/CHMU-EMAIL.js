@@ -1,4 +1,4 @@
-// Verze 78
+// Verze 79
 
 var hlavniKraj = -1;
 var zobrazovatVsechnyKraje = true;
@@ -7,7 +7,166 @@ var zobrazitVyhled = true;
 var zobrazitZmeny = true;
 var pouzeZmeny = false;
 var distrSeznamNahore = false;
+
 var JEVY_CISELNIK_PRECHOD = 20260701000000;
+
+function Normalize(datum) {
+  if (!datum) {
+    datum = '1.1.2100 01:00:00';
+  }
+  var datumString = new Date(datum);
+
+  var datumDen = datumString.getDate();
+  if (datumDen < 10) {
+    datumDen = '0' + datumDen;
+  }
+  var datumMesic = datumString.getMonth() + 1;
+  if (datumMesic < 10) {
+    datumMesic = '0' + datumMesic;
+  }
+  var datumRok = datumString.getFullYear();
+  var datumHodiny = datumString.getHours();
+  if (datumHodiny < 10) {
+    datumHodiny = '0' + datumHodiny;
+  }
+  var datumMinuty = datumString.getMinutes();
+  if (datumMinuty < 10) {
+    datumMinuty = '0' + datumMinuty;
+  }
+  var datumSekundy = datumString.getSeconds();
+  if (datumSekundy < 10) {
+    datumSekundy = '0' + datumSekundy;
+  }
+
+  datum =
+    datumRok.toString() +
+    datumMesic.toString() +
+    datumDen.toString() +
+    datumHodiny.toString() +
+    datumMinuty.toString() +
+    datumSekundy.toString();
+
+  return datum;
+}
+
+function usesNewJevyCiselnik(cas) {
+  if (!cas) {
+    return false;
+  }
+  var norm = Normalize(cas);
+  if (norm != 'NaNNaNNaNNaNNaNNaN') {
+    return Number(norm) >= JEVY_CISELNIK_PRECHOD;
+  }
+  var parts = String(cas).match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (parts) {
+    var den = parts[1];
+    var mesic = parts[2];
+    var rok = parts[3];
+    if (den.length < 2) {
+      den = '0' + den;
+    }
+    if (mesic.length < 2) {
+      mesic = '0' + mesic;
+    }
+    norm = rok + mesic + den + '000000';
+    return Number(norm) >= JEVY_CISELNIK_PRECHOD;
+  }
+  return false;
+}
+
+function UkoncenyJev(konecJev, casZprava) {
+  if (!konecJev) {
+    konecJev = '1.1.2100 01:00:00';
+  }
+
+  var konecJev_format = Normalize(konecJev);
+  var casZprava_format = Normalize(casZprava);
+
+  var kjYear = konecJev_format.substring(0, 4);
+  var kjMonth = konecJev_format.substring(4, 6);
+  var kjDay = konecJev_format.substring(6, 8);
+  var kjHour = konecJev_format.substring(8, 10);
+  var kjMinute = konecJev_format.substring(10, 12);
+  var kjSecond = konecJev_format.substring(12, 14);
+  var myEndTime = new Date(
+    kjYear,
+    kjMonth - 1,
+    kjDay,
+    kjHour,
+    kjMinute,
+    kjSecond
+  );
+
+  myEndTime.setMinutes(myEndTime.getMinutes() - 30);
+  konecJev_format = Normalize(myEndTime);
+
+  var konecJev_format_num = Number(konecJev_format);
+  var casZprava_format_num = Number(casZprava_format);
+
+  if (konecJev_format_num < casZprava_format_num) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function ZobrazDatum(datum, format, end) {
+  var normDatum = Normalize(datum);
+  var format_datum = '';
+  if (normDatum == 21000101010000 || normDatum == 'NaNNaNNaNNaNNaNNaN') {
+    format_datum = 'do odvolání';
+  } else {
+    var normDatumRok = normDatum.substring(0, 4);
+    var normDatumMesic = normDatum.substring(4, 6);
+    var normDatumDen = normDatum.substring(6, 8);
+    var normDatumHodina = normDatum.substring(8, 10);
+    var normDatumMinuta = normDatum.substring(10, 12);
+    var normDatumSekunda = normDatum.substring(12, 14);
+
+    if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
+      var myNewDay = new Date(
+        normDatumRok,
+        normDatumMesic - 1,
+        normDatumDen - 1
+      );
+      var newNormDatum = Normalize(myNewDay);
+      normDatumRok = newNormDatum.substring(0, 4);
+      normDatumMesic = newNormDatum.substring(4, 6);
+      normDatumDen = newNormDatum.substring(6, 8);
+      normDatumHodina = '24';
+    }
+
+    switch (format) {
+      case 'short':
+        format_datum =
+          Number(normDatumDen) +
+          '.' +
+          Number(normDatumMesic) +
+          '. ' +
+          normDatumHodina +
+          ':' +
+          normDatumMinuta;
+        break;
+      case 'long':
+      default:
+        format_datum =
+          Number(normDatumDen) +
+          '.' +
+          Number(normDatumMesic) +
+          '.' +
+          normDatumRok +
+          ' ' +
+          normDatumHodina +
+          ':' +
+          normDatumMinuta +
+          ':' +
+          normDatumSekunda;
+        break;
+    }
+  }
+
+  return format_datum;
+}
 
 var vytvoreni = vystraha.dc_odeslano;
 
@@ -32,73 +191,20 @@ var KRAJE_NAZVY = {
 var KRAJE_KODY = {
   '-1': 'ČR',
   '19': 'PHA',
-  '27': 'SČK',
-  '35': 'JČK',
+  '27': 'STC',
+  '35': 'JHC',
   '43': 'PLK',
   '51': 'KVK',
   '60': 'ULK',
-  '78': 'LIK',
-  '86': 'KHK',
+  '78': 'LBK',
+  '86': 'HKK',
   '94': 'PAK',
-  '108': 'VYK',
-  '116': 'JMK',
+  '108': 'VYS',
+  '116': 'JHM',
   '124': 'OLK',
   '141': 'ZLK',
   '132': 'MSK'
 };
-
-function usesNewJevyCiselnik(cas) {
-  if (!cas) {
-    return false;
-  }
-  var d = new Date(cas);
-  if (!isNaN(d.getTime())) {
-    var den = d.getDate();
-    if (den < 10) {
-      den = '0' + den;
-    }
-    var mesic = d.getMonth() + 1;
-    if (mesic < 10) {
-      mesic = '0' + mesic;
-    }
-    var rok = d.getFullYear();
-    var hodiny = d.getHours();
-    if (hodiny < 10) {
-      hodiny = '0' + hodiny;
-    }
-    var minuty = d.getMinutes();
-    if (minuty < 10) {
-      minuty = '0' + minuty;
-    }
-    var sekundy = d.getSeconds();
-    if (sekundy < 10) {
-      sekundy = '0' + sekundy;
-    }
-    var norm =
-      rok.toString() +
-      mesic.toString() +
-      den.toString() +
-      hodiny.toString() +
-      minuty.toString() +
-      sekundy.toString();
-    return Number(norm) >= JEVY_CISELNIK_PRECHOD;
-  }
-  var parts = String(cas).match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
-  if (parts) {
-    var denCz = parts[1];
-    var mesicCz = parts[2];
-    var rokCz = parts[3];
-    if (denCz.length < 2) {
-      denCz = '0' + denCz;
-    }
-    if (mesicCz.length < 2) {
-      mesicCz = '0' + mesicCz;
-    }
-    var normCz = rokCz + mesicCz + denCz + '000000';
-    return Number(normCz) >= JEVY_CISELNIK_PRECHOD;
-  }
-  return false;
-}
 
 if (!usesNewJevyCiselnik(vytvoreni)) {
   var JEVY_NAZVY = {
@@ -308,139 +414,6 @@ if (!usesNewJevyCiselnik(vytvoreni)) {
   };
 };
 
-function Normalize(datum) {
-  if (!datum) {
-    datum = '1.1.2100 01:00:00';
-  }
-  var datumString = new Date(datum);
-
-  var datumDen = datumString.getDate();
-  if (datumDen < 10) {
-    datumDen = '0' + datumDen;
-  }
-  var datumMesic = datumString.getMonth() + 1;
-  if (datumMesic < 10) {
-    datumMesic = '0' + datumMesic;
-  }
-  var datumRok = datumString.getFullYear();
-  var datumHodiny = datumString.getHours();
-  if (datumHodiny < 10) {
-    datumHodiny = '0' + datumHodiny;
-  }
-  var datumMinuty = datumString.getMinutes();
-  if (datumMinuty < 10) {
-    datumMinuty = '0' + datumMinuty;
-  }
-  var datumSekundy = datumString.getSeconds();
-  if (datumSekundy < 10) {
-    datumSekundy = '0' + datumSekundy;
-  }
-
-  datum =
-    datumRok.toString() +
-    datumMesic.toString() +
-    datumDen.toString() +
-    datumHodiny.toString() +
-    datumMinuty.toString() +
-    datumSekundy.toString();
-
-  return datum;
-}
-
-function UkoncenyJev(konecJev, casZprava) {
-  if (!konecJev) {
-    konecJev = '1.1.2100 01:00:00';
-  }
-
-  var konecJev_format = Normalize(konecJev);
-  var casZprava_format = Normalize(casZprava);
-
-  var kjYear = konecJev_format.substring(0, 4);
-  var kjMonth = konecJev_format.substring(4, 6);
-  var kjDay = konecJev_format.substring(6, 8);
-  var kjHour = konecJev_format.substring(8, 10);
-  var kjMinute = konecJev_format.substring(10, 12);
-  var kjSecond = konecJev_format.substring(12, 14);
-  var myEndTime = new Date(
-    kjYear,
-    kjMonth - 1,
-    kjDay,
-    kjHour,
-    kjMinute,
-    kjSecond
-  );
-
-  myEndTime.setMinutes(myEndTime.getMinutes() - 30);
-  konecJev_format = Normalize(myEndTime);
-
-  var konecJev_format_num = Number(konecJev_format);
-  var casZprava_format_num = Number(casZprava_format);
-
-  if (konecJev_format_num < casZprava_format_num) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function ZobrazDatum(datum, format, end) {
-  var normDatum = Normalize(datum);
-  var format_datum = '';
-  if (normDatum == 21000101010000 || normDatum == 'NaNNaNNaNNaNNaNNaN') {
-    format_datum = 'do odvolání';
-  } else {
-    var normDatumRok = normDatum.substring(0, 4);
-    var normDatumMesic = normDatum.substring(4, 6);
-    var normDatumDen = normDatum.substring(6, 8);
-    var normDatumHodina = normDatum.substring(8, 10);
-    var normDatumMinuta = normDatum.substring(10, 12);
-    var normDatumSekunda = normDatum.substring(12, 14);
-
-    if (normDatumHodina == '00' && normDatumMinuta == '00' && end) {
-      var myNewDay = new Date(
-        normDatumRok,
-        normDatumMesic - 1,
-        normDatumDen - 1
-      );
-      var newNormDatum = Normalize(myNewDay);
-      normDatumRok = newNormDatum.substring(0, 4);
-      normDatumMesic = newNormDatum.substring(4, 6);
-      normDatumDen = newNormDatum.substring(6, 8);
-      normDatumHodina = '24';
-    }
-
-    switch (format) {
-      case 'short':
-        format_datum =
-          Number(normDatumDen) +
-          '.' +
-          Number(normDatumMesic) +
-          '. ' +
-          normDatumHodina +
-          ':' +
-          normDatumMinuta;
-        break;
-      case 'long':
-      default:
-        format_datum =
-          Number(normDatumDen) +
-          '.' +
-          Number(normDatumMesic) +
-          '.' +
-          normDatumRok +
-          ' ' +
-          normDatumHodina +
-          ':' +
-          normDatumMinuta +
-          ':' +
-          normDatumSekunda;
-        break;
-    }
-  }
-
-  return format_datum;
-}
-
 function SimpleHighlightDiff(newValue, oldValue) {
   var resultText = '';
   var zmena = 0;
@@ -618,6 +591,89 @@ function compareInfoByPriority(a, b) {
   return 0;
 }
 
+function compareByRegionOrder(kraj1, kraj2, okres1, okres2, orp1, orp2) {
+  if (kraj1 < kraj2) return -1;
+  if (kraj1 > kraj2) return 1;
+  if (okres1 < okres2) return -1;
+  if (okres1 > okres2) return 1;
+  if (orp1 < orp2) return -1;
+  if (orp1 > orp2) return 1;
+  return 0;
+}
+
+function hasAnyInfoForRegion(krajList, ref_krajList, k) {
+  var found =
+    krajList[k].info.length > 0 ||
+    (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
+
+  for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
+    found =
+      krajList[k].okresList[o].info.length > 0 ||
+      (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
+
+    for (
+      var ol = 0;
+      ol < krajList[k].okresList[o].orpList.length && !found;
+      ol++
+    ) {
+      found =
+        krajList[k].okresList[o].orpList[ol].info.length > 0 ||
+        (ref_krajList.length > 0 &&
+          ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
+    }
+  }
+
+  return found;
+}
+
+function hasAnyInfoForRefRegion(ref_krajList, k) {
+  var found = ref_krajList[k].info.length > 0;
+
+  for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
+    found = ref_krajList[k].okresList[o].info.length > 0;
+
+    for (
+      var ol = 0;
+      ol < ref_krajList[k].okresList[o].orpList.length && !found;
+      ol++
+    ) {
+      found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
+    }
+  }
+
+  return found;
+}
+
+function buildDistributionList(krajList, ref_krajList) {
+  var dist = '';
+
+  for (var k = 0; k < krajList.length; k++) {
+    if (hasAnyInfoForRegion(krajList, ref_krajList, k)) {
+      dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
+    }
+  }
+
+  if (krajList.length == 0) {
+    for (var rk = 0; rk < ref_krajList.length; rk++) {
+      if (hasAnyInfoForRefRegion(ref_krajList, rk)) {
+        dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[rk].id];
+      }
+    }
+  }
+
+  return dist;
+}
+
+function pushUniqueOrdered(list, seen, value) {
+  if (!value) {
+    return;
+  }
+  if (!seen[value]) {
+    seen[value] = true;
+    list.push(value);
+  }
+}
+
 function PrepareInfo(orp, vystraha) {
   var infoList = [];
 
@@ -636,10 +692,7 @@ function PrepareInfo(orp, vystraha) {
         vystraha.info[i].orp.push(orpSplit[j]);
       } else {
         var vyska = orpSplit[j].substring(index);
-        if (!vyskaSeen[vyska]) {
-          vyskaSeen[vyska] = true;
-          vyskaList.push(vyska);
-        }
+        pushUniqueOrdered(vyskaList, vyskaSeen, vyska);
       }
     }
 
@@ -1863,96 +1916,17 @@ function PrintInfo(info, ref_info) {
   return resultText;
 }
 
-function hasAnyInfoForRegion(krajList, ref_krajList, k) {
-  var found =
-    krajList[k].info.length > 0 ||
-    (ref_krajList.length > 0 && ref_krajList[k].info.length > 0);
-
-  for (var o = 0; o < krajList[k].okresList.length && !found; o++) {
-    found =
-      krajList[k].okresList[o].info.length > 0 ||
-      (ref_krajList.length > 0 && ref_krajList[k].okresList[o].info.length > 0);
-
-    for (
-      var ol = 0;
-      ol < krajList[k].okresList[o].orpList.length && !found;
-      ol++
-    ) {
-      found =
-        krajList[k].okresList[o].orpList[ol].info.length > 0 ||
-        (ref_krajList.length > 0 &&
-          ref_krajList[k].okresList[o].orpList[ol].info.length > 0);
-    }
-  }
-
-  return found;
-}
-
-function hasAnyInfoForRefRegion(ref_krajList, k) {
-  var found = ref_krajList[k].info.length > 0;
-
-  for (var o = 0; o < ref_krajList[k].okresList.length && !found; o++) {
-    found = ref_krajList[k].okresList[o].info.length > 0;
-
-    for (
-      var ol = 0;
-      ol < ref_krajList[k].okresList[o].orpList.length && !found;
-      ol++
-    ) {
-      found = ref_krajList[k].okresList[o].orpList[ol].info.length > 0;
-    }
-  }
-
-  return found;
-}
-
-function buildDistributionList(krajList, ref_krajList) {
-  var dist = '';
-
-  for (var k = 0; k < krajList.length; k++) {
-    if (hasAnyInfoForRegion(krajList, ref_krajList, k)) {
-      dist += (dist ? ', ' : '') + KRAJE_KODY[krajList[k].id];
-    }
-  }
-
-  if (krajList.length == 0) {
-    for (var rk = 0; rk < ref_krajList.length; rk++) {
-      if (hasAnyInfoForRefRegion(ref_krajList, rk)) {
-        dist += (dist ? ', ' : '') + KRAJE_KODY[ref_krajList[rk].id];
-      }
-    }
-  }
-
-  return dist;
-}
-
-function pushUniqueOrdered(list, seen, value) {
-  if (!value) {
-    return;
-  }
-  if (!seen[value]) {
-    seen[value] = true;
-    list.push(value);
-  }
-}
-
 if (!razeniPodleNazvu) {
   var orpSort = orp;
   orpSort.sort(function (a, b) {
-    var kraj1 = parseFloat(a.kraj.id);
-    var kraj2 = parseFloat(b.kraj.id);
-    var okres1 = parseFloat(a.okres.id);
-    var okres2 = parseFloat(b.okres.id);
-    var orp1 = parseFloat(a.id);
-    var orp2 = parseFloat(b.id);
-
-    if (kraj1 < kraj2) return -1;
-    if (kraj1 > kraj2) return 1;
-    if (okres1 < okres2) return -1;
-    if (okres1 > okres2) return 1;
-    if (orp1 < orp2) return -1;
-    if (orp1 > orp2) return 1;
-    return 0;
+    return compareByRegionOrder(
+      parseFloat(a.kraj.id),
+      parseFloat(b.kraj.id),
+      parseFloat(a.okres.id),
+      parseFloat(b.okres.id),
+      parseFloat(a.id),
+      parseFloat(b.id)
+    );
   });
 }
 
@@ -2001,7 +1975,7 @@ resultText += '<META charset="utf-8"/>';
 resultText += '<TITLE>' + vystraha.id + '</TITLE>';
 
 resultText += '<style type="text/css">';
-resultText += '  body {font-family:serif;font-size:13px;}';
+resultText += '  body {font-family:serif;font-size:13px;background-color: #FFFFFF;color: #000000;}';
 resultText += '  .header {font-size:15px;text-align:center;}';
 resultText += '  .tg  {border-collapse:collapse;border-spacing:0;}';
 resultText +=
@@ -2221,7 +2195,9 @@ if (vystraha.info && vystraha.info.length > 0) {
   var situaceSeen = {};
 
   for (var i = 0; i < vystraha.info.length; i++) {
-    pushUniqueOrdered(situace, situaceSeen, vystraha.info[i].situace);
+    if (vystraha.info[i].situace) {
+      pushUniqueOrdered(situace, situaceSeen, vystraha.info[i].situace);
+    }
   }
 
   if (situace.length > 0) {
