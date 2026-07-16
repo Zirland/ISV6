@@ -1,5 +1,5 @@
 //!JS
-// Verze 78
+// Verze 79
 
 var omezitNaOrp = 337;
 var oddelovac = '\n';
