@@ -1,4 +1,4 @@
-// Verze 78
+// Verze 79
 
 var vytvoreni = vystraha.dc_odeslano;
 
